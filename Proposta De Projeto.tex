@@ -1,0 +1,147 @@
+%% 
+%% Copyright 2007-2018 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for Elsevier's document class `elsarticle'
+%% with harvard style bibliographic references
+
+\documentclass[preprint,12pt,authoryear]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times,authoryear]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+
+\journal{if105 - Data Science - UFPE}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \address{Address\fnref{label3}}
+%% \fntext[label3]{}
+
+\title{Análise de READMEs de projetos open-source}
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{}
+%% \address[label1]{}
+%% \address[label2]{}
+
+\author{Bruno Melo}
+\ead{bhlvm@cin.ufpe.br}
+
+\author{Hilton Leite}
+\ead{hpbl@cin.ufpe.br}
+
+% \address{}
+
+\begin{abstract}
+Repositórios open-source fazem uso de arquivos README escritos em markdown, para introduzir os conceitos dos mesmos, porém existem poucas ferramentas que analisam a efetividade e os padrões de escrita destes arquivos. Nesta proposta detalhamos motivação, forma de coleta dos dados, e possíveis análises a serem realizadas.
+\end{abstract}
+
+\begin{keyword}
+%% keywords here, in the form: keyword \sep keyword
+Ciência dos dados \sep README \sep open-source \sep Developer experience
+%% PACS codes here, in the form: \PACS code \sep code
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+\end{keyword}
+
+\end{frontmatter}
+
+%% \linenumbers
+
+%% main text
+\section{Introdução}
+\label{}
+O arquivo README.md de um projeto open-source é de grande importância para o futuro do repositório, pois ele é o ponto de entrada para possíveis novos usuários e/ou mantenedores. Nele geralmente se descreve os detalhes de uso e contribuição do projeto. Um README mal redigido pode ser um fator que faz o usuário desisitir de usar o projeto.
+
+
+\section{Coleta dos Dados}
+Para a análise usaremos apenas repositórios hospedados no GitHub. Como o escopo é reduzido a projetos open-source, os arquivos README necessários são de fácil acesso, necessitando apenas acessar a URL do repositório. Dados complementáres sobre issues criados relativos ao README, ou quaisquer outras informações sobre o repositórios podem ser adquiridas via a API do GitHub.
+
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+%% \appendix
+
+\section{Análise dos Dados}
+Faremos uma análise exploratória dos arquivos coletados, de forma a tentar descobrir padrões de escrita, tipo de linguagem utilizada, quais sessões constam, e quantos issues relacionados ao README foram abertos.
+
+Buscaremos tentrar evidenciar quais são as práticas comuns na produção dos README, e quais os problemas mais comumns encontrados nos repositórios, com auxílio de visualizações comom word-clouds. De forma com que possamos identificar padrões e anti-padrões e disponibilizá-los para utilidade pública dos mantenedores de repositórios.
+
+%% If you have bibdatabase file and want bibtex to generate the
+%% bibitems, please use
+%%
+%%  \bibliographystyle{elsarticle-harv} 
+%%  \bibliography{<your bibdatabase>}
+
+%% else use the following coding to input the bibitems directly in the
+%% TeX file.
+
+\begin{thebibliography}{00}
+
+%% \bibitem[Author(year)]{label}
+%% Text of bibliographic item
+
+\bibitem[ ()]{}
+
+\end{thebibliography}
+\end{document}
+
+\endinput
+%%
+%% End of file `elsarticle-template-harv.tex'.
