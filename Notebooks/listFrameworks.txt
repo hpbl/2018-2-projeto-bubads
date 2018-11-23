@@ -1,0 +1,100 @@
+https://github.com/vsouza/awesome-ios nok
+https://github.com/dkhamsing/open-source-ios-apps nok
+https://github.com/matteocrippa/awesome-swift nok
+https://github.com/HeroTransitions/Hero ok
+https://github.com/ReactiveX/RxSwift nok
+https://github.com/CosmicMind/Material ok
+https://github.com/Ramotion/animated-tab-bar ok
+https://github.com/xmartlabs/Eureka ok
+https://github.com/Ramotion/folding-cell ok
+https://github.com/IBAnimatable/IBAnimatable nok
+https://github.com/ninjaprox/NVActivityIndicatorView nok
+https://github.com/SwifterSwift/SwifterSwift nok
+https://github.com/kickstarter/ios-oss nok
+https://github.com/Juanpe/SkeletonView nok
+https://github.com/mac-cain13/R.swift nok
+https://github.com/Swift-AI/Swift-AI ok
+https://github.com/olucurious/Awesome-ARKit nok
+https://github.com/patchthecode/JTAppleCalendar ok
+https://github.com/SwiftGen/SwiftGen nok
+https://github.com/marcosgriselli/ViewAnimator ok
+https://github.com/krzysztofzablocki/Sourcery nok
+https://github.com/Yalantis/Koloda ok 
+https://github.com/SwiftKickMobile/SwiftMessages ok
+https://github.com/hyperoslo/ImagePicker nok
+https://github.com/exyte/Macaw ok
+https://github.com/SwiftyBeaver/SwiftyBeaver nok
+https://github.com/soapyigu/Swift-30-Projects nok
+https://github.com/SwipeCellKit/SwipeCellKit nok
+https://github.com/alexaubry/BulletinBoard ok
+https://github.com/WenchaoD/FSPagerView ok
+https://github.com/louisdh/panelkit nok
+https://github.com/radex/SwiftyUserDefaults nok
+https://github.com/garnele007/SwiftOCR ok
+https://github.com/hyperoslo/Whisper nok
+https://github.com/bizz84/SwiftyStoreKit nok
+https://github.com/shu223/iOS-10-Sampler not
+https://github.com/Yalantis/StarWars.iOS ok
+https://github.com/KelvinJin/AnimatedCollectionViewLayout ok
+https://github.com/eggswift/ESTabBarController ok
+https://github.com/SoySauceLab/CollectionKit nok
+https://github.com/DaveWoodCom/XCGLogger
+https://github.com/CVCalendar/CVCalendar
+https://github.com/Yalantis/Persei
+https://github.com/square/Valet
+https://github.com/PaoloCuscela/Cards
+https://github.com/CocoaDebug/CocoaDebug
+https://github.com/EFPrefix/EFQRCode
+https://github.com/Ramotion/circle-menu
+https://github.com/Swinject/Swinject
+https://github.com/xmartlabs/XLActionController
+https://github.com/BohdanOrlov/iOS-Developer-Roadmap
+https://github.com/hyperoslo/Presentation
+https://github.com/Yalantis/GuillotineMenu
+https://github.com/linkedin/LayoutKit
+https://github.com/willowtreeapps/spruce-ios
+https://github.com/Lax/iOS-Swift-Demos
+https://github.com/AugustRush/Stellar
+https://github.com/Yalantis/Side-Menu.iOS
+https://github.com/Ramotion/paper-switch
+https://github.com/BeauNouvelle/FaceAware
+https://github.com/Ramotion/paper-onboarding
+https://github.com/wireapp/wire-ios
+https://github.com/shoheiyokoyama/Gemini
+https://github.com/mobileplayer/mobileplayer-ios
+https://github.com/freshOS/Stevia
+https://github.com/shaps80/Peek
+https://github.com/Daltron/NotificationBanner
+https://github.com/wordpress-mobile/WordPress-iOS
+https://github.com/dennisweissmann/DeviceKit
+https://github.com/saoudrizwan/Disk
+https://github.com/Ramotion/reel-search
+https://github.com/IcaliaLabs/Presentr
+https://github.com/ytakzk/Fusuma
+https://github.com/madebybowtie/FlagKit
+https://github.com/jathu/UIImageColors
+https://github.com/IvanVorobei/SPPermission
+https://github.com/Ramotion/navigation-stack
+https://github.com/Touchwonders/Transition
+https://github.com/Baddaboo/ClassicKit
+https://github.com/ChiliLabs/CHIPageControl
+https://github.com/aslanyanhaik/youtube-iOS
+https://github.com/HarshilShah/DeckTransition
+https://github.com/ApplikeySolutions/VegaScroll
+https://github.com/alexdrone/Render
+https://github.com/Ramotion/adaptive-tab-bar
+https://github.com/bustoutsolutions/siesta
+https://github.com/Ramotion/preview-transition
+https://github.com/krzysztofzablocki/LifetimeTracker
+https://github.com/yapstudios/YapAnimator
+https://github.com/HarshilShah/NotchKit
+https://github.com/Yalantis/DisplaySwitcher
+https://github.com/devxoul/URLNavigator
+https://github.com/Yalantis/Segmentio
+https://github.com/FolioReader/FolioReaderKit
+https://github.com/BendingSpoons/katana-swift
+https://github.com/i-schuetz/SwiftCharts
+https://github.com/SebastianBoldt/Jelly
+https://github.com/netguru/ResponseDetective
+https://github.com/Cosmo/TinyConsole
+https://github.com/Urinx/iOSAppHook
