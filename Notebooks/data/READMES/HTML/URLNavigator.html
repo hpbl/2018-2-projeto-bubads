@@ -1,0 +1,182 @@
+<h1>URLNavigator</h1>
+<p><img alt="Swift" src="https://img.shields.io/badge/Swift-4.2-orange.svg" />
+<a href="https://cocoapods.org/pods/URLNavigator"><img alt="CocoaPods" src="http://img.shields.io/cocoapods/v/URLNavigator.svg" /></a>
+<a href="https://travis-ci.org/devxoul/URLNavigator"><img alt="Build Status" src="https://travis-ci.org/devxoul/URLNavigator.svg?branch=master" /></a>
+<a href="https://codecov.io/gh/devxoul/URLNavigator"><img alt="CodeCov" src="https://img.shields.io/codecov/c/github/devxoul/URLNavigator.svg" /></a></p>
+<p>⛵️ URLNavigator provides an elegant way to navigate through view controllers by URLs. URL patterns can be mapped by using <code>URLNavigator.register(_:_:)</code> function.</p>
+<p>URLNavigator can be used for mapping URL patterns with 2 kind of types: <code>URLNavigable</code> and <code>URLOpenHandler</code>. <code>URLNavigable</code> is a type which defines an custom initializer and <code>URLOpenHandler</code> is a closure which can be executed. Both an initializer and a closure receive an URL and placeholder values.</p>
+<h2>Getting Started</h2>
+<h4>1. Understanding URL Patterns</h4>
+<p>URL patterns can contain placeholders. Placeholders will be replaced with matching values from URLs. Use <code>&lt;</code> and <code>&gt;</code> to make placeholders. Placeholders can have types: <code>string</code>(default), <code>int</code>, <code>float</code>, and <code>path</code>.</p>
+<p>For example, <code>myapp://user/&lt;int:id&gt;</code> matches with:</p>
+<ul>
+<li><code>myapp://user/123</code></li>
+<li><code>myapp://user/87</code></li>
+</ul>
+<p>But it doesn't match with:</p>
+<ul>
+<li><code>myapp://user/devxoul</code> (expected int)</li>
+<li><code>myapp://user/123/posts</code> (different url structure)</li>
+<li><code>/user/devxoul</code> (missing scheme)</li>
+</ul>
+<h4>2. Mapping View Controllers and URL Open Handlers</h4>
+<p>URLNavigator allows to map view controllers ans URL open handlers with URL patterns. Here's an example of mapping URL patterns with view controllers and a closure. Each closures has three parameters: <code>url</code>, <code>values</code> and <code>context</code>.</p>
+<ul>
+<li><code>url</code> is an URL that is passed from <code>push()</code> and <code>present()</code>.</li>
+<li><code>values</code> is a dictionary that contains URL placeholder keys and values.</li>
+<li><code>context</code> is a dictionary which contains extra values passed from <code>push()</code>, <code>present()</code> or <code>open()</code>.</li>
+</ul>
+<p>```swift
+let navigator = Navigator()</p>
+<p>// register view controllers
+navigator.register("myapp://user/<int:id>") { url, values, context in
+  guard let userID = values["id"] as? Int else { return nil }
+  return UserViewController(userID: userID)
+}
+navigator.register("myapp://post/<title>") { url, values, context in
+  return storyboard.instantiateViewController(withIdentifier: "PostViewController")
+}</p>
+<p>// register url open handlers
+navigator.handle("myapp://alert") { url, values, context in
+  let title = url.queryParameters["title"]
+  let message = url.queryParameters["message"]
+  presentAlertController(title: title, message: message)
+  return true
+}
+```</p>
+<h4>3. Pushing, Presenting and Opening URLs</h4>
+<p>URLNavigator can push and present view controllers and execute closures with URLs.</p>
+<p>Provide the <code>from</code> parameter to <code>push()</code> to specify the navigation controller which the new view controller will be pushed. Similarly, provide the <code>from</code> parameter to <code>present()</code> to specify the view controller which the new view controller will be presented. If the <code>nil</code> is passed, which is a default value, current application's top most view controller will be used to push or present view controllers.</p>
+<p><code>present()</code> takes an extra parameter: <code>wrap</code>. If a <code>UINavigationController</code> class is specified, the new view controller will be wrapped with the class. Default value is <code>nil</code>.</p>
+<p>```swift
+Navigator.push("myapp://user/123")
+Navigator.present("myapp://post/54321", wrap: UINavigationController.self)</p>
+<p>Navigator.open("myapp://alert?title=Hello&amp;message=World")
+```</p>
+<h2>Installation</h2>
+<p>URLNavigator officially supports CocoaPods only.</p>
+<p><strong>Podfile</strong></p>
+<p><code>ruby
+pod 'URLNavigator'</code></p>
+<h2>Example</h2>
+<p>You can find an example app <a href="https://github.com/devxoul/URLNavigator/tree/master/Example">here</a>.</p>
+<ol>
+<li>Build and install the example app.</li>
+<li>Open Safari app</li>
+<li>Enter <code>navigator://user/devxoul</code> in the URL bar.</li>
+<li>The example app will be launched.</li>
+</ol>
+<h2>Tips and Tricks</h2>
+<h4>Where to initialize a Navigator instance</h4>
+<ol>
+<li>
+<p>Define as a global constant:</p>
+<p>```swift
+let navigator = Navigator()</p>
+<p>class AppDelegate: UIResponder, UIApplicationDelegate {
+  // ...
+}
+```</p>
+</li>
+<li>
+<p>Register to an IoC container:</p>
+<p><code>swift
+container.register(NavigatorType.self) { _ in Navigator() } // Swinject
+let navigator = container.resolve(NavigatorType.self)!</code></p>
+</li>
+<li>
+<p>Inject dependency from a composition root.</p>
+</li>
+</ol>
+<h4>Where to Map URLs</h4>
+<p>I'd prefer using separated URL map file.</p>
+<p><code>swift
+struct URLNavigationMap {
+  static func initialize(navigator: NavigatorType) {
+    navigator.register("myapp://user/&lt;int:id&gt;") { ... }
+    navigator.register("myapp://post/&lt;title&gt;") { ... }
+    navigator.handle("myapp://alert") { ... }
+  }
+}</code></p>
+<p>Then call <code>initialize()</code> at <code>AppDelegate</code>'s <code>application:didFinishLaunchingWithOptions:</code>.</p>
+<p>```swift
+@UIApplicationMain
+final class AppDelegate: UIResponder, UIApplicationDelegate {
+  func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?
+  ) -&gt; Bool {
+    // Navigator
+    URLNavigationMap.initialize(navigator: navigator)</p>
+<pre><code>// Do something else...
+</code></pre>
+<p>}
+}
+```</p>
+<h4>Implementing AppDelegate Launch Option URL</h4>
+<p>It's available to open your app with URLs if custom schemes are registered. In order to navigate to view controllers with URLs, you'll have to implement <code>application:didFinishLaunchingWithOptions:</code> method.</p>
+<p>```swift
+func application(
+  _ application: UIApplication,
+  didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?
+) -&gt; Bool {
+  // ...
+  if let url = launchOptions?[.url] as? URL {
+    if let opened = navigator.open(url)
+    if !opened {
+      navigator.present(url)
+    }
+  }
+  return true
+}</p>
+<p>```</p>
+<h4>Implementing AppDelegate Open URL Method</h4>
+<p>You'll might want to implement custom URL open handler. Here's an example of using URLNavigator with other URL open handlers.</p>
+<p>```swift
+func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -&gt; Bool {
+  // If you're using Facebook SDK
+  let fb = FBSDKApplicationDelegate.sharedInstance()
+  if fb.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation) {
+    return true
+  }</p>
+<p>// URLNavigator Handler
+  if navigator.open(url) {
+    return true
+  }</p>
+<p>// URLNavigator View Controller
+  if navigator.present(url, wrap: UINavigationController.self) != nil {
+    return true
+  }</p>
+<p>return false
+}
+```</p>
+<h4>Passing Extra Values when Pushing, Presenting and Opening</h4>
+<p><code>swift
+let context: [AnyHashable: Any] = [
+  "fromViewController": self
+]
+Navigator.push("myapp://user/10", context: context)
+Navigator.present("myapp://user/10", context: context)
+Navigator.open("myapp://alert?title=Hi", context: context)</code></p>
+<h4>Defining custom URL Value Converters</h4>
+<p>You can define custom URL Value Converters for URL placeholders.</p>
+<p>For example, the placeholder <code>&lt;region&gt;</code> is only allowed for the strings <code>["us-west-1", "ap-northeast-2", "eu-west-3"]</code>. If it doesn't contain any of these, the URL pattern should not match.</p>
+<p>Add a custom value converter to the <code>[String: URLValueConverter]</code> dictionary on your instance of <code>Navigator</code>.</p>
+<p><code>swift
+navigator.matcher.valueConverters["region"] = { pathComponents, index in
+  let allowedRegions = ["us-west-1", "ap-northeast-2", "eu-west-3"]
+  if allowedRegions.contains(pathComponents[index]) {
+    return pathComponents[index]
+  } else {
+    return nil
+  }
+}</code></p>
+<p>With the code above, for example, <code>myapp://region/&lt;region:_&gt;</code> matches with:
+- <code>myapp://region/us-west-1</code>
+- <code>myapp://region/ap-northeast-2</code>
+- <code>myapp://region/eu-west-3</code></p>
+<p>But it doesn't match with:
+- <code>myapp://region/ca-central-1</code></p>
+<p>For additional information, see the <a href="https://github.com/devxoul/URLNavigator/blob/master/Sources/URLMatcher/URLMatcher.swift">implementation</a> of default URL Value Converters.</p>
+<h2>License</h2>
+<p>URLNavigator is under MIT license. See the <a href="LICENSE">LICENSE</a> file for more info.</p>

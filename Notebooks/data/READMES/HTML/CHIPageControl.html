@@ -1,0 +1,71 @@
+<h1>CHIPageControl</h1>
+<p>CHIPageControl is a set of cool animated page controls to replace boring UIPageControl.
+We were inspired by <a href="https://dribbble.com/shots/2578447-Page-Control-Indicator-Transitions-Collection">Jardson Almeida dribbble shot</a> and implemented a few more page controls.</p>
+<p>Made with ❤️ by <a href="http://chi.lv">Chili</a>.</p>
+<h2>Overview</h2>
+<p><img src="Images/demo.gif" width="600" height="450"></p>
+<h2>Requirements</h2>
+<ul>
+<li>iOS 8.0+</li>
+<li>Xcode 8+</li>
+<li>Swift 3</li>
+</ul>
+<h2>Installation</h2>
+<h3>Manually</h3>
+<p>Just add the <code>CHIPageControl</code> folder to your project.</p>
+<h3>CocoaPods</h3>
+<p>use <a href="https://cocoapods.org">CocoaPods</a> with Podfile:
+``` ruby
+pod 'CHIPageControl', '~&gt; 0.1.3'</p>
+<h1>individual page control</h1>
+<p>pod 'CHIPageControl/Aji'
+pod 'CHIPageControl/Aleppo'
+pod 'CHIPageControl/Chimayo'
+pod 'CHIPageControl/Fresno'
+pod 'CHIPageControl/Jalapeno'
+pod 'CHIPageControl/Jaloro'
+pod 'CHIPageControl/Paprika'
+pod 'CHIPageControl/Puya'
+```</p>
+<h3>Carthage</h3>
+<p>use <a href="https://github.com/Carthage/Carthage">Carthage</a> with Cartfile
+<code>ogdl
+github "ChiliLabs/CHIPageControl" ~&gt; 0.1.3</code></p>
+<h2>Usage</h2>
+<h3>🎨 Storyboards</h3>
+<p>Just drop UIView and set its class to be one of CHIPageControls.
+<img src="Images/ibdesignable.gif" width="800" height="564"></p>
+<h3>💻 Code</h3>
+<p><code>swift
+let pageControl = CHIPageControlAji(frame: CGRect(x: 0, y:0, width: 100, height: 20))
+pageControl.numberOfPages = 4
+pageControl.radius = 4
+pageControl.tintColor = .red
+pageControl.currentPageTintColor = .green
+pageControl.padding = 6</code></p>
+<h3>Adding multiple tintColors</h3>
+<p>``` swift
+// The size of the array needs to match the numberOfPages or it will throw an fatal error
+pageControl.tintColors = [UIColor.black, UIColor.yellow, UIColor.black, UIColor.black]</p>
+<p>// or</p>
+<p>// If it is the first one, it will fill all colors with the selected tintColor and then replace the colors with the desired one
+pageControl.insertTintColor(UIColor.yellow, position: 1)
+```</p>
+<h3>Updating progress</h3>
+<p>``` swift
+//update dynamically
+pageControl.progress = 0.5</p>
+<p>//set progress with animation
+pageControl.set(progress: 2, animated: true)
+```</p>
+<h3>Page Controls 🌶️🌶️🌶️</h3>
+<p><img src="Images/Aji.gif" width="100" height="50"> CHIPageControlAji</p>
+<p><img src="Images/Aleppo.gif" width="100" height="50"> CHIPageControlAleppo</p>
+<p><img src="Images/Chimayo.gif" width="100" height="50"> CHIPageControlChimayo</p>
+<p><img src="Images/Fresno.gif" width="100" height="50"> CHIPageControlFresno</p>
+<p><img src="Images/Jalapeno.gif" width="100" height="50"> CHIPageControlJalapeno</p>
+<p><img src="Images/Jaloro.gif" width="100" height="50"> CHIPageControlJaloro</p>
+<p><img src="Images/Paprika.gif" width="100" height="50"> CHIPageControlPaprika</p>
+<p><img src="Images/Puya.gif" width="100" height="50"> CHIPageControlPuya</p>
+<h2>License</h2>
+<p>CHIPageControl is released under the MIT license. See <a href="./LICENSE">LICENSE</a> for details.</p>

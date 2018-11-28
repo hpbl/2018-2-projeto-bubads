@@ -1,0 +1,74 @@
+<p><a href="https://ramotion.com?utm_source=gthb&amp;utm_medium=special&amp;utm_campaign=paper-switch-logo"><img alt="header" src="./header.png" /></a>
+<img src="https://github.com/Ramotion/paper-switch/blob/master/paper-switch.gif" width="600" height="450" />
+<br><br/></p>
+<h1>RAMPaperSwitch</h1>
+<p><a href="https://cocoapods.org/pods/RAMPaperSwitch"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/p/RAMPaperSwitch.svg" /></a>
+<a href="http://cocoapods.org/pods/RAMPaperSwitch"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/RAMPaperSwitch.svg" /></a>
+<a href="https://cdn.rawgit.com/Ramotion/paper-switch/master/docs/index.html"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/metrics/doc-percent/RAMPaperSwitch.svg" /></a>
+<a href="https://github.com/Ramotion/paper-switch"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a>
+<a href="http://twitter.com/Ramotion"><img alt="Twitter" src="https://img.shields.io/badge/Twitter-@Ramotion-blue.svg?style=flat" /></a>
+<a href="https://travis-ci.org/Ramotion/paper-switch"><img alt="Travis" src="https://img.shields.io/travis/Ramotion/paper-switch.svg" /></a>
+<a href="https://paypal.me/Ramotion"><img alt="Donate" src="https://img.shields.io/badge/Donate-PayPal-blue.svg" /></a></p>
+<h2>About</h2>
+<p>This project is maintained by Ramotion, Inc.<br>
+We specialize in the designing and coding of custom UI for Mobile Apps and Websites.<br></p>
+<p><strong>Looking for developers for your project?</strong><br>
+This project is maintained by Ramotion, Inc. We specialize in the designing and coding of custom UI for Mobile Apps and Websites.</p>
+<p><a href="mailto:alex.a@ramotion.com?subject=Project%20inquiry%20from%20Github">
+<img src="https://github.com/ramotion/gliding-collection/raw/master/contact_our_team@2x.png" width="187" height="34"></a> <br></p>
+<p>The <a href="https://store.ramotion.com/product/iphone-x-clay-mockups?utm_source=gthb&amp;utm_medium=special&amp;utm_campaign=paper-switch">iPhone mockup</a> available <a href="https://store.ramotion.com?utm_source=gthb&amp;utm_medium=special&amp;utm_campaign=paper-switch">here</a>.</p>
+<h2>Try this UI control in action</h2>
+<p><a href="https://itunes.apple.com/app/apple-store/id1182360240?pt=550053&ct=gthb-paper-switch&mt=8" > <img src="https://github.com/Ramotion/navigation-stack/raw/master/Download_on_the_App_Store_Badge_US-UK_135x40.png" width="170" height="58"></a></p>
+<h2>Requirements</h2>
+<ul>
+<li>iOS 8.0+</li>
+<li>Xcode 9.0+</li>
+</ul>
+<h1>Installation</h1>
+<p>Just add the <code>RAMPaperSwitch</code> folder to your project.</p>
+<p>or use <a href="https://cocoapods.org">CocoaPods</a> with Podfile:
+<code>ruby
+pod 'RAMPaperSwitch'</code>
+or <a href="https://github.com/Carthage/Carthage">Carthage</a> users can simply add to their <code>Cartfile</code>:
+<code>github "Ramotion/paper-switch"</code></p>
+<h1>Usage</h1>
+<p>RAMPaperSwitch is a drop-in replacement of UISwitch. You just need to set the <code>onTintColor</code> property of the switch, and it will automatically <em>paint over</em> its superview with the selected color.
+You have ability to set duration of animation instead of default value.</p>
+<ol>
+<li>
+<p>Create a new UISwitch in your storyboard or nib.</p>
+</li>
+<li>
+<p>Set the class of the UISwitch to RAMPaperSwitch in your Storyboard or nib.</p>
+</li>
+<li>
+<p>Set <code>onTintColor</code> for the switch</p>
+</li>
+<li>
+<p>Set <code>duration</code> property programmatically if You want to change animation duration.</p>
+</li>
+<li>
+<p>Add animation for other views near the switch if need.</p>
+</li>
+</ol>
+<h1>Animate views</h1>
+<p>You can animate other views near the switch. For example, you can change color to views or labels that are inside the same superview. Duration of animation can be gotten from the RAMPaperSwitch's property <code>duration</code>. You can animate CoreAnimation properties like this:</p>
+<p><code>swift
+self.paperSwitch.animationDidStartClosure = {(onAnimation: Bool) in
+    UIView.transitionWithView(self.label, duration: self.paperSwitch.duration, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+        self.label.textColor = onAnimation ? UIColor.whiteColor() : UIColor.blueColor()
+    }, completion:nil)
+}</code></p>
+<p><br></p>
+<p>This library is a part of a <a href="https://github.com/Ramotion/swift-ui-animation-components-and-libraries"><b>selection of our best UI open-source projects.</b></a></p>
+<h1>Get the Showroom App for iOS to give it a try</h1>
+<p>Try this UI component and more like this in our iOS app. Contact us if interested.</p>
+<p><a href="https://itunes.apple.com/app/apple-store/id1182360240?pt=550053&ct=paper-switch&mt=8" >
+<img src="https://github.com/ramotion/gliding-collection/raw/master/app_store@2x.png" width="117" height="34"></a>
+<a href="mailto:alex.a@ramotion.com?subject=Project%20inquiry%20from%20Github">
+<img src="https://github.com/ramotion/gliding-collection/raw/master/contact_our_team@2x.png" width="187" height="34"></a>
+<br>
+<br></p>
+<p>Follow us for the latest updates<br>
+<a href="https://goo.gl/rPFpid" >
+<img src="https://i.imgur.com/ziSqeSo.png/" width="156" height="28"></a></p>

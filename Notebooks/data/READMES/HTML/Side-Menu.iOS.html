@@ -1,0 +1,110 @@
+<h1>Side Menu</h1>
+<p><a href="http://cocoapods.org/?q=YALSideMenu"><img alt="Platform" src="http://img.shields.io/badge/platform-iOS-blue.svg?style=flat" /></a>
+<a href="https://github.com/Yalantis/Side-Menu.iOS/blob/master/LICENSE"><img alt="License" src="http://img.shields.io/badge/license-MIT-green.svg?style=flat" /></a></p>
+<p>Animated side menu with customizable UI. 
+Made in <a href="https://yalantis.com/?utm_source=github"> Yalantis</a>.<br>
+Check this <a href="https://dribbble.com/shots/1689922-Side-Menu-Animation?list=searches&tag=yalantis&offset=0">project on dribbble</a>.<br>
+Check this <a href="https://www.behance.net/gallery/20411445/Mobile-Animations-Interactions ">project on Behance</a>.</p>
+<p><img src="https://d13yacurqjgara.cloudfront.net/users/125056/screenshots/1689922/events-menu_1-1-6.gif" /></p>
+<h2>Requirements</h2>
+<ul>
+<li>iOS 7+</li>
+<li>Swift 4.2</li>
+<li>Xcode 9</li>
+</ul>
+<h2>Installation</h2>
+<h4>Using <a href="http://cocoapods.org">CocoaPods</a></h4>
+<p>Simply add the following line to your Podfile:</p>
+<p><code>ruby
+pod 'YALSideMenu', '~&gt; 2.1'</code></p>
+<p><em>(CocoaPods v1.1 or later is required)</em></p>
+<h4>Manual Installation</h4>
+<blockquote>
+<p>For application targets that do not support embedded frameworks, such as iOS 7, SideMenu can be integrated by including source files from the SideMenu folder directly, optionally wrapping the top-level types into <code>struct SideMenu</code> to simulate a namespace. Yes, this sucks.</p>
+</blockquote>
+<ol>
+<li>Add SideMenu as a <a href="http://git-scm.com/docs/git-submodule">submodule</a> by opening the Terminal, <code>cd</code>-ing into your top-level project directory, and entering the command <code>git submodule add https://github.com/yalantis/Side-Menu.iOS.git</code></li>
+<li>Open the <code>SideMenu</code> folder, and drag <code>SideMenu.xcodeproj</code> into the file navigator of your app project.</li>
+<li>In Xcode, navigate to the target configuration window by clicking on the blue project icon, and selecting the application target under the "Targets" heading in the sidebar.</li>
+<li>Ensure that the deployment target of <code>SideMenu.framework</code> matches that of the application target.</li>
+<li>In the tab bar at the top of that window, open the "Build Phases" panel.</li>
+<li>Expand the "Target Dependencies" group, and add <code>SideMenu.framework</code>.</li>
+<li>Expand the "Link Binary With Libraries" group, and add <code>SideMenu.framework</code></li>
+<li>Click on the <code>+</code> button at the top left of the panel and select "New Copy Files Phase". Rename this new phase to "Copy Frameworks", set the "Destination" to "Frameworks", and add <code>SideMenu.framework</code>.</li>
+</ol>
+<h2>Usage</h2>
+<ol>
+<li>
+<p>Import <code>SideMenu</code> module</p>
+<p><code>swift
+import SideMenu</code></p>
+</li>
+<li>
+<p>Adopt the <code>Menu</code> protocol in your menu view controller, e.g.</p>
+<p><code>swift
+class MyFancyMenuViewController: UIViewController, Menu  {
+    @IBOutlet var menuItems = [UIView] ()
+}</code></p>
+</li>
+<li>
+<p>Set <code>preferredContentSize</code> in menu view controller to specify the desired menu width</p>
+</li>
+<li>
+<p>In content view controller store an animator, that will animate our menu.</p>
+<p><code>swift
+import SideMenu
+class ContentViewController: UIViewController  {
+var menuAnimator : MenuTransitionAnimator!
+}</code>
+5. Initialize an animator for presentation with parameters</p>
+<p><code>swift
+menuAnimator = MenuTransitionAnimator(mode: .presentation, shouldPassEventsOutsideMenu: false) { [unowned self] in
+    self.dismiss(animated: true, completion: nil)
+}</code></p>
+</li>
+</ol>
+<p>If you want, for example, to dismiss your menu when a tap outside menu takes place, you should pass 'false' to 'shouldPassEventsOutsideMenu' flag and assign a 'tappedOutsideHandler'.In fact, you are free to do whatever you want when a tap outside menu occurs or, if you want to have access to your content view controller, just pass 'true' and assign 'tappedOutsideHandler' to nil.
+6. Implement class of UIViewControllerTransitioningDelegate that will return our menuAnimator from method animationControllerForPresentedController and assign it to transitioningDelegate of menu view controller(Don't forget to set .Custom modal presentation style). To dismiss menu you should return MenuTransitionAnimator(mode: .Dismissal) from animationControllerForDismissedController method.</p>
+<pre><code>```swift
+override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    let menu = segue.destination as! MenuViewController
+    menu.transitioningDelegate = self
+    menu.modalPresentationStyle = .custom
+}
+
+func animationController(forPresented presented: UIViewController, presenting _: UIViewController,
+    source _: UIViewController) -&gt; UIViewControllerAnimatedTransitioning? {
+        return menuAnimator
+}
+
+func animationController(forDismissed dismissed: UIViewController) -&gt; UIViewControllerAnimatedTransitioning? {
+    return MenuTransitionAnimator(mode: .dismissal)
+}
+```
+</code></pre>
+<h2>Let us know!</h2>
+<p>We’d be really happy if you sent us links to your projects where you use our component. Just send an email to github@yalantis.com And do let us know if you have any questions or suggestion regarding the animation. </p>
+<p>P.S. We’re going to publish more awesomeness wrapped in code and a tutorial on how to make UI for iOS (Android) better than better. Stay tuned!</p>
+<h2>License</h2>
+<pre><code>The MIT License (MIT)
+
+Copyright © 2018 Yalantis
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</code></pre>

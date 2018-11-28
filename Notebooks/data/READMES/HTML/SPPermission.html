@@ -1,0 +1,93 @@
+<p><img src="https://rawcdn.githack.com/IvanVorobei/RequestPermission/fb53d20f152a3e76e053e6af529306611fb794f0/resources/request-permission - baner.svg"/></p>
+<h2>About</h2>
+<p>This project is about managing permissions with the customizable visual effects. Beautiful dialog increases the chance of approval (which is important when we request notification). Simple control of this module saves you hours of development. You can start using this project with just two lines of code and easy customization! You can see <a href="https://youtu.be/1mDdX7fQRv4">how I am designed UI</a> and <a href="https://youtu.be/viFDunOdyBg">how use pod tutorial</a> on youtube</p>
+<p>Preview GIF loading <code>4mb</code>. Please, wait</p>
+<p><img src="https://rawcdn.githack.com/IvanVorobei/RequestPermission/fb53d20f152a3e76e053e6af529306611fb794f0/resources/request-permission - mockup_preview.gif" width="500"></p>
+<p><img src="https://rawcdn.githack.com/IvanVorobei/RequestPermission/6fcd9bdb50a99cea358294999e161dffe55be46f/resources/request-permission - donate.svg"/></p>
+<p>The project is absolutely free, but but it takes time to support and update it. Your support is very motivating and very important. I often receive emails asking me to update or add functionality. <a href="https://money.yandex.ru/to/410012745748312">Small donate</a> for a cup of coffee helps to develop the project and make it better</p>
+<p><img src="https://rawcdn.githack.com/IvanVorobei/RequestPermission/6fcd9bdb50a99cea358294999e161dffe55be46f/resources/request-permission - donate.svg"/></p>
+<h2>Requirements</h2>
+<p>Swift 4.2. Ready for use on iOS 10+</p>
+<h2>Integration</h2>
+<p>Drop in <code>source/sparrow</code> folder to your Xcode project. Make sure to enable <code>Copy items if needed</code> and <code>Create groups</code></p>
+<p>Or via CocoaPods:
+<code>ruby
+pod 'SPPermission'</code></p>
+<h2>How to use</h2>
+<p>Call <code>SPPermission</code> and use func <code>request()</code>. Also passed controller, on which dialog should present
+```swift
+class ViewController: UIViewController {</p>
+<pre><code>override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    SPPermission.Dialog.request(with: [.camera, .microphone, .notification], on: self)
+}
+</code></pre>
+<p>}
+<code>If you want to know if permission allowed, you should call the function:</code>swift
+let isAvailableCamera = SPPermission.isAllow(.сamera)
+```</p>
+<p>How customize titles and images you can read section <a href="#datasource--customization">DataSource &amp; Customization</a></p>
+<h2>Permissions</h2>
+<p><img src="https://rawcdn.githack.com/IvanVorobei/RequestPermission/951477c8e89de55eeeac441102b52b1415c691b7/resources/request-permission_permissions.png"/></p>
+<p>Also now supported <code>MediaLibrary (Apple Music)</code> permission</p>
+<p>If you want to request notification (or other permissions) without dialog, use the function:
+<code>swift
+SPPermission.request(.notification, with: {
+    //callback
+})</code>
+Notification permission should be tested <em>only</em> on a real device.
+If you want to add new permission, create a new issue <a href="https://github.com/IvanVorobei/SPPermission/issues">here</a></p>
+<h2>Delegate</h2>
+<p>To track events hide &amp; allowed permission associated with <code>SPPermission</code>, implement the protocol <code>SPPermissionDialogDelegate</code></p>
+<p>```swift
+@objc public protocol SPPermissionDialogDelegate: class {</p>
+<pre><code>@objc optional func didHide()
+@objc optional func didAllow(permission: SPPermissionType)
+</code></pre>
+<p>}
+```</p>
+<p>And pass the delegate to the function:</p>
+<p><code>swift
+SPPermission.Dialog.request(
+    with: [.calendar, .microphone],
+    on: self,
+    delegate: self
+)</code></p>
+<h2>DataSource &amp; Customization</h2>
+<p>If you want to change the text, you need to implement the <code>SPPermissionDialogDataSource</code> protocol. Override the needed parameters to see the changes</p>
+<p>```swift
+@objc public protocol SPPermissionDialogDataSource: class {</p>
+<pre><code>@objc optional var dialogTitle: String { get }
+@objc optional var dialogSubtitle: String { get }
+@objc optional var dialogComment: String { get }
+@objc optional var allowTitle: String { get }
+@objc optional var allowedTitle: String { get }
+@objc optional var bottomComment: String { get }
+@objc optional var showCloseButton: Bool { get }
+@objc optional func name(for permission: SPPermissionType) -&gt; String?
+@objc optional func description(for permission: SPPermissionType) -&gt; String?
+@objc optional func image(for permission: SPPermissionType) -&gt; UIImage?
+</code></pre>
+<p>}
+```</p>
+<p>And pass the object to the function:</p>
+<p><code>swift
+SPPermission.Dialog.request(
+    with: [.photoLibrary, .contacts],
+    on: self,
+    delegate: self,
+    dataSource: self
+)</code></p>
+<p>If you want add or remove close button (for close dialog, need swipe it), you need override parametr  <code>showCloseButton</code>. How it will look look at the picture below:</p>
+<p><img src="https://rawcdn.githack.com/IvanVorobei/RequestPermission/b3e613295b73be36c8a3d35126d1f7015ef432a8/resources/request-permission - close button.png"/></p>
+<p>In the project you can find an example for usage <code>SPPermissionDialogDataSource</code></p>
+<h2>Apps, using lib</h2>
+<p>I like the idea to specify applications that use the <code>SPPermission</code>. Please, contact me via email. You can find it in the section <code>Contacts</code> so that I added app here</p>
+<h2>For Russian-speaking users</h2>
+<p>Вы можете глянуть <a href="https://youtu.be/viFDunOdyBg">туториал на youtube</a> или почитать <a href="https://habr.com/post/430886/">статью на хабре</a>, чтобы больше узнать о проекте</p>
+<h2>License</h2>
+<p><code>SPPermission</code> is released under the MIT license. Check LICENSE.md for details</p>
+<h2>Contact</h2>
+<p>If you need develop application or UI, write me to hello@ivanvorobei.by. I am develop design and ios apps. I am use <code>swift</code>. If you want to ask for more functionality, you should create a new issue</p>
+<p><a href="https://hello.ivanvorobei.by">hello.ivanvorobei.by</a> &amp; <a href="https://hello.ivanvorobei.by">ivanvorobei.by</a> </p>
+<p>My apps <a href="https://itunes.apple.com/us/developer/polina-zubarik/id1434528595">in AppStore</a> &amp; <a href="https://itunes.apple.com/us/developer/mikalai-varabei/id1435792103">in AppStore 2</a></p>

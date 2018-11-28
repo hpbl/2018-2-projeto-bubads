@@ -1,0 +1,76 @@
+<h1>Macaw</h1>
+<p><a href="https://travis-ci.org/exyte/Macaw"><img alt="CI Status" src="https://travis-ci.org/exyte/Macaw.svg?style=flat" /></a>
+<a href="http://cocoapods.org/pods/Macaw"><img alt="Version" src="https://img.shields.io/cocoapods/v/Macaw.svg?style=flat" /></a>
+<a href="https://github.com/Carthage/Carthage"><img alt="Carthage Compatible" src="https://img.shields.io/badge/Carthage-compatible-0473B3.svg?style=flat" /></a>
+<a href="http://cocoapods.org/pods/Macaw"><img alt="License" src="https://img.shields.io/cocoapods/l/Macaw.svg?style=flat" /></a>
+<a href="http://cocoapods.org/pods/Macaw"><img alt="Platform" src="https://img.shields.io/cocoapods/p/Macaw.svg?style=flat" /></a></p>
+<p><img src="https://raw.githubusercontent.com/exyte/Macaw/master/logo.png" width="400"></p>
+<h2>What is Macaw?</h2>
+<p>Macaw is a powerful and easy-to-use vector graphics library written in Swift.</p>
+<h4>It's simple</h4>
+<p>Get started with Macaw in several lines of code:</p>
+<p>```swift
+class MyView: MacawView {</p>
+<pre><code>required init?(coder aDecoder: NSCoder) {
+    let text = Text(text: "Hello, World!", place: .move(dx: 145, dy: 100))
+    super.init(node: text, coder: aDecoder)
+}
+</code></pre>
+<p>}
+```</p>
+<p><img src="http://i.imgur.com/ffPc4mr.png" width="475"></p>
+<h4>It has SVG support</h4>
+<p>Include Scalable Vector Graphics right into your iOS application:</p>
+<p><img src="http://i.imgur.com/NWkEzcu.png" width="300"></p>
+<h4>It's powerful</h4>
+<p>Affine transformations, user events, animation and various effects to build beautiful apps with Macaw:</p>
+<p><img src="http://i.imgur.com/pjmxrDI.gif" width="600"></p>
+<h2>Motivation</h2>
+<p>Modern designs contain tons of illustrations and complex animations. Mobile developers have to spend a lot of time on converting designs into native views that will be resizable for different screens. With Macaw you can reduce development time to a minimum and describe all graphics in high level <a href="https://en.wikipedia.org/wiki/Scene_graph">scene</a> elements. Or even render SVG graphics right from your design tool with Macaw events and animation support.</p>
+<h2>Resources</h2>
+<h3>Docs</h3>
+<p>We're working hard to provide full documentation. Currently you can take a look at the following docs:
+<em> <a href="https://github.com/exyte/Macaw/wiki/Getting-started">Getting started guide</a>
+</em> <a href="https://github.com/exyte/Macaw/wiki/Render-SVG-file">Render SVG file</a>
+<em> <a href="https://github.com/exyte/Macaw/wiki/Content-animation">Content animation</a>
+</em> <a href="https://github.com/exyte/Macaw/wiki/Morphing-animation">Morphing animation</a></p>
+<h3>Posts</h3>
+<ul>
+<li><a href="https://medium.com/exyte/replicating-apple-design-awarded-applications-70e5df4c4b94#.ckt1hfnei">Replicating Apple Design Awarded Applications</a></li>
+<li><a href="https://medium.com/exyte/how-friendly-can-drawing-api-be-on-ios-b3a818bf8105#.o9i35zcai">How friendly can drawing API be on iOS?</a></li>
+<li><a href="https://medium.com/exyte/macaw-ios-library-morphing-animations-and-touch-events-a4cb1c0be97f">Macaw iOS Library: Morphing Animations</a></li>
+</ul>
+<h2>Examples</h2>
+<p><a href="https://github.com/exyte/macaw-examples">Macaw-Examples</a> is a repository where you can find various usages of the <code>Macaw</code> library from simple charts to the complex periodic table.</p>
+<p><img src="http://i.imgur.com/rQIh3qD.gif" height="280"> <img src="http://i.imgur.com/bIgHtzt.gif" height="280"> <img src="http://i.imgur.com/NiBT2rv.gif" height="280"> <img src="http://i.imgur.com/Un8TJKc.gif" height="280"></p>
+<p><img src="http://i.imgur.com/o6tBKW6.gif" height="280"><img src="http://i.imgur.com/1JXF60f.gif" height="280"></p>
+<h2>Requirements</h2>
+<ul>
+<li>iOS 8.0+</li>
+<li>Mac OS X 10.11+</li>
+<li>Xcode 7.3+</li>
+</ul>
+<h2>Installation</h2>
+<h2><a href="http://cocoapods.org">CocoaPods</a></h2>
+<p>To install it, simply add the following line to your Podfile:
+<code>ruby
+pod "Macaw", "0.9.3"</code></p>
+<h2><a href="http://github.com/Carthage/Carthage">Carthage</a></h2>
+<p><code>ogdl
+github "Exyte/Macaw" ~&gt; 0.9.3</code></p>
+<h2>Building from sources</h2>
+<p>To build Macaw from sources:
+<em> clone the repo <code>git@github.com:exyte/Macaw.git</code>
+</em> open terminal and run <code>cd &lt;MacawRepo&gt;/Example/</code>
+<em> run <code>pod install</code> to install all dependencies
+</em> run <code>open Example.xcworkspace/</code> to open project in the Xcode</p>
+<h2>Who is using Macaw?</h2>
+<p>Over one thousand users already utilize Macaw in their applications. We would like to prepare the list of top use cases.
+Please share your story with us at info@exyte.com and we will thank you with Macaw stickers!</p>
+<p><img src="https://i.imgur.com/m0pBChS.jpg" height="200"></p>
+<h2>Change Log</h2>
+<p>You can find list of all changes by version in the <a href="https://github.com/exyte/Macaw/wiki/Change-Log">Change Log</a></p>
+<h2>Author</h2>
+<p>This project is maintained by <a href="http://www.exyte.com">exyte</a>. We design and build mobile and VR/AR applications.</p>
+<h2>License</h2>
+<p>Macaw is available under the MIT license. See the LICENSE file for more info.</p>

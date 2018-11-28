@@ -1,0 +1,66 @@
+<h1>DeckTransition</h1>
+<p><a href="https://travis-ci.org/HarshilShah/DeckTransition"><img alt="CI Status" src="http://img.shields.io/travis/HarshilShah/DeckTransition.svg" /></a>
+<a href="https://github.com/HarshilShah/DeckTransition/releases/latest"><img alt="Version" src="https://img.shields.io/github/release/HarshilShah/DeckTransition.svg" /></a>
+<img alt="Package Managers" src="https://img.shields.io/badge/supports-CocoaPods%20%7C%20Carthage-orange.svg" />
+<a href="https://harshilshah.github.com/DeckTransition"><img alt="Documentation" src="https://cdn.rawgit.com/HarshilShah/DeckTransition/master/docs/badge.svg" /></a>
+<a href="https://github.com/HarshilShah/DeckTransition/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-999999.svg" /></a>
+<a href="https://twitter.com/HarshilShah1910"><img alt="Contact" src="https://img.shields.io/badge/contact-%40HarshilShah1910-3a8fc1.svg" /></a></p>
+<p>DeckTransition is an attempt to recreate the card-like transition found in the iOS 10 Apple Music and iMessage apps.</p>
+<p>Hereʼs a GIF showing it in action.</p>
+<p><img alt="Demo" src="https://raw.githubusercontent.com/HarshilShah/DeckTransition/master/Resources/demo.gif" /></p>
+<h2>Requirements</h2>
+<ul>
+<li>Swift 4.2</li>
+<li>iOS 9 or later</li>
+</ul>
+<h2>Installation</h2>
+<h3>CocoaPods</h3>
+<p>To install DeckTransition using <a href="http://cocoapods.org">CocoaPods</a>, add the following line to your Podfile:</p>
+<p><code>pod 'DeckTransition', '~&gt; 2.0'</code></p>
+<h3>Carthage</h3>
+<p>To install DeckTransition using <a href="https://github.com/Carthage/Carthage">Carthage</a>, add the following line to your Cartfile:</p>
+<p><code>github "HarshilShah/DeckTransition" ~&gt; 2.0</code></p>
+<h2>Documentation</h2>
+<p>You can find <a href="https://harshilshah.github.io/DeckTransition" title="Documentation">the docs here</a>. Documentation is generated with <a href="https://github.com/realm/jazzy">Jazzy</a>, and hosted on <a href="https://pages.github.com">GitHub Pages</a>.</p>
+<h2>Usage</h2>
+<h3>Basics</h3>
+<p>Set <code>modalPresentationCapturesStatusBarAppearance</code> to <code>true</code> in your modal view controller, and override the <code>preferredStatusBarStyle</code> variable to return <code>.lightContent</code>.</p>
+<p>Additionally, the <code>UIScrollView</code> instances which should be tracked for the swipe-to-dismiss gesture should have their <code>backgroundColor</code> set to <code>.clear</code>.</p>
+<h3>Presentation</h3>
+<p>The transition can be called from code or using a storyboard.</p>
+<p>To use via storyboards, just setup a custom segue (<code>kind</code> set to <code>custom</code>), and set the <code>class</code> to <code>DeckSegue</code>.</p>
+<p>Hereʼs a snippet showing usage via code. Just replace <code>ModalViewController()</code> with your view controller's class and youʼre good to go.</p>
+<p><code>swift
+let modal = ModalViewController()
+let transitionDelegate = DeckTransitioningDelegate()
+modal.transitioningDelegate = transitionDelegate
+modal.modalPresentationStyle = .custom
+present(modal, animated: true, completion: nil)</code></p>
+<h3>Dismissal</h3>
+<p>By default, DeckTransition has a swipe-to-dismiss gesture which is automatically enabled when your modalʼs main <code>UIScrollView</code> is scrolled to the top.</p>
+<p>You can opt-out of this behaviour by passing in <code>false</code> for the <code>isSwipeToDismissEnabled</code> parameter while initialising your <code>DeckTransitioningDelegate</code>.</p>
+<h3><code>UIScrollView</code> detection</h3>
+<p>DeckTransition has an internal heuristic to determine which <code>UIScrollView</code> should be tracked for the swipe-to-dismiss gesture. In general, this should be sufficient for and cover most use cases.</p>
+<p>However there are some edge cases, and should you run into one, these can we worked around by making your modal view controller conform to the <code>DeckTransitionViewControllerProtocol</code> protocol. More information about this can be found in the documentation page about <a href="https://harshilshah.github.io/DeckTransition/uiscrollview-detection.html">UIScrollView detection</a>.</p>
+<h3>Snapshots</h3>
+<p>For a variety of reasons, and especially because of iOS 11's safe area layout, DeckTransition uses a snapshot of your presenting view controller's view instead of using the view directly. This view is automatically updated whenever the frame is resized.</p>
+<p>However, there can be some cases where you might want to update the snapshot view by yourself, and this can be achieved using the following one line snippet:</p>
+<p><code>swift
+(presentationController as? DeckSnapshotUpdater)?.requestPresentedViewSnapshotUpdate()</code></p>
+<p>All this does is request the presentation controller to update the snapshot.</p>
+<p>You can also choose to update snapshot directly from the presenting view controller, as follows:</p>
+<p><code>swift
+(presentedViewController?.presentationController as? DeckSnapshotUpdater)?.requestPresentedViewSnapshotUpdate()</code></p>
+<p>It's worth noting that updating the snapshot is an expensive process and should only be used if necessary, for example if you are updating your entire app's theme.</p>
+<h2>Apps Using DeckTransition</h2>
+<ul>
+<li><a href="https://zachsim.one/projects/petty">Petty</a> by <a href="https://twitter.com/zachsimone">Zach Simone</a></li>
+<li><a href="https://bitbookapp.com">Bitbook</a> by <a href="https://sammygutierrez.com">Sammy Gutierrez</a></li>
+<li><a href="https://git.gmu.edu/srct/whats-open-ios">What's Open for iOS</a> by <a href="https://srct.gmu.edu/">Mason SRCT</a></li>
+<li><a href="https://reader.manabi.io">Manabi Reader</a> by <a href="https://twitter.com/aehlke">Alex Ehlke</a></li>
+</ul>
+<p>Feel free to submit a PR if you’re using this library in your apps</p>
+<h2>Author</h2>
+<p>Written by <a href="https://twitter.com/HarshilShah1910">Harshil Shah</a></p>
+<h2>License</h2>
+<p>DeckTransition is available under the MIT license. See the LICENSE file for more info.</p>

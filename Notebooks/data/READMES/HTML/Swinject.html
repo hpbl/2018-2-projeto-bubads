@@ -1,0 +1,222 @@
+<p align="center">
+  <img src="https://avatars0.githubusercontent.com/u/13637225?v=3&s=600" width="33%">
+</p>
+
+<h1>Swinject</h1>
+<p><a href="https://travis-ci.org/Swinject/Swinject"><img alt="Travis CI" src="https://travis-ci.org/Swinject/Swinject.svg?branch=master" /></a>
+<a href="https://github.com/Carthage/Carthage"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a>
+<a href="http://cocoapods.org/pods/Swinject"><img alt="CocoaPods Version" src="https://img.shields.io/cocoapods/v/Swinject.svg?style=flat" /></a>
+<a href="http://cocoapods.org/pods/Swinject"><img alt="License" src="https://img.shields.io/cocoapods/l/Swinject.svg?style=flat" /></a>
+<a href="http://cocoapods.org/pods/Swinject"><img alt="Platforms" src="https://img.shields.io/badge/platform-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS%20%7C%20Linux-lightgrey.svg" /></a>
+<a href="https://developer.apple.com/swift"><img alt="Swift Version" src="https://img.shields.io/badge/Swift-2.2--3.1.x-F16D39.svg?style=flat" /></a>
+<a href="https://houndci.com"><img alt="Reviewed by Hound" src="https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg" /></a></p>
+<p>Swinject is a lightweight <a href="https://en.wikipedia.org/wiki/Dependency_injection">dependency injection</a> framework for Swift.</p>
+<p>Dependency injection (DI) is a software design pattern that implements Inversion of Control (IoC) for resolving dependencies. In the pattern, Swinject helps your app split into loosely-coupled components, which can be developed, tested and maintained more easily. Swinject is powered by the Swift generic type system and first class functions to define dependencies of your app simply and fluently.</p>
+<h2>Features</h2>
+<ul>
+<li>[x] <a href="./Documentation/README.md#user-content-pure-swift-type-support">Pure Swift Type Support</a></li>
+<li>[x] <a href="./Documentation/DIContainer.md#registration-with-arguments-to-di-container">Injection with Arguments</a></li>
+<li>[x] <a href="./Documentation/InjectionPatterns.md">Initializer/Property/Method Injections</a></li>
+<li>[x] <a href="./Documentation/InjectionPatterns.md#user-content-initialization-callback">Initialization Callback</a></li>
+<li>[x] <a href="./Documentation/CircularDependencies.md">Circular Dependency Injection</a></li>
+<li>[x] <a href="./Documentation/ObjectScopes.md">Object Scopes as None (Transient), Graph, Container (Singleton) and Hierarchy</a></li>
+<li>[x] Support of both Reference and <a href="./Documentation/Misc.md#value-types">Value Types</a></li>
+<li>[x] <a href="./Documentation/Misc.md#self-registration-self-binding">Self-registration (Self-binding)</a></li>
+<li>[x] <a href="./Documentation/ContainerHierarchy.md">Container Hierarchy</a></li>
+<li>[x] <a href="./Documentation/ThreadSafety.md">Thread Safety</a></li>
+<li>[x] <a href="./Documentation/Assembler.md">Modular Components</a></li>
+</ul>
+<h2>Extensions</h2>
+<ul>
+<li><strong><a href="https://github.com/Swinject/SwinjectPropertyLoader">SwinjectPropertyLoader</a></strong>: Loading property values from resources.</li>
+<li><strong><a href="https://github.com/Swinject/SwinjectStoryboard">SwinjectStoryboard</a></strong>: Automatic dependency injection via Storyboard.</li>
+<li><strong><a href="https://github.com/Swinject/Swinject-CodeGen">Swinject-CodeGen</a></strong>: Type-safe code generation of <code>Container</code> from a CSV/YAML file defining dependencies.</li>
+<li><strong><a href="https://github.com/Swinject/SwinjectAutoregistration">SwinjectAutoregistration</a></strong>: Automatic registration of services by leveraging the Swift Generics.</li>
+</ul>
+<h2>Requirements</h2>
+<ul>
+<li>iOS 8.0+ / Mac OS X 10.10+ / watchOS 2.0+ / tvOS 9.0+</li>
+<li>Swift 2.2 or 2.3</li>
+<li>Xcode 7.0+</li>
+<li>Swift 3</li>
+<li>Xcode 8.0+</li>
+<li>Swift 3.2, 4.x</li>
+<li>Xcode 9.0+</li>
+<li>Carthage 0.18+ (if you use)</li>
+<li>CocoaPods 1.1.1+ (if you use)</li>
+</ul>
+<h2>Installation</h2>
+<p>Swinject is available through <a href="https://github.com/Carthage/Carthage">Carthage</a> or <a href="https://cocoapods.org">CocoaPods</a>.</p>
+<h3>Carthage</h3>
+<p>To install Swinject with Carthage, add the following line to your <code>Cartfile</code>.</p>
+<h4>Swift 2.2 or 2.3</h4>
+<p><code>github "Swinject/Swinject" ~&gt; 1.1.4</code></p>
+<h4>Swift 3.x or 4.x</h4>
+<p>```
+github "Swinject/Swinject"</p>
+<h1>Uncomment if you use SwinjectStoryboard</h1>
+<h1>github "Swinject/SwinjectStoryboard"</h1>
+<p>```</p>
+<p>Then run <code>carthage update --no-use-binaries</code> command or just <code>carthage update</code>. For details of the installation and usage of Carthage, visit <a href="https://github.com/Carthage/Carthage">its project page</a>.</p>
+<h3>CocoaPods</h3>
+<p>To install Swinject with CocoaPods, add the following lines to your <code>Podfile</code>.</p>
+<h4>Swift 2.2 or 2.3</h4>
+<p>```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0' # or platform :osx, '10.10' if your target is OS X.
+use_frameworks!</p>
+<p>pod 'Swinject', '~&gt; 1.1.4'
+```</p>
+<h4>Swift 3.x</h4>
+<p>```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0' # or platform :osx, '10.10' if your target is OS X.
+use_frameworks!</p>
+<p>pod 'Swinject'</p>
+<h1>Uncomment if you use SwinjectStoryboard</h1>
+<h1>pod 'SwinjectStoryboard'</h1>
+<p>```</p>
+<p>Then run <code>pod install</code> command. For details of the installation and usage of CocoaPods, visit <a href="https://cocoapods.org">its official website</a>.</p>
+<h2>Documentation</h2>
+<ul>
+<li><a href="./Documentation">Technical documents</a> including patterns of dependency injection and examples.</li>
+<li><a href="http://cocoadocs.org/docsets/Swinject/">API reference</a></li>
+</ul>
+<h2>Basic Usage</h2>
+<p>First, register a service and component pair to a <code>Container</code>, where the component is created by the registered closure as a factory. In this example, <code>Cat</code> and <code>PetOwner</code> are component classes implementing <code>Animal</code> and <code>Person</code> service protocols, respectively.</p>
+<p><code>swift
+let container = Container()
+container.register(Animal.self) { _ in Cat(name: "Mimi") }
+container.register(Person.self) { r in
+    PetOwner(pet: r.resolve(Animal.self)!)
+}</code></p>
+<p>Then get an instance of a service from the container. The person is resolved to a pet owner, and playing with the cat named Mimi!</p>
+<p><code>swift
+let person = container.resolve(Person.self)!
+person.play() // prints "I'm playing with Mimi."</code></p>
+<p>Where definitions of the protocols and classes are</p>
+<p>```swift
+protocol Animal {
+    var name: String? { get }
+}</p>
+<p>class Cat: Animal {
+    let name: String?</p>
+<pre><code>init(name: String?) {
+    self.name = name
+}
+</code></pre>
+<p>}
+```</p>
+<p>and</p>
+<p>```swift
+protocol Person {
+    func play()
+}</p>
+<p>class PetOwner: Person {
+    let pet: Animal</p>
+<pre><code>init(pet: Animal) {
+    self.pet = pet
+}
+
+func play() {
+    let name = pet.name ?? "someone"
+    print("I'm playing with \(name).")
+}
+</code></pre>
+<p>}
+```</p>
+<p>Notice that the <code>pet</code> of <code>PetOwner</code> is automatically set as the instance of <code>Cat</code> when <code>Person</code> is resolved to the instance of <code>PetOwner</code>. If a container already set up is given, you do not have to care what are the actual types of the services and how they are created with their dependency.</p>
+<h2>Where to Register Services</h2>
+<p>Services must be registered to a container before they are used. The typical registration approach will differ depending upon whether you are using <code>SwinjectStoryboard</code> or not.</p>
+<p>The following view controller class is used in addition to the protocols and classes above in the examples below.</p>
+<p><code>swift
+class PersonViewController: UIViewController {
+    var person: Person?
+}</code></p>
+<h3>With SwinjectStoryboard</h3>
+<p>Import SwinjectStoryboard at the top of your swift source file if you use Swinject v2 in Swift 3.</p>
+<p><code>swift
+// Only Swinject v2 in Swift 3.
+import SwinjectStoryboard</code></p>
+<p>Services should be registered in an extension of <code>SwinjectStoryboard</code> if you use <code>SwinjectStoryboard</code>. Refer to <a href="https://github.com/Swinject/SwinjectStoryboard">the project page of SwinjectStoryboard</a> for further details.</p>
+<p><code>swift
+extension SwinjectStoryboard {
+    @objc class func setup() {
+        defaultContainer.register(Animal.self) { _ in Cat(name: "Mimi") }
+        defaultContainer.register(Person.self) { r in
+            PetOwner(pet: r.resolve(Animal.self)!)
+        }
+        defaultContainer.register(PersonViewController.self) { r in
+            let controller = PersonViewController()
+            controller.person = r.resolve(Person.self)
+            return controller
+        }
+    }
+}</code></p>
+<h3>Without SwinjectStoryboard</h3>
+<p>If you do not use <code>SwinjectStoryboard</code> to instantiate view controllers, services should be registered to a container in your application's <code>AppDelegate</code>. Registering before exiting <code>application:didFinishLaunchingWithOptions:</code> will ensure that the services are setup appropriately before they are used.</p>
+<p>```swift
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    var window: UIWindow?
+    let container: Container = {
+        let container = Container()
+        container.register(Animal.self) { _ in Cat(name: "Mimi") }
+        container.register(Person.self) { r in
+            PetOwner(pet: r.resolve(Animal.self)!)
+        }
+        container.register(PersonViewController.self) { r in
+            let controller = PersonViewController()
+            controller.person = r.resolve(Person.self)
+            return controller
+        }
+        return container
+    }()</p>
+<pre><code>func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -&gt; Bool {
+
+    // Instantiate a window.
+    let window = UIWindow(frame: UIScreen.main.bounds)
+    window.makeKeyAndVisible()
+    self.window = window
+
+    // Instantiate the root view controller with dependencies injected by the container.
+    window.rootViewController = container.resolve(PersonViewController.self)
+
+    return true
+}
+</code></pre>
+<p>}
+```</p>
+<p>Notice that the example uses a convenience initializer taking a closure to register services to the new instance of <code>Container</code>.</p>
+<h2>Play in Playground!</h2>
+<p>The project contains <code>Sample-iOS.playground</code> to demonstrate the features of Swinject. Download or clone the project, run the playground, modify it, and play with it to learn Swinject.</p>
+<p>To run the playground in the project, first build the project, then select <code>Editor &gt; Execute Playground</code> menu in Xcode.</p>
+<h2>Example Apps</h2>
+<ul>
+<li><a href="https://github.com/Swinject/SwinjectSimpleExample">SwinjectSimpleExample</a> demonstrates dependency injection and Swinject in a simple weather app that lists current weather information at some locations.</li>
+<li><a href="https://github.com/Swinject/SwinjectMVVMExample">SwinjectMVVMExample</a> demonstrates dependency injection with Swift and reactive programming with <a href="https://github.com/ReactiveCocoa/ReactiveCocoa">ReactiveCocoa</a> in MVVM architecture.</li>
+</ul>
+<h2>Blog Posts</h2>
+<p>The following blog posts introduce Swinject and the concept of dependency injection.</p>
+<ul>
+<li><a href="https://yoichitgy.github.io/post/dependency-injection-framework-for-swift-introduction-to-swinject/">Dependency Injection Framework for Swift - Introduction to Swinject</a></li>
+<li><a href="https://yoichitgy.github.io/post/dependency-injection-framework-for-swift-simple-weather-app-example-with-swinject-part-1/">Dependency Injection Framework for Swift - Simple Weather App Example with Swinject Part 1/2</a></li>
+<li><a href="https://yoichitgy.github.io/post/dependency-injection-framework-for-swift-simple-weather-app-example-with-swinject-part-2/">Dependency Injection Framework for Swift - Simple Weather App Example with Swinject Part 2/2</a></li>
+</ul>
+<h2>Contribution Guide</h2>
+<p>A guide to <a href="https://github.com/Swinject/Swinject/issues">submit issues</a>, to ask general questions, or to <a href="https://github.com/Swinject/Swinject/pulls">open pull requests</a> is <a href="CONTRIBUTING.md">here</a>.</p>
+<h2>Question?</h2>
+<p>If you have a general question and are feeling hesitant about submitting a Github issue, feel free to ask the question at <a href="http://stackoverflow.com">Stack Overflow</a>. The author of Swinject monitors the <code>swinject</code> tag so as to answer as quickly as possible.</p>
+<h2>Credits</h2>
+<p>The DI container features of Swinject are inspired by:</p>
+<ul>
+<li><a href="http://ninject.org">Ninject</a> - <a href="https://github.com/enkari">Enkari, Ltd</a> and <a href="https://github.com/ninject/Ninject/graphs/contributors">the Ninject project contributors</a>.</li>
+<li><a href="http://autofac.org">Autofac</a> - <a href="https://github.com/autofac/Autofac">Autofac Project</a>.</li>
+</ul>
+<p>and highly inspired by:</p>
+<ul>
+<li><a href="http://funq.codeplex.com">Funq</a> - <a href="http://www.codeplex.com/site/users/view/dcazzulino">Daniel Cazzulino</a> and <a href="http://funq.codeplex.com/team/view">the project team</a>.</li>
+</ul>
+<h2>License</h2>
+<p>MIT license. See the <a href="LICENSE.txt">LICENSE file</a> for details.</p>

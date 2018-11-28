@@ -1,0 +1,252 @@
+<h1>SwiftMessages</h1>
+<p><a href="https://twitter.com/TimothyMoose"><img alt="Twitter: @TimothyMoose" src="https://img.shields.io/badge/contact-@TimothyMoose-blue.svg?style=flat" /></a>
+<a href="http://cocoadocs.org/docsets/SwiftMessages"><img alt="Version" src="https://img.shields.io/cocoapods/v/SwiftMessages.svg?style=flat" /></a>
+<a href="http://cocoadocs.org/docsets/SwiftMessages"><img alt="License" src="https://img.shields.io/cocoapods/l/SwiftMessages.svg?style=flat" /></a>
+<a href="http://cocoadocs.org/docsets/SwiftMessages"><img alt="Platform" src="https://img.shields.io/cocoapods/p/SwiftMessages.svg?style=flat" /></a>
+<a href="https://github.com/Carthage/Carthage"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a></p>
+<h2>🔥 View Controllers 🔥</h2>
+<p>SwiftMessages can now present view controllers using the <code>SwiftMessagesSegue</code> custom modal segue!</p>
+<p align="center">
+  <img src="./Design/SwiftMessagesSegue.gif" />
+</p>
+
+<p><a href="./SwiftMessages/SwiftMessagesSegue.swift"><code>SwiftMessagesSegue</code></a> is a subclass of <code>UIStoryboardSegue</code> that integrates directly into Interface Builder as a custom modal segue, enabling view controllers to take advantage of SwiftMessages layouts, animations and more. <code>SwiftMessagesSegue</code> works with any UIKIt project — storyboards are not required. Refer to the View Controllers readme below for more information.</p>
+<h4><a href="./ViewControllers.md">View Controllers Readme</a></h4>
+<p>And check out our blog post <a href="http://www.swiftkickmobile.com/elegant-custom-uiviewcontroller-transitioning-uiviewcontrollertransitioningdelegate-uiviewcontrolleranimatedtransitioning/">Elegant Custom UIViewController Transitioning</a> to learn a great technique you can use to build your own custom segues that utilize <code>UIViewControllerTransitioningDelegate</code> and <code>UIViewControllerAnimatedTransitioning</code>.</p>
+<p align="center">
+  <img src="./Design/swiftmessages.png" />
+</p>
+
+<h2>Overview</h2>
+<p>SwiftMessages is a very flexible view and view controller presentation library for iOS.</p>
+<p>Message views and view controllers can be displayed at the top, bottom, or center of the screen, over or under the status bar, or behind navigation bars and tab bars. There are interactive dismiss gestures including a fun, physics-based one. Multiple background dimming modes. And a lot more!</p>
+<p>In addition to the numerous configuration options, SwiftMessages provides several good-looking layouts and themes. But SwiftMessages is also designer-friendly, which means you can fully and easily customize the view:</p>
+<ul>
+<li>Copy one of the included nib files into your project and change it.</li>
+<li>Subclass <code>MessageView</code> and add elements, etc.</li>
+<li>Or just supply an arbitrary instance of <code>UIView</code>.</li>
+</ul>
+<p>Try exploring <a href="http://goo.gl/KXw4nD">the demo app via appetize.io</a> to get a feel for the extensive configurability of SwiftMessages.</p>
+<p align="center">
+  <img src="./Demo/demo.png" />
+</p>
+
+<p align="center">
+    <a href="http://goo.gl/KXw4nD"><img src="./Demo/appetize.png" /></a>
+</p>
+
+<h2>Installation</h2>
+<h3>CocoaPods</h3>
+<p>Add the following line to your Podfile:</p>
+<p><code>ruby
+pod 'SwiftMessages'</code></p>
+<h3>Carthage</h3>
+<p>Add the following line to your Cartfile:</p>
+<p><code>ruby
+github "SwiftKickMobile/SwiftMessages"</code></p>
+<h3>Manual</h3>
+<ol>
+<li>Put SwiftMessages repo somewhere in your project directory.</li>
+<li>In Xcode, add <code>SwiftMessages.xcodeproj</code> to your project.</li>
+<li>On your app's target, add the SwiftMessages framework:</li>
+<li>as an embedded binary on the General tab.</li>
+<li>as a target dependency on the Build Phases tab.</li>
+</ol>
+<h2>Usage</h2>
+<h3>Basics</h3>
+<p><code>swift
+SwiftMessages.show(view: myView)</code></p>
+<p>Although you can show any instance of <code>UIView</code>, SwiftMessages provides a <code>MessageView</code> class
+and assortment of nib-based layouts that should handle most cases:</p>
+<p>````swift
+// Instantiate a message view from the provided card view layout. SwiftMessages searches for nib
+// files in the main bundle first, so you can easily copy them into your project and make changes.
+let view = MessageView.viewFromNib(layout: .cardView)</p>
+<p>// Theme message elements with the warning style.
+view.configureTheme(.warning)</p>
+<p>// Add a drop shadow.
+view.configureDropShadow()</p>
+<p>// Set message title, body, and icon. Here, we're overriding the default warning
+// image with an emoji character.
+let iconText = ["🤔", "😳", "🙄", "😶"].sm_random()!
+view.configureContent(title: "Warning", body: "Consider yourself warned.", iconText: iconText)</p>
+<p>// Increase the external margin around the card. In general, the effect of this setting
+// depends on how the given layout is constrained to the layout margins.
+view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)</p>
+<p>// Reduce the corner radius (applicable to layouts featuring rounded corners).
+(view.backgroundView as? CornerRoundingView)?.cornerRadius = 10</p>
+<p>// Show the message.
+SwiftMessages.show(view: view)
+````</p>
+<p>You may wish to use the view provider variant <code>show(viewProvider:)</code> to ensure that
+your UIKit code is executed on the main queue:</p>
+<p><code>swift
+SwiftMessages.show {
+    let view = MessageView.viewFromNib(layout: .cardView)
+    // ... configure the view
+    return view
+}</code></p>
+<p>The <code>SwiftMessages.Config</code> struct provides numerous configuration options that can be passed to <code>show()</code>:</p>
+<p>````swift
+var config = SwiftMessages.Config()</p>
+<p>// Slide up from the bottom.
+config.presentationStyle = .bottom</p>
+<p>// Display in a window at the specified window level: UIWindow.Level.statusBar
+// displays over the status bar while UIWindow.Level.normal displays under.
+config.presentationContext = .window(windowLevel: .statusBar)</p>
+<p>// Disable the default auto-hiding behavior.
+config.duration = .forever</p>
+<p>// Dim the background like a popover view. Hide when the background is tapped.
+config.dimMode = .gray(interactive: true)</p>
+<p>// Disable the interactive pan-to-hide gesture.
+config.interactiveHide = false</p>
+<p>// Specify a status bar style to if the message is displayed directly under the status bar.
+config.preferredStatusBarStyle = .lightContent</p>
+<p>// Specify one or more event listeners to respond to show and hide events.
+config.eventListeners.append() { event in
+    if case .didHide = event { print("yep") }
+}</p>
+<p>SwiftMessages.show(config: config, view: view)
+````</p>
+<p>Specify default configuration options:</p>
+<p>````swift
+SwiftMessages.defaultConfig.presentationStyle = .bottom</p>
+<p>// Show message with default config.
+SwiftMessages.show(view: view)</p>
+<p>// Customize config using the default as a base.
+var config = SwiftMessages.defaultConfig
+config.duration = .forever
+SwiftMessages.show(config: config, view: view)
+````</p>
+<h3>Accessibility</h3>
+<p>SwiftMessages provides excellent VoiceOver support out-of-the-box.</p>
+<ul>
+<li>
+<p>The title and body of the message are combined into a single announcement when the message is shown. The <code>MessageView.accessibilityPrefix</code> property can be set to prepend additional clarifying text to the announcement.</p>
+<p>Sometimes, a message may contain important visual cues that aren't captured in the title or body. For example, a message may rely on a yellow background to convey a warning rather than having the word "warning" in the title or body. In this case, it might be helpful to set <code>MessageView.accessibilityPrefix = "warning"</code>.</p>
+</li>
+<li>
+<p>If the message is shown with a dim view using <code>config.dimMode</code>, elements below the dim view are not focusable until the message is hidden. If <code>config.dimMode.interactive == true</code>, the dim view itself will be focusable and read out "dismiss" followed by "button". The former text can be customized by setting the <code>config.dimModeAccessibilityLabel</code> property.</p>
+</li>
+</ul>
+<p>See the <code>AccessibleMessage</code> protocol for implementing proper accessibility support in custom views.</p>
+<h3>Message Queueing</h3>
+<p>You can call <code>SwiftMessages.show()</code> as many times as you like. SwiftMessages maintains a queue and shows messages one at a time. If your view implements the <code>Identifiable</code> protocol (like <code>MessageView</code>), duplicate messages will be removed automatically. The pause between messages can be adjusted:</p>
+<p><code>swift
+SwiftMessages.pauseBetweenMessages = 1.0</code></p>
+<p>There are a few ways to hide messages programatically:</p>
+<p>````swift
+// Hide the current message.
+SwiftMessages.hide()</p>
+<p>// Or hide the current message and clear the queue.
+SwiftMessages.hideAll()</p>
+<p>// Or for a view that implements <code>Identifiable</code>:
+SwiftMessages.hide(id: someId)</p>
+<p>// Or hide when the number of calls to show() and hideCounted(id:) for a 
+// given message ID are equal. This can be useful for messages that may be
+// shown from  multiple code paths to ensure that all paths are ready to hide.
+SwiftMessages.hideCounted(id: someId)
+````</p>
+<p>Multiple instances of <code>SwiftMessages</code> can be used to show more than one message at a time. Note that the static <code>SwiftMessages.show()</code> and other static APIs on <code>SwiftMessage</code> are just convenience wrappers around the shared instance <code>SwiftMessages.sharedInstance</code>). Instances must be retained, thus it should be a property of something (e.g. your view controller):</p>
+<p>````swift
+class SomeViewController: UIViewController {
+    let otherMessages = SwiftMessages() </p>
+<pre><code>func someMethod() {
+    SwiftMessages.show(...)
+    otherMessages.show(...)
+}
+</code></pre>
+<p>}
+````</p>
+<h3>Retrieving Messages</h3>
+<p>There are several APIs available for retrieving messages that are currently being shown, hidden, or queued to be shown. These APIs are useful for updating messages
+when some event happens without needing to keep temporary references around.
+See also <code>eventListeners</code>.</p>
+<p>````swift
+// Get a message view with the given ID if it is currently 
+// being shown or hidden.
+if let view = SwiftMessages.current(id: "some id") { ... }</p>
+<p>// Get a message view with the given ID if is it currently 
+// queued to be shown. 
+if let view = SwiftMessages.queued(id: "some id") { ... }</p>
+<p>// Get a message view with the given ID if it is currently being
+// shown, hidden or in the queue to be shown.
+if let view = SwiftMessages.currentOrQueued(id: "some id") { ... }
+````</p>
+<h3>Customization</h3>
+<p>SwiftMessages can display any <code>UIView</code>. However, there are varying degrees of customization that can be done to the bundled views.</p>
+<h4>Nib Files</h4>
+<p>All of the message designs bundled with SwiftMessages have associated nib files. You are encouraged to copy any of these nib files into your project and modify them to suit your needs. SwiftMessages will load your copy of the file instead of the original. Nib files may be copied in Xcode using drag-and-drop.</p>
+<p>To facilitate the use of nib-based layouts, <code>MessageView</code> provides some type-safe convenience methods for loading the bundled nibs:</p>
+<p><code>swift
+let view = MessageView.viewFromNib(layout: .cardView)</code></p>
+<p>In addition, the <code>SwiftMessages</code> class provides some generic loading methods:</p>
+<p>````swift
+// Instantiate MessageView from a named nib.
+let view: MessageView = try! SwiftMessages.viewFromNib(named: "MyCustomNib")</p>
+<p>// Instantiate MyCustomView from a nib named MyCustomView.nib.
+let view: MyCustomView = try! SwiftMessages.viewFromNib()
+````</p>
+<h4>MessageView Class</h4>
+<p><a href="./SwiftMessages/MessageView.swift"><code>MessageView</code></a> is a light-weight view that all of the bundled designs use. It primarily consists of the following optional <code>@IBOutlet</code> properties:</p>
+<p>Element | Declaration | Description
+--------|-----------|-----
+Title | <code>titleLabel: UILabel?</code> | The message title.
+Message body | <code>bodyLabel: UILabel?</code> |  The body of the message.
+Image icon | <code>iconImageView: UIImageView?</code> | An image-based icon.
+Text icon | <code>iconLabel: UILabel?</code> |  A text-based (emoji) alternative to the image icon.
+Button | <code>button: UIButton?</code> | An action button.</p>
+<p>The SwiftMessages nib file use <code>MessageView</code> as the top-level view with content connected to these outlets. The layouts are done using stack views, which means that you can remove an element by simply hiding it:</p>
+<p><code>swift
+view.titleLabel.isHidden = true</code></p>
+<p>A common mistake is attempting to remove an element by setting the corresponding outlet to <code>nil</code>. This does not work because it does not remove the element from the view hierarchy.</p>
+<h4>Configuration</h4>
+<p><code>MessageView</code> provides numerous methods that follow the <code>configure*</code> naming convention:</p>
+<p><code>swift
+view.configureTheme(.warning)
+view.configureContent(title: "Warning", body: "Consider yourself warned.", iconText: "🤔")</code></p>
+<p>All of these methods are shortcuts for quickly configuring the underlying view properties. SwiftMessages strives to avoid doing any internal magic in these methods, so you do not need to call them. You can configure the view properties directly or combine the two approaches.</p>
+<h4>Interaction</h4>
+<p><code>MessageView</code> provides an optional block-based tap handler for the button and another for the view itself:</p>
+<p>````swift
+// Hide when button tapped
+messageView.buttonTapHandler = { _ in SwiftMessages.hide() }</p>
+<p>// Hide when message view tapped
+messageView.tapHandler = { _ in SwiftMessages.hide() }
+````</p>
+<h4>Extending</h4>
+<p>The suggested method for starting with <code>MessageView</code> as a base and <strong>adding new elements</strong>, such as additional buttons, is as follows:</p>
+<ol>
+<li>Copy one of the bundled nib files into your project or create a new one from scratch.</li>
+<li>Add new elements to the nib file.</li>
+<li>Sublcass <code>MessageView</code> and create outlets for the new elements.</li>
+<li>Assign the top-level view in the nib file to the subclass.</li>
+<li>Connect outlets between the nib file and the subclass.</li>
+<li>(recommended) override the implementation of <code>Identifiable</code> as needed to incorporate new elements into the message's identity.</li>
+<li>(recommended) override the implementation of <code>AccessibleMessage</code> as needed to incorporate new elements into Voice Over.</li>
+<li>Use one of the nib-loading methods above to load the view.</li>
+</ol>
+<h4>BaseView Class</h4>
+<p><a href="./SwiftMessages/BaseView.swift"><code>BaseView</code></a> is the superclass of <code>MessageView</code> and provides numerous options that aren't specific to the "title + body + icon + button" design of <code>MessageView</code>. Custom views that are significantly different from <code>MessageView</code>, such as a progress indicator, should subclass <code>BaseView</code>.</p>
+<h4>CornerRoundingView Class</h4>
+<p><a href="./SwiftMessages/CornerRoundingView.swift"><code>CornerRoundingView</code></a> is a custom view that messages can use for rounding all or a subset of corners with squircles (the smoother method of rounding corners that you see on app icons). The nib files that feature rounded corners have <code>backgroundView</code> assigned to a <code>CornerRoundingView</code>. It provides a <code>roundsLeadingCorners</code> option to dynamically round only the leading corners of the view when presented from top or bottom (a feature used for the tab-style layouts).</p>
+<h4>Animator Protocol</h4>
+<p><a href="./SwiftMessages/Animator.swift"><code>Animator</code></a> is the protocol that SwiftMessages uses for presentation and dismissal animations. Custom animations can be done through the <code>SwiftMessages.PresentationStyle.custom(animator:)</code>. Some related components:
+<em> <a href="./SwiftMessages/TopBottomAnimation.swift"><code>TopBottomAnimation</code></a> is a sliding implementation of <code>Animator</code> used internally by <code>.top</code> and <code>.bottom</code> presentation styles. It provides some customization options.
+</em> <a href="./SwiftMessages/PhysicsAnimation.swift"><code>PhysicsAnimation</code></a> is a scaling + opacity implementation of <code>Animator</code> used internally by the <code>.center</code> presentation style. It provides a fun physics-based dismissal gesture and provides customization options including <code>.top</code> and <code>.bottom</code> placement.
+* <a href="./SwiftMessages/PhysicsPanHandler.swift"><code>PhysicsPanHandler</code></a> provides the physics-based dismissal gesture for <code>PhysicsAnimation</code> and can be incorporated into other <code>Animator</code> implementations.</p>
+<p>High-quality PRs for cool <code>Animator</code> implementations are welcome!</p>
+<h4>MarginAdjustable Protocol</h4>
+<p><a href="./SwiftMessages/MarginAdjustable.swift"><code>MarginAdjustable</code></a> is a protocol adopted by <code>BaseView</code>. If the view being presented adopts <code>MarginAdjustable</code>, SwiftMessages takes ownership of the view's layout margins to ensure ideal spacing across the full range of presentation contexts.</p>
+<h4>BackgroundViewable Protocol</h4>
+<p><a href="./SwiftMessages/BackgroundViewable.swift"><code>BackgroundViewable</code></a> is a protocol adopted by <code>BaseView</code> and requires that a view provide a single <code>backgroundView</code> property. <code>BaseView</code> initializes <code>backgroundView = self</code>, which you can freely re-assign to any subview.</p>
+<p>If the view being presented adopts <code>BackgroundViewable</code>, SwiftMessages will ignore touches outside of <code>backgroundView</code>. This is important because message views always span the full width of the device. Card and tab-style layouts appear inset from the edges of the device because the message view's background is transparent and <code>backgroundView</code> is assigned to a subview constrained to the layout margins. In these layouts, touches in the transparent margins should be ignored.</p>
+<h4>Identifiable Protocol</h4>
+<p><a href="./SwiftMessages/Identifiable.swift"><code>Identifiable</code></a> is a protocol adopted by <code>MessageView</code> and requires that a view provide a single <code>id</code> property, which SwiftMessages uses for message deduplication.</p>
+<p><code>MessageView</code> computes the <code>id</code> based on the message content, but <code>id</code> can also be set explicitly as needed.</p>
+<h4>AccessibleMessage Protocol</h4>
+<p><a href="./SwiftMessages/AccessibleMessage.swift"><code>AccessibleMessage</code></a> is a protocol adopted by <code>MessageView</code>. If the view being presented adopts <code>AccessibleMessage</code>, SwiftMessages provides improved Voice Over.</p>
+<h2>About SwiftKick Mobile</h2>
+<p>We build high quality apps! <a href="http://www.swiftkickmobile.com">Get in touch</a> if you need help with a project.</p>
+<h2>License</h2>
+<p>SwiftMessages is distributed under the MIT license. <a href="./LICENSE.md">See LICENSE</a> for details.</p>

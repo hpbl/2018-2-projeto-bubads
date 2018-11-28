@@ -1,0 +1,139 @@
+<p><a href="https://shaps.me/peek"><img alt="Peek Site" src="https://github.com/shaps80/Peek/raw/master/preview.gif" /></a></p>
+<p><a href="https://github.com/Carthage/Carthage"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-✓-4BC51D.svg?style=flat" /></a>
+<a href="http://cocoapods.org/pods/Peek"><img alt="Version" src="https://img.shields.io/cocoapods/v/Peek.svg?style=flat" /></a>
+<a href="http://cocoapods.org/pods/Peek"><img alt="License" src="https://img.shields.io/cocoapods/l/Peek.svg?style=flat" /></a>
+<a href="http://cocoadocs.org/docsets/Peek"><img alt="Language" src="https://img.shields.io/badge/language-swift-ff69b4.svg" /></a>
+<a href="http://cocoapods.org/pods/Peek"><img alt="Platform" src="https://img.shields.io/cocoapods/p/Peek.svg?style=flat" /></a></p>
+<h1>Peek: All new design</h1>
+<p>Peek 5 with an all new design and all new features. Whether you're a developer, designer or QA/tester, Peek can help you at all stages of your development process.</p>
+<p><a href="https://player.vimeo.com/video/261323610">Watch the Promo</a> to see it in action.</p>
+<h2>Unified Inspectors</h2>
+<p>All inspectors and attributes have now been unified into a single window, making inspection simpler and faster than ever before.</p>
+<h2>Collapsible Groups</h2>
+<p>Feeling overwhelmed with all the information Peek has to offer? Simply tap the header to expand/collapse any section. Peek will even remember your choice across launches!</p>
+<h2>Nested Inspectors</h2>
+<p>Peek now supports nested Inspectors. This powerful feature allows Peek to surface even more detail about your application. In fact Peek 5.0 more than doubles the number of attributes it can inspect.</p>
+<h2>Previews</h2>
+<p>Views, images, colours and more can now provide snapshot previews to help you better identify what you’re inspecting.</p>
+<h2>Reporting</h2>
+<p>An all new reporting system allows you to export screenshots, metadata and even suggested values using the iOS native share sheet.</p>
+<h2>Accessibility</h2>
+<p>Peek itself is now more accessible with Dynamic Type, but Peek can also surface accessibility details from your application.</p>
+<h2>Search</h2>
+<p>You can now search within Peek, making it easier than ever to inspect your apps.</p>
+<h2>Less Code &amp; Dependencies</h2>
+<p>Thanks to an all new architecture Peek is also now smaller. Providing more features with much less code, leaving a very small footprint on your application.</p>
+<h1>Ready to get started?</h1>
+<h2>Designers &amp; Testers</h2>
+<ul>
+<li>Simply press one of your volume key(s) to show &amp; hide Peek</li>
+<li>Now tap or drag your finger across the screen</li>
+<li>Tap the inspectors button (or double tap anywhere on the screen) to show the Inspectors for the selected view</li>
+</ul>
+<p>You can't get simpler than that!</p>
+<h2>Developers</h2>
+<h3>Device</h3>
+<p>The simplest way to integrate Peek into your project is to use <code>Cocoapods</code> or <code>Carthage</code>:</p>
+<p>```ruby</p>
+<h1>Cocoapods</h1>
+<p>pod 'Peek', :configurations =&gt; ['Debug']</p>
+<h1>Carthage</h1>
+<p>github "shaps80/Peek" ~&gt; 5.1.0
+```</p>
+<p>You only need 1 line of code to enable Peek in your application:</p>
+<p><code>window?.peek.enabled = true</code></p>
+<h3>Simulator</h3>
+<p>When running in the Simulator you'll need a couple of extra lines:</p>
+<p><code>swift
+// Your AppDelegate
+override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
+    // iOS 8/9 requires device motion handlers to be on the AppDelegate
+    window?.peek.handleShake(motion)
+}</code></p>
+<p>or</p>
+<p>```swift</p>
+<p>// Your ViewController
+override var canBecomeFirstResponder: Bool {
+    return true
+}</p>
+<p>override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
+    // iOS 10 now requires device motion handlers to be on a UIViewController
+    UIApplication.shared.keyWindow?.peek.handleShake(motion)
+}
+```</p>
+<p>Now you can press <code>CMD+CTRL+Z</code> (or use the Menu option) to show/hide Peek in your Simulator.</p>
+<h3>Contributing</h3>
+<p>Contributions to Peek are welcomed and encouraged!</p>
+<p>It is easy to get involved. Please see the <a href="https://github.com/shaps80/Peek/blob/master/CONTRIBUTING.md">Contributing guide</a> for more details.</p>
+<p><a href="https://github.com/shaps80/Peek/graphs/contributors">A list of contributors is available through GitHub.</a></p>
+<p>To give clarity of what is expected of our community, Peek has adopted the code of conduct defined by the Contributor Covenant. This document is used across many open source communities, and I think it articulates my values well. For more, see the <a href="https://github.com/shaps80/Peek/blob/master/CODE_OF_CONDUCT.md">Code of Conduct</a>.</p>
+<h1>What is Peek?</h1>
+<p><a href="https://player.vimeo.com/video/261323610"><img alt="Peek on Vimeo" src="https://github.com/shaps80/Peek/raw/master/preview.jpg" /></a></p>
+<p>Peek is an open source framework that provides runtime inspection of your application while its running on your device (or Simulator).</p>
+<ul>
+<li>Developers can use Peek to inspect their user interfaces at runtime.</li>
+<li>Designers can verify that the applications meets their design specifications.</li>
+<li>Testers and QA can check accessibility identifiers, validate behaviour and report issues.</li>
+</ul>
+<p>Peek is a tool to aide you at all stages of your development process.</p>
+<h1>How does Peek work?</h1>
+<p>Peek scans your entire user interface on the screen then provides overlays with layout information and attribute inspectors.</p>
+<p>Peek includes an intelligent filtering system to best determine which views you care about while ignoring those you are not likely to be interested in.</p>
+<p>For example, by default Peek will not show you many of Apple's system components unless they are subclassed.</p>
+<p>Peek presents itself in its own window that sits directly on top of your own app's user interface to ensure that it doesn't interfere with normal functionality.</p>
+<p>Peek also allows you to test all supported orientations on both iPhone and iPad.</p>
+<p>Most importantly Peek doesn’t interfere with your applications logic or user interface in anyway. It provides read-only inspection to guarantee you’re seeing live-values only!</p>
+<h1>Demo</h1>
+<p>If you're not ready to integrate Peek into your own project, You can simply download this repo and run the sample project included :)</p>
+<p>Its a small app that perfectly demonstrates the power of Peek!</p>
+<h1>Configuring Peek</h1>
+<p>Peek allows many options to be configured, allowing you more control over how Peek is configured as well as reporting options:</p>
+<p>```swift
+window?.peek.enableWithOptions { options in
+    options.theme = .black
+    options.activationMode = .auto
+    options.shouldIgnoreContainers = true</p>
+<pre><code>/*
+  Sometimes it can also be useful to include additional metadata with each report.
+ */
+options.metaData = [ "Environment": "UAT" ]
+</code></pre>
+<p>}
+```</p>
+<h1>Safety First</h1>
+<p>Peek is designed to be as safe as possible. Peek will never retain objects from your application. It will never use a background thread. Peek won't even run unless you explicitly enable it!</p>
+<p>Go ahead, take a Peek at your app now :)</p>
+<h1>Supported Platforms and Versions</h1>
+<p>Peek is officially supported (and tested) with the following configurations:</p>
+<ul>
+<li>iOS 9.0+ (Swift and Objective-C)</li>
+</ul>
+<blockquote>
+<p>Note: if you're having issues with Swift versions when using Cocoapods, try adding the following to your <code>Podfile</code>:</p>
+</blockquote>
+<p><code>ruby
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        if target.name == "Peek" then
+            target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '4.0'
+            end
+        end
+    end
+end</code></p>
+<h1>Swift Versions</h1>
+<p><strong>Swift 4.x</strong></p>
+<p>Currently supported by version Peek v4.0 – v5.0</p>
+<p><strong>Swift 3.x</strong></p>
+<p>Not officially supported. Its recommended you update to Swift 4 and Peek 5.0</p>
+<p><strong>Swift 2.3</strong></p>
+<p>If you need Swift 2.3 support, update your Podfile as such:</p>
+<p><code>pod 'Peek', '2.3'</code></p>
+<p><strong>Swift 2.2</strong></p>
+<p>If you need Swift 2.2 support, update your Podfile as such:</p>
+<p><code>pod 'Peek', '2.0'</code></p>
+<hr />
+<h1>Attribution</h1>
+<p>Original concept, code and app design by <a href="https://twitter.com/shaps" title="Shaps on Twitter">@shaps</a><br /></p>
+<p>Icons in the demo app found on <a href="https://thenounproject.com">The Noun Project</a>.
+Artwork by <a href="https://thenounproject.com/vitalikexpert">Vitaliy Gorbachev</a></p>

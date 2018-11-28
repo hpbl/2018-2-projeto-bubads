@@ -1,0 +1,116 @@
+<p><a href="https://ramotion.com?utm_source=gthb&amp;utm_medium=special&amp;utm_campaign=preview-transition-logo"><img alt="header" src="./header.png" /></a>
+<img src="https://github.com/Ramotion/preview-transition/blob/master/preview-transition.gif" width="600" height="450" />
+<br><br/></p>
+<h1>Preview-transition</h1>
+<p><a href="http://twitter.com/Ramotion"><img alt="Twitter" src="https://img.shields.io/badge/Twitter-@Ramotion-blue.svg?style=flat" /></a>
+<a href="https://travis-ci.org/Ramotion/preview-transition.svg?branch=master"><img alt="Travis" src="https://img.shields.io/travis/Ramotion/preview-transition.svg" /></a>
+<a href="https://github.com/Ramotion/preview-transition"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a>
+<a href="https://cocoapods.org/pods/PreviewTransition"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/p/PreviewTransition.svg" /></a>
+<a href="http://cocoapods.org/pods/PreviewTransition"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/PreviewTransition.svg" /></a>
+<a href="https://codebeat.co/projects/github-com-ramotion-preview-transition"><img alt="codebeat badge" src="https://codebeat.co/badges/b99f71fe-b7e7-4a08-94bd-d98307d176ea" /></a>
+<a href="https://paypal.me/Ramotion"><img alt="Donate" src="https://img.shields.io/badge/Donate-PayPal-blue.svg" /></a></p>
+<h2>About</h2>
+<p>This project is maintained by Ramotion, Inc.<br>
+We specialize in the designing and coding of custom UI for Mobile Apps and Websites.<br></p>
+<p><strong>Looking for developers for your project?</strong><br>
+This project is maintained by Ramotion, Inc. We specialize in the designing and coding of custom UI for Mobile Apps and Websites.</p>
+<p><a href="mailto:alex.a@ramotion.com?subject=Project%20inquiry%20from%20Github">
+<img src="https://github.com/ramotion/gliding-collection/raw/master/contact_our_team@2x.png" width="187" height="34"></a> <br></p>
+<p>The <a href="https://store.ramotion.com/product/iphone-x-clay-mockups?utm_source=gthb&amp;utm_medium=special&amp;utm_campaign=preview-transition">iPhone mockup</a> available <a href="https://store.ramotion.com?utm_source=gthb&amp;utm_medium=special&amp;utm_campaign=preview-transition">here</a>.</p>
+<h2>Requirements</h2>
+<ul>
+<li>iOS 9.0+</li>
+<li>Xcode 9</li>
+</ul>
+<h2>Licence</h2>
+<p>Preview-transition is released under the MIT license.
+See <a href="./LICENSE">LICENSE</a> for details.</p>
+<h2>Installation</h2>
+<p>Just add the Source folder to your project or use <a href="https://cocoapods.org">CocoaPods</a> like this:
+<code>ruby
+pod "PreviewTransition"</code></p>
+<p>or <a href="https://github.com/Carthage/Carthage">Carthage</a> users can simply add to their <code>Cartfile</code>:
+```
+github "Ramotion/preview-transition"</p>
+<p>```</p>
+<h2>Usage</h2>
+<p>1) <code>import PreviewTransition</code></p>
+<p>2) Create UITableViewController inherit, inheriting from <code>PTTableViewController</code></p>
+<p>3) Add UITableViewDelegate methods</p>
+<p>```swift
+public override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int {
+    return <RowsCount>
+}</p>
+<p>public override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -&gt; UITableViewCell {
+    return tableView.dequeueReusableCellWithIdentifier(<CellIdentifier>, forIndexPath: indexPath)
+}
+```</p>
+<p>4) add a ParallaxCell</p>
+<p>storyboards:
+create a cell and inherit from <code>ParallaxCell</code>; don't forget set the identifier <code>&lt;CellIdentifier&gt;</code></p>
+<p>or programmatically:
+register a cell in viewDidLoad <code>tableView.registerClass(ParallaxCell, forCellReuseIdentifier:&lt;CellIdentifier&gt;)</code></p>
+<p>5) set cell height</p>
+<p>6) create image names (image sizes must be equal to screen size or bigger)</p>
+<p><code>swift
+let images = [image_name, image_name, image_name, image_name, image_name] // image names</code></p>
+<p>7) set image and text for ParallaxCell</p>
+<p>```swift
+public override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {</p>
+<pre><code>guard let cell = cell as? ParallaxCell else {
+  return
+}
+
+let imageName = images[indexPath.row]
+
+if let image = UIImage(named: imageName) {
+  cell.setImage(image, title: &lt;SetText&gt;)
+}
+</code></pre>
+<p>}
+```
+your tableViewController should look like <a href="https://github.com/Ramotion/preview-transition/blob/master/PreviewTransitionDemo/PreviewTransitionDemo/ViewController/DemoTableViewController.swift">DemoTableViewController</a></p>
+<p>Method <code>public override func tableView(tableView: didSelectRowAtIndexPath indexPath:)</code> we will add later. (step 10)</p>
+<p>8) Create UIViewController, inheriting from <code>PTDetailViewController</code></p>
+<p>9) Add action for backButton and call <code>popViewController()</code></p>
+<p><code>swift
+func backButtonHandler() {
+    popViewController()
+}</code></p>
+<p>10) Push this UIViewController in UITableViewController. Add method</p>
+<p>```swift
+public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {</p>
+<p>// create viewController
+  let <YourViewController> = storyboard?.instantiateViewControllerWithIdentifier(<identifier>)
+  if case let viewController as <YourViewController> = viewController {
+     pushViewController(viewController)
+  }
+}
+```</p>
+<p>11) Configure UINavigationBar</p>
+<p>```swift
+// transparent background
+UINavigationBar.appearance().setBackgroundImage(UIImage(), forBarMetrics: .Default)
+UINavigationBar.appearance().shadowImage = UIImage()
+UINavigationBar.appearance().translucent = true
+UINavigationBar.appearance().tintColor = .whiteColor()</p>
+<p>// set font
+if let font = UIFont(name: <Font name> , size: 18) {
+      UINavigationBar.appearance().titleTextAttributes = [
+        NSForegroundColorAttributeName : UIColor.whiteColor(),
+        NSFontAttributeName : font
+      ]
+}
+```</p>
+<p>This library is a part of a <a href="https://github.com/Ramotion/swift-ui-animation-components-and-libraries"><b>selection of our best UI open-source projects.</b></a></p>
+<h1>Get the Showroom App for iOS to give it a try</h1>
+<p>Try this UI component and more like this in our iOS app. Contact us if interested.</p>
+<p><a href="https://itunes.apple.com/app/apple-store/id1182360240?pt=550053&ct=preview-transition&mt=8" >
+<img src="https://github.com/ramotion/gliding-collection/raw/master/app_store@2x.png" width="117" height="34"></a>
+<a href="mailto:alex.a@ramotion.com?subject=Project%20inquiry%20from%20Github">
+<img src="https://github.com/ramotion/gliding-collection/raw/master/contact_our_team@2x.png" width="187" height="34"></a>
+<br>
+<br></p>
+<p>Follow us for the latest updates<br>
+<a href="https://goo.gl/rPFpid" >
+<img src="https://i.imgur.com/ziSqeSo.png/" width="156" height="28"></a></p>

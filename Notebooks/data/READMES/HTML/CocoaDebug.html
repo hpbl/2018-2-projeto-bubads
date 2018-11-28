@@ -1,0 +1,148 @@
+<p>| <img alt="logo" src="https://raw.githubusercontent.com/CocoaDebug/CocoaDebug/master/pic/logo.png" width="250"/> | <ul align="left"><li><a href="https://github.com/CocoaDebug/CocoaDebug/wiki/%E4%B8%AD%E6%96%87%E4%BB%8B%E7%BB%8D">中文介绍</a><li><a href="#introduction">Introduction</a><li><a href="#installation">Installation</a><li><a href="#usage">Usage</a><li><a href="#parameters">Parameters</a></ul> |
+| -------------- | -------------- |
+| Travis CI | <a href="https://travis-ci.org/CocoaDebug/CocoaDebug"><img alt="Build Status" src="https://travis-ci.org/CocoaDebug/CocoaDebug.svg?branch=master" /></a> |
+| Codacy | <a href="https://www.codacy.com/app/CocoaDebug/CocoaDebug?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CocoaDebug/CocoaDebug&amp;utm_campaign=Badge_Grade"><img alt="Codacy Badge" src="https://api.codacy.com/project/badge/Grade/6aac8606d10f403a811cafdf870bb552" /></a> |
+| Codecov | <a href="https://codecov.io/gh/CocoaDebug/CocoaDebug"><img alt="codecov" src="https://codecov.io/gh/CocoaDebug/CocoaDebug/branch/master/graph/badge.svg" /></a> |
+| Frameworks | <a href="https://github.com/Carthage/Carthage"><img alt="Carthage Compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a> <a href="https://img.shields.io/cocoapods/v/CocoaDebug.svg"><img alt="CocoaPods Compatible" src="https://img.shields.io/cocoapods/v/CocoaDebug.svg" /></a> |
+| Languages | <img alt="Languages" src="https://img.shields.io/badge/languages-Swift%20%7C%20ObjC-blue.svg" /> |
+| Platform | <img alt="Platform" src="https://img.shields.io/badge/platforms-iOS%208.0+-blue.svg" /> |
+| Licence | <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License MIT"/> |</p>
+<p><span style="float:none" /></p>
+<h2>Introduction</h2>
+<p><img alt="example" src="https://raw.githubusercontent.com/CocoaDebug/CocoaDebug/master/pic/example.gif" /></p>
+<ul>
+<li>
+<p>[x] Shake to hide or show the black bubble. (support both device and simulator)</p>
+</li>
+<li>
+<p>[x] Long press the black bubble to show <code>UIDebuggingInformationOverlay</code>. (Apple's Private API, support iOS 10/11/12)</p>
+</li>
+<li>
+<p>[x] Application memory usage and <em>FPS</em>.</p>
+</li>
+<li>
+<p>[x] List all <code>print()</code> and <code>NSLog()</code> messages which have been written by developer in Xcode. (<strong>optional</strong>)</p>
+</li>
+<li>
+<p>[x] List of all the network requests sent by the application. (<strong>optional</strong>)</p>
+</li>
+<li>
+<p>[x] List crash errors. (<strong>optional</strong>)</p>
+</li>
+<li>
+<p>[x] Shake device or simulator to share network details via email or copy to clipboard when you are in the <em>Network Details</em> page.</p>
+</li>
+<li>
+<p>[x] Copy logs. (long press the text, then select all or select copy)</p>
+</li>
+<li>
+<p>[x] Search logs by keyword.</p>
+</li>
+<li>
+<p>[x] List application and device informations, including: <em>version</em>, <em>build</em>, <em>bundle name</em>, <em>bundle id</em>, <em>screen resolution</em>, <em>device</em>, <em>iOS version</em></p>
+</li>
+<li>
+<p>[x] List all sandbox folders and files, supporting to preview and edit.</p>
+</li>
+</ul>
+<h2>Installation</h2>
+<h3>CocoaPods</h3>
+<p>```ruby
+platform :ios, '8.0'
+use_frameworks!</p>
+<p>target 'YourTargetName' do
+    pod 'CocoaDebug', :configurations =&gt; ['Debug']
+end
+```</p>
+<h3>Carthage</h3>
+<p><code>ogdl
+github "CocoaDebug/CocoaDebug"</code></p>
+<blockquote>
+<p>WARNING: Don't submit <code>.ipa</code> to AppStore which has been linked with the <code>CocoaDebug.framework</code>. This <a href="https://github.com/CocoaDebug/CocoaDebug/wiki/Integration-Guide">Integration Guide</a> outline a way to use build configurations to isolate linking the framework to <code>Debug</code> builds only.</p>
+</blockquote>
+<h2>Usage</h2>
+<h3>Swift</h3>
+<pre><code>//Step 1.
+#if DEBUG
+    import CocoaDebug
+#endif
+
+//Step 2.
+#if DEBUG
+    CocoaDebug.enable()
+#endif
+
+//Step 3.
+public func print&lt;T&gt;(file: String = #file, function: String = #function, line: Int = #line, _ message: T, color: UIColor = .white) {
+    #if DEBUG
+        swiftLog(file, function, line, message, color)
+    #endif
+}
+</code></pre>
+<h3>Objective-C</h3>
+<pre><code>//Step 1.
+#ifdef DEBUG
+    @import CocoaDebug;
+#endif
+
+//Step 2.
+#ifdef DEBUG
+    [CocoaDebug enable];
+#endif
+
+//Step 3.
+#ifdef DEBUG
+    #define NSLog(fmt, ...) [CocoaDebug objcLog:[[NSString stringWithUTF8String:__FILE__] lastPathComponent] :NSStringFromSelector(_cmd) :__LINE__ :(fmt, ##__VA_ARGS__) :[UIColor whiteColor]]
+#else
+    #define NSLog(fmt, ...) nil
+#endif
+</code></pre>
+<blockquote>
+<p>Please check <code>Example_Swift.xcodeproj</code> and <code>Example_Objc.xcodeproj</code> for more advanced usage.</p>
+<p>NOTE: Be careful with <code>Other Swift Flags</code> &amp; <code>Preprocessor Macros</code> when using Swift &amp; Objective-C in one project. You can refer to <a href="https://stackoverflow.com/questions/24111854/in-absence-of-preprocessor-macros-is-there-a-way-to-define-practical-scheme-spe">here</a>.  </p>
+</blockquote>
+<h2>Parameters</h2>
+<p>When you initialize CocoaDebug, you can customize the following parameter values before <code>CocoaDebug.enable()</code>.</p>
+<ul>
+<li>
+<p><code>serverURL</code> - If the crawled URLs contain server URL ,set these URLs bold font to be marked. not mark when this value is nil. default value is <strong>nil</strong>.</p>
+</li>
+<li>
+<p><code>ignoredURLs</code> - Set the URLs which should not crawled, ignoring case, crawl all URLs when the value is nil. default value is <strong>nil</strong>.</p>
+</li>
+<li>
+<p><code>onlyURLs</code> - Set the URLs which are only crawled, ignoring case, crawl all URLs when the value is nil. default value is <strong>nil</strong>.</p>
+</li>
+<li>
+<p><code>tabBarControllers</code> - Set controllers to be added as child controllers of UITabBarController. default value is <strong>nil</strong>.</p>
+</li>
+<li>
+<p><code>logMaxCount</code> - The maximum count of logs which CocoaDebug display. default value is <strong>500</strong>.</p>
+</li>
+<li>
+<p><code>emailToRecipients</code> - Set the initial recipients to include in the email’s “To” field when share via email. default value is <strong>nil</strong>.</p>
+</li>
+<li>
+<p><code>emailCcRecipients</code> - Set the initial recipients to include in the email’s “Cc” field when share via email. default value is <strong>nil</strong>.</p>
+</li>
+<li>
+<p><code>mainColor</code> - Set the main color with hexadecimal format. default value is <strong>#42d459</strong>.</p>
+</li>
+<li>
+<p><code>disableLogMonitoring</code> - Whether to disable the monitoring of Xcode logs in app. default value is <strong>false</strong>.</p>
+</li>
+<li>
+<p><code>disableNetworkMonitoring</code> - Whether to disable the monitoring of networks in app. default value is <strong>false</strong>.</p>
+</li>
+<li>
+<p><code>recordCrash</code> - Whether to allow the recording of crash logs in app. default value is <strong>false</strong>.</p>
+</li>
+</ul>
+<h2>TODO</h2>
+<ul>
+<li><a href="https://codecov.io/gh/CocoaDebug/CocoaDebug">Unit Testing</a></li>
+</ul>
+<h2>Thanks</h2>
+<p>Special thanks to <a href="https://github.com/remirobert">remirobert</a>.</p>
+<h2>License</h2>
+<p>CocoaDebug is released under the <a href="https://github.com/CocoaDebug/CocoaDebug/blob/master/LICENSE">MIT license</a>.</p>

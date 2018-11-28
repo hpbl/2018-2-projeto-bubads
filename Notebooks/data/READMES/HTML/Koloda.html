@@ -1,0 +1,235 @@
+<h2>KolodaView <a href="https://github.com/Carthage/Carthage"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a> <img alt="Swift 4.2" src="https://img.shields.io/badge/Swift-4.2-orange.svg" /></h2>
+<p><a href="https://Yalantis.com/?utm_source=github"><img alt="Yalantis" src="https://raw.githubusercontent.com/Yalantis/PullToMakeSoup/master/PullToMakeSoupDemo/Resouces/badge_dark.png" /></a></p>
+<p>Check this <a href="https://yalantis.com/blog/how-we-built-tinder-like-koloda-in-swift/">article on our blog</a>.
+And another one <a href="https://yalantis.com/blog/koloda-tinder-like-animation-version-2-prototyping-in-pixate-and-development-in-swift/">article on our blog</a></p>
+<p><img alt="Preview" src="https://github.com/Yalantis/Koloda/blob/master/Koloda_v2_example_animation.gif" />
+<img alt="Preview" src="https://github.com/Yalantis/Koloda/blob/master/Koloda_v1_example_animation.gif" /></p>
+<h2>Purpose</h2>
+<p>KolodaView is a class designed to simplify the implementation of Tinder like cards on iOS. It adds convenient functionality such as a UITableView-style dataSource/delegate interface for loading views dynamically, and efficient view loading, unloading .</p>
+<h2>Supported OS &amp; SDK Versions</h2>
+<ul>
+<li>Supported build target - iOS 11.0 (Xcode 9)</li>
+</ul>
+<h2>ARC Compatibility</h2>
+<p>KolodaView requires ARC.</p>
+<h2>Сocoapods version</h2>
+<p><code>ruby
+pod 'Koloda', '~&gt; 4.5.1'</code></p>
+<h2>Thread Safety</h2>
+<p>KolodaView is subclassed from UIView and - as with all UIKit components - it should only be accessed from the main thread. You may wish to use threads for loading or updating KolodaView contents or items, but always ensure that once your content has loaded, you switch back to the main thread before updating the KolodaView.</p>
+<h2>Installation</h2>
+<p>To install via CocoaPods add this lines to your Podfile. You need CocoaPods v. 1.1 or higher
+<code>ruby
+use_frameworks!
+pod "Koloda"</code></p>
+<p>To install via Carthage add this lines to your Cartfile
+<code>ruby
+github "Yalantis/Koloda"</code></p>
+<p>To install manually the KolodaView class in an app, just drag the KolodaView, DraggableCardView, OverlayView class files (demo files and assets are not needed) into your project. Also you need to install facebook-pop. Or add bridging header if you are using CocoaPods.</p>
+<h2>Usage</h2>
+<ol>
+<li>
+<p>Import <code>Koloda</code> module to your <code>MyKolodaViewController</code> class</p>
+<p><code>swift
+import Koloda</code>
+2. Add <code>KolodaView</code> to <code>MyKolodaViewController</code>, then set dataSource and delegate for it
+```swift
+class MyKolodaViewController: UIViewController {
+    @IBOutlet weak var kolodaView: KolodaView!</p>
+<pre><code>override func viewDidLoad() {
+    super.viewDidLoad()
+
+    kolodaView.dataSource = self
+    kolodaView.delegate = self
+}
+</code></pre>
+<p>}
+<code>3. Conform your `MyKolodaViewController` to `KolodaViewDelegate` protocol and override some methods if you need, e.g.</code>swift
+extension MyKolodaViewController: KolodaViewDelegate {
+    func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
+        koloda.reloadData()
+    }</p>
+<pre><code>func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
+    UIApplication.shared.openURL(URL(string: "https://yalantis.com/")!)
+}
+</code></pre>
+<p>}
+<code>4. Conform `MyKolodaViewController` to `KolodaViewDataSource` protocol and implement all the methods , e.g.</code>swift
+extension MyKolodaViewController: KolodaViewDataSource {</p>
+<pre><code>func kolodaNumberOfCards(_ koloda:KolodaView) -&gt; Int {
+    return images.count
+}
+
+func kolodaSpeedThatCardShouldDrag(_ koloda: KolodaView) -&gt; DragSpeed {
+    return .fast
+}
+
+func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -&gt; UIView {
+    return UIImageView(image: images[index])
+}
+
+func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -&gt; OverlayView? {
+    return Bundle.main.loadNibNamed("OverlayView", owner: self, options: nil)[0] as? OverlayView
+}
+</code></pre>
+<p>}
+<code>``
+5.</code>KolodaView` works with default implementation. Override it to customize its behavior</p>
+</li>
+</ol>
+<p>Also check out <a href="https://github.com/serejahh/Koloda-Carthage-usage">an example project with carthage</a>.</p>
+<h2>Properties</h2>
+<p>The KolodaView has the following properties:
+<code>swift
+weak var dataSource: KolodaViewDataSource?</code>
+An object that supports the KolodaViewDataSource protocol and can provide views to populate the KolodaView.
+<code>swift
+weak var delegate: KolodaViewDelegate?</code>
+An object that supports the KolodaViewDelegate protocol and can respond to KolodaView events.
+<code>swift
+private(set) public var currentCardIndex</code>
+The index of front card in the KolodaView (read only).
+<code>swift
+private(set) public var countOfCards</code>
+The count of cards in the KolodaView (read only). To set this, implement the <code>kolodaNumberOfCards:</code> dataSource method.
+<code>swift
+public var countOfVisibleCards</code>
+The count of displayed cards in the KolodaView.</p>
+<h2>Methods</h2>
+<p>The KolodaView class has the following methods:
+<code>swift
+public func reloadData()</code>
+This method reloads all KolodaView item views from the dataSource and refreshes the display.
+<code>swift
+public func resetCurrentCardIndex()</code>
+This method resets currentCardIndex and calls reloadData, so KolodaView loads from the beginning.
+<code>swift
+public func revertAction()</code>
+Applies undo animation and decrement currentCardIndex.
+<code>swift
+public func applyAppearAnimationIfNeeded()</code>
+Applies appear animation if needed.
+<code>swift
+public func swipe(_ direction: SwipeResultDirection, force: Bool = false)</code>
+Applies swipe animation and action, increment currentCardIndex.</p>
+<p><code>swift
+open func frameForCard(at index: Int) -&gt; CGRect</code></p>
+<p>Calculates frames for cards. Useful for overriding. See example to learn more about it.</p>
+<h2>Protocols</h2>
+<p>The KolodaView follows the Apple convention for data-driven views by providing two protocol interfaces, KolodaViewDataSource and KolodaViewDelegate.</p>
+<h4>The KolodaViewDataSource protocol has the following methods:</h4>
+<p><code>swift
+func koloda(_ kolodaNumberOfCards koloda: KolodaView) -&gt; Int</code>
+Return the number of items (views) in the KolodaView.
+<code>swift
+func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -&gt; UIView</code>
+Return a view to be displayed at the specified index in the KolodaView.
+<code>swift
+func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -&gt; OverlayView?</code>
+Return a view for card overlay at the specified index. For setting custom overlay action on swiping(left/right), you should override didSet of overlayState property in OverlayView. (See Example)
+<code>swift
+func kolodaSpeedThatCardShouldDrag(_ koloda: KolodaView) -&gt; DragSpeed</code>
+Allow management of the swipe animation duration</p>
+<h4>The KolodaViewDelegate protocol has the following methods:</h4>
+<p><code>swift
+func koloda(_ koloda: KolodaView, allowedDirectionsForIndex index: Int) -&gt; [SwipeResultDirection]</code>
+Return the allowed directions for a given card, defaults to <code>[.left, .right]</code>
+<code>swift
+func koloda(_ koloda: KolodaView, shouldSwipeCardAt index: Int, in direction: SwipeResultDirection) -&gt; Bool</code>
+This method is called before the KolodaView swipes card. Return <code>true</code> or <code>false</code> to allow or deny the swipe.
+<code>swift
+func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection)</code>
+This method is called whenever the KolodaView swipes card. It is called regardless of whether the card was swiped programatically or through user interaction.
+<code>swift
+func kolodaDidRunOutOfCards(_ koloda: KolodaView)</code>
+This method is called when the KolodaView has no cards to display.
+<code>swift
+func koloda(_ koloda: KolodaView, didSelectCardAt index: Int)</code>
+This method is called when one of cards is tapped.
+<code>swift
+func kolodaShouldApplyAppearAnimation(_ koloda: KolodaView) -&gt; Bool</code>
+This method is fired on reload, when any cards are displayed. If you return YES from the method or don't implement it, the koloda will apply appear animation.
+<code>swift
+func kolodaShouldMoveBackgroundCard(_ koloda: KolodaView) -&gt; Bool</code>
+This method is fired on start of front card swipping. If you return YES from the method or don't implement it, the koloda will move background card with dragging of front card.
+<code>swift
+func kolodaShouldTransparentizeNextCard(_ koloda: KolodaView) -&gt; Bool</code>
+This method is fired on koloda's layout and after swiping. If you return YES from the method or don't implement it, the koloda will transparentize next card below front card.
+<code>swift
+func koloda(_ koloda: KolodaView, draggedCardWithPercentage finishPercentage: CGFloat, in direction: SwipeResultDirection)</code>
+This method is called whenever the KolodaView recognizes card dragging event.
+<code>swift
+func kolodaSwipeThresholdRatioMargin(_ koloda: KolodaView) -&gt; CGFloat?</code>
+Return the percentage of the distance between the center of the card and the edge at the drag direction that needs to be dragged in order to trigger a swipe. The default behavior (or returning NIL) will set this threshold to half of the distance
+<code>swift
+func kolodaDidResetCard(_ koloda: KolodaView)</code>
+This method is fired after resetting the card.
+<code>swift
+func koloda(_ koloda: KolodaView, didShowCardAt index: Int)</code>
+This method is called after a card has been shown, after animation is complete
+<code>swift
+func koloda(_ koloda: KolodaView, shouldDragCardAt index: Int) -&gt; Bool</code>
+This method is called when the card is beginning to be dragged. If you return YES from the method or
+don't implement it, the card will move in the direction of the drag. If you return NO the card will
+not move.</p>
+<h2>Release Notes</h2>
+<p>Version 4.5
+- Swift 4.2 via <a href="https://github.com/evilmint">@evilmint</a></p>
+<p>Version 4.4
+- Swift 4.1 via <a href="https://github.com/irace">@irace</a>
+- Added <code>isLoop</code> property via <a href="https://github.com/brownsoo">@brownsoo</a>
+- Take into account card's alpha channel via <a href="https://github.com/bwhtmn">@bwhtmn</a></p>
+<p>Version 4.3
+- Swift 4 support
+- iOS 11 frame bugfix</p>
+<p>Version 4.0
+- Swift 3 support
+- Get rid of UInt
+- Common bugfix</p>
+<p>Version 3.1</p>
+<ul>
+<li>Multiple Direction Support</li>
+<li>Delegate methods for swipe disabling</li>
+</ul>
+<p>Version 3.0</p>
+<ul>
+<li>Ability to dynamically insert/delete/reload specific cards</li>
+<li>External animator</li>
+<li>Major refactoring. <a href="https://github.com/Yalantis/Koloda/releases/tag/3.0.0">More information</a></li>
+<li>Swift 2.2 support</li>
+</ul>
+<p>Version 2.0</p>
+<ul>
+<li>Swift 2.0 support</li>
+</ul>
+<p>Version 1.1</p>
+<ul>
+<li>New delegate methods</li>
+<li>Fixed minor issues</li>
+</ul>
+<p>Version 1.0</p>
+<ul>
+<li>Release version.</li>
+</ul>
+<h4>Apps using KolodaView</h4>
+<ul>
+<li><a href="https://itunes.apple.com/ua/app/bro-social-networking-bromance/id1049979758?mt=8">BroApp</a>.</li>
+</ul>
+<p><img alt="Preview" src="https://github.com/Yalantis/Koloda/blob/master/Example/UsageExamples/bro.gif" />
+- <a href="https://itunes.apple.com/us/app/storage-space-plus-compress/id1086277462?mt=8">Storage Space Plus</a>.
+- <a href="https://itunes.apple.com/us/app/color-dating-free-app-for/id1100827439?mt=8">Color Dating</a>.
+- <a href="https://itunes.apple.com/pt/app/ao-dispor/id1185556583">Ao Dispor</a></p>
+<h4>Let us know!</h4>
+<p>We’d be really happy if you sent us links to your projects where you use our component. Just send an email to github@yalantis.com And do let us know if you have any questions or suggestion regarding the animation.</p>
+<p>P.S. We’re going to publish more awesomeness wrapped in code and a tutorial on how to make UI for iOS (Android) better than better. Stay tuned!</p>
+<h2>License</h2>
+<p>The MIT License (MIT)</p>
+<p>Copyright © 2018 Yalantis</p>
+<p>Permission is hereby granted free of charge to any person obtaining a copy of this software and associated documentation files (the "Software") to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</p>

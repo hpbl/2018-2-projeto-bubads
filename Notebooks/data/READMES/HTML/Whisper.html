@@ -1,0 +1,75 @@
+<p>⚠️ DEPRECATED, NO LONGER MAINTAINED</p>
+<p><img alt="Whisper" src="https://github.com/hyperoslo/Whisper/blob/master/Resources/whisper-cover.png" /></p>
+<p><img alt="CircleCI" src="https://circleci.com/gh/hyperoslo/Whisper.png" />
+<a href="http://cocoadocs.org/docsets/Whisper"><img alt="Version" src="https://img.shields.io/cocoapods/v/Whisper.svg?style=flat" /></a>
+<a href="https://github.com/Carthage/Carthage"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a>
+<a href="http://cocoadocs.org/docsets/Whisper"><img alt="License" src="https://img.shields.io/cocoapods/l/Whisper.svg?style=flat" /></a>
+<a href="http://cocoadocs.org/docsets/Whisper"><img alt="Platform" src="https://img.shields.io/cocoapods/p/Whisper.svg?style=flat" /></a>
+<img alt="Swift" src="https://img.shields.io/badge/%20in-swift%204.0-orange.svg" /></p>
+<h2>Description :leaves:</h2>
+<p>Break the silence of your UI, whispering, shouting or whistling at it. <strong>Whisper</strong> is a component that will make the task of displaying messages and in-app notifications simple. It has three different views inside.</p>
+<h4>Whispers</h4>
+<p><img alt="Whisper" src="https://github.com/hyperoslo/Whisper/blob/master/Resources/permanent-whisper.png" /></p>
+<p>Display a short message at the bottom of the navigation bar—this can be anything, from a "Great Job!" to an error message. It can have images or even a loader.</p>
+<h4>Shouts</h4>
+<p><img alt="In-App" src="https://github.com/hyperoslo/Whisper/blob/master/Resources/in-app-notification.png" /></p>
+<p>Let users know that something happened inside the app with this beautiful customizable in-app notification.</p>
+<h4>Whistles</h4>
+<p><img alt="Whistle" src="https://github.com/hyperoslo/Whisper/blob/master/Resources/whistle-information.png" /></p>
+<p>This is the smallest of all, a beautiful discretion in your UI.</p>
+<h5>Bonus</h5>
+<p>All sounds are fully customizable, as are colors and fonts.</p>
+<p>Shouts have an optional action that will be called if the user taps on it, and you'll even get a message when the Shout is gone. Finally, if you want to set how long the Shout should be displayed, you have a duration property.</p>
+<p>In Whisper, there is no need to think about scroll view insets anymore—this will be handled automatically. As an added bonus, when transitioning from one view controller to another, the next controller's offset will be adjusted as you'd expect. It just works!</p>
+<h2>Usage</h2>
+<p>The usage of the component is so simple, you just create a message in the case of Whisper, an announcement in the case of a Shout, or a Murmur in the case of a Whistle. Because there may be a conflict with <code>show</code> from <code>UIViewController</code>, you need to explicitly use the <code>Whisper</code> namespace to call <code>show</code>.</p>
+<h5>For a Whisper:</h5>
+<p>```swift
+let message = Message(title: "Enter your message here.", backgroundColor: .red)</p>
+<p>// Show and hide a message after delay
+Whisper.show(whisper: message, to: navigationController, action: .show)</p>
+<p>// Present a permanent message
+Whisper.show(whisper: message, to: navigationController, action: .present)</p>
+<p>// Hide a message
+Whisper.hide(whisperFrom: navigationController)
+```</p>
+<h5>For a Shout:</h5>
+<p><code>swift
+let announcement = Announcement(title: "Your title", subtitle: "Your subtitle", image: UIImage(named: "avatar"))
+Whisper.show(shout: announcement, to: navigationController, completion: {
+  print("The shout was silent.")
+})</code></p>
+<h5>For a Whistle:</h5>
+<p>```swift
+let murmur = Murmur(title: "This is a small whistle...")</p>
+<p>// Show and hide a message after delay
+Whisper.show(whistle: murmur, action: .show(0.5))</p>
+<p>// Present a permanent status bar message
+Whisper.show(whistle: murmur, action: .present)</p>
+<p>// Hide a message
+Whisper.hide(whistleAfter: 3)
+```</p>
+<p>If you want to use <strong>Whisper</strong> with Objective-C, you can find information about it <a href="https://github.com/hyperoslo/Whisper/wiki/Using-Whisper-in-Objective-C">here</a>.</p>
+<h2>Installation</h2>
+<p><strong>Whisper</strong> is available through <a href="http://cocoapods.org">CocoaPods</a>. To install
+it, simply add the following line to your Podfile:</p>
+<p><code>ruby
+pod 'Whisper'</code></p>
+<p><strong>Whisper</strong> is also available through <a href="https://github.com/Carthage/Carthage">Carthage</a>. To install just write into your Cartfile:</p>
+<p><code>ruby
+github "hyperoslo/Whisper"</code></p>
+<h2>Roadmap</h2>
+<p>In the future the idea is to keep improving and add some features:</p>
+<ul>
+<li>Improve the offset detection and animation.</li>
+<li>Add more UI related components into Whisper.</li>
+<li>More customization points and more sizes for each whisper.</li>
+<li>Custom actions inside Whispers and Shouts.</li>
+<li>We are open to new and awesome ideas, contribute if you like! :)</li>
+</ul>
+<h2>Author</h2>
+<p><a href="http://hyper.no">Hyper</a> made this with ❤️</p>
+<h2>Contribute</h2>
+<p>We would love for you to contribute to <strong>Whisper</strong>, check the <a href="https://github.com/hyperoslo/Whisper/blob/master/CONTRIBUTING.md">CONTRIBUTING</a> file for more info.</p>
+<h2>License</h2>
+<p><strong>Whisper</strong> is available under the MIT license. See the <a href="https://github.com/hyperoslo/Whisper/blob/master/LICENSE.md">LICENSE</a> file for more info.</p>

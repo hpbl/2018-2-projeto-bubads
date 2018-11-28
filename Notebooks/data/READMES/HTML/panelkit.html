@@ -1,0 +1,101 @@
+<p align="center">
+<img src="readme-resources/hero.png" style="max-height: 300px;" alt="PanelKit for iOS">
+</p>
+
+<p align="center">
+<a href="https://travis-ci.org/louisdh/panelkit"><img src="https://travis-ci.org/louisdh/panelkit.svg?branch=master" style="max-height: 300px;" alt="Build Status"/></a>
+<a href="https://codecov.io/gh/louisdh/panelkit"><img src="https://codecov.io/gh/louisdh/panelkit/branch/master/graph/badge.svg" alt="Codecov"/></a>
+<br>
+<a href="https://developer.apple.com/swift/"><img src="https://img.shields.io/badge/Swift-4.1-orange.svg?style=flat" style="max-height: 300px;" alt="Swift"/></a>
+<a href="https://cocoapods.org/pods/PanelKit"><img src="https://img.shields.io/cocoapods/v/PanelKit.svg" style="max-height: 300px;" alt="PodVersion"/></a>
+<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4bc51d.svg?style=flat" style="max-height: 300px;" alt="Carthage Compatible"/></a>
+<img src="https://img.shields.io/badge/platform-iOS-lightgrey.svg" style="max-height: 300px;" alt="Platform: iOS">
+<br>
+<a href="http://twitter.com/LouisDhauwe"><img src="https://img.shields.io/badge/Twitter-@LouisDhauwe-blue.svg?style=flat" style="max-height: 300px;" alt="Twitter"/></a>
+<a href="https://paypal.me/louisdhauwe"><img src="https://img.shields.io/badge/Donate-PayPal-green.svg?style=flat" alt="Donate via PayPal"/></a>
+</p>
+
+<p align="center">
+<img src="readme-resources/example.gif" style="max-height: 4480px;" alt="PanelKit for iOS">
+<br>
+<i>Applications using PanelKit can be seen in the <a href="SHOWCASE.md">showcase</a>.</i>
+</p>
+
+<h2>About</h2>
+<p>PanelKit is a UI framework that enables panels on iOS. A panel can be presented in the following ways:</p>
+<ul>
+<li>Modally</li>
+<li>As a popover</li>
+<li>Floating (drag the panel around)</li>
+<li>Pinned (either left or right)</li>
+</ul>
+<p>This framework does all the heavy lifting for dragging panels, pinning them and even moving/resizing them when a keyboard is shown/dismissed.</p>
+<h2>Implementing</h2>
+<p>A lot of effort has gone into making the API simple for a basic implementation, yet very customizable if needed. Since PanelKit is protocol based, you don't need to subclass anything in order to use it. There a two basic principles PanelKit entails: <code>panels</code> and a <code>PanelManager</code>.</p>
+<h3>Panels</h3>
+<p>A panel is created using the <code>PanelViewController</code> initializer, which expects a <code>UIViewController</code>, <code>PanelContentDelegate</code> and <code>PanelManager</code>.</p>
+<h4>PanelContentDelegate</h4>
+<p><code>PanelContentDelegate</code> is a protocol that defines the appearance of a panel. Typically the <code>PanelContentDelegate</code> protocol is implemented for each panel on its <code>UIViewController</code>.</p>
+<p>Example:</p>
+<p>```swift
+class MyPanelContentViewController: UIViewController, PanelContentDelegate {</p>
+<pre><code>override func viewDidLoad() {
+    super.viewDidLoad()
+
+    self.title = "Panel title"  
+}
+
+var preferredPanelContentSize: CGSize {
+    return CGSize(width: 320, height: 500)
+}
+</code></pre>
+<p>}
+```  </p>
+<p>A panel is explicitly (without your action) shown in a <code>UINavigationController</code>, but the top bar can be hidden or styled as with any <code>UINavigationController</code>.</p>
+<h3>PanelManager</h3>
+<p><code>PanelManager</code> is a protocol that in its most basic form expects the following:</p>
+<p>```swift
+// The view in which the panels may be dragged around
+var panelContentWrapperView: UIView {
+    return contentWrapperView
+}</p>
+<p>// The content view, which will be moved/resized when panels pin
+var panelContentView: UIView {
+    return contentView
+}</p>
+<p>// An array of PanelViewController objects
+var panels: [PanelViewController] {
+    return []
+}
+``` </p>
+<p>Typically the <code>PanelManager</code> protocol is implemented on a <code>UIViewController</code>.</p>
+<h2>Advanced features</h2>
+<p>PanelKit has some advanced opt-in features:</p>
+<ul>
+<li><a href="docs/MultiPinning.md">Multi-pinning</a></li>
+<li><a href="docs/Resizing.md">Panel resizing</a></li>
+<li><a href="docs/States.md">State restoration</a></li>
+<li><a href="docs/Expose.md">Exposé</a></li>
+</ul>
+<h2>Installation</h2>
+<h3><a href="http://cocoapods.org">CocoaPods</a></h3>
+<p>To install, add the following line to your <code>Podfile</code>:</p>
+<p><code>ruby
+pod 'PanelKit', '~&gt; 2.0'</code></p>
+<h3><a href="https://github.com/Carthage/Carthage">Carthage</a></h3>
+<p>To install, add the following line to your <code>Cartfile</code>:</p>
+<p><code>ruby
+github "louisdh/panelkit" ~&gt; 2.0</code>
+Run <code>carthage update</code> to build the framework and drag the built <code>PanelKit.framework</code> into your Xcode project.</p>
+<h2>Requirements</h2>
+<ul>
+<li>iOS 10.0+</li>
+<li>Xcode 9.0+</li>
+</ul>
+<h2>Todo</h2>
+<h3>Long term:</h3>
+<ul>
+<li>[ ] Top/down pinning</li>
+</ul>
+<h2>License</h2>
+<p>This project is available under the MIT license. See the LICENSE file for more info.</p>

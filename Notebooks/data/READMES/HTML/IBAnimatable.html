@@ -1,0 +1,186 @@
+<p><img alt="IBAnimatable" src="https://raw.githubusercontent.com/IBAnimatable/IBAnimatable-Misc/master/IBAnimatable/Hero.png" /></p>
+<p>Design and prototype customized UI, interaction, navigation, transition and animation for App Store ready Apps in Interface Builder with IBAnimatable.</p>
+<p><img alt="IBAnimatable hero image" src="https://raw.githubusercontent.com/IBAnimatable/IBAnimatable-Misc/master/IBAnimatable/IBAnimatable.gif" /></p>
+<p><a href="https://travis-ci.org/IBAnimatable/IBAnimatable"><img alt="Build Status" src="https://travis-ci.org/IBAnimatable/IBAnimatable.svg?branch=master" /></a>
+<a href="https://swift.org"><img alt="Language" src="https://img.shields.io/badge/language-Swift%204.2-orange.svg" /></a>
+<a href="http://cocoadocs.org/docsets/IBAnimatable/"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/IBAnimatable.svg?style=flat" /></a>
+<a href="https://github.com/Carthage/Carthage"><img alt="Carthage Compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a>
+<a href="https://github.com/IBAnimatable/IBAnimatable/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/IBAnimatable/IBAnimatable.svg?style=flat" /></a></p>
+<p><strong>The app was made in Interface Builder with <code>IBAnimatable</code> without a single line of code</strong>. Due to the size of <a href="https://dribbble.com/shots/2453933-IBAnimatable-Design-App-Store-ready-Apps-in-Interface-Builder">the GIF file on Dribbble</a>, it only demonstrates a subset of features. We can also find the full HD version on <a href="https://www.youtube.com/watch?v=dvD8X6J1YLM">YouTube</a> or <a href="https://github.com/IBAnimatable/IBAnimatable-Misc/blob/master/Videos/IBAnimatable.mp4?raw=true">MP4 on Github</a></p>
+<h2>Key features</h2>
+<ul>
+<li>✅ <strong>100% compatible with <code>UIKit</code></strong>. All <code>IBAnimatable</code> APIs are extensions of <code>UIKit</code>. No pollutions to <code>UIKit</code>'s APIs.</li>
+<li>✅ <strong>100% compatible with Auto Layout and Size Classes</strong>. No custom layout system.</li>
+<li>✅ <strong>User interface design and preview in IB</strong>: corner radius, border, mask, shadow, gradient colors, tint color, blur effect etc.</li>
+<li>✅ <strong>Animation design in IB</strong>: slide in/out, fade in/out, zoom in/out, flip, pop, shake, rotate, move etc.</li>
+<li>✅ <strong>Transition design in IB</strong>: fade, slide, flip, cube, portal, fold, explosion etc.</li>
+<li>✅ <strong>Interactive gesture design in IB</strong>: pan, screen edge pan, pinch etc. </li>
+<li>✅ <strong>Presentation design in IB</strong>: flip, cover, zoom, dropdown etc.</li>
+<li>✅ <strong>Activity indicator design in IB</strong>: ball beat, ball rotate, cube transition, Pacman etc.  </li>
+</ul>
+<p><img alt="StoryboardPreview" src="https://raw.githubusercontent.com/IBAnimatable/IBAnimatable-Misc/master/IBAnimatable/Storyboard.jpg" /></p>
+<p>Here is the full design in a Storyboard in Interface Builder.</p>
+<p>With <code>IBAnimatable</code>, we can design a UI in Interface Builder like what we can do in Sketch, and prototype animations in a Swift playground like what we can do in Framer. Also, we can use the output of the design directly in the production ready App.</p>
+<p>As a designer, we love Sketch, which is a simple but yet super powerful tool to create UI. However, Sketch can't design interaction, navigation, transition and animation, and we may need another tool like Framer to design some of them. Moreover, to make an App Store ready App, we need to use Xcode and Interface Builder to implement the UI and animations. To speed up the process and minimize the waste, we create <code>IBAnimatable</code> to make Interface Builder designable and animatable.   </p>
+<h2>How to install</h2>
+<h3>Manually install</h3>
+<p>Copy and paste <code>IBAnimatable</code> folder in your Xcode project.</p>
+<h3><a href="https://swift.org/package-manager">Swift package manager</a></h3>
+<p>To integrate using Apple's Swift package manager, add the following as a dependency to your <code>Package.swift</code>:</p>
+<p><code>swift
+.package(url: "https://github.com/IBAnimatable/IBAnimatable.git", .upToNextMajor(from: "5.0.0"))</code></p>
+<h3><a href="https://cocoapods.org">CocoaPods</a></h3>
+<p>Add the following entry in your Podfile:</p>
+<p><code>ruby
+   pod 'IBAnimatable'</code></p>
+<h3><a href="https://github.com/Carthage/Carthage">Carthage</a></h3>
+<p>Add the following entry in your Cartfile:</p>
+<p><code>github "IBAnimatable/IBAnimatable"</code></p>
+<p>Please Notice, there is <a href="https://github.com/Carthage/Carthage/issues/335">a limitation of a built framework for <code>@IBDesignable</code> and <code>@IBInspectable</code></a>, that will impact on <code>IBAnimatable</code> when you use Carthage. There is a workaround to use Carthage or Swift package manager with <code>IBAnimatable</code>, please have a look at <a href="https://github.com/IBAnimatable/IBAnimatable/issues/354">Carthage – no Animatable UI Classes appearing in Storyboard</a></p>
+<p>As @DanielAsher mentioned</p>
+<blockquote>
+<p>I use carthage update --use-submodules --no-build --no-use-binaries and manually add the both the framework project and the framework as an embedded dependency.
+This method is robust, and fine-grained, but perhaps not as easy as dragging the built framework into your project.</p>
+</blockquote>
+<h3>Git submodule</h3>
+<p>Add this repo as a submodule, and add the project file to your workspace. You can then link against <code>IBAnimatable.framework</code> for your application target. </p>
+<h2>Version 5.2</h2>
+<p>IBAnimatable 5.2 is the latest major release of IBAnimatable. This version supports Swift 4.2. There are no API breaking changes from migrating from version 4.x. </p>
+<p>If you migrate from version 3.x. Please check out <a href="Documentation/IBAnimatable 4.0 Migration Guide.md">IBAnimatable 4.0 Migration Guide</a> for more information.</p>
+<h2>Swift version</h2>
+<h3>Swift 4.2</h3>
+<p>There are no API breaking changes when migrating from Swift 4.* to Swift 4.2 using IBAnimatable.</p>
+<p>If you are using Xcode 10 with Swift 4.2, please use the latest tagged 5.x release.</p>
+<h3>Swift 4.1</h3>
+<p>There are no API breaking changes when migrating from Swift 4 to Swift 4.1 using IBAnimatable.</p>
+<p>If you are using Xcode 9.3 with Swift 4.1, please use the latest tagged 5.x release.</p>
+<h3>Swift 4</h3>
+<p>There are no API breaking changes when migrating from Swift 3.2 to Swift 4 using IBAnimatable.</p>
+<p>If you are using Xcode 9 with Swift 4, please use the latest tagged 5.x release.</p>
+<h3>Swift 3.2</h3>
+<p>There are no API breaking changes when migrating from Swift 3.1 to Swift 3.2 using IBAnimatable.</p>
+<p>If you are using Xcode 9 and Swift 3.2, please use the 4.2 release.</p>
+<h3>Swift 3 or 3.1</h3>
+<p>If you migrate from Swift 2.x, please check out <a href="Documentation/IBAnimatable 3.0 Migration Guide.md">IBAnimatable 3.0 Migration Guide</a> for more information about how to migrate your project to 3.0. Version 3 follows Swift 3 <a href="https://swift.org/documentation/api-design-guidelines/">API Design Guidelines</a> and contains a lot of breaking changes from version 2.x. </p>
+<p>If you are using Xcode 8 with Swift 3, please use the latest tagged 4.x release.</p>
+<h2>Languages</h2>
+<p><a href="Documentation/README.zh.md">中文</a></p>
+<h2>Features</h2>
+<ul>
+<li>From prototype to shippable App Store ready App - What you design in Interface Builder is what the App exactly looks. More details can be found in this talk <a href="https://youtu.be/HaB2_ki_67w">Prototype and Design App Store ready Apps in Interface Builder (/dev/world/2016)</a></li>
+<li>Designer-friendly - Sketch style configuration panel on Attributes inspector (<img alt="Attributes inspector" src="https://raw.githubusercontent.com/IBAnimatable/IBAnimatable-Misc/master/IBAnimatable/AttributesInspector.png" />) to lower the learning curve for using Interface Builder.   </li>
+<li>Animation design support in Swift playground - Similar to Framer, we can prototype animations in Swift playground to save time for running on a simulator or actual iOS devices. </li>
+<li>Built-in Auto Layout support - We can use Auto Layout and Size Classes with <code>IBAnimatable</code> to support orientations and multiple iOS devices. </li>
+<li>Navigation and transition support - We can use default navigation pattern in the App. <code>IBAnimatable</code> also has custom transition animators and segues to support transition animations and gesture interactions.</li>
+<li>Protocol-oriented programming - <code>IBAnimatable</code> uses a protocol-oriented programming paradigm. With Swift protocol extension, it is easy to support more designable or animatable features. We can even use these protocol extensions to create other custom UI elements instead of using the default ones from <code>IBAnimatable</code>. More details can be found in this talk <a href="https://youtu.be/HaB2_ki_67w?t=24m13s">Prototype and Design App Store ready Apps in Interface Builder (/dev/world/2016) - Part 2: Protocol oriented programming</a></li>
+</ul>
+<h2>Use cases</h2>
+<ul>
+<li>Prototyping - Create interactive prototypes to validate ideas quickly.</li>
+<li>Redesigning in Interface Builder - Redesign the UI from Sketch and animations from Framer without writing any code.</li>
+<li>Making custom UI elements - Use <code>IBAnimatable</code> protocols to make custom UI elements. e.g. Buttons with a default color palette.</li>
+</ul>
+<h2>Documentations</h2>
+<ul>
+<li><a href="Documentation/APIs.md"><del>Fully</del> Mostly documented API Reference</a> </li>
+<li><a href="Documentation/Transitions.md">How to design and prototype custom transition animation and gesture interaction in Interface Builder with IBAnimatable</a></li>
+<li>Youtube video:  <a href="https://youtu.be/HaB2_ki_67w">Prototype and Design App Store ready Apps in Interface Builder (/dev/world/2016) - Part 2: Protocol oriented programming</a></li>
+</ul>
+<h2>How to run the example App</h2>
+<p>The easy way to learn and understand how powerful of <code>IBAnimatable</code>is to run the example App and play around the settings in Interface Builder. Just a few steps we can run the App as below, to see more features, we can tap on "Forget Password" button to unlock them. 😉</p>
+<p>1) Clone the repository</p>
+<p><code>bash
+$ git clone https://github.com/IBAnimatable/IBAnimatable.git</code></p>
+<p>2) Open the workspace in Xcode</p>
+<p><code>bash
+$ cd IBAnimatable
+$ open IBAnimatable.xcworkspace</code></p>
+<p>3) Compile and run the app on your simulator or iOS device</p>
+<h2>How to design in Interface Builder</h2>
+<p><img alt="" src="https://raw.githubusercontent.com/IBAnimatable/IBAnimatable-Misc/master/IBAnimatable/DesignInInterfaceBuilder.png" /></p>
+<p>To use <code>IBAnimatable</code> to design the UI and animations in Interface Builder, just follow a few steps as below:</p>
+<ol>
+<li>Open a Storyboard or Xib file.</li>
+<li>Drag and drop a UIKit element e.g. <code>UIView</code> to a <code>UIViewController</code>.</li>
+<li>In Identity inspector (<img alt="Identity inspector" src="https://raw.githubusercontent.com/IBAnimatable/IBAnimatable-Misc/master/IBAnimatable/IdentityInspector.png" />), configure the UI element to <code>Animatable</code> custom UI class e.g. <code>AnimatableView</code>, you can find all <code>Animatable</code> classes in <a href="Documentation/APIs.md">APIs.md</a>.</li>
+<li>Configure the UI and animations in Attribute Inspector.</li>
+</ol>
+<h2>How to animate in Swift playground</h2>
+<p><img alt="" src="https://raw.githubusercontent.com/IBAnimatable/IBAnimatable-Misc/master/IBAnimatable/AnimateInSwiftPlayground.gif" /></p>
+<p>We can configure the animation settings in Attribute inspector. However, Interface Builder doesn't support previewing Animations, but we can still prototype animations in Swift playground. There are three sample pages to demonstrate how to design animation in Swift playground. You can find them in <a href="IBAnimatable.playground">IBAnimatable.playground</a>. </p>
+<ol>
+<li>Open IBAnimatable.xcworkspace</li>
+<li>Select IBAnimatable Framework scheme and build it with <code>Command + b</code></li>
+<li>Select IBAnimatable.playground, choose one page in Swift playground, then click on "Assistant editor" button to split the playground. After that, select "Timeline" on the top of right-hand side to preview the animation. We can use Xcode menu "Editor" -&gt; "Execute" to re-run the playground.</li>
+</ol>
+<h2>How to animate programmatically</h2>
+<p>As you saw above, we can prototype an App fully in Interface Builder without a single line of code, but <code>IBAnimatable</code> also provides APIs to let us fully control the UI and animations. <code>IBAnimatable</code> provides simple promise-like APIs. We can easily call them in one line.</p>
+<p><code>swift
+view.animate(.pop(repeatCount: 1)) // pop animation for the view
+view.animate(.squeezeFade(way: .in, direction: .left)) // squeeze and fade in from left animation</code>  </p>
+<p>You can play around with all these predefined animations in the <a href="IBAnimatable.playground/Pages/Predefined%20Animations.xcplaygroundpage">Swift playground Page - Predefined Animations</a></p>
+<h3>Animation properties</h3>
+<p>There are some properties we can change to customize the animation. What we need to do is to pass the parameters to <code>animate()</code> method to start the animation.</p>
+<p><code>swift
+view.animate(.squeeze(way: .in, direction: .left), duration: 1, damping: 1, velocity: 2, force: 1)</code></p>
+<p>You can play around with all animations with different parameters in the <a href="IBAnimatable.playground/Pages/Animation%20Properties.xcplaygroundpage">Swift playground Page - Animation Properties</a></p>
+<h3>Chaining animations</h3>
+<p>Sometimes, we need to run more animation after the previous one. With <code>IBAnimatable</code>, we can easily use promise-like API to chain all animations together to provide a sleek user experience.</p>
+<p><code>swift
+// We can chain the animations together, it is the source code of animated GIF in "Animate in Swift playground" section
+view.animate(.squeezeFade(way: .in, direction: .down))
+    .then(.pop(repeatCount: 1))
+    .then(.shake(repeatCount: 1))
+    .then(.squeeze(way: .in, direction: .down))
+    .then(.wobble(repeatCount: 1))
+    .then(.flip(along: .x))
+    .then(.flip(along: .y))
+    .then(.slideFade(way: .out, direction: .down))</code></p>
+<h3>Delaying animations</h3>
+<p>We can use <code>delay</code> method to delay the next animation.</p>
+<p><code>swift
+view.animate(.squeeze(way: .in, direction: .left))
+    .delay(0.5)
+    .then(.shake(repeatCount: 3))</code></p>
+<p>We can also delay the first animation.</p>
+<p><code>swift
+view.delay(2)
+    .then(.squeeze(way: .in, direction: .left))</code></p>
+<h3>Completion handler</h3>
+<p>We can add a completion handler/closure to execute when all animations are completed.</p>
+<p><code>swift
+view.animate(.squeeze(way: .in, direction: .left))
+    .completion { print("Animations finished!") }</code></p>
+<h2>How to contribute</h2>
+<p>All of us can contribute to this project. Fewer overheads mean less time to build quality Apps and more time to enjoy coffee ☕️.</p>
+<ul>
+<li>
+<p>If you are a designer, you can design in Interface Builder with <code>IBAnimatable</code> without a design tool like Sketch, or implement your existing design from Sketch or Photoshop in Interface Builder rapidly. With <code>IBAnimatable</code>, you should be able to do <del>all</del> most of the design work in Interface Builder. If you have any feature request, please <a href="https://github.com/IBAnimatable/IBAnimatable/issues/new">create a GitHub Issue</a> and we will put it in the backlog. If you have done any design with <code>IBAnimatable</code>, please let us know via creating Pull Request or GitHub Issue. We will add it to README file.</p>
+</li>
+<li>
+<p>If you are a developer, you can work on features or fix bugs, please check out <a href="Documentation/Roadmap.md">Vision, Technical Considerations and Roadmap</a> and <a href="https://github.com/IBAnimatable/IBAnimatable/issues">GitHub Issues</a> to find out the backlogs. If you have used <code>IBAnimatable</code> in your App, please let us know via creating Pull Request or GitHub Issue. We will add it to README file.</p>
+</li>
+<li>
+<p>If you are good at English, please correct my English 😁. If you are good at other languages, please create a README file in those languages.</p>
+</li>
+<li>
+<p>If you like the project, please share it with the other designers and developers, and star 🌟 the project. 🤗</p>
+</li>
+</ul>
+<p>Many thanks to <a href="https://github.com/IBAnimatable/IBAnimatable/graphs/contributors">all contributors</a> 🤗 especially to <a href="https://github.com/tbaranes">@tbaranes</a> who develops a lot of features and maintains the project.</p>
+<h2>Roadmap</h2>
+<p><a href="Documentation/Roadmap.md">Vision, Technical Considerations and Roadmap</a></p>
+<h2>Inspirations / Credits</h2>
+<ul>
+<li><code>IBDesignable</code> and <code>IBInspectable</code> - The entire project is based on that.</li>
+<li>Sketch -  Interface Builder should be as easy as Sketch to use.</li>
+<li>Framer Studio - Design and preview animations in one place.</li>
+<li><a href="https://github.com/MengTo/Spring">Spring by Meng To</a> - steal a lot of animation parameters from this project.</li>
+<li><a href="https://github.com/ColinEberhardt/VCTransitionsLibrary">VCTransitionsLibrary by Colin Eberhardt</a> - port all transition animations from this project, and add parameters support and fix bugs.</li>
+<li><a href="https://github.com/ninjaprox/NVActivityIndicatorView">NVActivityIndicatorView by Vinh Nguyen</a> - port all activity indicator animations from this project, and migrate to Swift 3.</li>
+<li><a href="http://www.invisionapp.com/do">Invision ToDo App UI Kit</a>, The demo App's original design is from this UI Kit and redone in Interface Builder. We also added interaction, navigation and animations.</li>
+</ul>
+<h2>Change Log</h2>
+<p>Please see <a href="CHANGELOG.md">CHANGELOG.md</a></p>
+<h2>License</h2>
+<p><code>IBAnimatable</code> is released under the MIT license. See <a href="LICENSE">LICENSE</a> for details.</p>

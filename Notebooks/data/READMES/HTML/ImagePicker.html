@@ -1,0 +1,62 @@
+<p>⚠️ DEPRECATED, NO LONGER MAINTAINED</p>
+<p><img alt="ImagePicker" src="https://github.com/hyperoslo/ImagePicker/blob/master/Resources/ImagePickerPresentation.png" /></p>
+<p><a href="http://cocoadocs.org/docsets/ImagePicker"><img alt="Version" src="https://img.shields.io/cocoapods/v/ImagePicker.svg?style=flat" /></a>
+<a href="https://github.com/Carthage/Carthage"><img alt="Carthage Compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a>
+<a href="http://cocoadocs.org/docsets/ImagePicker"><img alt="License" src="https://img.shields.io/cocoapods/l/ImagePicker.svg?style=flat" /></a>
+<a href="http://cocoadocs.org/docsets/ImagePicker"><img alt="Platform" src="https://img.shields.io/cocoapods/p/ImagePicker.svg?style=flat" /></a>
+<img alt="Swift" src="https://img.shields.io/badge/%20in-swift%204.0-orange.svg" />
+<a href="https://gitter.im/hyperoslo/ImagePicker?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img alt="Join the chat at https://gitter.im/hyperoslo/ImagePicker" src="https://badges.gitter.im/hyperoslo/ImagePicker.svg" /></a></p>
+<h2>Description</h2>
+<p><img src="https://github.com/hyperoslo/ImagePicker/blob/master/Resources/ImagePickerIcon.png" alt="ImagePicker Icon" align="right" /></p>
+<p><strong>ImagePicker</strong> is an all-in-one camera solution for your iOS app. It lets your users select images from the library and take pictures at the same time. As a developer you get notified of all the user interactions and get the beautiful UI for free, out of the box, it's just that simple.</p>
+<p><strong>ImagePicker</strong> has been optimized to give a great user experience, it passes around referenced images instead of the image itself which makes it less memory consuming. This is what makes it smooth as butter.</p>
+<h2>Usage</h2>
+<p><strong>ImagePicker</strong> works as a normal controller, just instantiate it and present it.</p>
+<p><code>swift
+let imagePickerController = ImagePickerController()
+imagePickerController.delegate = self
+present(imagePickerController, animated: true, completion: nil)</code></p>
+<p><strong>ImagePicker</strong> has three delegate methods that will inform you what the users are up to:</p>
+<p><code>swift
+func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage])
+func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage])
+func cancelButtonDidPress(_ imagePicker: ImagePickerController)</code></p>
+<p><strong>ImagePicker</strong> supports limiting the amount of images that can be selected, it defaults
+to zero, which means that the user can select as many images as he/she wants.</p>
+<p><code>swift
+let imagePickerController = ImagePickerController()
+imagePickerController.imageLimit = 5</code></p>
+<h3>Optional bonus</h3>
+<h5>Configuration</h5>
+<p>You can inject <code>Configuration</code> instance to ImagePicker, which allows you to configure text, colors, fonts and camera features</p>
+<p>```swift
+var configuration = Configuration()
+configuration.doneButtonTitle = "Finish"
+configuration.noImagesTitle = "Sorry! There are no images here!"
+configuration.recordLocation = false</p>
+<p>let imagePicker = ImagePickerController(configuration: configuration)
+```</p>
+<h5>Resolve assets</h5>
+<p>As said before, <strong>ImagePicker</strong> works with referenced images, that is really powerful because it lets you download the asset and choose the size you want. If you want to change the default implementation, just add a variable in your controller.</p>
+<p><code>swift
+public var imageAssets: [UIImage] {
+  return AssetManager.resolveAssets(imagePicker.stack.assets)
+}</code></p>
+<p>And when you call any delegate method that returns images, add in the first line:</p>
+<p><code>swift
+let images = imageAssets</code></p>
+<h2>Installation</h2>
+<p><strong>ImagePicker</strong> is available through <a href="http://cocoapods.org">CocoaPods</a>. To install
+it, simply add the following line to your Podfile:</p>
+<p><code>ruby
+pod 'ImagePicker'</code></p>
+<p><strong>ImagePicker</strong> is also available through <a href="https://github.com/Carthage/Carthage">Carthage</a>.
+To install just write into your Cartfile:</p>
+<p><code>ruby
+github "hyperoslo/ImagePicker"</code></p>
+<h2>Author</h2>
+<p><a href="http://hyper.no">Hyper</a> made this with ❤️</p>
+<h2>Contribute</h2>
+<p>We would love you to contribute to <strong>ImagePicker</strong>, check the <a href="https://github.com/hyperoslo/ImagePicker/blob/master/CONTRIBUTING.md">CONTRIBUTING</a> file for more info.</p>
+<h2>License</h2>
+<p><strong>ImagePicker</strong> is available under the MIT license. See the <a href="https://github.com/hyperoslo/ImagePicker/blob/master/LICENSE.md">LICENSE</a> file for more info.</p>

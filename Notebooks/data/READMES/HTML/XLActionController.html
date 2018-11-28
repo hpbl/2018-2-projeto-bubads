@@ -1,0 +1,370 @@
+<h1>XLActionController</h1>
+<p align="left">
+<a href="https://travis-ci.org/xmartlabs/XLActionController"><img src="https://travis-ci.org/xmartlabs/XLActionController.svg?branch=master" alt="Build status" /></a>
+<img src="https://img.shields.io/badge/platform-iOS-blue.svg?style=flat" alt="Platform iOS" />
+<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/swift4-compatible-4BC51D.svg?style=flat" alt="Swift 4 compatible" /></a>
+<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage compatible" /></a>
+<a href="https://cocoapods.org/pods/XLActionController"><img src="https://img.shields.io/cocoapods/v/XLActionController.svg" alt="CocoaPods compatible" /></a>
+<a href="https://raw.githubusercontent.com/xmartlabs/XLActionController/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License: MIT" /></a>
+<!-- <a href="https://codebeat.co/projects/github-com-xmartlabs-xlactioncontroller"><img alt="codebeat badge" src="https://codebeat.co/badges/24f48197-136d-44cc-b072-6703644d13b6" /></a> -->
+</p>
+
+<p>By <a href="http://xmartlabs.com">XMARTLABS</a>.</p>
+<p><strong>XLActionController</strong> is an extensible library to quickly create any custom action sheet controller.</p>
+<h2>Examples</h2>
+<table>
+ <tr>
+  <td>
+    <img src="Media/demo_spotify.gif" width="300"/>
+  </td>
+  <td>
+    <img src="Media/demo_twitter.gif" width="300"/>
+  </td>
+  <td>
+    <img src="Media/demo_tweetbot.gif" width="300"/>
+  </td>
+ </tr>
+ <tr>
+  <td>
+    <img src="Media/demo_periscope.gif" width="300"/>
+  </td>
+  <td>
+    <img src="Media/demo_youtube.gif" width="300"/>
+  </td>
+  <td>
+    <img src="Media/demo_skype.gif" width="300"/>
+  </td>
+ </tr>
+ </table>
+
+<p>The action sheet controllers shown above were entirely created using XLActionController and are included in the <a href="/Example/CustomActionControllers">Examples</a>.
+To run the Example project: clone XLActionController repository, open XLActionController workspace and run the Example project.</p>
+<p>The code snippet below shows how to present the Tweetbot action sheet controller:</p>
+<p>```swift
+let actionController = TweetbotActionController()</p>
+<p>actionController.addAction(Action("View Details", style: .default, handler: { action in
+  // do something useful
+}))
+actionController.addAction(Action("View Retweets", style: .default, handler: { action in
+  // do something useful
+}))
+actionController.addAction(Action("View in Favstar", style: .default, handler: { action in
+  // do something useful
+}))
+actionController.addAction(Action("Translate", style: .default, executeImmediatelyOnTouch: true, handler: { action in
+  // do something useful
+}))</p>
+<p>actionController.addSection(Section())
+actionController.addAction(Action("Cancel", style: .cancel, handler:nil))</p>
+<p>present(actionController, animated: true, completion: nil)
+```</p>
+<p>As you may have noticed, the library usage looks pretty similar to UIAlertController.</p>
+<p>Actions' handlers are executed after the alert controller is dismissed from screen. If you want, you can change this passing <code>true</code> to the action's constructor to the argument <code>executeImmediatelyOnTouch</code>.</p>
+<blockquote>
+<p>Behind the scenes XLActionController uses a UICollectionView to display the action sheet.</p>
+</blockquote>
+<h2>Usage</h2>
+<p>First create a custom action sheet view controller by extending from the <code>ActionController</code> generic class. For details on how to create a custom action sheet controller look at the <a href="#extensibility">Extensibility</a> section.</p>
+<p>For instance, let's suppose we've already created <a href="Example/CustomActionControllers/Twitter.swift"><code>TwitterActionController</code></a>.</p>
+<p><code>swift
+// Instantiate custom action sheet controller
+let actionSheet = TwitterActionController()
+// set up a header title
+actionSheet.headerData = "Accounts"
+// Add some actions, note that the first parameter of `Action` initializer is `ActionData`.
+actionSheet.addAction(Action(ActionData(title: "Xmartlabs", subtitle: "@xmartlabs", image: UIImage(named: "tw-xmartlabs")!), style: .default, handler: { action in
+   // do something useful
+}))
+actionSheet.addAction(Action(ActionData(title: "Miguel", subtitle: "@remer88", image: UIImage(named: "tw-remer")!), style: .default, handler: { action in
+   // do something useful
+}))
+// present actionSheet like any other view controller
+present(actionSheet, animated: true, completion: nil)</code>
+<img src="Media/demo_twitter.gif" width="200"/></p>
+<p>As the code above illustrates, there are no relevant differences compared to the UIAlertController API.</p>
+<p>The main difference is that XLActionController works with any header data type and not only the standard UIAlertController <code>title</code> and <code>message</code> properties.
+Similarly XLActionController's Action works with any data Type and not only the <code>title</code> string.</p>
+<p>```swift
+// XLActionController:
+xlActionController.headerData = SpotifyHeaderData(title: "The Fast And The Furious Soundtrack Collection", subtitle: "Various Artists", image: UIImage(named: "sp-header-icon")!)</p>
+<p>// vs UIAlertController:
+uiActionController.title = "The Fast And The Furious Soundtrack Collection" // no way to pass an image
+uiActionController.message = "Various Artists"
+```</p>
+<p>```swift
+// XLActionController:
+let xlAction = Action(ActionData(title: "Save Full Album", image: UIImage(named: "sp-add-icon")!), style: .default, handler: { action in })
+// notice that we are able to pass an image in addition to the title
+xlActionController.addAction(xlAction)</p>
+<p>// vs UIAlertController:
+let uiAction = UIAlertAction(title: "Xmartlabs", style: .default, handler: { action in }))
+uiActionController.addAction(uiAction)
+```</p>
+<blockquote>
+<p>This can be accomplished because XLActionController is a generic type.</p>
+</blockquote>
+<p>Another important difference is that XLActionController provides a way to add action sections as illustrated in the code below:</p>
+<p><code>swift
+  actionController.addSection(Section())</code></p>
+<p>and also each section has a <code>data</code> property. This property is generic, so that it can hold any type. This data will be used to create this section's header view.</p>
+<p><code>swift
+let section = actionController.addSection(Section())
+section.data = "String" // assuming section data Type is String</code></p>
+<blockquote>
+<p>Each section contains a set of actions. We typically use sections to show a header view above a set of actions.</p>
+</blockquote>
+<h2>Extensibility</h2>
+<p>ActionController uses a UICollectionView to show actions and headers on screen. Actions will be rendered as instances of UICollectionViewCell. You can use
+your own subclass of UICollectionViewCell by specifying it in the action controller declaration. Additionally, ActionController allows you to specify a global header and a section header. Headers are shown as collection view's supplementary views.</p>
+<p>The <code>ActionController</code> class is a generic type that works with any cell, header, section header type and its associated data types.</p>
+<h3>Create your custom action sheet controller</h3>
+<p>XLActionController provides extension points to specify a whole new look and feel to our custom sheet controller and to tweak present and dismiss animations. Let's see an example:</p>
+<p>```swift
+// As first step we should extend the ActionController generic type
+public class PeriscopeActionController: ActionController<PeriscopeCell, String, PeriscopeHeader, String, UICollectionReusableView, Void> {</p>
+<pre><code>// override init in order to customize behavior and animations
+public override init(nibName nibNameOrNil: String? = nil, bundle nibBundleOrNil: Bundle? = nil) {
+    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    // customizing behavior and present/dismiss animations
+    settings.behavior.hideOnScrollDown = false
+    settings.animation.scale = nil
+    settings.animation.present.duration = 0.6
+    settings.animation.dismiss.duration = 0.5
+    settings.animation.dismiss.options = .curveEaseIn
+    settings.animation.dismiss.offset = 30
+
+    // providing a specific collection view cell which will be used to display each action, height parameter expects a block that returns the cell height for a particular action.
+    cellSpec = .nibFile(nibName: "PeriscopeCell", bundle: Bundle(for: PeriscopeCell.self), height: { _ in 60})
+    // providing a specific view that will render each section header.
+    sectionHeaderSpec = .cellClass(height: { _ in 5 })
+    // providing a specific view that will render the action sheet header. We calculate its height according the text that should be displayed.
+    headerSpec = .cellClass(height: { [weak self] (headerData: String) in
+        guard let me = self else { return 0 }
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: me.view.frame.width - 40, height: CGFloat.greatestFiniteMagnitude))
+        label.numberOfLines = 0
+        label.font = .systemFontOfSize(17.0)
+        label.text = headerData
+        label.sizeToFit()
+        return label.frame.size.height + 20
+    })
+
+    // once we specify the views, we have to provide three blocks that will be used to set up these views.
+    // block used to setup the header. Header view and the header are passed as block parameters
+    onConfigureHeader = { [weak self] header, headerData in
+        guard let me = self else { return }
+        header.label.frame = CGRect(x: 0, y: 0, width: me.view.frame.size.width - 40, height: CGFloat.greatestFiniteMagnitude)
+        header.label.text = headerData
+        header.label.sizeToFit()
+        header.label.center = CGPoint(x: header.frame.size.width  / 2, y: header.frame.size.height / 2)
+    }
+    // block used to setup the section header
+    onConfigureSectionHeader = { sectionHeader, sectionHeaderData in
+        sectionHeader.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
+    }
+    // block used to setup the collection view cell
+    onConfigureCellForAction = { [weak self] cell, action, indexPath in
+        cell.setup(action.data, detail: nil, image: nil)
+        cell.separatorView?.isHidden = indexPath.item == self!.collectionView.numberOfItems(inSection: indexPath.section) - 1
+        cell.alpha = action.enabled ? 1.0 : 0.5
+        cell.actionTitleLabel?.textColor = action.style == .destructive ? UIColor(red: 210/255.0, green: 77/255.0, blue: 56/255.0, alpha: 1.0) : UIColor(red: 0.28, green: 0.64, blue: 0.76, alpha: 1.0)
+    }
+}
+</code></pre>
+<p>}
+```</p>
+<p>ActionController type declaration:
+<code>swift
+public class ActionController&lt;ActionViewType: UICollectionViewCell, ActionDataType, HeaderViewType: UICollectionReusableView, HeaderDataType, SectionHeaderViewType: UICollectionReusableView, SectionHeaderDataType&gt;</code></p>
+<p>When extending ActionController we must specify the following view types ActionViewType, HeaderViewType, SectionHeaderViewType. These types are the cell type used to render an action, the view used to render the action sheet header and the view used to render the section header.</p>
+<p>Each view type has its associated data: ActionDataType, HeaderDataType, SectionHeaderDataType respectively.</p>
+<blockquote>
+<p>If your custom action sheet doesn't have a header view we can use <code>UICollectionReusableView</code> as <code>HeaderViewType</code> and <code>Void</code> as <code>HeaderDataType</code>.
+If it doesn't have a section header view you can use <code>UICollectionReusableView</code> as <code>SectionHeaderViewType</code> and <code>Void</code> as <code>SectionHeaderDataType</code>.</p>
+</blockquote>
+<p>The code below shows how we specify these types for the action controllers provided in the example project:
+<code>swift
+class PeriscopeActionController: ActionController&lt;PeriscopeCell, String, PeriscopeHeader, String, UICollectionReusableView, Void&gt; { ... } // doesn't need to show a section header
+class SpotifyActionController: ActionController&lt;SpotifyCell, ActionData, SpotifyHeaderView, SpotifyHeaderData, UICollectionReusableView, Void&gt; { ... } // doesn't need to show a section header
+class TwitterActionController: ActionController&lt;TwitterCell, ActionData, TwitterActionControllerHeader, String, UICollectionReusableView, Void&gt; { ... } // doesn't need to show a section header
+class YoutubeActionController: ActionController&lt;YoutubeCell, ActionData, UICollectionReusableView, Void, UICollectionReusableView, Void&gt;</code></p>
+<h3>Tweaking default style and animation parameters</h3>
+<p>By following the previous section steps you should already be able to play with your custom action controller.
+It happens quite often that we need some other customization such as zooming out the presenting view, changing the status bar color or customizing the default present and dismiss animation.</p>
+<p><code>ActionController</code> class defines the <code>settings</code> property of type <code>ActionSheetControllerSettings</code> to tweak all these.</p>
+<h4>UICollectionView's behavior</h4>
+<p><code>swift
+// Indicates if the action controller must be dismissed when the user taps the background view. `true` by default.
+settings.behavior.hideOnTap: Bool
+// Indicates if the action controller must be dismissed when the user scrolls down the collection view. `true` by default.
+settings.behavior.hideOnScrollDown: Bool
+// Indicates if the collectionView's scroll is enabled. `false` by default.
+settings.behavior.scrollEnabled: Bool
+// Controls whether the collection view scroll bounces past the edge of content and back again. `false` by default.
+settings.behavior.bounces: Bool
+// Indicates if the collection view layout will use UIDynamics to animate its items. `false` by default.
+settings.behavior.useDynamics: Bool
+// Determines whether the navigation bar is hidden when action controller is being presented. `true` by default
+settings.hideCollectionViewBehindCancelView: Bool</code></p>
+<h4>UICollectionView Style</h4>
+<p><code>swift
+// Margins between the collection view and the container view's margins. `0` by default
+settings.collectionView.lateralMargin: CGFloat
+// Cells height when UIDynamics is used to animate items. `50` by default.
+settings.collectionView.cellHeightWhenDynamicsIsUsed: CGFloat</code></p>
+<h4>Animation settings</h4>
+<p>Struct that contains all properties related to presentation &amp; dismissal animations</p>
+<p><code>swift
+// Used to scale the presenting view controller when the action controller is being presented. If `nil` is set, then the presenting view controller won't be scaled. `(0.9, 0.9)` by default.
+settings.animation.scale: CGSize? = CGSize(width: 0.9, height: 0.9)</code></p>
+<h4>Present animation settings</h4>
+<p><code>swift
+// damping value for the animation block. `1.0` by default.
+settings.animation.present.damping: CGFloat
+// delay for the animation block. `0.0` by default.
+settings.animation.present.delay: TimeInterval
+// Indicates the animation duration. `0.7` by default.
+settings.animation.present.duration: TimeInterval
+// Used as `springVelocity` for the animation block. `0.0` by default.
+settings.animation.present.springVelocity: CGFloat
+// Present animation options. `UIViewAnimationOptions.curveEaseOut` by default.
+settings.animation.present.options: UIViewAnimationOptions</code></p>
+<h4>Dismiss animation settings</h4>
+<p><code>swift
+// damping value for the animation block. `1.0` by default.
+settings.animation.dismiss.damping: CGFloat
+// Used as delay for the animation block. `0.0` by default.
+settings.animation.dismiss.delay: TimeInterval
+// animation duration. `0.7` by default.
+settings.animation.dismiss.duration: TimeInterval
+// springVelocity for the animation block. `0.0` by default
+settings.animation.dismiss.springVelocity: CGFloat
+// dismiss animation options. `UIViewAnimationOptions.curveEaseIn` by default
+settings.animation.dismiss.options: UIViewAnimationOptions</code></p>
+<h4>StatusBar Style</h4>
+<p><code>swift
+// Indicates if the status bar should be visible or hidden when the action controller is visible. Its default value is `true`
+settings.statusBar.showStatusBar: Bool
+// Determines the style of the device’s status bar when the action controller is visible. `UIStatusBarStyle.LightContent` by default.
+settings.statusBar.style: UIStatusBarStyle
+// Determines whether the action controller takes over control of status bar appearance from the presenting view controller. `true` by default.
+settings.statusBar.modalPresentationCapturesStatusBarAppearance: Bool</code></p>
+<h4>Cancel view style</h4>
+<p>Sometimes we need to show a cancel view below the collection view. This is the case of the <code>SpotifyActionController</code>.
+These properties have nothing to do with the actions added to an action Controller nor with the actions with .Cancel as style value.</p>
+<p><code>swift
+ // Indicates if the cancel view is shown. `false` by default.
+settings.cancelView.showCancel: Bool
+ // Cancel view's title. "Cancel" by default.
+settings.cancelView.title: String?
+ // Cancel view's height. `60` by default.
+settings.cancelView.height: CGFloat
+ // Cancel view's background color. `UIColor.black.withAlphaComponent(0.8)` by default.
+settings.cancelView.backgroundColor: UIColor
+// Indicates if the collection view is partially hidden by the cancelView when it is pulled down.
+settings.cancelView.hideCollectionViewBehindCancelView: Bool</code></p>
+<h3>Advanced animations</h3>
+<p>If tweaking previous settings is not enough to make the animations work like you want, XLActionController allows you to change the present/dismiss animation by overriding some functions.</p>
+<h4>Presentation</h4>
+<p><code>swift
+open func presentView(_ presentedView: UIView, presentingView: UIView, animationDuration: Double, completion: ((_ completed: Bool) -&gt; Void)?)</code>
+The function above is responsible for making the present animation. It encapsulates how the presentation is performed and invokes <code>onWillPresentView</code>, <code>performCustomPresentationAnimation</code> and <code>onDidPresentView</code> to allow you to change a specific point of the animation.</p>
+<blockquote>
+<p>Typically we don't need to override <code>presentView</code> function because overriding either <code>onWillPresentView</code>, <code>performCustomPresentationAnimation</code> or <code>onDidPresentView</code> is enough.</p>
+</blockquote>
+<p><code>swift
+open func onWillPresentView()</code>
+<code>onWillPresentView</code> is called before the animation block starts. Any change here won't be animated. It's intended to set the initial animated properties values.</p>
+<p><code>swift
+open func performCustomPresentationAnimation(_ presentedView: UIView, presentingView: UIView)</code>
+<code>performCustomPresentationAnimation</code> is called from within the main animation block.</p>
+<p><code>swift
+open func onDidPresentView()</code>
+After the present animation is completed, <code>presentView</code> calls <code>onDidPresentView</code> from within completion callback.</p>
+<blockquote>
+<p><code>onWillPresentView</code>, <code>performCustomPresentationAnimation</code>, <code>onDidPresentView</code> won't be invoked if you override <code>presentView</code> implementation.</p>
+</blockquote>
+<h4>Dismissal</h4>
+<p>Dismissal animation can be customized in the same way as presentation animation.</p>
+<p><code>swift
+open func dismissView(_ presentedView: UIView, presentingView: UIView, animationDuration: Double, completion: ((_ completed: Bool) -&gt; Void)?)</code></p>
+<p>The function above is responsible for making the dismissal animation. It encapsulates how the dismissal animation is performed and invokes <code>onWillDismissView</code>, <code>performCustomDismissingAnimation</code> and <code>onDidDismissView</code> to allow you to change an specific point of the animation.</p>
+<blockquote>
+<p>Typically we don't need to override <code>dismissView</code> method because overriding either onWillDismissView<code>,</code>performCustomDismissingAnimation<code>or</code>onDidDismissView` is enough.</p>
+</blockquote>
+<p><code>swift
+open func onWillDismissView()</code>
+Overrides <code>onWillDismissView</code> to perform any set up before the animation begins.</p>
+<p><code>swift
+open func performCustomDismissingAnimation(_ presentedView: UIView, presentingView: UIView)</code>
+<code>performCustomDismissingAnimation</code> function is invoked from within the main animation block.</p>
+<p><code>swift
+open func onDidDismissView()</code>
+After the dismissal animation completes, <code>dismissView</code> calls <code>onDidDismissView</code> from within completion callback.</p>
+<blockquote>
+<p><code>onWillDismissView</code>, <code>performCustomDismissingAnimation</code>, <code>onDidDismissView</code> won't be invoked if you override <code>dismissView</code> implementation.</p>
+</blockquote>
+<p><strong>To show how simple and powerful XLActionController is and give several examples of how to extend ActionController we have mimicked the <a href="Example/CustomActionControllers/Skype.swift">Skype</a>, <a href="Example/CustomActionControllers/Tweetbot.swift">Tweetbot</a>, <a href="Example/CustomActionControllers/Twitter.swift">Twitter</a>, <a href="Example/CustomActionControllers/Youtube.swift">Youtube</a>, <a href="Example/CustomActionControllers/Periscope.swift">Periscope</a> and <a href="Example/CustomActionControllers/Spotify.swift">Spotify</a>  action controllers.</strong></p>
+<h2>Requirements</h2>
+<ul>
+<li>iOS 9.0+</li>
+<li>Xcode 9.0+</li>
+<li>Swift 4</li>
+</ul>
+<h2>Getting involved</h2>
+<ul>
+<li>If you <strong>want to contribute</strong> please feel free to <strong>submit pull requests</strong>.</li>
+<li>If you <strong>have a feature request</strong> please <strong>open an issue</strong>.</li>
+<li>If you <strong>found a bug</strong> or <strong>need help</strong> please <strong>check older issues or threads on
+<a href="http://stackoverflow.com/questions/tagged/xlactioncontroller">StackOverflow</a> before submitting an issue</strong>.</li>
+</ul>
+<p>If you use <strong>XLActionController</strong> in your app we would love to hear about it!
+Drop us a line on <a href="https://twitter.com/xmartlabs">twitter</a>.</p>
+<h2>Installation</h2>
+<h3>CocoaPods</h3>
+<p><a href="https://cocoapods.org/">CocoaPods</a> is a dependency manager for Cocoa projects.</p>
+<p>Specify XLActionController into your project's Podfile:</p>
+<p>```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '9.0'
+use_frameworks!</p>
+<p>target '<Your App Target>' do
+  # This will install just the library's core, won't include any examples
+  pod 'XLActionController'</p>
+<p># Uncomment depending on the examples that you want to install
+  #pod 'XLActionController/Periscope'
+  #pod 'XLActionController/Skype'
+  #pod 'XLActionController/Spotify'
+  #pod 'XLActionController/Tweetbot'
+  #pod 'XLActionController/Twitter'
+  #pod 'XLActionController/Youtube'
+end
+```</p>
+<p>Then run the following command:</p>
+<p><code>sh
+$ pod install</code></p>
+<h3>Carthage</h3>
+<p><a href="https://github.com/Carthage/Carthage">Carthage</a> is a simple, decentralized
+dependency manager for Cocoa.</p>
+<p>Specify XLActionController into your project's Carthage:</p>
+<p><code>github "xmartlabs/XLActionController" ~&gt; 4.0</code></p>
+<h3>Manually as Embedded Framework</h3>
+<p>Clone XLActionController as a git <a href="http://git-scm.com/docs/git-submodule">submodule</a> by
+running the following command from your project root git folder.</p>
+<p><code>sh
+$ git submodule add https://github.com/xmartlabs/XLActionController.git</code></p>
+<p>Open XLActionController folder that was created by the previous git submodule
+command and drag the XLActionController.xcodeproj into the Project Navigator
+of your application's Xcode project.</p>
+<p>Select the XLActionController.xcodeproj in the Project Navigator and verify the deployment
+target matches with your application deployment target.</p>
+<p>Select your project in the Xcode Navigation and then select your application
+target from the sidebar. Next select the "General" tab and click on the + button
+under the "Embedded Binaries" section.</p>
+<p>Select XLActionController.framework and we are done!</p>
+<h2>Authors</h2>
+<ul>
+<li><a href="https://www.github.com/m-revetria" title="Miguel Revetria Github">Miguel Revetria</a></li>
+<li><a href="https://www.github.com/mtnBarreto" title="Martin Barreto Github">Martin Barreto</a></li>
+</ul>
+<h2>License</h2>
+<p>XLActionController is released under <a href="https://raw.githubusercontent.com/xmartlabs/XLActionController/master/LICENSE">MIT license</a> and copyrighted by Xmartlabs SRL.</p>

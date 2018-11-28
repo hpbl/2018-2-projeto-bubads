@@ -1,0 +1,128 @@
+<p align="center">
+<img src="https://cdn.jsdelivr.net/gh/marcosgriselli/ViewAnimator@65b0a97b14ad54c63b1f5b1862ad7c58dc5b5568/Resources/banner.svg" height="80"/>
+</p>
+
+<p align="center">
+    <img src="https://img.shields.io/badge/Swift-4.2-orange.svg" />
+        <img src="https://img.shields.io/badge/Platforms-iOS%20%7C%20tvOS-blue.svg?style=flat" />
+        <img src="https://img.shields.io/cocoapods/dt/ViewAnimator.svg?style=flat"/>
+    <a href="https://cocoapods.org/pods/ViewAnimator">
+        <img src="https://img.shields.io/cocoapods/v/ViewAnimator.svg" alt="CocoaPods" />
+    </a>
+    <a href="https://github.com/Carthage/Carthage">
+        <img src="https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat" alt="Carthage" />
+    </a>
+    <a href="https://codebeat.co/projects/github-com-marcosgriselli-viewanimator-master">
+      <img src="https://codebeat.co/badges/633fb33d-66b6-4034-93c0-0f52c5d0e15c" alt="Codebeat" />
+    </a>
+    <a href="https://opensource.org/licenses/MIT">
+      <img src="https://img.shields.io/cocoapods/l/ViewAnimator.svg?style=flat" alt="License" />
+    </a>
+</p>
+
+<p><strong>ViewAnimator</strong> is a library for building complex iOS UIView animations in an easy way. It provides one line animations for any view included the ones which contain other views like UITableView and UICollectionView with its cells or UIStackView with its arrangedSubviews.</p>
+<h3>Entire View&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UITableView&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UICollectionView</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/marcosgriselli/ViewAnimator@cf065e96ac34c924710dd84c718ecd3be179ae37/Resources/entireView.svg"/>&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/marcosgriselli/ViewAnimator@cf065e96ac34c924710dd84c718ecd3be179ae37/Resources/horizontal.svg"/>&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/marcosgriselli/ViewAnimator@cf065e96ac34c924710dd84c718ecd3be179ae37/Resources/vertical.svg"/>&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/marcosgriselli/ViewAnimator@cf065e96ac34c924710dd84c718ecd3be179ae37/Resources/collection.svg"/>&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/marcosgriselli/ViewAnimator@cf065e96ac34c924710dd84c718ecd3be179ae37/Resources/collectionX.svg"/></p>
+<p>SVG animations inspired by <a href="http://lkzhao.com">Luke Zhao's</a> project <a href="https://github.com/lkzhao/Hero/blob/master/README.md">Hero</a></p>
+<h3>Complex Layouts</h3>
+<p><image src="https://cdn.dribbble.com/users/702789/screenshots/3816087/preview-messaki.gif" width="400"/></p>
+<p>UI created by <a href="https://dribbble.com/messaki">Messaki</a>, make sure to check out his profile.</p>
+<h2>Installation</h2>
+<h3>CocoaPods</h3>
+<p>ViewAnimator is available through <a href="http://cocoapods.org">CocoaPods</a>. To install
+it, simply add the following line to your Podfile:</p>
+<p><code>ruby
+pod "ViewAnimator"</code></p>
+<h3>Manual</h3>
+<p>Drop the swift files inside of <a href="https://github.com/marcosgriselli/ViewAnimator/tree/master/ViewAnimator/Classes">ViewAnimator/Classes</a> into your project.</p>
+<h3>Carthage</h3>
+<p><code>github "marcosgriselli/ViewAnimator"</code></p>
+<h2>Usage</h2>
+<p><code>ViewAnimator</code> provides a set of <code>UIView</code> extensions to easily add custom animations to your views. From version <code>2.0.0</code> there are two ways to use this extension. </p>
+<h3>Self animating views</h3>
+<p>Views can animate theirselves calling <code>.animate(animations: [Animation])</code> that's the most basic usage. Here's the full method that contains many default arguments: </p>
+<p><code>swift
+func animate(animations: [Animation],
+             reversed: Bool = false,
+             initialAlpha: CGFloat = 0.0,
+             finalAlpha: CGFloat = 1.0,
+             delay: Double = 0,
+             duration: TimeInterval = ViewAnimatorConfig.duration,
+             completion: (() -&gt; Void)? = nil)</code> </p>
+<h3>Animating multiple views</h3>
+<p>ViewAnimator follows the UIKit animations API style with a static method  <code>UIView.animate(views: [UIView], animations: [Animation])</code>. This makes the library really easy to use and extensible to any kind of view. As the previous example, the method contains a lot of default arguments: </p>
+<p><code>swift
+static func animate(views: [UIView],
+                    animations: [Animation],
+                    reversed: Bool = false,
+                    initialAlpha: CGFloat = 0.0,
+                    finalAlpha: CGFloat = 1.0,
+                    delay: Double = 0,
+                    animationInterval: TimeInterval = 0.05,
+                    duration: TimeInterval = ViewAnimatorConfig.duration,
+                    completion: (() -&gt; Void)? = nil)</code></p>
+<h3>AnimationType</h3>
+<h4>Direction</h4>
+<p><code>Direction</code> provides the axis where the animation should take place and its movement direction.</p>
+<p><code>swift
+let animation = AnimationType.from(direction: .top, offset: 30.0)
+view.animate(animations: [animation])</code></p>
+<h4>Zoom</h4>
+<p>Zoom in and Zoom out animation support.</p>
+<p><code>swift
+let animation = AnimationType.zoom(scale: 0.5)
+view.animate(animations: [animation])</code></p>
+<h3>Combined Animations</h3>
+<p>You can combine conformances of <code>Animation</code> to apply multiple transforms on your animation block. </p>
+<p>```swift 
+let fromAnimation = AnimationType.from(direction: .right, offset: 30.0)
+let zoomAnimation = AnimationType.zoom(scale: 0.2)
+let rotateAnimation = AnimationType.rotate(angle: CGFloat.pi/6)
+UIView.animate(views: collectionView.visibleCells,
+               animations: [zoomAnimation, rotateAnimation],
+               duration: 0.5)
+UIView.animate(views: tableView.visibleCells,
+               animations: [fromAnimation, zoomAnimation], 
+               delay: 0.5)</p>
+<p>```</p>
+<h2>Animation</h2>
+<p><code>Animation</code> protocol provides you the posibility of expanding the animations supported by <code>ViewAnimator</code> with exception of the <code>animateRandom</code> function.</p>
+<p><code>swift 
+public protocol Animation {
+    var initialTransform: CGAffineTransform { get }
+}</code></p>
+<h2>UITableView/UICollection extensions</h2>
+<p>ViewAnimator comes with a set of handy extensions to make your animations in <code>UITableView</code> and <code>UICollectionView</code> a lot simpler. They both have access to cells in a section to animate easily. </p>
+<p>They both expose a method <code>visibleCells(in section: Int)</code> that returns an array of <code>UITableViewCell</code> or <code>UICollectionViewCell</code>.</p>
+<p><code>swift
+let cells = tableView.visibleCells(in: 1)
+UIView.animate(views: cells, animations: [rotateAnimation, fadeAnimation])</code> </p>
+<h2>Mentions</h2>
+<ul>
+<li><a href="http://iosdevweekly.com/issues/323#start">iOS Dev Weekly 323</a></li>
+<li><a href="https://swiftnews.curated.co/issues/147#start">Natasha The Robot's Newsleter 147</a></li>
+<li><a href="https://medium.mybridge.co/swift-top-10-articles-for-the-past-month-v-oct-2017-4e0f1bd031e8">Top 10 Swift Articles October</a></li>
+<li><a href="https://medium.mybridge.co/30-amazing-ios-swift-libraries-for-the-past-year-v-2018-7cf15027eee9">30 Amazing iOS Swift Libraries (v2018)</a></li>
+</ul>
+<h2>Project Details</h2>
+<h3>Requirements</h3>
+<ul>
+<li>Swift 4.0</li>
+<li>Xcode 7.0+</li>
+<li>iOS 8.0+</li>
+</ul>
+<h3>Contributing</h3>
+<p>Feel free to collaborate with ideas 💭, issues ⁉️ and/or pull requests 🔃.</p>
+<p>If you use ViewAnimator in your app I'd love to hear about it and feature your animation here!</p>
+<h3>Contributors</h3>
+<p><a href="https://sourcerer.io/fame/marcosgriselli/marcosgriselli/ViewAnimator/links/0"><img alt="" src="https://sourcerer.io/fame/marcosgriselli/marcosgriselli/ViewAnimator/images/0" /></a><a href="https://sourcerer.io/fame/marcosgriselli/marcosgriselli/ViewAnimator/links/1"><img alt="" src="https://sourcerer.io/fame/marcosgriselli/marcosgriselli/ViewAnimator/images/1" /></a><a href="https://sourcerer.io/fame/marcosgriselli/marcosgriselli/ViewAnimator/links/2"><img alt="" src="https://sourcerer.io/fame/marcosgriselli/marcosgriselli/ViewAnimator/images/2" /></a><a href="https://sourcerer.io/fame/marcosgriselli/marcosgriselli/ViewAnimator/links/3"><img alt="" src="https://sourcerer.io/fame/marcosgriselli/marcosgriselli/ViewAnimator/images/3" /></a><a href="https://sourcerer.io/fame/marcosgriselli/marcosgriselli/ViewAnimator/links/4"><img alt="" src="https://sourcerer.io/fame/marcosgriselli/marcosgriselli/ViewAnimator/images/4" /></a><a href="https://sourcerer.io/fame/marcosgriselli/marcosgriselli/ViewAnimator/links/5"><img alt="" src="https://sourcerer.io/fame/marcosgriselli/marcosgriselli/ViewAnimator/images/5" /></a><a href="https://sourcerer.io/fame/marcosgriselli/marcosgriselli/ViewAnimator/links/6"><img alt="" src="https://sourcerer.io/fame/marcosgriselli/marcosgriselli/ViewAnimator/images/6" /></a><a href="https://sourcerer.io/fame/marcosgriselli/marcosgriselli/ViewAnimator/links/7"><img alt="" src="https://sourcerer.io/fame/marcosgriselli/marcosgriselli/ViewAnimator/images/7" /></a></p>
+<h3>Author</h3>
+<p>Marcos Griselli | <a href="url"><img src="https://cdn.jsdelivr.net/gh/marcosgriselli/ViewAnimator@cf065e96ac34c924710dd84c718ecd3be179ae37/Resources/twitterLogo.svg" height="17"></a> <a href="https://twitter.com/marcosgriselli">@marcosgriselli</a></p>
+<p><a href="https://twitter.com/marcosgriselli"><img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/marcosgriselli.svg?style=social" /></a></p>
+<p><a href="https://github.com/marcosgriselli"><img alt="Twitter Follow" src="https://img.shields.io/github/followers/marcosgriselli.svg?style=social&amp;label=Follow" /></a></p>
+<h3>License</h3>
+<p>ViewAnimator is available under the MIT license. See the <a href="https://github.com/marcosgriselli/ViewAnimator/blob/master/LICENSE">LICENSE</a> file for more info.</p>

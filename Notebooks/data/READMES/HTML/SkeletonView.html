@@ -1,0 +1,362 @@
+<p><img alt="" src="Assets/header2.jpg" /></p>
+<p align="center">
+    <a href="https://travis-ci.org/Juanpe/SkeletonView">
+      <img src="https://img.shields.io/travis/Juanpe/SkeletonView.svg">
+    </a>
+    <a href="https://instagram.github.io/IGListKit/">
+        <img src="https://img.shields.io/cocoapods/p/SkeletonView.svg" alt="Platforms">
+    </a>
+    <img src="https://img.shields.io/badge/Swift-4.2-orange.svg" />
+    <a href="https://cocoapods.org/pods/SkeletonView">
+        <img src="https://img.shields.io/cocoapods/v/SkeletonView.svg" alt="CocoaPods" />
+    </a>
+    <a href="https://github.com/Carthage/Carthage">
+        <img src="https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat" alt="Carthage" />
+    </a>
+    <a href="https://cocoapods.org/pods/SkeletonView">
+        <img src="https://img.shields.io/cocoapods/dt/SkeletonView.svg?style=flat" alt="CocoaPods downloads" />
+    </a>
+    <a href="https://twitter.com/JuanpeCatalan">
+        <img src="https://img.shields.io/badge/contact-@JuanpeCatalan-blue.svg?style=flat" alt="Twitter: @JuanpeCatalan" />
+    </a>
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=MJ4Y2D9DEX6FL&lc=ES&item_name=SkeletonView&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted">
+        <img src="https://img.shields.io/badge/Donate-PayPal-green.svg" alt="Paypal" />
+    </a>
+    <a href="https://twitter.com/intent/tweet?text=Wow%20This%20library%20is%20awesome:&url=https%3A%2F%2Fgithub.com%2FJuanpe%2FSkeletonView">
+      <img src="https://img.shields.io/twitter/url/https/github.com/Juanpe/SkeletonView.svg?style=social" alt="License" />
+    </a>
+    <a href="https://twitter.com/JuanpeCatalan">
+      <img src="https://img.shields.io/twitter/follow/JuanpeCatalan.svg?style=social&label=Follow" alt="Twitter" />
+    </a>
+</p>
+
+<p>🌎  Translations: </br>
+<a href="https://github.com/Juanpe/SkeletonView/blob/master/README_zh.md">🇨🇳</a> by <a href="https://twitter.com/WhatsXie">@WhatsXie</a> </br>
+<a href="https://github.com/Juanpe/SkeletonView/blob/master/README_pt-br.md">🇧🇷</a> by <a href="https://twitter.com/brunomuniz_af">@brunomunizaf</a></p>
+<p>Today almost all apps have async processes, such as Api requests, long running processes, etc. And while the processes are working, usually developers place a loading view to show users that something is going on.</p>
+<p><code>SkeletonView</code> has been conceived to address this need, an elegant way to show users that something is happening and also prepare them to which contents he is waiting.</p>
+<p>Enjoy it! 🙂</p>
+<ul>
+<li><a href="#-features">Features</a></li>
+<li><a href="#-supported-os--sdk-versions">Requirements</a></li>
+<li><a href="#-guides">Guides</a></li>
+<li><a href="#-example">Example Project</a></li>
+<li><a href="#-installation">Installation</a></li>
+<li><a href="#using-cocoapods">Cocoapods</a></li>
+<li><a href="#using-carthage">Carthage</a></li>
+<li><a href="#-how-to-use">How to use</a></li>
+<li><a href="#-collections">Collections</a></li>
+<li><a href="#-multiline-text">Multiline text</a></li>
+<li><a href="#-custom-colors">Custom colors</a></li>
+<li><a href="#-appearance">Appearance</a></li>
+<li><a href="#-custom-animations">Custom animations</a></li>
+<li><a href="#-hierarchy">Hierarchy</a></li>
+<li><a href="#-debug">Debug</a></li>
+<li><a href="#-documentation">Documentation</a></li>
+<li><a href="#-next-steps">Next steps</a></li>
+<li><a href="#-contributing">Contributing</a></li>
+<li><a href="#-mentions">Mentions</a></li>
+<li><a href="#-author">Author</a></li>
+<li><a href="#-license">License</a></li>
+</ul>
+<h2>🌟 Features</h2>
+<ul>
+<li>[x] Easy to use</li>
+<li>[x] All UIViews are skeletonables</li>
+<li>[x] Fully customizable</li>
+<li>[x] Universal (iPhone &amp; iPad)</li>
+<li>[x] Interface Builder friendly</li>
+<li>[x] Simple Swift syntax</li>
+<li>[x] Lightweight readable codebase</li>
+</ul>
+<h3>📋 Supported OS &amp; SDK Versions</h3>
+<ul>
+<li>iOS 9.0+</li>
+<li>tvOS 9.0+</li>
+<li>Swift 4.2</li>
+</ul>
+<h3>🎬 Guides</h3>
+<p><a href="https://youtu.be/75kgOhWsPNA"><img src="Assets/thumb_getting_started.png"></a></p>
+<h3>🔮 Example</h3>
+<p>To run the example project, clone the repo and run <code>SkeletonViewExample</code> target.</p>
+<h2>📲 Installation</h2>
+<h4>Using <a href="https://cocoapods.org">CocoaPods</a></h4>
+<p>Edit your <code>Podfile</code> and specify the dependency:</p>
+<p><code>ruby
+pod "SkeletonView"</code></p>
+<h4>Using <a href="https://github.com/carthage">Carthage</a></h4>
+<p>Edit your <code>Cartfile</code> and specify the dependency:</p>
+<p><code>bash
+github "Juanpe/SkeletonView"</code></p>
+<h2>🐒 How to use</h2>
+<p>Only <strong>3</strong> steps needed to use <code>SkeletonView</code>:</p>
+<p><strong>1.</strong> Import SkeletonView in proper place.
+<code>swift
+import SkeletonView</code></p>
+<p><strong>2.</strong> Now, set which views will be <code>skeletonables</code>. You achieve this in two ways:</p>
+<p><strong>Using code:</strong>
+<code>swift
+avatarImageView.isSkeletonable = true</code>
+<strong>Using IB/Storyboards:</strong></p>
+<p><img alt="" src="Assets/storyboard.png" /></p>
+<p><strong>3.</strong> Once you've set the views, you can show the <strong>skeleton</strong>. To do so, you have <strong>4</strong> choices:</p>
+<p><code>swift
+(1) view.showSkeleton()                 // Solid
+(2) view.showGradientSkeleton()         // Gradient
+(3) view.showAnimatedSkeleton()         // Solid animated
+(4) view.showAnimatedGradientSkeleton() // Gradient animated</code></p>
+<p><strong>Preview</strong></p>
+<table>
+<tr>
+<td width="25%">
+<center>Solid</center>
+</td>
+<td width="25%">
+<center>Gradient</center>
+</td>
+<td width="25%">
+<center>Solid Animated</center>
+</td>
+<td width="25%">
+<center>Gradient Animated</center>
+</td>
+</tr>
+<tr>
+<td width="25%">
+<img src="Assets/solid.png"></img>
+</td>
+<td width="25%">
+<img src="Assets/gradient.png"></img>
+</td>
+<td width="25%">
+<img src="Assets/solid_animated.gif"></img>
+</td>
+<td width="25%">
+<img src="Assets/gradient_animated.gif"></img>
+</td>
+</tr>
+</table>
+
+<blockquote>
+<p><strong>IMPORTANT!</strong></p>
+<blockquote>
+<p><code>SkeletonView</code> is recursive, so if you want show the skeleton in all skeletonable views, you only need to call the show method in the main container view. For example, with UIViewControllers</p>
+</blockquote>
+</blockquote>
+<h3>🌿 Collections</h3>
+<p>Now, <code>SkeletonView</code> is compatible with <code>UITableView</code> and <code>UICollectionView</code>.</p>
+<h6>UITableView</h6>
+<p>If you want to show the skeleton in a <code>UITableView</code>, you need to conform to <code>SkeletonTableViewDataSource</code> protocol.</p>
+<p><code>swift
+public protocol SkeletonTableViewDataSource: UITableViewDataSource {
+    func numSections(in collectionSkeletonView: UITableView) -&gt; Int
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -&gt; Int
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -&gt; ReusableCellIdentifier
+}</code>
+As you can see, this protocol inherits from <code>UITableViewDataSource</code>, so you can replace this protocol with the skeleton protocol.</p>
+<p>This protocol has a default implementation:</p>
+<p><code>swift
+func numSections(in collectionSkeletonView: UITableView) -&gt; Int
+// Default: 1</code></p>
+<p><code>swift
+func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -&gt; Int
+// Default:
+// It calculates how many cells need to populate whole tableview</code></p>
+<p>There is only one method you need to implement to let Skeleton know the cell identifier. This method doesn't have default implementation:
+ <code>swift
+ func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -&gt; ReusableCellIdentifier</code></p>
+<p><strong>Example</strong>
+ <code>swift
+ func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -&gt; ReusableCellIdentifier {
+    return "CellIdentifier"
+}</code></p>
+<blockquote>
+<p><strong>IMPORTANT!</strong>
+If you are using resizable cells (<code>tableView.rowHeight = UITableViewAutomaticDimension</code> ), it's mandatory define the <code>estimatedRowHeight</code>.</p>
+</blockquote>
+<h6>UICollectionView</h6>
+<p>For <code>UICollectionView</code>, you need to conform to <code>SkeletonCollectionViewDataSource</code> protocol.</p>
+<p><code>swift
+public protocol SkeletonCollectionViewDataSource: UICollectionViewDataSource {
+    func numSections(in collectionSkeletonView: UICollectionView) -&gt; Int
+    func collectionSkeletonView(_ skeletonView: UICollectionView, numberOfItemsInSection section: Int) -&gt; Int
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -&gt; ReusableCellIdentifier
+}</code></p>
+<p>The rest of the process is the same as <code>UITableView</code></p>
+<h3>📰 Multiline text</h3>
+<p><img alt="" src="Assets/multilines2.png" /></p>
+<p>When using elements with text, <code>SkeletonView</code> draws lines to simulate text.
+Besides, you can decide how many lines you want. If  <code>numberOfLines</code> is set to zero, it will calculate how many lines needed to populate the whole skeleton and it will be drawn. Instead, if you set it to one, two or any number greater than zero, it will only draw this number of lines.</p>
+<h5>🎛 Customize</h5>
+<p>You can set some properties for multilines elements.</p>
+<p>| Property | Values | Default | Preview
+| ------- | ------- |------- | -------
+| <strong>Filling percent</strong> of the last line. | <code>0...100</code> | <code>70%</code> | <img alt="" src="Assets/multiline_lastline.png" />
+| <strong>Corner radius</strong> of lines. (<strong>NEW</strong>) | <code>0...10</code> | <code>0</code> | <img alt="" src="Assets/multiline_corner.png" /></p>
+<p>To modify the percent or radius <strong>using code</strong>, set the properties:
+<code>swift
+descriptionTextView.lastLineFillPercent = 50
+descriptionTextView.linesCornerRadius = 5</code></p>
+<p>Or, if you prefer use <strong>IB/Storyboard</strong>:</p>
+<p><img alt="" src="Assets/multiline_customize.png" /></p>
+<h3>🎨 Custom colors</h3>
+<p>You can decide which color the skeleton is tinted with. You only need to pass as a parameter the color or gradient you want.</p>
+<p><strong>Using solid colors</strong>
+<code>swift
+view.showSkeleton(usingColor: UIColor.gray) // Solid
+// or
+view.showSkeleton(usingColor: UIColor(red: 25.0, green: 30.0, blue: 255.0, alpha: 1.0))</code>
+<strong>Using gradients</strong>
+<code>swift
+let gradient = SkeletonGradient(baseColor: UIColor.midnightBlue)
+view.showGradientSkeleton(usingGradient: gradient) // Gradient</code></p>
+<p>Besides, <code>SkeletonView</code> features 20 flat colors 🤙🏼</p>
+<p><code>UIColor.turquoise, UIColor.greenSea, UIColor.sunFlower, UIColor.flatOrange  ...</code></p>
+<p><img alt="" src="Assets/flatcolors.png" /></p>
+<h6>Image captured from website <a href="https://flatuicolors.com">https://flatuicolors.com</a></h6>
+<h3>🦋 Appearance</h3>
+<p><strong>NEW</strong> The skeletons have a default appearance. So, when you don't specify the color, gradient or multilines properties, <code>SkeletonView</code> uses the default values.</p>
+<p>Default values:
+- <strong>tintColor</strong>: UIColor
+    - <em>default: .clouds</em>
+- <strong>gradient</strong>: SkeletonGradient
+  - <em>default: SkeletonGradient(baseColor: .clouds)</em>
+- <strong>multilineHeight</strong>: CGFloat
+  - <em>default: 15</em>
+- <strong>multilineSpacing</strong>: CGFloat
+  - <em>default: 10</em>
+- <strong>multilineLastLineFillPercent</strong>: Int
+  - <em>default: 70</em>
+- <strong>multilineCornerRadius</strong>: Int
+  - <em>default: 0</em></p>
+<p>To get these default values you can use <code>SkeletonAppearance.default</code>. Using this property you can set the values as well:
+<code>Swift
+SkeletonAppearance.default.multilineHeight = 20
+SkeletonAppearance.default.tintColor = .green</code></p>
+<h3>🤓 Custom animations</h3>
+<p><code>SkeletonView</code> has two built-in animations, <em>pulse</em> for solid skeletons and <em>sliding</em> for gradients.</p>
+<p>Besides, if you want to do your own skeleton animation, it's really easy.</p>
+<p>Skeleton provides the <code>showAnimatedSkeleton</code> function which has a <code>SkeletonLayerAnimation</code> closure where you can define your custom animation.</p>
+<p><code>swift
+public typealias SkeletonLayerAnimation = (CALayer) -&gt; CAAnimation</code></p>
+<p>You can call the function like this:</p>
+<p>```swift
+view.showAnimatedSkeleton { (layer) -&gt; CAAnimation in
+  let animation = CAAnimation()
+  // Customize here your animation</p>
+<p>return animation
+}
+```</p>
+<p>It's available <code>SkeletonAnimationBuilder</code>. It's a builder to make <code>SkeletonLayerAnimation</code>.</p>
+<p>Today, you can create <strong>sliding animations</strong> for gradients, deciding the <strong>direction</strong> and setting the <strong>duration</strong> of the animation (default = 1.5s).</p>
+<p>```swift
+// func makeSlidingAnimation(withDirection direction: GradientDirection, duration: CFTimeInterval = 1.5) -&gt; SkeletonLayerAnimation</p>
+<p>let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftToRight)
+view.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)</p>
+<p>```</p>
+<p><code>GradientDirection</code> is an enum, with this cases:</p>
+<p>|  Direction | Preview
+|------- | -------
+| .leftRight | <img alt="" src="Assets/sliding_left_to_right.gif" />
+| .rightLeft | <img alt="" src="Assets/sliding_right_to_left.gif" />
+| .topBottom | <img alt="" src="Assets/sliding_top_to_bottom.gif" />
+| .bottomTop | <img alt="" src="Assets/sliding_bottom_to_top.gif" />
+| .topLeftBottomRight | <img alt="" src="Assets/sliding_topLeft_to_bottomRight.gif" />
+| .bottomRightTopLeft | <img alt="" src="Assets/sliding_bottomRight_to_topLeft.gif" /></p>
+<blockquote>
+<p><strong>😉 TRICK!</strong>
+Exist another way to create sliding animations, just using this shortcut:</p>
+<blockquote>
+<p><code>let animation = GradientDirection.leftToRight.slidingAnimation()</code></p>
+</blockquote>
+</blockquote>
+<h3>👨‍👧‍👦 Hierarchy</h3>
+<p>Since <code>SkeletonView</code> is recursive, and we want skeleton to be very efficient, we want to stop recursion as soon as possible. For this reason, you must set the container view as <code>Skeletonable</code>, because Skeleton will stop looking for <code>skeletonable</code> subviews as soon as a view is not Skeletonable, breaking then the recursion.</p>
+<p>Because an image is worth a thousand words:</p>
+<blockquote>
+<p><code>ìsSkeletonable</code>= ☠️</p>
+</blockquote>
+<p>| Configuration | Result
+|------- | -------
+|<img alt="" src="Assets/no_skeletonable.png" /> | <img alt="" src="Assets/no_skeletonables_result.png" />
+|<img alt="" src="Assets/container_no_skeletonable.png" /> | <img alt="" src="Assets/no_skeletonables_result.png" />
+|<img alt="" src="Assets/container_skeletonable.png" /> | <img alt="" src="Assets/container_skeletonable_result.png" />
+|<img alt="" src="Assets/all_skeletonables.png" /> | <img alt="" src="Assets/all_skeletonables_result.png" /></p>
+<h3>🔬 Debug</h3>
+<p><strong>NEW</strong> In order to facilitate the debug tasks when something is not working fine. <code>SkeletonView</code> has some new tools.</p>
+<p>First, <code>UIView</code> has available a new property with his skeleton info:
+```swift
+var skeletonDescription: String</p>
+<p>```
+The skeleton representation looks like this:</p>
+<p><img alt="" src="Assets/debug_description.png" /></p>
+<p>Besides, you can activate the new <strong>debug mode</strong>. You just add the environment variable <code>SKELETON_DEBUG</code> and activate it.</p>
+<p><img alt="" src="Assets/debug_mode.png" /></p>
+<p>Then, when the skeleton appears, you can see the view hierarchy in the Xcode console.</p>
+<details>
+<summary>Open to see an output example </summary>
+<img src="Assets/hierarchy_output.png" />
+</details>
+
+<h3>📚 Documentation</h3>
+<p>Coming soon...😅</p>
+<h2>📬 Next steps</h2>
+<ul>
+<li>[x] Set the filling percent of the last line in multiline elements</li>
+<li>[x] Add more gradient animations</li>
+<li>[x] Supported resizable cells</li>
+<li>[x] CollectionView compatible</li>
+<li>[x] tvOS compatible</li>
+<li>[x] Add recovery state</li>
+<li>[x] Custom default appearance</li>
+<li>[x] Debug mode</li>
+<li>[ ] Custom collections compatible</li>
+<li>[ ] Add animations when it shows/hides the skeletons</li>
+<li>[ ] MacOS and WatchOS compatible</li>
+</ul>
+<h2>❤️ Contributing</h2>
+<p>This is an open source project, so feel free to contribute. How?
+- Open an <a href="https://github.com/Juanpe/SkeletonView/issues/new">issue</a>.
+- Send feedback via <a href="mailto://juanpecatalan.com">email</a>.
+- Propose your own fixes, suggestions and open a pull request with the changes.</p>
+<p>See <a href="https://github.com/Juanpe/SkeletonView/graphs/contributors">all contributors</a></p>
+<h6>Project generated with <a href="https://github.com/JohnSundell/SwiftPlate">SwiftPlate</a></h6>
+<h2>📢 Mentions</h2>
+<ul>
+<li><a href="https://iosdevweekly.com/issues/327#start">iOS Dev Weekly #327</a></li>
+<li><a href="https://www.hackingwithswift.com/articles/40/skeletonview-makes-loading-content-beautiful">Hacking with Swift Articles</a></li>
+<li><a href="https://medium.mybridge.co/swift-top-10-articles-for-the-past-month-v-nov-2017-dfed7861cd65">Top 10 Swift Articles November</a></li>
+<li><a href="https://medium.mybridge.co/30-amazing-ios-swift-libraries-for-the-past-year-v-2018-7cf15027eee9">30 Amazing iOS Swift Libraries (v2018)</a></li>
+<li><a href="http://digest.appcoda.com/issues/appcoda-weekly-issue-44-81899">AppCoda Weekly #44</a></li>
+<li><a href="https://us11.campaign-archive.com/?u=cd1f3ed33c6527331d82107ba&amp;id=48131a516d">iOS Cookies Newsletter #103</a></li>
+<li><a href="https://andybargh.com/swiftdevelopments-113/">Swift Developments Newsletter #113</a></li>
+<li><a href="http://ios-goodies.com/post/167557280951/week-204">iOS Goodies #204</a></li>
+<li><a href="http://digest.swiftweekly.com/issues/swift-weekly-issue-96-81759">Swift Weekly #96</a></li>
+<li><a href="https://www.cocoacontrols.com/controls/skeletonview">CocoaControls</a></li>
+<li><a href="https://ios.libhunt.com/newsletter/74">Awesome iOS Newsletter #74</a></li>
+</ul>
+<h2>👨🏻‍💻 Author</h2>
+<ul>
+<li>Juanpe Catalán <a href="http://www.twitter.com/JuanpeCatalan"><img alt="alt text" src="http://i.imgur.com/tXSoThF.png" /></a></li>
+</ul>
+<p><a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/CDou4xtIK"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy me a coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;"><span style="margin-left:5px"></span></a></p>
+<h2>👮🏻 License</h2>
+<p>```
+MIT License</p>
+<p>Copyright (c) 2017 Juanpe Catalán</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```</p>

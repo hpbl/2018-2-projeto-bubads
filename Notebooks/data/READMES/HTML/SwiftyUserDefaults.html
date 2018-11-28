@@ -1,0 +1,241 @@
+<h1>SwiftyUserDefaults</h1>
+<p><img alt="Platforms" src="https://img.shields.io/badge/platforms-ios%20%7C%20osx%20%7C%20watchos%20%7C%20tvos-lightgrey.svg" />
+<a href="https://travis-ci.org/radex/SwiftyUserDefaults"><img alt="CI Status" src="https://api.travis-ci.org/radex/SwiftyUserDefaults.svg?branch=master" /></a>
+<a href="https://cocoapods.org/pods/SwiftyUserDefaults"><img alt="CocoaPods" src="http://img.shields.io/cocoapods/v/SwiftyUserDefaults.svg" /></a>
+<a href="#carthage"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a>
+<img alt="Swift version" src="https://img.shields.io/badge/swift-4.1-orange.svg" /></p>
+<h4>Modern Swift API for <code>NSUserDefaults</code></h4>
+<h6>SwiftyUserDefaults makes user defaults enjoyable to use by combining expressive Swifty API with the benefits of static typing. Define your keys in one place, use value types easily, and get extra safety and convenient compile-time checks for free.</h6>
+<p>Read <a href="http://radex.io/swift/nsuserdefaults/static">Statically-typed NSUserDefaults</a> for more information about this project.<br />
+Read <a href="https://github.com/radex/SwiftyUserDefaults/blob/14b629b035bf6355b46ece22c3851068a488a895/README.md">documentation for stable version 3.0.1</a><br />
+Read <a href="MigrationGuides/migration_3_to_4.md">migration guide from version 3.x to 4.x</a></p>
+<h1>Version 4 - alpha 1</h1>
+<p align="center">
+    <a href="#features">Features</a> &bull;
+    <a href="#usage">Usage</a> &bull;
+    <a href="#codable">Codable</a> &bull;
+    <a href="#nscoding">NSCoding</a> &bull;
+    <a href="#rawrepresentable">RawRepresentable</a> &bull;
+    <a href="#default-values">Default values</a> &bull;
+    <a href="#custom-types">Custom types</a> &bull;
+    <a href="#installation">Installation</a>
+</p>
+
+<h2>Features</h2>
+<p><strong>There's only two steps to using SwiftyUserDefaults:</strong></p>
+<p>Step 1: Define your keys</p>
+<p><code>swift
+extension DefaultsKeys {
+    static let username = DefaultsKey&lt;String?&gt;("username")
+    static let launchCount = DefaultsKey&lt;Int&gt;("launchCount")
+}</code></p>
+<p>Step 2: Just use it!</p>
+<p>```swift
+// Get and set user defaults easily
+let username = Defaults[.username]
+Defaults[.hotkeyEnabled] = true</p>
+<p>// Modify value types in place
+Defaults[.launchCount] += 1
+Defaults[.volume] -= 0.1
+Defaults[.strings] += "… can easily be extended!"</p>
+<p>// Use and modify typed arrays
+Defaults[.libraries].append("SwiftyUserDefaults")
+Defaults[.libraries][0] += " 2.0"</p>
+<p>// Easily work with custom serialized types
+Defaults[.color] = NSColor.white
+Defaults[.color]?.whiteComponent // =&gt; 1.0
+```</p>
+<p>The convenient dot syntax is only available if you define your keys by extending magic <code>DefaultsKeys</code> class. You can also just pass the <code>DefaultsKey</code> value in square brackets, or use a more traditional string-based API. How? Keep reading.</p>
+<h2>Usage</h2>
+<h3>Define your keys</h3>
+<p>To get the most out of SwiftyUserDefaults, define your user defaults keys ahead of time:</p>
+<p><code>swift
+let colorKey = DefaultsKey&lt;String&gt;("color")</code></p>
+<p>Just create a <code>DefaultsKey</code> object, put the type of the value you want to store in angle brackets, the key name in parentheses, and you're good to go.</p>
+<p>You can now use the <code>Defaults</code> shortcut to access those values:</p>
+<p><code>swift
+Defaults[colorKey] = "red"
+Defaults[colorKey] // =&gt; "red", typed as String</code></p>
+<p>The compiler won't let you set a wrong value type, and fetching conveniently returns <code>String</code>.</p>
+<h3>Take shortcuts</h3>
+<p>For extra convenience, define your keys by extending magic <code>DefaultsKeys</code> class and adding static properties:</p>
+<p><code>swift
+extension DefaultsKeys {
+    static let username = DefaultsKey&lt;String?&gt;("username")
+    static let launchCount = DefaultsKey&lt;Int&gt;("launchCount")
+}</code></p>
+<p>And use the shortcut dot syntax:</p>
+<p><code>swift
+Defaults[.username] = "joe"
+Defaults[.launchCount]</code></p>
+<h3>Just use it!</h3>
+<p>You can easily modify value types (strings, numbers, array) in place, as if you were working with a plain old dictionary:</p>
+<p>```swift
+// Modify value types in place
+Defaults[.launchCount] += 1
+Defaults[.volume] -= 0.1
+Defaults[.strings] += "… can easily be extended!"</p>
+<p>// Use and modify typed arrays
+Defaults[.libraries].append("SwiftyUserDefaults")
+Defaults[.libraries][0] += " 2.0"</p>
+<p>// Easily work with custom serialized types
+Defaults[.color] = NSColor.white
+Defaults[.color]?.whiteComponent // =&gt; 1.0
+```</p>
+<h3>Supported types</h3>
+<p>SwiftyUserDefaults supports all of the standard <code>NSUserDefaults</code> types, like strings, numbers, booleans, arrays and dictionaries.</p>
+<p>Here's a full table of built-in single value defaults:</p>
+<p>| Optional variant | Non-optional variant | Default value |
+| ---------------- | -------------------- | ------------- |
+| <code>String?</code>        | <code>String</code>             | <code>""</code>          |
+| <code>Int?</code>           | <code>Int</code>                | <code>0</code>           |
+| <code>Double?</code>        | <code>Double</code>             | <code>0.0</code>         |
+| <code>Bool?</code>          | <code>Bool</code>               | <code>false</code>       |
+| <code>Data?</code>          | <code>Data</code>               | <code>Data()</code>      |
+| <code>Date?</code>          | n/a                  | n/a           |
+| <code>URL?</code>           | n/a                  | n/a           |</p>
+<p>and arrays:</p>
+<p>| Array type | Optional variant |
+| ---------- | ---------------- |
+| <code>[String]</code> | <code>[String]?</code>      |
+| <code>[Int]</code>    | <code>[Int]?</code>         |
+| <code>[Double]</code> | <code>[Double]?</code>      |
+| <code>[Bool]</code>   | <code>[Bool]?</code>        |
+| <code>[Data]</code>   | <code>[Data]?</code>        |
+| <code>[Date]</code>   | <code>[Date]?</code>        |
+| <code>[URL]</code>    | <code>[URL]?</code>         |</p>
+<p>But that's not all!</p>
+<h4>Codable</h4>
+<p>Since version 4, <code>SwiftyUserDefaults</code> support <code>Codable</code>! Just add <code>DefaultsSerializable</code> type to your type, like:
+<code>swift
+final class FrogCodable: Codable, DefaultsSerializable {
+    let name: String
+ }</code></p>
+<p>No implementation needed! By doing this you will get an option to specify an optional <code>DefaultsKey</code>:
+<code>swift
+let frog = DefaultsKey&lt;FrogCodable?&gt;("frog")</code></p>
+<p>Additionally, you've got an array support for free:
+<code>swift
+let froggies = DefaultsKey&lt;[FrogCodable]?&gt;("froggies")</code></p>
+<h4>NSCoding</h4>
+<p><code>NSCoding</code> was supported before version 4, but in this version we take the support on another level. No need for custom subscripts anymore!
+Support your custom <code>NSCoding</code> type the same way as you can support <code>Codable</code> types: add <code>DefaultsSerializable</code> to your implemented protocols:
+<code>final class FrogSerializable: NSObject, NSCoding, DefaultsSerializable { ... }</code></p>
+<p>No implementation needed as well! By doing this you will get an option to specify an optional <code>DefaultsKey</code>:
+<code>swift
+let frog = DefaultsKey&lt;FrogSerializable?&gt;("frog")</code></p>
+<p>Additionally, you've got an array support also for free:
+<code>swift
+let froggies = DefaultsKey&lt;[FrogSerializable]?&gt;("froggies")</code></p>
+<h4>RawRepresentable</h4>
+<p>And the last but not least, <code>RawRepresentable</code> support! It's all the same situation like with <code>NSCoding</code> or with <code>Codable</code>, add one
+little protocol to rule them all!
+<code>swift
+enum BestFroggiesEnum: String, DefaultsSerializable {
+    case Andy
+    case Dandy
+}</code></p>
+<p>No implementation needed as well! By doing this you will get an option to specify an optional <code>DefaultsKey</code>:
+<code>swift
+let frog = DefaultsKey&lt;BestFroggiesEnum?&gt;("frog")</code></p>
+<p>Additionally, you've got an array support also for free:
+<code>swift
+let froggies = DefaultsKey&lt;[BestFroggiesEnum]?&gt;("froggies")</code></p>
+<h4>Default values</h4>
+<p>Since version 4, you can support a default value for your key (arrays as well!):
+<code>swift
+let frog = DefaultsKey&lt;FrogCodable&gt;("frog", defaultValue: FrogCodable(name: "Froggy"))
+let frogs = DefaultsKey&lt;FrogCodable&gt;("frogs", defaultValue: [FrogCodable(name: "Froggy")])</code></p>
+<p><em>or</em> you can specify a default value for the whole type using two protocols, <code>DefaultsDefaultValueType</code> for a single value default:
+ <code>swift
+extension FrogCodable: DefaultsDefaultValueType {
+    static let defaultValue: FrogCodable = FrogCodable(name: "Froggy")
+}</code></p>
+<p>or <code>DefaultsDefaultArrayValueType</code> for an array of type default:
+ <code>swift
+extension FrogCodable: DefaultsDefaultArrayValueType {
+    static let defaultArrayValue: [FrogCodable] = []
+}</code></p>
+<p>And then you can create your keys without specyfing a <code>defaultValue</code> each time!
+<code>swift
+let frog = DefaultsKey&lt;FrogCodable&gt;("frog")
+let frogs = DefaultsKey&lt;FrogCodable&gt;("frogs")</code></p>
+<h3>Custom types</h3>
+<p>So let's say there is a type that is not supported yet (like <code>NSCoding</code>, <code>Codable</code> or <code>RawRepresentable</code> before) and you want to support it.
+You can do it by specializing getters and setters of <code>DefaultsSerializable</code>. See this extension we have for the Foundation's <code>URL</code> type:
+```swift
+extension URL: DefaultsSerializable {
+    public static func get(key: String, userDefaults: UserDefaults) -&gt; URL? {
+        return userDefaults.url(forKey: key)
+    }</p>
+<pre><code>public static func getArray(key: String, userDefaults: UserDefaults) -&gt; [URL]? {
+    return userDefaults.data(forKey: key).flatMap(NSKeyedUnarchiver.unarchiveObject) as? [URL]
+}
+
+public static func save(key: String, value: URL?, userDefaults: UserDefaults) {
+    userDefaults.set(value, forKey: key)
+}
+
+public static func saveArray(key: String, value: [URL], userDefaults: UserDefaults) {
+    userDefaults.set(NSKeyedArchiver.archivedData(withRootObject: value), forKey: key)
+}
+</code></pre>
+<p>}
+```</p>
+<p>And if you feel there is a type that we could support this, don't hesitate and create an Issue, or better yet, make a Pull Request 😉 We're gonna try to help you as much as possible!</p>
+<h3>Remove all keys</h3>
+<p>To reset user defaults, use <code>removeAll</code> method.</p>
+<p><code>swift
+Defaults.removeAll()</code></p>
+<h3>Shared user defaults</h3>
+<p>If you're sharing your user defaults between different apps or an app and its extensions, you can use SwiftyUserDefaults by overriding the <code>Defaults</code> shortcut with your own. Just add in your app:</p>
+<p><code>swift
+var Defaults = UserDefaults(suiteName: "com.my.app")!</code></p>
+<h2>Installation</h2>
+<h4>CocoaPods</h4>
+<p>If you're using CocoaPods, just add this line to your Podfile:</p>
+<p><code>ruby
+pod 'SwiftyUserDefaults', '4.0.0-alpha.1'</code></p>
+<p>Install by running this command in your terminal:</p>
+<p><code>sh
+pod install</code></p>
+<p>Then import the library in all files where you use it:</p>
+<p><code>swift
+import SwiftyUserDefaults</code></p>
+<h4>Carthage</h4>
+<p>Just add to your Cartfile:</p>
+<p><code>ruby
+github "radex/SwiftyUserDefaults" "4.0.0-alpha.1"</code></p>
+<h4>Swift Package Manager</h4>
+<p>Just add to your <code>Package.swift</code> under dependencies:
+<code>swift
+let package = Package(
+    name: "MyPackage",
+    products: [...],
+    dependencies: [
+        .package(url: "https://github.com/radex/SwiftyUserDefaults.git", .exact("4.0.0-alpha.1")),
+    ],
+    targets: [...]
+)</code></p>
+<h2>More like this</h2>
+<p>If you like SwiftyUserDefaults, check out <a href="https://github.com/radex/SwiftyTimer">SwiftyTimer</a>, which applies the same swifty approach to <code>NSTimer</code>.</p>
+<p>You might also be interested in my blog posts which explain the design process behind those libraries:
+- <a href="http://radex.io/swift/nsuserdefaults/">Swifty APIs: NSUserDefaults</a>
+- <a href="http://radex.io/swift/nsuserdefaults/static">Statically-typed NSUserDefaults</a>
+- <a href="http://radex.io/swift/nstimer/">Swifty APIs: NSTimer</a>
+- <a href="http://radex.io/swift/methods/">Swifty methods</a></p>
+<h3>Contributing</h3>
+<p>If you have comments, complaints or ideas for improvements, feel free to open an issue or a pull request.</p>
+<h3>Author and license</h3>
+<p><em>Maintainer:</em> Łukasz Mróz
+<em> <a href="http://github.com/sunshinejr">github.com/sunshinejr</a>
+</em> <a href="http://twitter.com/thesunshinejr">twitter.com/thesunshinejr</a>
+* <a href="https://sunshinejr.com">sunshinejr.com</a></p>
+<p><em>Created by:</em> Radek Pietruszewski</p>
+<ul>
+<li><a href="http://github.com/radex">github.com/radex</a></li>
+<li><a href="http://twitter.com/radexp">twitter.com/radexp</a></li>
+<li><a href="http://radex.io">radex.io</a></li>
+<li>this.is@radex.io</li>
+</ul>
+<p>SwiftyUserDefaults is available under the MIT license. See the LICENSE file for more info.</p>

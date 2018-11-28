@@ -1,0 +1,113 @@
+<p><img src="https://cdn.rawgit.com/lkzhao/Hero/427d5f2/Resources/Hero.svg" width="388"/></p>
+<p><strong>Hero</strong> is a library for building iOS view controller transitions. It provides a declarative layer on top of the UIKit's cumbersome transition APIs—making custom transitions an easy task for developers.</p>
+<p><a href="https://github.com/Carthage/Carthage"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-Compatible-brightgreen.svg?style=flat" /></a>
+<a href="http://cocoapods.org/pods/Hero"><img alt="Version" src="https://img.shields.io/cocoapods/v/Hero.svg?style=flat" /></a>
+<a href="https://github.com/lkzhao/Hero/blob/master/LICENSE?raw=true"><img alt="License" src="https://img.shields.io/cocoapods/l/Hero.svg?style=flat" /></a>
+<img alt="Xcode 9.0+" src="https://img.shields.io/badge/Xcode-9.0%2B-blue.svg" />
+<img alt="iOS 8.0+" src="https://img.shields.io/badge/iOS-8.0%2B-blue.svg" />
+<img alt="Swift 4.0+" src="https://img.shields.io/badge/Swift-4.0%2B-orange.svg" />
+<a href="https://github.com/lkzhao/Hero/blob/master/README.zh-cn.md"><img alt="中文 README" src="https://img.shields.io/badge/%E4%B8%AD%E6%96%87-README-blue.svg?style=flat" /></a>
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=NT5F7Y2MPV7RE"><img alt="Donate" src="https://img.shields.io/badge/Donate-PayPal-blue.svg" /></a></p>
+<p><img src="https://cdn.rawgit.com/lkzhao/Hero/ebb3f2c/Resources/features.svg"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://cdn.rawgit.com/lkzhao/Hero/ebb3f2c/Resources/features2.svg"/></p>
+<p>Hero is similar to Keynote's <strong>Magic Move</strong>. It checks the <code>heroID</code> property on all source and destination views. Every matched view pair is then automatically transitioned from its old state to its new state.</p>
+<p>Hero can also construct animations for unmatched views. It is easy to define these animations via the <code>heroModifiers</code> property. Hero will run these animations alongside the <strong>Magic Move</strong> animations. All of these animations can be <strong>interactively controlled</strong> by user gestures.</p>
+<p>At view controller level, Hero provides several template transitions that you can set through <code>heroModalAnimationType</code>, <code>heroNavigationAnimationType</code>, and <code>heroTabBarAnimationType</code>. These can be used as the foundation of your custom transitions. Combine with <code>heroID</code> &amp; <code>heroModifiers</code> to make your own unique transitions.</p>
+<p><img src="https://cdn.rawgit.com/lkzhao/Hero/ebb3f2c/Resources/defaultAnimations.svg"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://cdn.rawgit.com/lkzhao/Hero/ebb3f2c/Resources/defaultAnimations2.svg"/></p>
+<p>By default, Hero provides <strong>dynamic duration</strong> based on the <a href="https://material.io/guidelines/motion/duration-easing.html">Material Design Motion Guide</a>. Duration is automatically determined by changes to distance and size—saving you the hassle, while providing consistent and delightful animations.</p>
+<p>Hero doesn't make any assumptions about how the view is built or structured. It won't modify any of your views' states other than hiding them during the animation. This makes it work with <strong>Auto Layout</strong>, <strong>programmatic layout</strong>, <strong>UICollectionView</strong> (without modifying its layout object), <strong>UITableView</strong>, <strong>UINavigationController</strong>, <strong>UITabBarController</strong>, etc... </p>
+<h2>Example Gallery</h2>
+<p>Checkout the <a href="http://lkzhao.com/2016/12/28/hero.html">Example Gallery Blog Post</a> for a general idea of what you can achieve with <strong>Hero</strong></p>
+<h2>Usage Example 1</h2>
+<p><img src="https://cdn.rawgit.com/lkzhao/Hero/ebb3f2c/Resources/simple.svg" /></p>
+<h5>View Controller 1</h5>
+<p><code>swift
+redView.hero.id = "ironMan"
+blackView.hero.id = "batMan"</code></p>
+<h5>View Controller 2</h5>
+<p><code>swift
+self.hero.isEnabled = true
+redView.hero.id = "ironMan"
+blackView.hero.id = "batMan"
+whiteView.hero.modifiers = [.translate(y:100)]</code></p>
+<h2>Usage Example 2</h2>
+<p><img src="https://cdn.rawgit.com/lkzhao/Hero/ebb3f2c/Resources/advanced.svg" /></p>
+<h5>View Controller 1</h5>
+<p><code>swift
+greyView.hero.id = "skyWalker"</code></p>
+<h5>View Controller 2</h5>
+<p>```swift
+self.hero.isEnabled = true
+greyView.hero.id = "skyWalker"</p>
+<p>// collectionView is the parent view of all red cells
+collectionView.hero.modifiers = [.cascade]
+for cell in redCells {
+    cell.hero.modifiers = [.fade, .scale(0.5)]
+}
+```</p>
+<p>You can do these in the <strong>storyboard</strong> too!</p>
+<p><img src="https://cdn.rawgit.com/lkzhao/Hero/master/Resources/storyboardView.png" width="267px"/> 
+<img src="https://cdn.rawgit.com/lkzhao/Hero/master/Resources/storyboardViewController.png" width="267px"/></p>
+<h2>Installation</h2>
+<h3>CocoaPods</h3>
+<p>Add the following entry to your Podfile:</p>
+<p><code>rb
+pod 'Hero'</code></p>
+<p>Then run <code>pod install</code>.</p>
+<p>Don't forget to <code>import Hero</code> in every file you'd like to use Hero.</p>
+<h3>Carthage</h3>
+<p>Add the following entry to your <code>Cartfile</code>:</p>
+<p><code>github "HeroTransitions/Hero"</code></p>
+<p>Then run <code>carthage update</code>.</p>
+<p>If this is your first time using Carthage in the project, you'll need to go through some additional steps as explained <a href="https://github.com/Carthage/Carthage#adding-frameworks-to-an-application">over at Carthage</a>.</p>
+<h3>Swift Package Manager</h3>
+<p>To integrate using Apple's Swift package manager, add the following as a dependency to your <code>Package.swift</code>:</p>
+<p><code>swift
+.package(url: "https://github.com/HeroTransitions/Hero.git", .upToNextMajor(from: "1.3.0"))</code></p>
+<p>and then specify <code>"Hero"</code> as a dependency of the Target in which you wish to use Hero.
+Here's an example <code>PackageDescription</code>:</p>
+<p>```swift
+// swift-tools-version:4.0
+import PackageDescription</p>
+<p>let package = Package(
+    name: "MyPackage",
+    products: [
+        .library(
+            name: "MyPackage",
+            targets: ["MyPackage"]),
+    ],
+    dependencies: [
+        .package(url: "https://github.com/HeroTransitions/Hero.git", .upToNextMajor(from: "1.3.0"))
+    ],
+    targets: [
+        .target(
+            name: "MyPackage",
+            dependencies: ["Hero"])
+    ]
+)
+```</p>
+<h3>Manually</h3>
+<ul>
+<li>Drag the <strong>Sources</strong> folder anywhere in your project.</li>
+</ul>
+<h2>Documentations</h2>
+<p>Checkout the <strong><a href="https://github.com/lkzhao/Hero/wiki/Usage-Guide">WIKI PAGES (Usage Guide)</a></strong> for documentations. </p>
+<p>For more up-to-date ones, please see the header-doc. (use <strong>alt+click</strong> in Xcode)
+<img src="https://cdn.rawgit.com/lkzhao/Hero/master/Resources/headerDoc.png" width="521px"/></p>
+<h2>Interactive Transition Tutorials</h2>
+<p><a href="http://lkzhao.com/2017/02/05/hero-interactive-transition.html">Interactive transitions with Hero (Part 1)</a></p>
+<h2>FAQ</h2>
+<h4>Not able to use Hero transition even when <code>self.hero.isEnabled</code> is set to true</h4>
+<p>Make sure that you have also enabled <code>self.hero.isEnabled</code> on the navigation controller if you are doing a push/pop inside the navigation controller.</p>
+<h4>Views being covered by another matched view during the transition</h4>
+<p>Matched views use global coordinate space while unmatched views use local coordinate space by default. Local coordinate spaced views might be covered by other global coordinate spaced views. To solve this, use the <code>useGlobalCoordinateSpace</code> modifier on the views being covered. Checkout <a href="https://github.com/lkzhao/Hero/wiki/Coordinate-Space">Coordinate Space Wiki page</a> for details.</p>
+<h4>Push animation is shown along side my custom animation</h4>
+<p>This is the default animation for navigation controller provided by Hero. To disable the push animation, set <code>self.hero.navigationAnimationType</code> to <code>.fade</code> or <code>.none</code> on the navigation controller.</p>
+<h4>How do I use a different default animation when dismissing</h4>
+<p>You can use the animation type <code>.selectBy(presenting:dismissing)</code> to specify a different default animation for dismiss.</p>
+<p>For example:</p>
+<p><code>swift
+    self.hero.modalAnimationType = .selectBy(presenting:.zoom, dismissing:.zoomOut)</code></p>
+<h2>Contribute</h2>
+<p>We welcome any contributions. Please read the <a href="https://github.com/lkzhao/Hero/wiki/Contribution-Guide">Contribution Guide</a>.</p>

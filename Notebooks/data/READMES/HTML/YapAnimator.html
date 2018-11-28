@@ -1,0 +1,52 @@
+<p><img alt="YapAnimatorLogo" src="Docs/header.gif" /></p>
+<p><strong>YapAnimator</strong> is your fast and friendly physics-based animation system. YapAnimator was built with ease-of-use in mind, keeping <em>you</em> sane and your designer very, <em>very</em> happy. All animations are interruptable, include completion blocks, and allow you to apply forces to them (e.g. adding the velocity from a gesture in a transition). We've included <code>Animatable</code> protocol conformance for some commonly animated types (<code>CG</code> types), but it's really easy to add conformance to any other type. <strong>You can animate anything</strong> that you can represent and compose with an array of <code>Double</code>s — view properties, music volume, morphing between bezier paths, colors, smoothing brush strokes, the list goes on… use your imagination!</p>
+<p><a href="https://travis-ci.org/yapstudios/YapAnimator"><img alt="Build Status" src="https://travis-ci.org/yapstudios/YapAnimator.svg?branch=master" /></a>
+<a href="https://img.shields.io/cocoapods/v/YapAnimator.svg"><img alt="CocoaPods Compatible" src="https://img.shields.io/cocoapods/v/YapAnimator.svg" /></a>
+<a href="http://cocoadocs.org/docsets/YapAnimator"><img alt="Platform" src="https://img.shields.io/cocoapods/p/YapAnimator.svg?style=flat" /></a></p>
+<h2>Why use YapAnimator?</h2>
+<p>Because it's insanely easy to use and makes beautiful animations, that's why. There are other physics-based animation systems out there (e.g. UIKit's spring animations, Facebook's Pop), but they still require writing too much code, bookkeeping, and hand-holding for our taste. YapAnimator represents a distilled n-th iteration of code that we've been using in our own apps for years. We find it invaluable in our day-to-day and think that you will too.</p>
+<h2>Built-in Extensions</h2>
+<p>YapAnimator comes with a handy extension bolted on to <code>CALayer</code> and <code>UIView</code>/<code>NSView</code>, providing one-liner animations under the <code>animatedLayer</code> and <code>animated</code> properties, respectively.</p>
+<p><img alt="CircleAnimationExample" src="Docs/squirclemorph.gif" /></p>
+<p>```swift
+func handle(gesture: UIPanGestureRecognizer) {</p>
+<pre><code>if gesture.state == .began {
+    squircle.animated.cornerRadius.animate(to: squircle.bounds.width / 2.0)
+    squircle.animated.rotationZ.animate(to: .pi)
+else if gesture.state == .changed {
+    squircle.animated.position.instant(to: gesture.location(in: nil))
+} else if gesture.state == .ended {
+    squircle.animated.position.animate(to: self.view.center)
+    squircle.animated.cornerRadius.animate(to: 0)
+    squircle.animated.rotationZ.animate(to: 0)
+}
+</code></pre>
+<p>}
+```</p>
+<h2>Custom Animators</h2>
+<p>Creating a custom animator is straightforward:</p>
+<ul>
+<li><code>initialValue</code> This sets the initial value of the animator and informs it what type it will be animating.</li>
+<li><code>willBegin</code> Called just before motion starts. Return the actual value of the property that you'll be animating. This allows the animator to sync up with that value in case it was changed outside of the scope of the animator. <em>(optional)</em></li>
+<li><code>eachFrame</code> Called each frame of the animation — this is typically where you'd apply the animator's <code>current.value</code> to the property that you're animating. You can also use it to check values to trigger other actions / animations.</li>
+</ul>
+<p><code>swift
+frameAnimator = YapAnimator(initialValue: square.frame, willBegin: { [unowned self] in
+    return self.square.frame
+}, eachFrame: { [unowned self] (animator) in
+    self.square.frame = animator.current.value
+})</code></p>
+<p><img alt="SquareFrameExample" src="Docs/squareframe.gif" /></p>
+<p>```swift
+frameAnimator.bounciness = 1.5</p>
+<p>frameAnimator.animate(to: square.frame.insetBy(dx: -50, dy: -50), completion: { animator, wasInterrupted in
+    if !wasInterrupted {
+        // animate back to the original value
+        animator.animate(to: animator.current.value.insetBy(dx: 50, dy: 50))
+    }
+})
+```</p>
+<h2>Questions?</h2>
+<p>Feel free to <a href="https://github.com/yapstudios/YapAnimator/issues/new">ask your question in an issue</a>. We will respond there, and  amend this read me/start a wiki if the answer seems like it would benefit others.</p>
+<h2>Credits</h2>
+<p>YapAnimator is owned and maintained by <a href="http://www.yapstudios.com">Yap Studios</a>.</p>

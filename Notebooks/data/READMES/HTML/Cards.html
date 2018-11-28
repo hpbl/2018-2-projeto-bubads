@@ -1,0 +1,138 @@
+<p align="center">
+    <a href="https://github.com/PaoloCuscela/Cards/stargazers">
+        <img src="https://img.shields.io/github/stars/PaoloCuscela/Cards.svg"
+            alt="GitHub Stars"></a>
+    <a href="http://cocoadocs.org/docsets/Cards/">
+        <img src="https://img.shields.io/cocoapods/v/Cards.svg?style=flat"
+            alt="Pod Version"></a>
+    <a href="http://cocoadocs.org/docsets/Cards">
+        <img src="https://img.shields.io/cocoapods/p/Cards.svg?style=flat"
+            alt="Platform"></a>
+    <a href="https://github.com/PaoloCuscela/Cards/blob/master/LICENSE">
+        <img src="https://img.shields.io/github/license/PaoloCuscela/Cards.svg"
+            alt="License"></a>
+</p>
+
+<p><img alt="Overview" src="https://raw.githubusercontent.com/PaoloCuscela/Cards/master/Images/Header.png" /></p>
+<p align="center"> <b>Cards brings to Xcode the card views seen in the new iOS XI Appstore. </b></p>
+
+<h2>Getting Started</h2>
+<h3>Storyboard</h3>
+<ul>
+<li>Go to <strong>main.storyboard</strong> and add a <strong>blank UIView</strong></li>
+<li>Open the <strong>Identity Inspector</strong> and type '<strong>CardHighlight</strong>' the '<strong>class</strong>' field</li>
+<li>Make sure you have '<strong>Cards</strong>' selected in '<strong>Module</strong>' field</li>
+<li>Switch to the <strong>Attributes Inspector</strong> and <strong>configure</strong> it as you like. </li>
+</ul>
+<p><img alt="CardViewStoryboard" src="https://raw.githubusercontent.com/PaoloCuscela/Cards/master/Images/CardViewStoryboard.png" /></p>
+<ul>
+<li>Drag a blank <strong>UIViewController</strong> and design its view as you like</li>
+<li>Move to the <strong>Identity inspector</strong> </li>
+<li>Type '<strong>CardContent</strong>' in the <strong>StoryboardID</strong> field.</li>
+</ul>
+<p><img alt="DetailViewStoryboard" src="https://raw.githubusercontent.com/PaoloCuscela/Cards/master/Images/DetailViewStoryboard.png" /></p>
+<h3>Code</h3>
+<p>```swift
+import Cards</p>
+<p>// Aspect Ratio of 5:6 is preferred
+let card = CardHighlight(frame: CGRect(x: 10, y: 30, width: 200 , height: 240))</p>
+<p>card.backgroundColor = UIColor(red: 0, green: 94/255, blue: 112/255, alpha: 1)
+card.icon = UIImage(named: "flappy")
+card.title = "Welcome \nto \nCards !"
+card.itemTitle = "Flappy Bird"
+card.itemSubtitle = "Flap That !"
+card.textColor = UIColor.white</p>
+<p>card.hasParallax = true</p>
+<p>let cardContentVC = storyboard!.instantiateViewController(withIdentifier: "CardContent")
+card.shouldPresent(cardContentVC, from: self, fullscreen: false)</p>
+<p>view.addSubview(card)
+```</p>
+<p><img alt="GetStarted" src="https://raw.githubusercontent.com/PaoloCuscela/Cards/master/Images/GetStarted.png" /></p>
+<h2>Prerequisites</h2>
+<ul>
+<li><strong>Xcode 9.0</strong> or newer</li>
+<li><strong>Swift 4.0</strong></li>
+</ul>
+<h2>Installation</h2>
+<h3>Cocoapods</h3>
+<p><code>use_frameworks!
+pod 'Cards'</code></p>
+<h3>Manual</h3>
+<ul>
+<li><strong>Download</strong> the repo</li>
+<li>⌘C ⌘V the <strong>'Cards' folder</strong> in your project</li>
+<li>In your <strong>Project's Info</strong> go to '<strong>Build Phases</strong>'</li>
+<li>Open '<strong>Compile Sources</strong>' and <strong>add all the files</strong> in the folder</li>
+</ul>
+<h2>Overview</h2>
+<p><img alt="Overview" src="https://raw.githubusercontent.com/PaoloCuscela/Cards/master/Images/CardPlayer.gif" />
+<img alt="Overview" src="https://raw.githubusercontent.com/PaoloCuscela/Cards/master/Images/CardGroupSliding.gif" />
+<img alt="Overview" src="https://raw.githubusercontent.com/PaoloCuscela/Cards/master/Images/DetailView.gif" /></p>
+<h2>Customization</h2>
+<p>```swift
+//Shadow settings
+var shadowBlur: CGFloat
+var shadowOpacity: Float
+var shadowColor: UIColor
+var backgroundImage: UIImage?
+var backgroundColor: UIColor</p>
+<p>var textColor: UIColor  //Color used for the labels
+var insets: CGFloat     //Spacing between content and card borders
+var cardRadius: CGFloat //Corner radius of the card
+var icons: [UIImage]?   //DataSource for CardGroupSliding
+var blurEffect: UIBlurEffectStyle //Blur effect of CardGroup
+```</p>
+<h2>Usage</h2>
+<h3>CardPlayer</h3>
+<p>```swift
+let card = CardPlayer(frame: CGRect(x: 40, y: 50, width: 300 , height: 360))
+card.textColor = UIColor.black
+card.videoSource = URL(string: "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
+card.shouldDisplayPlayer(from: self)    //Required. </p>
+<p>card.playerCover = UIImage(named: "mvBackground")!  // Shows while the player is loading
+card.playImage = UIImage(named: "CardPlayerPlayIcon")!  // Play button icon</p>
+<p>card.isAutoplayEnabled = true
+card.shouldRestartVideoWhenPlaybackEnds = true</p>
+<p>card.title = "Big Buck Bunny"
+card.subtitle = "Inside the extraordinary world of Buck Bunny"
+card.category = "today's movie"</p>
+<p>view.addSubview(card)
+```</p>
+<h3>CardGroupSliding</h3>
+<p>```swift
+    let icons: [UIImage] = [    </p>
+<pre><code>    UIImage(named: "grBackground")!,
+    UIImage(named: "background")!,
+    UIImage(named: "flappy")!,
+    UIImage(named: "flBackground")!,
+    UIImage(named: "icon")!,
+    UIImage(named: "mvBackground")!
+
+]   // Data source for CardGroupSliding
+
+let card = CardGroupSliding(frame: CGRect(x: 40, y: 50, width: 300 , height: 360))
+card.textColor = UIColor.black
+
+card.icons = icons
+card.iconsSize = 60
+card.iconsRadius = 30
+
+card.title = "from the editors"
+card.subtitle = "Welcome to XI Cards !"
+
+view.addSubview(card)
+</code></pre>
+<p>```</p>
+<h2>Documentation</h2>
+<p>See the <strong>Wiki</strong>, to learn in depth infos about Cards.<br />
+<a href="https://github.com/PaoloCuscela/Cards/wiki">GO!</a> </p>
+<h2>Issues &amp; Feature requests</h2>
+<p>If you encounter any problems or have any trouble using Cards, feel free to open an issue. I'll answer you as soon as I see it.</p>
+<p>New features, or improvements to the framework are welcome (open an issue).</p>
+<h2>Thanksto</h2>
+<ul>
+<li><strong>Patrick Piemonte</strong> - providing <a href="https://github.com/piemonte/Player">Player</a> framework used in <a href="https://raw.githubusercontent.com/PaoloCuscela/Cards/master/Cards/CardPlayer.swift">CardPlayer.swift</a></li>
+<li><strong>Mac Bellingrath</strong> </li>
+</ul>
+<h2>License</h2>
+<p>Cards is released under the <a href="LICENSE">MIT License</a>.</p>

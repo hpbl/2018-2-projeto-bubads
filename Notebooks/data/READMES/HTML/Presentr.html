@@ -1,0 +1,237 @@
+<p><img src="http://danielozano.com/Presentr/Screenshots/PresentrLogo.png" width="700"></p>
+<p><a href="http://cocoapods.org/pods/Presentr"><img alt="Version" src="https://img.shields.io/cocoapods/v/Presentr.svg?style=flat" /></a>
+<a href="https://github.com/Carthage/Carthage"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a>
+<a href="https://developer.apple.com/swift/"><img alt="Swift 3.0" src="https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat" /></a>
+<a href="http://cocoapods.org/pods/Presentr"><img alt="Platform" src="https://img.shields.io/cocoapods/p/Presentr.svg?style=flat" /></a>
+<a href="http://cocoapods.org/pods/Presentr"><img alt="License" src="https://img.shields.io/cocoapods/l/Presentr.svg?style=flat" /></a>
+<a href="https://codebeat.co/projects/github-com-icalialabs-presentr"><img alt="codebeat badge" src="https://codebeat.co/badges/f89d5cdf-b0c3-441d-b4e1-d56dcea48544" /></a>
+<img alt="Made with Love by Icalia Labs" src="https://img.shields.io/badge/With%20love%20by-Icalia%20Labs-ff3434.svg" /></p>
+<p><em>Presentr is a simple customizable wrapper for the Custom View Controller Presentation API introduced in iOS 8.</em></p>
+<h2>About</h2>
+<p>iOS let's you modally present any view controller, but if you want the presented view controller to not cover the whole screen or modify anything about its presentation or transition you have to use the Custom View Controller Presentation API's.</p>
+<p>This can be cumbersome, specially if you do it multiple times in your app. <strong>Presentr</strong> simplifies all of this. You just have to configure your <strong>Presentr</strong> object depending on how you want you view controller to be presented, and the framework handles everything for you.</p>
+<p><img src="http://danielozano.com/Presentr/Gifs/AlertSlow.gif" width="192"><img src="http://danielozano.com/Presentr/Gifs/PopupSlow.gif" width="192"><img src="http://danielozano.com/Presentr/Gifs/TopHalfSlow.gif" width="192"><img src="http://danielozano.com/Presentr/Gifs/OtherSlow.gif" width="192"></p>
+<p><em>These are just examples of an Alert UI presented in multiple ways. But, with Presentr you can present any custom View Controller you create in any of the Presentation types, or create your own custom one!</em></p>
+<h2>What's New</h2>
+<h4>1.9</h4>
+<ul>
+<li>Support for Xcode 10 / iOS 12 / Swift 4.2</li>
+<li>Last version before big 2.0 update</li>
+</ul>
+<h4>1.3.1</h4>
+<ul>
+<li>New <code>FlipHorizontal</code> transition type (thanks to @falkobuttler)</li>
+<li>New <code>CoverFromCorner</code> transition type (thanks to @freakdragon)</li>
+<li>New <code>customOrientation</code> ModalSize (thanks to @freakdragon)</li>
+<li>KeyboardTranslation now works for all Presentation Type's (thanks to @oxozle)</li>
+<li>Other bug fixes &amp; improvements</li>
+</ul>
+<h4>1.3</h4>
+<ul>
+<li>Swift 4 / Xcode 9 / iOS 11 Support</li>
+<li>Bug fixes</li>
+</ul>
+<h4>1.2.0</h4>
+<ul>
+<li>You can add custom BackgroundView. (thanks to @clebta)</li>
+<li>Add custom text color for AlertViewController</li>
+<li>New PresentationType called .dynamic that allows dynamic sizing of ViewController using AutoLayout to calculate size.</li>
+<li>You can set the context so the presentation is done properly on a child view controller and not the whole screen.</li>
+<li>You can also set the behavior for a tap outside the context.</li>
+<li>Simpler PresentrAnimation architecture. Simpler to modify existing transition animations or create your own.</li>
+<li>Two new animations to replace system ones, CoverVertical &amp; CrossDissolve.</li>
+<li>All animations are now Presentr's, no more Apple animations. This allows greater control &amp; less bugs.</li>
+<li>Swipe to dismiss feature greatly improved.</li>
+<li>Bug fixes and other small improvements.</li>
+</ul>
+<h4>1.1.0</h4>
+<ul>
+<li>You are now able to create your own custom transition animations. See how in readme. (thanks to @fpg1503 &amp; @danlozano)</li>
+<li>New animation available, coverVerticalWithSpring (thanks to @fpg1503)</li>
+</ul>
+<h4>See CHANGELOG.md for previous</h4>
+<h2>Contributing</h2>
+<ol>
+<li>Fork project</li>
+<li>Checkout <strong>Develop</strong> branch</li>
+<li>Create <strong>Feature</strong> branch off of the <strong>Develop</strong> branch</li>
+<li>Create awesome feature/enhancement/bug-fix</li>
+<li>Optionally create <em>Issue</em> to discuss feature</li>
+<li>Submit pull request from your <strong>Feature</strong> branch to Presentr’s <strong>Develop</strong> branch</li>
+</ol>
+<h2>Supported Swift Versions</h2>
+<p>| Presentr Version   |      Swift Version      |    Min. iOS Version      |
+|----------|:-------------:|:-------------:|
+| &lt;= 0.1.8 |  Swift 2.2  | &gt;= iOS 8.0  |
+| == 0.2.1 |    Swift 2.3 | &gt;= iOS 8.0 |
+| &gt;= 1.0.0 | Swift 3.0 | &gt;= iOS 9.0 |
+| &gt;= 1.3 | Swift 4.0 | &gt;= iOS 9.0 |
+| &gt;= 1.9 | Swift 4.0 &amp; Swift 4.2 | &gt;= iOS 9.0 |</p>
+<h2>Installation</h2>
+<h3><a href="http://cocoapods.org">Cocoapods</a></h3>
+<p>```ruby
+use_frameworks!</p>
+<p>pod 'Presentr'
+```</p>
+<h3><a href="https://github.com/Carthage/Carthage">Carthage</a></h3>
+<p>Add Presentr to you <code>Cartfile</code>
+<code>sh
+github "IcaliaLabs/Presentr"</code>
+Install using
+<code>sh
+carthage update --platform ios</code></p>
+<h3>Manually</h3>
+<ol>
+<li>Download and drop <code>/Presentr</code> folder in your project.  </li>
+<li>You're done!</li>
+</ol>
+<h2>Getting started</h2>
+<h3>Create a Presentr object</h3>
+<p>It is <strong>important to hold on to the Presentr object as a property</strong> on the presenting/current View Controller since internally it will be used as a delegate for the custom presentation, so you must hold a strong reference to it.</p>
+<p>Your <strong>Presentr</strong> can be as simple as this:</p>
+<p>```swift
+class ViewController: UIViewController {</p>
+<p>let presenter = Presentr(presentationType: .alert)</p>
+<p>}
+```</p>
+<p>Or as complex as this:</p>
+<p>```swift
+class ViewController: UIViewController {</p>
+<p>let presenter: Presentr = {
+        let width = ModalSize.full
+        let height = ModalSize.fluid(percentage: 0.20)
+        let center = ModalCenterPosition.customOrigin(origin: CGPoint(x: 0, y: 0))
+        let customType = PresentationType.custom(width: width, height: height, center: center)</p>
+<pre><code>    let customPresenter = Presentr(presentationType: customType)
+    customPresenter.transitionType = .coverVerticalFromTop
+    customPresenter.dismissTransitionType = .crossDissolve
+    customPresenter.roundCorners = false
+    customPresenter.backgroundColor = .green
+    customPresenter.backgroundOpacity = 0.5
+    customPresenter.dismissOnSwipe = true
+    customPresenter.dismissOnSwipeDirection = .top
+    return customPresenter
+}()
+</code></pre>
+<p>}
+```</p>
+<h3>Present the view controller.</h3>
+<p>Instantiate the View Controller you want to present and use the customPresentViewController method along with your <strong>Presentr</strong> object to do the custom presentation.</p>
+<p><code>swift
+let controller = SomeViewController()
+customPresentViewController(presenter, viewController: controller, animated: true, completion: nil)</code></p>
+<p>This is a helper method provided for you as an extension on UIViewController. It handles setting the Presentr object as the delegate for the presentation &amp; transition.</p>
+<p>Remember to setup Auto Layout on the ViewController so it can be displayed well on any size.</p>
+<p>The PresentationType (and all other properties) can be changed later on in order to reuse the <strong>Presentr</strong> object for other presentations.</p>
+<p><code>swift
+presenter.presentationType = .popup</code></p>
+<h2>Main Types</h2>
+<h3>Presentation Type</h3>
+<p>```swift
+public enum PresentationType {</p>
+<p>case alert
+  case popup
+  case topHalf
+  case bottomHalf
+  case fullScreen
+  case dynamic(center: ModalCenterPosition)
+  case custom(width: ModalSize, height: ModalSize, center: ModalCenterPosition)</p>
+<p>}
+```</p>
+<h4>Alert &amp; Popup</h4>
+<p><img src="http://danielozano.com/Presentr/Gifs/AlertSlow.gif" width="250"><img src="http://danielozano.com/Presentr/Gifs/PopupSlow.gif" width="250"></p>
+<h4>BottomHalf &amp; TopHalf</h4>
+<p><img src="http://danielozano.com/Presentr/Gifs/BottomHalfSlow.gif" width="250"><img src="http://danielozano.com/Presentr/Gifs/TopHalfSlow.gif" width="250"></p>
+<h3>Transition Type</h3>
+<p>```swift
+public enum TransitionType {</p>
+<p>case coverVertical
+  case crossDissolve
+  case coverVerticalFromTop
+  case coverHorizontalFromRight
+  case coverHorizontalFromLeft
+  case custom(PresentrAnimation)</p>
+<p>}
+```</p>
+<h2>Properties</h2>
+<h4>Properties are optional, as they all have Default values.</h4>
+<p>The only required property for <strong>Presentr</strong> is the <strong>PresentationType</strong>. You initialize the object with one, but it can be changed later on.</p>
+<p><code>swift
+presenter.presentationType = .popup</code></p>
+<p>You can choose a TransitionType, which is the animation that will be used to present or dismiss the view controller.</p>
+<p><code>swift
+presenter.transitionType = .coverVerticalFromTop
+presenter.dismissTransitionType = .crossDissolve</code></p>
+<p>You can change the background color &amp; opacity for the background view that will be displayed below the presented view controller. You can also set a customBackgroundView that will be displayed on top of the built-in background view.</p>
+<p><code>swift
+presenter.backgroundColor = UIColor.red
+presenter.backgroundOpacity = 1.0
+presenter.customBackgroundView = UIView()</code></p>
+<p>You could also turn on the blur effect for the background, and change it's style. If you turn on the blur effect the background color and opacity will be ignored.</p>
+<p><code>swift
+presenter.blurBackground = true
+presenter.blurStyle = UIBlurEffectStyle.light</code></p>
+<p>You can choose to disable rounded corners on the view controller that will be presented.</p>
+<p><code>swift
+presenter.roundCorners = false</code></p>
+<p>If set to true you can modify the cornerRadius.</p>
+<p><code>swift
+presenter.cornerRadius = 10</code></p>
+<p>Using the <strong>PresentrShadow</strong> struct can set a custom shadow on the presented view controller.</p>
+<p>```swift
+let shadow = PresentrShadow()
+shadow.shadowColor = .black
+shadow.shadowOpacity = 0.5
+shadow.shadowOffset = CGSize(5,5)
+shadow.shadowRadius = 4.0</p>
+<p>presenter.dropShadow = shadow
+```</p>
+<p>You can choose to disable dismissOnTap that dismisses the presented view controller on tapping the background. Default is true. Or you can disable the animation for the dismissOnTap and dismissOnSwipe.</p>
+<p><code>swift
+presenter.dismissOnTap = false
+presenter.dismissAnimated = false</code></p>
+<p>You can activate dismissOnSwipe so that swiping inside the presented view controller dismisses it. Default is false because if your view controller uses any kind of scroll view this is not recommended as it will mess with the scrolling.</p>
+<p>You can also se the direction, for example in case your ViewController is an Alert at the top, you would want to dismiss it by swiping up.</p>
+<p><code>swift
+presenter.dismissOnSwipe = true
+presenter.dismissOnSwipeDirection = .top</code></p>
+<p>If you have text fields inside your modal and the presentationType property is set to popup, you can use a <strong>KeyboardTranslationType</strong> to tell <strong>Presentr</strong> how to handle your modal when the keyboard shows up.</p>
+<p><code>swift
+presenter.keyboardTranslationType = .none
+presenter.keyboardTranslationType = .moveUp
+presenter.keyboardTranslationType = .compress
+presenter.keyboardTranslationType = .stickToTop</code></p>
+<p>If you are doing a presentation inside a SplitViewController or any other type of container/child ViewController situation you can use these properties to handle it properly.</p>
+<p>Set the viewControllerForContext to the ViewController you want <strong>Presentr</strong> to use for framing the presentation context. shouldIgnoreTapOutsideContext is set to false by default. This handles what happens when they click outside the context (on the other ViewController).</p>
+<p>Be sure to set the viewControllerForContext property before presenting, not on initialization, this makes sure that Auto Layout has finished it's work and the frame for the ViewController is correct.</p>
+<p><code>swift
+@IBAction func didSelectShowAlert(_ sender: Any) {
+    presenter.viewControllerForContext = self
+    presenter.shouldIgnoreTapOutsideContext = true
+    customPresentViewController(presenter, viewController: alertController, animated: true, completion: nil)
+}</code></p>
+<h2>Other / Advanced</h2>
+<ul>
+<li><a href="https://github.com/IcaliaLabs/Presentr/blob/master/ALERT.md">Built in AlertViewController</a></li>
+<li><a href="https://github.com/IcaliaLabs/Presentr/blob/master/DELEGATE.md">PresentrDelegate</a></li>
+<li><a href="https://github.com/IcaliaLabs/Presentr/blob/master/PRESENTATIONTYPE.md">PresentationType customization &amp; more</a></li>
+<li><a href="https://github.com/IcaliaLabs/Presentr/blob/master/TRANSITIONTYPE.md">TransitionType customization, PresentrAnimation &amp; more</a></li>
+</ul>
+<h2>Requirements</h2>
+<ul>
+<li>iOS 9.0+</li>
+<li>Xcode 8.0+</li>
+<li>Swift 3.0+</li>
+</ul>
+<h2>Documentation</h2>
+<p>Read the <a href="http://danielozano.com/Presentr/Docs/">docs</a>. </p>
+<h2>Author</h2>
+<p><a href="http://danielozano.com">Daniel Lozano</a> <br></p>
+<h2>Main Contributors</h2>
+<p><a href="http://swiftification.org/">Gabriel Peart</a>
+<br><br>
+Logo design by <a href="http://eldelentes.mx">Eduardo Higareda</a><br>
+Alert design by <a href="http://www.noearaujo.com">Noe Araujo</a></p>
+<h2>License</h2>
+<p>Presentr is released under the MIT license.<br />
+See LICENSE for details.</p>

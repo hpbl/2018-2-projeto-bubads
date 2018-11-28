@@ -1,0 +1,119 @@
+<p><img alt="header" src="./header.png" />
+<img src="https://github.com/Ramotion/paper-onboarding/blob/master/paper-onboarding.gif" width="600" height="450" />
+<br><br/></p>
+<h1>paper-onboarding</h1>
+<p><a href="http://twitter.com/Ramotion"><img alt="Twitter" src="https://img.shields.io/badge/Twitter-@Ramotion-blue.svg?style=flat" /></a>
+<a href="https://cocoapods.org/pods/paper-onboarding"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/p/paper-onboarding.svg" /></a>
+<a href="http://cocoapods.org/pods/paper-onboarding"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/paper-onboarding.svg" /></a>
+<a href="https://github.com/Ramotion/paper-onboarding"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a>
+<a href="https://travis-ci.org/Ramotion/paper-onboarding"><img alt="Travis" src="https://img.shields.io/travis/Ramotion/paper-onboarding.svg" /></a>
+<a href="https://codebeat.co/projects/github-com-ramotion-paper-onboarding"><img alt="codebeat badge" src="https://codebeat.co/badges/d06237c6-6ff7-4560-9602-b6cc65063383" /></a>
+<a href="https://paypal.me/Ramotion"><img alt="Donate" src="https://img.shields.io/badge/Donate-PayPal-blue.svg" /></a></p>
+<h1>Check this library on other platforms:</h1>
+<p><a href="https://github.com/Ramotion/paper-onboarding-android">
+<img src="https://github.com/ramotion/navigation-stack/raw/master/Android_Java@2x.png" width="178" height="81"></a></p>
+<p><strong>Looking for developers for your project?</strong><br>
+This project is maintained by Ramotion, Inc. We specialize in the designing and coding of custom UI for Mobile Apps and Websites.</p>
+<p><a href="mailto:alex.a@ramotion.com?subject=Project%20inquiry%20from%20Github">
+<img src="https://github.com/ramotion/gliding-collection/raw/master/contact_our_team@2x.png" width="187" height="34"></a> <br></p>
+<p>The <a href="https://store.ramotion.com/product/iphone-x-clay-mockups?utm_source=gthb&amp;utm_medium=special&amp;utm_campaign=paper-onboarding">iPhone mockup</a> available <a href="https://store.ramotion.com?utm_source=gthb&amp;utm_medium=special&amp;utm_campaign=paper-onboarding">here</a>.</p>
+<h2>Requirements</h2>
+<ul>
+<li>iOS 10.0+</li>
+<li>Xcode 9</li>
+</ul>
+<h2>Installation</h2>
+<p>Just add the Source folder to your project.</p>
+<p>or use <a href="https://cocoapods.org">CocoaPods</a> with Podfile:</p>
+<p><code>ruby
+pod 'paper-onboarding'</code></p>
+<p>or <a href="https://github.com/Carthage/Carthage">Carthage</a> users can simply add to their <code>Cartfile</code>:
+<code>github "Ramotion/paper-onboarding"</code></p>
+<h2>Usage</h2>
+<h4>Storyboard</h4>
+<p>1) Create a new UIView inheriting from <code>PaperOnboarding</code></p>
+<p>2) Set dataSource in attribute inspector</p>
+<h4>or Code</h4>
+<p>``` swift
+override func viewDidLoad() {
+  super.viewDidLoad()</p>
+<p>let onboarding = PaperOnboarding(itemsCount: 3)
+  onboarding.dataSource = self
+  onboarding.translatesAutoresizingMaskIntoConstraints = false
+  view.addSubview(onboarding)</p>
+<p>// add constraints
+  for attribute: NSLayoutAttribute in [.Left, .Right, .Top, .Bottom] {
+    let constraint = NSLayoutConstraint(item: onboarding,
+                                        attribute: attribute,
+                                        relatedBy: .Equal,
+                                        toItem: view,
+                                        attribute: attribute,
+                                        multiplier: 1,
+                                        constant: 0)
+    view.addConstraint(constraint)
+  }
+}
+```</p>
+<h4>For adding content use dataSource methods:</h4>
+<p>``` swift
+  func onboardingItem(at index: Int) -&gt; OnboardingItemInfo {</p>
+<p>return [
+     OnboardingItemInfo(informationImage: IMAGE,
+                                   title: "title",
+                             description: "description",
+                                pageIcon: IMAGE,
+                                   color: UIColor.RANDOM,
+                              titleColor: UIColor.RANDOM,
+                        descriptionColor: UIColor.RANDOM,
+                               titleFont: UIFont.FONT,
+                         descriptionFont: UIFont.FONT),</p>
+<pre><code> OnboardingItemInfo(informationImage: IMAGE,
+                                title: "title",
+                          description: "description",
+                             pageIcon: IMAGE,
+                                color: UIColor.RANDOM,
+                           titleColor: UIColor.RANDOM,
+                     descriptionColor: UIColor.RANDOM,
+                            titleFont: UIFont.FONT,
+                      descriptionFont: UIFont.FONT),
+
+OnboardingItemInfo(informationImage: IMAGE,
+                             title: "title",
+                       description: "description",
+                          pageIcon: IMAGE,
+                             color: UIColor.RANDOM,
+                        titleColor: UIColor.RANDOM,
+                  descriptionColor: UIColor.RANDOM,
+                         titleFont: UIFont.FONT,
+                   descriptionFont: UIFont.FONT)
+ ][index]
+</code></pre>
+<p>}</p>
+<p>func onboardingItemsCount() -&gt; Int {
+    return 3
+  }</p>
+<p>```</p>
+<h4>configuring content item:</h4>
+<p>``` swift
+func onboardingConfigurationItem(item: OnboardingContentViewItem, index: Int) {</p>
+<p>//    item.titleLabel?.backgroundColor = .redColor()
+//    item.descriptionLabel?.backgroundColor = .redColor()
+//    item.imageView = ...
+  }
+```</p>
+<p>This library is a part of a <a href="https://github.com/Ramotion/swift-ui-animation-components-and-libraries"><b>selection of our best UI open-source projects.</b></a></p>
+<h2>License</h2>
+<p>paper-onboarding is released under the MIT license.
+See <a href="./LICENSE">LICENSE</a> for details.</p>
+<p><br></p>
+<h1>Get the Showroom App for iOS to give it a try</h1>
+<p>Try this UI component and more like this in our iOS app. Contact us if interested.</p>
+<p><a href="https://itunes.apple.com/app/apple-store/id1182360240?pt=550053&ct=paper-onboarding&mt=8" >
+<img src="https://github.com/ramotion/gliding-collection/raw/master/app_store@2x.png" width="117" height="34"></a></p>
+<p><a href="mailto:alex.a@ramotion.com?subject=Project%20inquiry%20from%20Github">
+<img src="https://github.com/ramotion/gliding-collection/raw/master/contact_our_team@2x.png" width="187" height="34"></a>
+<br>
+<br></p>
+<p>Follow us for the latest updates<br>
+<a href="https://goo.gl/rPFpid" >
+<img src="https://i.imgur.com/ziSqeSo.png/" width="156" height="28"></a></p>

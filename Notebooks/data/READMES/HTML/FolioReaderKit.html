@@ -1,0 +1,112 @@
+<p><img alt="FolioReader logo" src="https://raw.githubusercontent.com/FolioReader/FolioReaderKit/assets/folioreader.png" />
+FolioReaderKit is an ePub reader and parser framework for iOS written in Swift.</p>
+<p><img alt="Version" src="https://img.shields.io/cocoapods/v/FolioReaderKit.svg" />
+<img alt="Downloads" src="https://img.shields.io/cocoapods/dt/FolioReaderKit.svg" />
+<img alt="Apps using" src="https://img.shields.io/cocoapods/at/FolioReaderKit.svg" />
+<img alt="License" src="https://img.shields.io/cocoapods/l/FolioReaderKit.svg" /></p>
+<h2>Features</h2>
+<ul>
+<li>[x] ePub 2 and ePub 3 support</li>
+<li>[x] Custom Fonts</li>
+<li>[x] Custom Text Size</li>
+<li>[x] Text Highlighting</li>
+<li>[x] List / Edit / Delete Highlights</li>
+<li>[x] Themes / Day mode / Night mode</li>
+<li>[x] Handle Internal and External Links</li>
+<li>[x] Portrait / Landscape</li>
+<li>[x] Reading Time Left / Pages left</li>
+<li>[x] In-App Dictionary</li>
+<li>[x] Media Overlays (Sync text rendering with audio playback)</li>
+<li>[x] TTS - Text to Speech Support</li>
+<li>[x] Parse epub cover image</li>
+<li>[x] RTL Support</li>
+<li>[x] Vertical or/and Horizontal scrolling</li>
+<li>[x] Share Custom Image Quotes <strong><sup>NEW</sup></strong></li>
+<li>[x] Support multiple instances at same time, like parallel reading <strong><sup>NEW</sup></strong></li>
+<li>[ ] Book Search</li>
+<li>[ ] Add Notes to a Highlight</li>
+</ul>
+<h2>Demo</h2>
+<p><strong>Custom Fonts :smirk:</strong>   |  <strong>Text Highlighting :heart_eyes:</strong>
+:-------------------------:|:-------------------------:
+<img alt="Custom fonts" src="https://raw.githubusercontent.com/FolioReader/FolioReaderKit/assets/custom-fonts.gif" />  |  <img alt="Highlight" src="https://raw.githubusercontent.com/FolioReader/FolioReaderKit/assets/highlight.gif" /></p>
+<p><strong>Reading Time Left :open_mouth:</strong>   |  <strong>Media Overlays 😭</strong>
+:-------------------------:|:-------------------------:
+<img alt="Time left" src="https://raw.githubusercontent.com/FolioReader/FolioReaderKit/assets/time-left.mov.gif" />  |  <img alt="Media Overlays" src="https://raw.githubusercontent.com/FolioReader/FolioReaderKit/assets/media-overlays.gif" /></p>
+<h2>Installation</h2>
+<p><strong>FolioReaderKit</strong> is available through <a href="http://cocoapods.org">CocoaPods</a> and <a href="https://github.com/Carthage/Carthage">Carthage</a>. </p>
+<h3>Cocoapods</h3>
+<p><a href="http://cocoapods.org">CocoaPods</a> is a dependency manager for Cocoa projects. You can install it with the following command:</p>
+<p><code>bash
+$ gem install cocoapods</code></p>
+<p>To integrate FolioReaderKit into your Xcode project using CocoaPods, specify it in your <code>Podfile</code>:</p>
+<p>```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!</p>
+<p>target '<Your Target Name>' do
+    pod 'FolioReaderKit'
+end
+```</p>
+<p>Then, run the following command:</p>
+<p><code>bash
+$ pod install</code></p>
+<p>Alternatively to give it a test run, run the command:</p>
+<p><code>bash
+$ pod try FolioReaderKit</code></p>
+<h3>Carthage</h3>
+<p>Add the following to your <a href="https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#cartfile">Cartfile</a></p>
+<p><code>ruby
+github "FolioReader/FolioReaderKit"</code></p>
+<p>Run the following command:</p>
+<p><code>bash
+$ carthage update --platform iOS --no-use-binaries</code></p>
+<p>Then, follow the steps as described in Carthage's <a href="https://github.com/Carthage/Carthage#adding-frameworks-to-an-application">README</a>.</p>
+<h2>Requirements</h2>
+<ul>
+<li>iOS 8.0+</li>
+<li>Xcode 9+</li>
+</ul>
+<h2>Basic Usage</h2>
+<p>To get started, this is a simple usage sample of using the integrated view controller.</p>
+<p>```swift
+import FolioReaderKit</p>
+<p>func open(sender: AnyObject) {
+    let config = FolioReaderConfig()
+    let bookPath = Bundle.main.path(forResource: "book", ofType: "epub")
+    let folioReader = FolioReader()
+    folioReader.presentReader(parentViewController: self, withEpubPath: bookPath!, andConfig: config)
+}
+```</p>
+<p>For more usage examples check the <a href="/Example">Example</a> folder.</p>
+<h2>Storyboard</h2>
+<p>To get started, here is a simple example how to use the integrated view controller with storyboards.</p>
+<p>```swift
+import FolioReaderKit</p>
+<p>class StoryboardFolioReaderContrainer: FolioReaderContainer {
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)</p>
+<pre><code>    let config = FolioReaderConfig()
+    config.scrollDirection = .horizontalWithVerticalContent
+
+    guard let bookPath = Bundle.main.path(forResource: "The Silver Chair", ofType: "epub") else { return }
+    setupConfig(config, epubPath: bookPath)
+}
+</code></pre>
+<p>}
+```</p>
+<p>Go to your storyboard file, choose or create the view controller that should present the epub reader. In the identity inspector set StoryboardFolioReaderContrainer as class.</p>
+<h2>Documentation</h2>
+<p>Checkout <a href="/Example">Example</a> and <a href="http://cocoadocs.org/docsets/FolioReaderKit">API Documentation</a></p>
+<p>You can always use the header-doc. (use <strong>alt+click</strong> in Xcode)</p>
+<p><img src="https://raw.githubusercontent.com/FolioReader/FolioReaderKit/assets/header-doc.png" width="521px"/></p>
+<h3>Migration</h3>
+<p>If you are migrating to a newer version check out <a href="/MIGRATION.md">MIGRATION</a> and <a href="/CHANGELOG.md">CHANGELOG</a>.</p>
+<h2>Author</h2>
+<p><a href="https://github.com/hebertialmeida"><strong>Heberti Almeida</strong></a></p>
+<ul>
+<li>Follow me on <strong>Twitter</strong>: <a href="https://twitter.com/hebertialmeida"><strong>@hebertialmeida</strong></a></li>
+<li>Contact me on <strong>LinkedIn</strong>: <a href="http://linkedin.com/in/hebertialmeida"><strong>hebertialmeida</strong></a></li>
+</ul>
+<h2>License</h2>
+<p>FolioReaderKit is available under the BSD license. See the <a href="/LICENSE">LICENSE</a> file.</p>

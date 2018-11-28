@@ -1,0 +1,95 @@
+<p><img alt="" src="Images/Header.png" /></p>
+<p><img alt="" src="https://www.bitrise.io/app/c09426001dedd91c.svg?token=4zhZMFtDpH-9BhWvGP5-1g&amp;branch=develop" />
+<img alt="" src="https://img.shields.io/badge/swift-3.2-orange.svg" />
+<img alt="" src="https://img.shields.io/github/release/netguru/ResponseDetective.svg" />
+<img alt="" src="https://img.shields.io/badge/carthage-compatible-green.svg" />
+<img alt="" src="https://img.shields.io/badge/cocoapods-compatible-green.svg" /></p>
+<p><strong>ResponseDetective</strong> is a non-intrusive framework for intercepting any outgoing requests and incoming responses between your app and your server for debugging purposes.</p>
+<h2>Requirements</h2>
+<p>ResponseDetective is written in <strong>Swift 3.2</strong> and supports <strong>iOS 8.0+</strong>, <strong>macOS 10.9+</strong> and <strong>tvOS 9.0+</strong>.</p>
+<h2>Usage</h2>
+<p>Incorporating ResponseDetective in your project is very simple – it all comes down to just two steps:</p>
+<h3>Step 1: Enable interception</h3>
+<p>For ResponseDetective to work, it needs to be added as a middleman between your <code>(NS)URLSession</code> and the Internet. You can do this by registering the provided <code>URLProtocol</code> class in your session's <code>(NS)URLSessionConfiguration.protocolClasses</code>, or use a shortcut method:</p>
+<p>```objc
+// Objective-C</p>
+<p>NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+[RDTResponseDetective enableInConfiguration:configuration];
+```</p>
+<p>```swift
+// Swift</p>
+<p>let configuration = URLSessionConfiguration.default
+ResponseDetective.enable(inConfiguration: configuration)
+```</p>
+<p>Then, you should use that configuration with your <code>(NS)URLSession</code>:</p>
+<p>```objc
+// Objective-C</p>
+<p>NSURLSession *session = [[NSURLSession alloc] initWithConfiguration:configuration];
+```</p>
+<p>```swift
+// Swift</p>
+<p>let session = URLSession(configuration: configuration)
+```</p>
+<p>Or, if you're using <a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a>/<a href="https://github.com/Alamofire/Alamofire">Alamofire</a> as your networking framework, integrating ResponseDetective comes down to just initializing your <code>AFURLSessionManager</code>/<code>Manager</code> with the above <code>(NS)URLSessionConfiguration</code>:</p>
+<p>```objc
+// Objective-C (AFNetworking)</p>
+<p>AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+```</p>
+<p>```swift
+// Swift (Alamofire)</p>
+<p>let manager = Alamofire.SessionManager(configuration: configuration)
+```</p>
+<p>And that's all!</p>
+<h3>Step 2: Profit</h3>
+<p>Now it's time to perform the actual request:</p>
+<p>```objc
+// Objective-C</p>
+<p>NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://httpbin.org/get"]];
+[[session dataTaskWithRequest:request] resume];
+```</p>
+<p>```swift
+// Swift</p>
+<p>let request = URLRequest(URL: URL(string: "http://httpbin.org/get")!)
+session.dataTask(with: request).resume()
+```</p>
+<p>Voilà! 🎉 Check out your console output:</p>
+<p>```none
+&lt;0x000000000badf00d&gt; [REQUEST] GET https://httpbin.org/get
+ ├─ Headers
+ ├─ Body
+ │ <none></p>
+<p>&lt;0x000000000badf00d&gt; [RESPONSE] 200 (NO ERROR) https://httpbin.org/get
+ ├─ Headers
+ │ Server: nginx
+ │ Date: Thu, 01 Jan 1970 00:00:00 GMT
+ │ Content-Type: application/json
+ ├─ Body
+ │ {
+ │   "args" : {
+ │   },
+ │   "headers" : {
+ │     "User-Agent" : "ResponseDetective\/1 CFNetwork\/758.3.15 Darwin\/15.4.0",
+ │     "Accept-Encoding" : "gzip, deflate",
+ │     "Host" : "httpbin.org",
+ │     "Accept-Language" : "en-us",
+ │     "Accept" : "<em>\/</em>"
+ │   },
+ │   "url" : "https:\/\/httpbin.org\/get"
+ │ }
+```</p>
+<h2>Installation</h2>
+<h3>Carthage</h3>
+<p>If you're using <a href="https://github.com/Carthage/Carthage">Carthage</a>, add the following dependency to your <code>Cartfile</code>:</p>
+<p><code>none
+github "netguru/ResponseDetective"</code></p>
+<h3>CocoaPods</h3>
+<p>If you're using <a href="http://cocoapods.org">CocoaPods</a>, add the following dependency to your <code>Podfile</code>:</p>
+<p><code>none
+use_frameworks!
+pod 'ResponseDetective'</code></p>
+<h2>About</h2>
+<p>This project is made with &lt;3 by <a href="https://netguru.co">Netguru</a> and maintained by <a href="https://github.com/akashivskyy">Adrian Kashivskyy</a>.</p>
+<h3>Release names</h3>
+<p>Starting from version 1.0.0, ResponseDetective's releases are named after <a href="http://www.sherlockian.net/investigating/canon/">Sherlock Holmes canon stories</a>, in chronological order. <strong>What happens if we reach 60 releases and there are no more stories?</strong> We don't know, maybe we'll start naming them after cats or something.</p>
+<h3>License</h3>
+<p>ResponseDetective is licensed under the MIT License. See <a href="LICENSE.md">LICENSE.md</a> for more info.</p>

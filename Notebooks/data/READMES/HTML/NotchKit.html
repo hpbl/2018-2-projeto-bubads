@@ -1,0 +1,74 @@
+<h1>NotchKit</h1>
+<p><a href="https://travis-ci.org/HarshilShah/NotchKit"><img alt="CI Status" src="http://img.shields.io/travis/HarshilShah/NotchKit.svg" /></a>
+<a href="https://github.com/HarshilShah/NotchKit/releases/latest"><img alt="Version" src="https://img.shields.io/github/release/HarshilShah/NotchKit.svg" /></a>
+<a href="http://cocoapods.org/pods/NotchKit"><img alt="CocoaPods" src="https://img.shields.io/badge/CocoaPods-compatible-fb0006.svg" /></a>
+<a href="https://github.com/Carthage/Carthage"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg" /></a>
+<a href="https://github.com/HarshilShah/NotchKit/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/cocoapods/l/NotchKit.svg" /></a>
+<a href="https://twitter.com/HarshilShah1910"><img alt="Contact" src="https://img.shields.io/badge/contact-%40HarshilShah1910-3a8fc1.svg" /></a></p>
+<p>NotchKit is a simple way to hide the notch on the iPhone X, and create a card-like interface for your apps. Inspired by <a href="https://twitter.com/sdw/status/903060778340593664">this tweet from Sebastiaan de With</a>:</p>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I hope / wish that the &#39;iPhone 8&#39; UI looks like this: using black OLED or wallpaper behind to make apps &#39;cards&#39;. Would be beautiful. <a href="https://t.co/mravS87NFy">pic.twitter.com/mravS87NFy</a></p>&mdash; Sebastiaan de With (@sdw) <a href="https://twitter.com/sdw/status/903060778340593664">August 31, 2017</a></blockquote>
+
+<p>Here's what it looks like:</p>
+<p><img alt="Demo" src="demo.gif" /></p>
+<h2>Requirements</h2>
+<ul>
+<li>Swift 4</li>
+<li>iOS 8</li>
+</ul>
+<h2>Installation</h2>
+<p>NotchKit is available via CocoaPods and Carthage</p>
+<h3>CocoaPods</h3>
+<p>To install NotchKit using <a href="http://cocoapods.org">CocoaPods</a>, add the following line to your Podfile:</p>
+<p><code>pod 'NotchKit'</code></p>
+<h3>Carthage</h3>
+<p>To install NotchKit using <a href="https://github.com/Carthage/Carthage">Carthage</a>, add the following line to your Cartfile:</p>
+<p><code>github "HarshilShah/NotchKit"</code></p>
+<h2>Usage</h2>
+<p>Integrating NotchKit is extremely simple. Firstly, import <code>NotchKit</code> in the file where your AppDelegate is stored.</p>
+<p>Next, replace the <code>didFinishLaunchingWithOptions</code> method with the following, swapping in your custom view controller's class in place of <code>ViewController</code></p>
+<p><code>swift
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -&gt; Bool {
+    window = NotchKitWindow(frame: UIScreen.main.bounds)
+    let rootViewController = ViewController()
+    window?.rootViewController = rootViewController
+    window?.makeKeyAndVisible()
+    return true
+}</code></p>
+<p>If you use Storyboards, you can instantiate your Storyboard and fetch the new <code>rootViewController</code> in code using the following, swapping in your Storyboard's class for <code>Main</code>:</p>
+<p><code>swift
+let storyboard = UIStoryboard(name: "Main", bundle: nil)
+let rootViewController = storyboard.instantiateInitialViewController()</code></p>
+<p>If you target a version of iOS earlier than iOS 11, you can still use NotchKit by loading the <code>NotchKitWindow</code> conditionally using the <code>#available</code> syntax, as follows:</p>
+<p><code>swift
+window = {
+    if #available(iOS 11, *) {
+        return NotchKitWindow()
+    } else {
+        return UIWindow()
+    }
+}()</code></p>
+<p>And that's all, you're done!</p>
+<h2>Customisation</h2>
+<p>There are some customisation points offered in NotchKit.</p>
+<p>You can adjust these from any view or view controller belonging to the window, by simply calling the window as a <code>NotchKitWindow</code>, as follows:</p>
+<p><code>swift
+(view.window as? NotchKitWindow)?.propertyToCustomise = valueYouWantToSet</code></p>
+<h3>Target Devices</h3>
+<p>By default, NotchKit hides the status bar and home indicator on all devices. However if you choose you can limit this behaviour to just the iPhone X and have it do nothing on other devices by setting the <code>shouldShowBarsOnlyOniPhoneX</code> property to <code>true</code>.</p>
+<h3>Masked Edges</h3>
+<p>By default, NotchKit masks all edges where applicable. You can customise this behaviour using the <code>maskedEdges</code> property, which accepts a <code>UIRectEdge</code> object that specifies the edges you want to mask.</p>
+<h3>Corner Radius</h3>
+<p>You can customise the corner radius of the window, via the <code>.cornerRadius</code> property. This property is an enum and can either be <code>.standard</code>, which does all the maths for you to show an appropriate corner radius, or you can set a custom value by setting it to <code>.custom(n)</code>, where <code>n</code> is a custom corner radius of your choice.</p>
+<h2>Author</h2>
+<p>Written by Harshil Shah. You can <a href="https://twitter.com/HarshilShah1910">find me on Twitter</a>.</p>
+<h2>License</h2>
+<p>NotchKit is available under the MIT license. See the LICENSE file for more info.</p>
+<hr />
+<p>P.S.: This was made mostly as a joke while I was debating different ways to handle the iPhone X.</p>
+<p>Apple's updated <a href="https://developer.apple.com/ios/human-interface-guidelines/overview/iphone-x">Human Interface Guidelines for the iPhone X</a> explicitly call this out:</p>
+<blockquote>
+<p><strong>Don't mask or call special attention to key display features.</strong> Don't attempt to hide the device's rounded corners, sensor housing, or indicator for accessing the Home screen by placing black bars at the top and bottom of the screen. Don't use visual adornments like brackets, bezels, shapes, or instructional text to call special attention to these areas either.</p>
+</blockquote>
+<p>I'm not sure if violating the HIG is often used as grounds for a rejection, however I wouldn't bet either way.</p>
+<p>It only took me a couple of days using the simulator to realise that embracing the notch is the way forward. My intention with open-sourcing this was to make it easier for others to reach that conclusion as well.</p>
+<h1>EmbraceTheNotch</h1>

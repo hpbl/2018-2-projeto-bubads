@@ -1,0 +1,118 @@
+<p><a href="https://github.com/patchthecode/JTAppleCalendar"><img alt="jtapplecalendarnewlogo" src="https://cloud.githubusercontent.com/assets/2439146/20656424/a1c98c8e-b4e1-11e6-9833-5fa6430f5a8c.png" /></a></p>
+<p><a href="https://patchthecode.github.io/"><img alt="Tutorial" src="https://img.shields.io/badge/Tutorials-patchthecode.github.io-blue.svg" /></a> <a href="http://cocoapods.org/pods/JTAppleCalendar"><img alt="Version" src="https://img.shields.io/cocoapods/v/JTAppleCalendar.svg?style=flat" /></a> <a href="https://github.com/Carthage/Carthage"><img alt="Carthage Compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a> <a href="http://cocoapods.org/pods/JTAppleCalendar"><img alt="Platform" src="https://img.shields.io/cocoapods/p/JTAppleCalendar.svg?style=flat" /></a> <a href="http://cocoapods.org/pods/JTAppleCalendar"><img alt="License" src="https://img.shields.io/cocoapods/l/JTAppleCalendar.svg?style=flat" /></a> <a href="https://github.com/patchthecode/JTAppleCalendar/wiki/Support"><img alt="" src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_74x21.png" /></a> <a href="#backers"><img alt="Backers on Open Collective" src="https://opencollective.com/JTAppleCalendar/backers/badge.svg" /></a> <a href="#sponsors"><img alt="Sponsors on Open Collective" src="https://opencollective.com/JTAppleCalendar/sponsors/badge.svg" /></a> </p>
+<h4>Q: How will my calendar dateCells look with this library?</h4>
+<p><strong>A</strong>: However you want it to look.</p>
+<h3>Tutorials now @ <a href="https://patchthecode.github.io/">patchthecode.github.io</a></h3>
+<p align="center">
+   <a href="https://github.com/patchthecode/JTAppleCalendar/issues/2">
+      <img src="https://cloud.githubusercontent.com/assets/2439146/20638185/d708d542-b353-11e6-8119-fa36c11b66cb.gif" height="450">
+   </a>
+</p>
+
+<p align="center">  
+   <a href="https://github.com/patchthecode/JTAppleCalendar/issues/2">More Images</a>
+</p>
+
+<h2>Features</h2>
+<hr />
+<ul>
+<li>[x] Range selection - select dates in a range. The design is entirely up to you.</li>
+<li>[x] Boundary dates - limit the calendar date range</li>
+<li>[x] Week/month mode - show 1 row of weekdays. Or 2, 3 or 6</li>
+<li>[x] Custom cells - make your day-cells look however you want, with any functionality you want</li>
+<li>[x] Custom calendar view - make your calendar look however you want, with what ever functionality you want</li>
+<li>[x] First Day of week - pick anyday to be first day of the week</li>
+<li>[x] Horizontal or vertical mode</li>
+<li>[x] Ability to add month headers in varying sizes/styles of your liking</li>
+<li>[x] Ability to scroll to any month by simply using the date</li>
+<li>[x] Ability to design your calendar <a href="https://github.com/patchthecode/JTAppleCalendar/issues/2">however you want.</a> You want it, you build it</li>
+<li>[x] <a href="http://cocoadocs.org/docsets/JTAppleCalendar">Complete Documentation</a></li>
+</ul>
+<p><a href="#installation">Installation</a> </p>
+<h1>Want to create a buggy calendar? because this is how people who do not read this creates a buggy calendar.</h1>
+<h1>Please implement the willDisplayCell function as stated here --&gt; https://github.com/patchthecode/JTAppleCalendar/issues/553</h1>
+<h3>I had to put extra bold text because no one reads this 😞</h3>
+<p>Tutorials</p>
+<p><strong>1. Building a Calendar from scratch</strong></p>
+<p><a href="https://www.youtube.com/watch?v=zOphH-h-qCs"><img width="300" alt="screen shot 2017-04-07 at 1 10 00 am" src="https://cloud.githubusercontent.com/assets/2439146/24791476/10ae6602-1b2f-11e7-9d2b-038b007090ab.png"></a></p>
+<p><strong>2. Designing the Calendar [Part1]</strong></p>
+<p><a href="https://www.youtube.com/watch?v=Qd_Gc67xzlw"><img width="300" alt="screen shot 2017-04-09 at 5 16 16 pm" src="https://cloud.githubusercontent.com/assets/2439146/24842167/78a730a2-1d48-11e7-9c63-304491283ce6.png"></a></p>
+<p><strong>3. Mastering Calendar layouts</strong></p>
+<p><a href="https://www.youtube.com/watch?v=1Sta3aEo9E4"><img width="300" alt="screen shot 2017-04-16 at 1 02 30 am" src="https://cloud.githubusercontent.com/assets/2439146/25069787/82c4c886-2240-11e7-94be-324cde5bed4a.png"></a></p>
+<p><strong>4. Common Questions #1</strong></p>
+<p><a href="https://www.youtube.com/watch?v=CQNotydm58s"><img width="300" alt="screen shot 2017-04-16 at 1 02 30 am" src="https://user-images.githubusercontent.com/2439146/28244395-068cdc62-699f-11e7-9c31-5630745aa130.png"></a></p>
+<h2>Installation</h2>
+<hr />
+<h3>1. Installing via CocoaPods</h3>
+<p><a href="http://cocoapods.org">CocoaPods</a> is a dependency manager for Cocoa projects. You can install it with the following command:</p>
+<p><code>bash
+$ gem install cocoapods</code></p>
+<blockquote>
+<p>CocoaPods 1.1.0+ is required to build JTApplecalendar.</p>
+</blockquote>
+<p>To integrate JTAppleCalendar into your Xcode project using CocoaPods, specify it in your <code>Podfile</code>:</p>
+<p>```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '10.0'
+use_frameworks!</p>
+<p>target '<Your Target Name>' do
+    pod 'JTAppleCalendar', '~&gt; 7.0'
+end
+```</p>
+<p>Then, run the following command:</p>
+<p><code>bash
+$ pod install</code></p>
+<p><strong>Completed!</strong></p>
+<p>New to Cocoapods? Did the steps above fail? Then read on.</p>
+<p>If you're new to CocoaPods, simply search how to integrate Cocoapods into your project. Trust me that 5-7 minutes of research will bring you much benefit. CocoaPods one of the top dependency manager for integrating 3rd party frameworks into your project. But in a nut-shell, here is how I did my installation with a sample project called <strong>test</strong></p>
+<ol>
+<li>Install Cocoapods.</li>
+<li>Create a new xcode project. Save the name as: <strong>test</strong></li>
+<li>Go to your console in the directory location where your project is located.</li>
+<li>Type and run the command: <strong>pod init</strong></li>
+<li>This will create a file called: <strong>Podfile</strong> in that same location.</li>
+<li>Edit that <strong>Podfile</strong> so that it looks like the following:</li>
+</ol>
+<p>```bash</p>
+<h1>Uncomment the next line to define a global platform for your project</h1>
+<h1>platform :ios, '9.0'</h1>
+<p>target 'test' do
+  use_frameworks!
+  pod 'JTAppleCalendar', '~&gt; 7.0'
+end
+```</p>
+<p>Save, and head back to terminal and run: <strong>pod install</strong>.  If all Went well, installation should be complete. Close the XCodeproject, and instead reopen it using the <strong>workspace</strong> file which generated when installation was completed. Done.</p>
+<h3>2. Installing via Carthage</h3>
+<p><a href="https://github.com/Carthage/Carthage">Carthage</a> is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.</p>
+<p>You can install Carthage with <a href="http://brew.sh/">Homebrew</a> using the following command:</p>
+<p><code>bash
+$ brew update
+$ brew install carthage</code></p>
+<p>To integrate JTAppleCalendar into your Xcode project using Carthage, specify it in your <code>Cartfile</code>:</p>
+<p><code>ogdl
+github "patchthecode/JTAppleCalendar" ~&gt; 7.0</code></p>
+<p>Run <code>carthage update</code> to build the framework and drag the built <code>JTApplecalendar.framework</code> into your Xcode project.</p>
+<h3>3. Installing manually</h3>
+<p>Simply drag the source files into your project.</p>
+<h2>Author</h2>
+<p>JayT, patchthecode@gmail.com &lt;-- Sending me emails will not get you a swift response. I check it once every 2 weeks or so. Create a new issue <a href="https://github.com/patchthecode/JTAppleCalendar/issues">here on github</a> if you need help.</p>
+<h2>Contributors</h2>
+<p>This project exists thanks to all the people who contribute. [<a href="CONTRIBUTING.md">Contribute</a>].
+<a href="graphs/contributors"><img src="https://opencollective.com/JTAppleCalendar/contributors.svg?width=890&button=false" /></a></p>
+<h2>Backers</h2>
+<p>Thank you to all our backers! 🙏 [<a href="https://opencollective.com/JTAppleCalendar#backer">Become a backer</a>]</p>
+<p><a href="https://opencollective.com/JTAppleCalendar#backers" target="_blank"><img src="https://opencollective.com/JTAppleCalendar/backers.svg?width=890"></a></p>
+<h2>Sponsors</h2>
+<p>Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [<a href="https://opencollective.com/JTAppleCalendar#sponsor">Become a sponsor</a>]</p>
+<p><a href="https://opencollective.com/JTAppleCalendar/sponsor/0/website" target="_blank"><img src="https://opencollective.com/JTAppleCalendar/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/JTAppleCalendar/sponsor/1/website" target="_blank"><img src="https://opencollective.com/JTAppleCalendar/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/JTAppleCalendar/sponsor/2/website" target="_blank"><img src="https://opencollective.com/JTAppleCalendar/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/JTAppleCalendar/sponsor/3/website" target="_blank"><img src="https://opencollective.com/JTAppleCalendar/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/JTAppleCalendar/sponsor/4/website" target="_blank"><img src="https://opencollective.com/JTAppleCalendar/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/JTAppleCalendar/sponsor/5/website" target="_blank"><img src="https://opencollective.com/JTAppleCalendar/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/JTAppleCalendar/sponsor/6/website" target="_blank"><img src="https://opencollective.com/JTAppleCalendar/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/JTAppleCalendar/sponsor/7/website" target="_blank"><img src="https://opencollective.com/JTAppleCalendar/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/JTAppleCalendar/sponsor/8/website" target="_blank"><img src="https://opencollective.com/JTAppleCalendar/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/JTAppleCalendar/sponsor/9/website" target="_blank"><img src="https://opencollective.com/JTAppleCalendar/sponsor/9/avatar.svg"></a></p>
+<h2>License</h2>
+<p>JTAppleCalendar is available under the MIT license. See the LICENSE file for more info.</p>

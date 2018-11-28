@@ -1,0 +1,314 @@
+<p><img alt="fspagerview" src="https://cloud.githubusercontent.com/assets/5186464/24086370/45e7e8dc-0d49-11e7-86aa-139354fe00c5.jpg" /></p>
+<p><a href="#"><img alt="Languages" src="https://img.shields.io/badge/language-swift%204.2%20|%20objc-FF69B4.svg?style=plastic" /></a> <br/>
+<a href="http://cocoadocs.org/docsets/FSPagerView"><img alt="Platform" src="https://img.shields.io/badge/platform-iOS%20|%20tvOS-blue.svg?style=plastic" /></a>
+<a href="http://cocoadocs.org/docsets/FSPagerView"><img alt="Version" src="https://img.shields.io/cocoapods/v/FSPagerView.svg?style=plastic" /></a> 
+<a href="https://github.com/Carthage/Carthage"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=plastic" /></a>
+<a href="https://swift.org/package-manager/"><img alt="SPM compatible" src="https://img.shields.io/badge/SPM-compatible-FF9966.svg?style=plastic" /></a></p>
+<p>|<b>SWIFT</b>|<a href="https://github.com/WenchaoD/FSPagerView/blob/master/README-OBJECTIVE-C.md"><b>OBJECTIVE-C</b></a> |
+|---|---|</p>
+<p><strong>FSPagerView</strong> is an elegant Screen Slide Library implemented primarily with <strong><em>UICollectionView</em></strong>. It is extremely helpful for making Banner、Product Show、Welcome/Guide Pages、Screen/ViewController Sliders.</p>
+<h2>Features</h2>
+<ul>
+<li><strong><em>Infinite</em></strong> scrolling.</li>
+<li><strong><em>Automatic</em></strong> Sliding.</li>
+<li><strong><em>Horizontal</em></strong> and <strong><em>Vertical</em></strong> paging.</li>
+<li>Fully customizable item, with predefined banner-style item.</li>
+<li>Fully customizable <strong><em>page control</em></strong>.</li>
+<li>Rich build-in 3D transformers.</li>
+<li><strong><em>Simple</em></strong> and <strong><em>Delightful</em></strong> api usage.</li>
+<li>Support <strong>SWIFT</strong> and <strong>OBJECTIVE-C</strong>.</li>
+</ul>
+<h2>Demos</h2>
+<ul>
+<li><a href="#banner">Demo1 - Banner</a></li>
+<li><a href="#transformer">Demo2 - Transformer</a></li>
+<li><a href="#page_control">Demo3 - Page Control</a></li>
+</ul>
+<h3>Demo1 - Banner <a id="banner"></a></h3>
+<p>| Banner |
+|---|
+|<img alt="9" src="https://cloud.githubusercontent.com/assets/5186464/22688057/9003d880-ed65-11e6-882e-4587c97c8878.gif" /> |</p>
+<h3>automaticSlidingInterval</h3>
+<p>The time interval of automatic sliding. 0 means disabling automatic sliding. Default is 0.</p>
+<p><strong>e.g.</strong></p>
+<p><code>swift
+pagerView.automaticSlidingInterval = 3.0</code></p>
+<h3>isInfinite</h3>
+<p>A boolean value indicates whether the pager view has infinite number of items. Default is false.</p>
+<p><strong>e.g.</strong></p>
+<p><code>swift
+pagerView.isInfinite = true</code></p>
+<h3>decelerationDistance</h3>
+<p>An unsigned integer value that determines the paging distance of the pager view, which indicates the number of passing items during the deceleration. When the value of this property is FSPagerView.automaticDistance, the actual 'distance' is automatically calculated according to the scrolling speed of the pager view. Default is 1.</p>
+<p><strong>e.g.</strong></p>
+<p><code>swift
+pagerView.decelerationDistance = 2</code></p>
+<h3>itemSize</h3>
+<p>The item size of the pager view. When the value of this property is FSPagerView.automaticSize, the items fill the entire visible area of the pager view. Default is FSPagerView.automaticSize.</p>
+<p><strong>e.g.</strong></p>
+<p><code>swift
+pagerView.itemSize = CGSize(width: 200, height: 180)</code></p>
+<h3>interitemSpacing</h3>
+<p>The spacing to use between items in the pager view. Default is 0.</p>
+<p><strong>e.g.</strong></p>
+<p><code>swift
+pagerView.interitemSpacing = 10</code></p>
+<h2>Demo2 - Transformers</h2>
+<p>|Cross Fading|
+|---|
+| <img alt="1" src="https://cloud.githubusercontent.com/assets/5186464/22686429/1983b97e-ed5f-11e6-9a32-44c1830df7ac.gif" /> |</p>
+<p><code>swift
+pagerView.transformer = FSPagerViewTransformer(type: .crossfading)</code></p>
+<hr />
+<p>|Zoom Out|
+|---|
+| <img alt="2" src="https://cloud.githubusercontent.com/assets/5186464/22686426/19830862-ed5f-11e6-90be-8fb1319cd125.gif" /> |</p>
+<p><code>swift
+pagerView.transformer = FSPagerViewTransformer(type: .zoomout)</code></p>
+<hr />
+<p>|Depth|
+|---|
+| <img alt="3" src="https://cloud.githubusercontent.com/assets/5186464/22686430/19856c1a-ed5f-11e6-8187-9e4395b7597c.gif" /> |</p>
+<p><code>swift
+pagerView.transformer = FSPagerViewTransformer(type: .depth)</code></p>
+<hr />
+<p>|Linear|
+|---|
+| <img alt="4" src="https://cloud.githubusercontent.com/assets/5186464/22686428/198368c0-ed5f-11e6-95df-cfcfe9bc3f29.gif" /> |</p>
+<p><code>swift
+pagerView.transformer = FSPagerViewTransformer(type: .linear)</code></p>
+<hr />
+<p>|Overlap|
+|---|
+| <img alt="5" src="https://cloud.githubusercontent.com/assets/5186464/22686431/198905aa-ed5f-11e6-9312-ec371c8c4e44.gif" /> |</p>
+<p><code>swift
+pagerView.transformer = FSPagerViewTransformer(type: .overlap)</code></p>
+<hr />
+<p>|Ferris Wheel|
+|------|
+| <img alt="6" src="https://cloud.githubusercontent.com/assets/5186464/22686427/19831c08-ed5f-11e6-8bdb-30e762a85d4b.gif" /> |</p>
+<p><code>swift
+pagerView.transformer = FSPagerViewTransformer(type: .ferrisWheel)</code></p>
+<hr />
+<p>|Inverted Ferris Wheel|
+|------|
+| <img alt="7" src="https://cloud.githubusercontent.com/assets/5186464/22686433/19b669a0-ed5f-11e6-8bf0-dc23edf8101f.gif" /> |</p>
+<p><code>swift
+pagerView.transformer = FSPagerViewTransformer(type: .invertedFerrisWheel)</code></p>
+<hr />
+<p>|Cover Flow|
+|------|
+| <img alt="8" src="https://cloud.githubusercontent.com/assets/5186464/22686432/19b567f8-ed5f-11e6-885d-bd660c98b507.gif" /> |
+<code>swift
+pagerView.transformer = FSPagerViewTransformer(type: .coverFlow)</code></p>
+<hr />
+<p>|Cubic|
+|------|
+| <img alt="9" src="https://cloud.githubusercontent.com/assets/5186464/23461598/8875080c-fec5-11e6-8db6-6d8864acfcc1.gif" /> |
+<code>swift
+pagerView.transformer = FSPagerViewTransformer(type: .cubic)</code></p>
+<hr />
+<blockquote>
+<p>Customize your own transformer by subclassing<code>FSPagerViewTransformer.</code></p>
+</blockquote>
+<h2>Demo3 Page Control</h2>
+<p>|Page Control|
+|---|
+|<img alt="10" src="https://cloud.githubusercontent.com/assets/5186464/22689720/2baabdb0-ed6d-11e6-8287-ef7a2c0f64bc.gif" />
+|</p>
+<h3>numberOfPages</h3>
+<p>The number of page indicators of the page control. Default is 0.</p>
+<p><strong>e.g.</strong></p>
+<p><code>swift
+pageControl.numberOfPages = 5</code></p>
+<h3>currentPage</h3>
+<p>The current page, highlighted by the page control. Default is 0.</p>
+<p><strong>e.g.</strong></p>
+<p><code>swift
+pageControl.currentPage = 1</code></p>
+<h3>contentHorizontalAlignment</h3>
+<p>The horizontal alignment of content within the control’s bounds. Default is center.</p>
+<p><strong>e.g.</strong>
+<code>swift
+pageControl.contentHorizontalAlignment = .right</code></p>
+<h3>setStrokeColor:forState:</h3>
+<p>Sets the stroke color for page indicators to use for the specified state. (selected/normal).</p>
+<p><strong>e.g.</strong></p>
+<p><code>swift
+pageControl.setStrokeColor(.green, for: .normal)
+pageControl.setStrokeColor(.yellow, for: .selected)</code></p>
+<h3>setFillColor:forState:</h3>
+<p>Sets the fill color for page indicators to use for the specified state. (selected/normal).</p>
+<p><strong>e.g.</strong></p>
+<p><code>swift
+pageControl.setFillColor(.gray, for: .normal)
+pageControl.setFillColor(.white, for: .selected)</code></p>
+<h3>setImage:forState:</h3>
+<p>Sets the image for page indicators to use for the specified state. (selected/normal).</p>
+<p><strong>e.g.</strong></p>
+<p><code>swift
+pageControl.setImage(UIImage(named:"image1"), for: .normal)
+pageControl.setImage(UIImage(named:"image2"), for: .selected)</code></p>
+<h3>setPath:forState:</h3>
+<p>Sets the path for page indicators to use for the specified state. (selected/normal).</p>
+<p><strong>e.g.</strong></p>
+<p><code>swift
+pageControl.setPath(UIBezierPath(rect: CGRect(x: 0, y: 0, width: 8, height: 8)), for: .normal)
+pageControl.setPath(UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: 8, height: 8)), for: .selected)</code></p>
+<h2>Installation</h2>
+<ul>
+<li>Manually</li>
+<li>Cocoapods</li>
+<li>Carthage</li>
+</ul>
+<h3>Manually</h3>
+<ol>
+<li><strong><em><a href="#">Download</a></em></strong> the source code.</li>
+<li>Extract the zip file, simply drag folder <strong><em>Sources</em></strong> into your project.</li>
+<li>Make sure <strong><em>Copy items if needed</em></strong> is checked.</li>
+</ol>
+<h3>Cocoapods</h3>
+<p><code>ruby
+use_frameworks!
+target '&lt;Your Target Name&gt;' do
+    pod 'FSPagerView'
+end</code></p>
+<h3>Carthage</h3>
+<p><code>ruby
+github "WenchaoD/FSPagerView"</code></p>
+<h2>Tutorial</h2>
+<ul>
+<li><a href="#getting_started">Getting started</a></li>
+<li><a href="#implement_fspagerviewdatasource">Implement FSPagerViewDataSource</a></li>
+<li><a href="#implement_fspagerviewdelegate">Implement FSPagerViewDelegate</a></li>
+</ul>
+<h3>1. Getting started <a id='getting_started'></a></h3>
+<ul>
+<li>Getting started with code</li>
+</ul>
+<p><code>swift
+// Create a pager view
+let pagerView = FSPagerView(frame: frame1)
+pagerView.dataSource = self
+pagerView.delegate = self
+pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
+self.view.addSubview(pagerView)
+// Create a page control
+let pageControl = FSPageControl(frame: frame2)
+self.view.addSubview(pageControl)</code></p>
+<ul>
+<li>Getting started with Interface Builder <br/>
+1、Simply drag <strong>UIView</strong> instance into your View Controller, Change the <code>Custom Class</code> to <code>FSPagerView</code>. (Or <code>FSPageControl</code>) <br/>
+2、Link the <code>dataSource</code> and <code>delegate</code> property of <strong>FSPagerView</strong> to your View Controller. <br/>
+3、Register a cell class.</li>
+</ul>
+<p><code>swift
+@IBOutlet weak var pagerView: FSPagerView! {
+    didSet {
+        self.pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
+    }
+}</code></p>
+<h3>2. Implement FSPagerViewDataSource <a id='implement_fspagerviewdatasource'></a></h3>
+<p>```swift
+public func numberOfItems(in pagerView: FSPagerView) -&gt; Int {
+    return numberOfItems
+}</p>
+<p>public func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -&gt; FSPagerViewCell {
+    let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
+    cell.imageView?.image = ...
+    cell.textLabel?.text = ...
+    return cell
+}
+```</p>
+<h3>3. Implement FSPagerViewDelegate <a id='implement_fspagerviewdelegate'></a></h3>
+<p><code>swift
+func pagerView(_ pagerView: FSPagerView, shouldHighlightItemAt index: Int) -&gt; Bool</code></p>
+<blockquote>
+<p>Asks the delegate if the item should be highlighted during tracking.</p>
+</blockquote>
+<hr />
+<p><code>swift
+func pagerView(_ pagerView: FSPagerView, didHighlightItemAt index: Int)</code></p>
+<blockquote>
+<p>Tells the delegate that the item at the specified index was highlighted.</p>
+</blockquote>
+<hr />
+<p><code>swift
+func pagerView(_ pagerView: FSPagerView, shouldSelectItemAt index: Int) -&gt; Bool</code></p>
+<blockquote>
+<p>Asks the delegate if the specified item should be selected.</p>
+</blockquote>
+<hr />
+<p><code>swift
+func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int)</code></p>
+<blockquote>
+<p>Tells the delegate that the item at the specified index was selected.</p>
+</blockquote>
+<hr />
+<p><code>swift
+func pagerView(_ pagerView: FSPagerView, willDisplay cell: FSPagerViewCell, forItemAt index: Int)</code></p>
+<blockquote>
+<p>Tells the delegate that the specified cell is about to be displayed in the pager view.</p>
+</blockquote>
+<hr />
+<p><code>swift
+func pagerView(_ pagerView: FSPagerView, didEndDisplaying cell: FSPagerViewCell, forItemAt index: Int)</code></p>
+<blockquote>
+<p>Tells the delegate that the specified cell was removed from the pager view.</p>
+</blockquote>
+<hr />
+<p><code>swift
+func pagerViewWillBeginDragging(_ pagerView: FSPagerView)</code></p>
+<blockquote>
+<p>Tells the delegate when the pager view is about to start scrolling the content.</p>
+</blockquote>
+<hr />
+<p><code>swift
+func pagerViewWillEndDragging(_ pagerView: FSPagerView, targetIndex: Int)</code></p>
+<blockquote>
+<p>Tells the delegate when the user finishes scrolling the content.</p>
+</blockquote>
+<hr />
+<p><code>swift
+func pagerViewDidScroll(_ pagerView: FSPagerView)</code></p>
+<blockquote>
+<p>Tells the delegate when the user scrolls the content view within the receiver.</p>
+</blockquote>
+<hr />
+<p><code>swift
+func pagerViewDidEndScrollAnimation(_ pagerView: FSPagerView)</code></p>
+<blockquote>
+<p>Tells the delegate when a scrolling animation in the pager view concludes.</p>
+</blockquote>
+<hr />
+<p><code>swift
+func pagerViewDidEndDecelerating(_ pagerView: FSPagerView)</code></p>
+<blockquote>
+<p>Tells the delegate that the pager view has ended decelerating the scrolling movement.</p>
+</blockquote>
+<hr />
+<h2><a id="support"></a>Support this repo</h2>
+<ul>
+<li>
+<p><strong><em>Star</em></strong> this repo <a href="#"><img style="margin-bottom:-12px" width="72" alt="star" src="https://cloud.githubusercontent.com/assets/5186464/15383105/fcf9cdf0-1dc2-11e6-88db-bf221042a584.png"></a>
+<br/></p>
+</li>
+<li>
+<p>Buy me a Coffee. ☕️ </p>
+</li>
+</ul>
+<p><a href="https://www.paypal.me/WenchaoD" target="_blank"><img src="https://www.paypalobjects.com/webstatic/i/logo/rebrand/ppcom.svg" width="100" height="40" style="margin-bottom:-15px;"></a> &nbsp;&nbsp;|&nbsp;&nbsp;
+    <a href="https://user-images.githubusercontent.com/5186464/45949944-46960480-c030-11e8-9e90-30b015698cf6.png" target="_blank"><img src="http://a1.mzstatic.com/us/r30/Purple49/v4/50/16/b3/5016b341-39c1-b47b-2994-d7e23823baed/icon175x175.png" width="40" height="40" style="margin-bottom:-15px;-webkit-border-radius:10px;border:1px solid rgba(30, 154, 236, 1);"></a> &nbsp;&nbsp;|&nbsp;&nbsp;
+    <a href="https://cloud.githubusercontent.com/assets/5186464/15096872/b06f3a3a-153c-11e6-89f9-2e9c7b88ef42.png" target="_blank"><img src="http://a4.mzstatic.com/us/r30/Purple49/v4/23/31/14/233114f8-2e8d-7b63-8dc5-85d29893061e/icon175x175.jpeg" height="40" width="40" style="margin-bottom:-15px; -webkit-border-radius: 10px;border:1px solid rgba(43, 177, 0, 1)"></a></p>
+<hr />
+<h2>Author</h2>
+<ul>
+<li><strong><em>微博：<a href="http://weibo.com/WenchaoD">@WenchaoD</a></em></strong></li>
+<li><strong><em>Twitter: <a href="https://twitter.com/WenchaoD">@WenchaoD</a></em></strong></li>
+<li>Other repos: <ul>
+<li><a href="https://github.com/WenchaoD"><strong><em>FSCalendar</em></strong></a></li>
+</ul>
+</li>
+</ul>
+<hr />
+<h1><a href="http://cocoadocs.org/docsets/FSPagerView">Documentation</a></h1>

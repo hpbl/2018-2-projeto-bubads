@@ -1,0 +1,137 @@
+<p><a href="https://ramotion.com?utm_source=gthb&amp;utm_medium=special&amp;utm_campaign=animated-tab-bar-logo"><img alt="header" src="./header.png" /></a>
+<img src="https://github.com/Ramotion/animated-tab-bar/blob/master/Screenshots/animatedTabBar.gif" width="600" height="450" />
+<br><br/></p>
+<h1>Animated-tab-bar</h1>
+<p><a href="http://cocoapods.org/pods/RAMAnimatedTabBarController"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/p/RAMAnimatedTabBarController.svg" /></a>
+<a href="http://cocoapods.org/pods/RAMAnimatedTabBarController"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/RAMAnimatedTabBarController.svg" /></a>
+<a href="https://github.com/Ramotion/animated-tab-bar"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a>
+<a href="https://developer.apple.com/swift/"><img alt="Swift 4.0" src="https://img.shields.io/badge/Swift-4.0-green.svg?style=flat" /></a>
+<a href="http://twitter.com/Ramotion"><img alt="Twitter" src="https://img.shields.io/badge/Twitter-@Ramotion-blue.svg?style=flat" /></a>
+<a href="https://travis-ci.org/Ramotion/animated-tab-bar"><img alt="Travis" src="https://img.shields.io/travis/Ramotion/animated-tab-bar.svg" /></a>
+<a href="https://paypal.me/Ramotion"><img alt="Donate" src="https://img.shields.io/badge/Donate-PayPal-blue.svg" /></a></p>
+<h2>About</h2>
+<p>This project is maintained by Ramotion, Inc.<br>
+We specialize in the designing and coding of custom UI for Mobile Apps and Websites.<br></p>
+<p><strong>Looking for developers for your project?</strong><br>
+This project is maintained by Ramotion, Inc. We specialize in the designing and coding of custom UI for Mobile Apps and Websites.</p>
+<p><a href="mailto:alex.a@ramotion.com?subject=Project%20inquiry%20from%20Github">
+<img src="https://github.com/ramotion/gliding-collection/raw/master/contact_our_team@2x.png" width="187" height="34"></a>
+<br></p>
+<p>The <a href="https://store.ramotion.com/product/iphone-x-clay-mockups?utm_source=gthb&amp;utm_medium=special&amp;utm_campaign=animated-tab-bar">iPhone mockup</a> available <a href="https://store.ramotion.com?utm_source=gthb&amp;utm_medium=special&amp;utm_campaign=animated-tab-bar">here</a>.</p>
+<h2>Try this UI control in action</h2>
+<p><a href="https://itunes.apple.com/app/apple-store/id1182360240?pt=550053&ct=gthb-animated-tab-bar&mt=8" > <img src="https://github.com/Ramotion/navigation-stack/raw/master/Download_on_the_App_Store_Badge_US-UK_135x40.png" width="170" height="58"></a></p>
+<p>Screencast from our Demo</p>
+<p><img alt="Animation" src="https://raw.githubusercontent.com/Ramotion/animated-tab-bar/master/Screenshots/RAMAnimatedTabBarDemo.gif" /></p>
+<h2>Requirements</h2>
+<ul>
+<li>iOS 9.0+</li>
+<li>xCode 9</li>
+</ul>
+<h2>Installation</h2>
+<p>Just add the RAMAnimatedTabBarController folder to your project.</p>
+<p>or use <a href="https://cocoapods.org">CocoaPods</a> with Podfile:
+<code>ruby
+pod 'RAMAnimatedTabBarController'</code></p>
+<p>or <a href="https://github.com/Carthage/Carthage">Carthage</a> users can simply add to their <code>Cartfile</code>:
+```
+github "Ramotion/animated-tab-bar"</p>
+<p>```</p>
+<h2>Usage</h2>
+<ol>
+<li>
+<p>Create a new UITabBarController in your storyboard or nib.</p>
+</li>
+<li>
+<p>Set the class of the UITabBarController to RAMAnimatedTabBarController in your Storyboard or nib.</p>
+</li>
+<li>
+<p>For each UITabBarItem, set the class to RAMAnimatedTabBarItem.</p>
+</li>
+<li>
+<p>Add a custom image icon for each RAMAnimatedTabBarItem</p>
+</li>
+<li>
+<p>Add animation for each RAMAnimatedTabBarItem :</p>
+</li>
+<li>drag and drop an NSObject item into your ViewController</li>
+<li>set its class to ANIMATION_CLASS (where ANIMATION_CLASS is the class name of the animation you want to use)</li>
+<li>connect the outlet animation in RAMAnimatedTabBarItem to your ANIMATION_CLASS
+   <a href="http://vimeo.com/112390386">Demonstration video for step 5</a></li>
+</ol>
+<h2>Included Animations</h2>
+<ul>
+<li>RAMBounceAnimation</li>
+<li>RAMLeftRotationAnimation</li>
+<li>RAMRightRotationAnimation</li>
+<li>RAMFlipLeftTransitionItemAnimations</li>
+<li>RAMFlipRightTransitionItemAnimations</li>
+<li>RAMFlipTopTransitionItemAnimations</li>
+<li>RAMFlipBottomTransitionItemAnimations</li>
+<li>RAMFrameItemAnimation</li>
+<li>RAMFumeAnimation</li>
+</ul>
+<h2>Creating Custom Animations</h2>
+<ol>
+<li>Create a new class which inherits from RAMItemAnimation:</li>
+</ol>
+<p><code>swift
+     class NewAnimation : RAMItemAnimation</code>
+2. Implement the methods in RAMItemAnimationProtocol:</p>
+<p><code>swift
+    // method call when Tab Bar Item is selected
+    override func playAnimation(icon: UIImageView, textLabel: UILabel) {
+      // add animation
+    }</code><br />
+<code>swift
+    // method call when Tab Bar Item is deselected
+    override func deselectAnimation(icon: UIImageView, textLabel: UILabel, defaultTextColor: UIColor, defaultIconColor: UIColor) {
+      // add animation
+    }</code>  <br />
+<code>swift
+    // method call when TabBarController did load
+    override func selectedState(icon: UIImageView, textLabel: UILabel) {
+      // set selected state  
+    }</code></p>
+<ol>
+<li>Example:</li>
+</ol>
+<p>``` swift
+import RAMAnimatedTabBarController</p>
+<p>class RAMBounceAnimation : RAMItemAnimation {</p>
+<pre><code>override func playAnimation(_ icon: UIImageView, textLabel: UILabel) {
+    playBounceAnimation(icon)
+    textLabel.textColor = textSelectedColor
+}
+
+override func deselectAnimation(_ icon: UIImageView, textLabel: UILabel, defaultTextColor: UIColor, defaultIconColor: UIColor) {
+    textLabel.textColor = defaultTextColor
+}
+
+override func selectedState(_ icon: UIImageView, textLabel: UILabel) {
+    textLabel.textColor = textSelectedColor
+}
+
+func playBounceAnimation(_ icon : UIImageView) {
+
+    let bounceAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
+    bounceAnimation.values = [1.0 ,1.4, 0.9, 1.15, 0.95, 1.02, 1.0]
+    bounceAnimation.duration = TimeInterval(duration)
+    bounceAnimation.calculationMode = kCAAnimationCubic
+
+    icon.layer.add(bounceAnimation, forKey: "bounceAnimation")
+}
+</code></pre>
+<p>}
+```</p>
+<p><br>This library is a part of a <a href="https://github.com/Ramotion/swift-ui-animation-components-and-libraries"><b>selection of our best UI open-source projects.</b></a></br></p>
+<h1>Get the Showroom App for iOS to give it a try</h1>
+<p>Try this UI library in our iOS app. Contact us if you interested in hiring the team.</p>
+<p><a href="https://itunes.apple.com/app/apple-store/id1182360240?pt=550053&ct=animated-tab-bar&mt=8" >
+<img src="https://github.com/ramotion/gliding-collection/raw/master/app_store@2x.png" width="117" height="34"></a>
+<a href="mailto:alex.a@ramotion.com?subject=Project%20inquiry%20from%20Github">
+<img src="https://github.com/ramotion/gliding-collection/raw/master/contact_our_team@2x.png" width="187" height="34"></a>
+<br>
+<br></p>
+<p>Follow us for the latest updates<br>
+<a href="https://goo.gl/rPFpid" >
+<img src="https://i.imgur.com/ziSqeSo.png/" width="156" height="28"></a></p>

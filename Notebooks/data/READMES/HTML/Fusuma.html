@@ -1,0 +1,103 @@
+<h2>Fusuma</h2>
+<p>Fusuma is a Swift library that provides an Instagram-like photo browser with a camera feature using only a few lines of code.<br />
+You can use Fusuma instead of UIImagePickerController. It also has a feature to take a square-sized photo.</p>
+<p><a href="http://cocoapods.org/pods/Fusuma"><img alt="Version" src="https://img.shields.io/cocoapods/v/Fusuma.svg?style=flat" /></a>
+<a href="http://cocoapods.org/pods/Fusuma"><img alt="Platform" src="https://img.shields.io/cocoapods/p/Fusuma.svg?style=flat" /></a>
+<a href="https://travis-ci.org/ytakzk/Fusuma"><img alt="CI Status" src="http://img.shields.io/travis/ytakzk/Fusuma.svg?style=flat" /></a>
+<a href="https://github.com/Carthage/Carthage"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a>
+<a href="https://codebeat.co/projects/github-com-ytakzk-fusuma"><img alt="codebeat" src="https://codebeat.co/badges/287ff7b1-4cda-4384-8780-88e1dbff95cd" /></a></p>
+<h2>Preview</h2>
+<p><img src="./Demo/fusuma.gif?raw=true" width="340px"></p>
+<h2>Images</h2>
+<p><img src="./Demo/camera_roll.png?raw=true" width="340px">
+<img src="./Demo/photo.png?raw=true" width="340px"></p>
+<h2>Features</h2>
+<ul>
+<li>[x] UIImagePickerController alternative</li>
+<li>[x] Cropping images in camera roll</li>
+<li>[x] Taking a square-sized photo and a video using AVFoundation</li>
+<li>[x] Flash: On &amp; Off </li>
+<li>[x] Camera Mode: Front &amp; Back </li>
+<li>[x] Video Mode</li>
+<li>[x] Colors fully customizable</li>
+</ul>
+<p>Those features are available just with a few lines of code!</p>
+<h2>Installation</h2>
+<h4>Manual installation</h4>
+<p>Download and drop the 'Classes' folder into your Xcode project.  </p>
+<h4>Using <a href="http://cocoapods.org/">CocoaPods</a></h4>
+<p>Add <code>pod 'Fusuma'</code> to your <code>Podfile</code> and run <code>pod install</code>. Also add <code>use_frameworks!</code> to the <code>Podfile</code>.</p>
+<p><code>use_frameworks!
+pod 'Fusuma'</code></p>
+<h4>Using <a href="https://github.com/Carthage/Carthage">Carthage</a></h4>
+<p>Add <code>github "ytakzk/Fusuma"</code> to your <code>Cartfile</code> and run <code>carthage update</code>. If unfamiliar with Carthage then checkout their <a href="https://github.com/Carthage/Carthage#getting-started">Getting Started section</a>.</p>
+<p><code>github "ytakzk/Fusuma"</code></p>
+<h2>Fusuma Usage</h2>
+<p>Import Fusuma <code>import Fusuma</code> then use the following codes in some function except for viewDidLoad and give FusumaDelegate to the view controller.  </p>
+<p><code>Swift
+let fusuma = FusumaViewController()
+fusuma.delegate = self
+fusuma.hasVideo = true //To allow for video capturing with .library and .camera available by default
+fusuma.cropHeightRatio = 0.6 // Height-to-width ratio. The default value is 1, which means a squared-size photo.
+fusuma.allowMultipleSelection = true // You can select multiple photos from the camera roll. The default value is false.
+self.presentViewController(fusuma, animated: true, completion: nil)</code></p>
+<h4>Delegate methods</h4>
+<p>```Swift
+// Return the image which is selected from camera roll or is taken via the camera.
+func fusumaImageSelected(image: UIImage, source: FusumaMode) {</p>
+<p>print("Image selected")
+}</p>
+<p>// Return the image but called after is dismissed.
+func fusumaDismissedWithImage(image: UIImage, source: FusumaMode) {</p>
+<p>print("Called just after FusumaViewController is dismissed.")
+}</p>
+<p>func fusumaVideoCompleted(withFileURL fileURL: NSURL) {</p>
+<p>print("Called just after a video has been selected.")
+}</p>
+<p>// When camera roll is not authorized, this method is called.
+func fusumaCameraRollUnauthorized() {</p>
+<p>print("Camera roll unauthorized")
+}</p>
+<p>// Return selected images when you allow to select multiple photos.
+func fusumaMultipleImageSelected(images: [UIImage], source: FusumaMode) {</p>
+<p>}</p>
+<p>// Return an image and the detailed information.
+func fusumaImageSelected(_ image: UIImage, source: FusumaMode, metaData: ImageMetadata) {</p>
+<p>}
+```</p>
+<h4>How To Customize</h4>
+<p>```Swift
+let fusuma = FusumaViewController()
+fusuma.delegate = self
+// ...
+fusumaCameraRollTitle = "CustomizeCameraRollTitle"
+fusumaCameraTitle = "CustomizeCameraTitle" // Camera Title
+fusumaTintColor: UIColor // tint color
+// ...
+self.presentViewController(fusuma, animated: true, completion: nil)</p>
+<p>```</p>
+<h3>Properties</h3>
+<p>| Prop | Type | Description | Default |
+|---|---|---|---|
+|<strong><code>fusumaBaseTintColor</code></strong>|UIColor|Base tint color.|<code>UIColor.hex("#c9c7c8", alpha: 1.0)</code>|
+|<strong><code>fusumaTintColor</code></strong>|UIColor|Tint color.|<code>UIColor.hex("#FCFCFC", alpha: 1.0)</code>|
+|<strong><code>fusumaBackgroundColor</code></strong>|UIColor|Background color.|<code>UIColor.hex("#c9c7c8", alpha: 1.0)</code>|
+|<strong><code>fusumaCheckImage</code></strong>| UIImage | Image of check button.|<img alt="" src="./Sources/Assets.xcassets/ic_check.imageset/ic_check_white_48pt.png" />|
+|<strong><code>fusumaCloseImage</code></strong>| UIImage |Image of close button.|<img alt="" src="./Sources/Assets.xcassets/ic_close.imageset/ic_close_white_48pt.png" />|
+|<strong><code>fusumaCropImage</code></strong>| Bool |Whether to crop the taken image.| <code>true</code> |
+|<strong><code>fusumaSavesImage</code></strong>| Bool |Whether to save the taken image.| <code>false</code> |
+|<strong><code>fusumaCameraRollTitle</code></strong>| String |Text of camera roll title.| <code>"Library"</code> |
+|<strong><code>fusumaCameraTitle</code></strong>| String |Text of carmera title text.| <code>Photo</code> |
+|<strong><code>fusumaVideoTitle</code></strong>| String |Text of video title.| <code>Video</code> |
+|<strong><code>fusumaTitleFont</code></strong>| UIFont |Whether to save the taken image.| <code>UIFont(name: "AvenirNext-DemiBold", size: 15)</code> |</p>
+<h2>Fusuma for Xamarin</h2>
+<p>Cheesebaron developed Chafu for Xamarin.<br />
+https://github.com/Cheesebaron/Chafu</p>
+<h2>Author</h2>
+<p>ytakzk<br />
+<a href="https://ytakzk.me">https://ytakzk.me</a></p>
+<h2>Donation</h2>
+<p>Your support is welcome through Bitcoin 3Ps8tBgz4qn6zVUr5D1wcYrrzYjMgEugqv</p>
+<h2>License</h2>
+<p>Fusuma is released under the MIT license.<br />
+See LICENSE for details.</p>

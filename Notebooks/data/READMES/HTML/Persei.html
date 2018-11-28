@@ -1,0 +1,149 @@
+<h1>Persei</h1>
+<p><a href="https://travis-ci.org/Yalantis/Persei"><img alt="Build Status" src="https://travis-ci.org/Yalantis/Persei.svg" /></a>
+<a href="https://github.com/Yalantis/Persei/blob/master/LICENSE"><img alt="License" src="http://img.shields.io/badge/license-MIT-green.svg?style=flat" /></a></p>
+<p><img alt="Preview" src="https://github.com/Yalantis/Persei/blob/master/Assets/animation.gif" /></p>
+<p>Animated top menu for UITableView / UICollectionView / UIScrollView written in Swift!</p>
+<p>Made in <a href="https://yalantis.com/?utm_source=github">Yalantis</a>.</p>
+<p>Check this <a href="https://dribbble.com/shots/1706861-Top-Menu-Animation?list=users&amp;offset=23">project on Dribbble</a></p>
+<p>Check this <a href="https://www.behance.net/gallery/20411445/Mobile-Animations-Interactions%20">project on Behance</a></p>
+<h2>Supported Swift versions</h2>
+<p>| Swift Version | Persei |
+|:---:|:---:|
+| 1.x | 1.1 |
+| 2.x | 2.0 |
+| 3.x | 3.0 |
+| <strong>4.x</strong> | <strong>3.1</strong> |</p>
+<h2>Installation</h2>
+<h3><a href="http://cocoapods.org">CocoaPods</a></h3>
+<p>```ruby
+use_frameworks!</p>
+<p>pod 'Persei', '~&gt; 3.0'
+```</p>
+<h3><a href="http://github.com/Carthage/Carthage">Carthage</a></h3>
+<p><code>ruby
+github "Yalantis/Persei" ~&gt; 3.0</code></p>
+<h3>Manual Installation</h3>
+<blockquote>
+<p>For application targets that do not support embedded frameworks, such as iOS 7, Persei can be integrated by including source files from the Persei folder directly, optionally wrapping the top-level types into <code>struct Persei</code> to simulate a namespace. Yes, this sucks.</p>
+</blockquote>
+<ol>
+<li>Add Persei as a <a href="http://git-scm.com/docs/git-submodule">submodule</a> by opening the Terminal, <code>cd</code>-ing into your top-level project directory, and entering the command <code>git submodule add https://github.com/yalantis/Persei.git</code></li>
+<li>Open the <code>Persei</code> folder, and drag <code>Persei.xcodeproj</code> into the file navigator of your app project.</li>
+<li>In Xcode, navigate to the target configuration window by clicking on the blue project icon, and selecting the application target under the "Targets" heading in the sidebar.</li>
+<li>Ensure that the deployment target of <code>Persei.framework</code> matches that of the application target.</li>
+<li>In the tab bar at the top of that window, open the "Build Phases" panel.</li>
+<li>Expand the "Target Dependencies" group, and add <code>Persei.framework</code>.</li>
+<li>Expand the "Link Binary With Libraries" group, and add <code>SideMenu.framework</code></li>
+<li>Click on the <code>+</code> button at the top left of the panel and select "New Copy Files Phase". Rename this new phase to "Copy Frameworks", set the "Destination" to "Frameworks", and add <code>Persei.framework</code>.</li>
+</ol>
+<h2>Usage</h2>
+<h4>Import <code>Persei</code> module</h4>
+<p><code>swift
+import Persei</code></p>
+<h4>Init</h4>
+<p><code>swift
+let menu = MenuView()    
+tableView.addSubview(menu)</code></p>
+<h4>Configuring items</h4>
+<p>In order to set items you need to instantiate array of <code>MenuItem</code>:</p>
+<p>```swift
+let items = feedModes.map { mode: SomeYourCustomFeedMode -&gt; MenuItem in
+    return MenuItem(image: mode.image)
+}</p>
+<p>menu.items = items
+```</p>
+<h4>Handling selection</h4>
+<p>You can specify selected item manually:
+<code>swift
+menu.selectedIndex = 3</code></p>
+<p>Note, that selectedIndex declared as <code>Int?</code> and will be <code>nil</code> in case of <code>menu.items = nil</code>.</p>
+<p>Also, you can implement <code>MenuViewDelegate</code> to be notified about selection change:
+```swift
+// during init
+menu.delegate = self</p>
+<p>// actual implementation
+extension FeedViewController: MenuViewDelegate {
+    func menu(menu: MenuView, didSelectItemAt index: Int) {
+        dataSource.mode = feedModes[index] // alter mode of dataSource</p>
+<pre><code>    tableView.reload() // update tableView
+}
+</code></pre>
+<p>}
+```</p>
+<h4>Reveal menu manually</h4>
+<p>Menu can be reveal as a result of button tap:
+```swift
+func menuButtonSelected(sender: UIControl) {
+    menu.revealed = !menu.revealed</p>
+<pre><code>// or animated
+menu.setRevealed(true, animated: true)
+</code></pre>
+<p>}
+```</p>
+<h4>Content Gravity</h4>
+<p>Use <code>contentViewGravity</code> to control sticking behavior. There are 3 available options:</p>
+<ul>
+<li>Top: <code>contentView</code> sticked to the top position of the view</li>
+<li>Center: <code>contentView</code> is aligned to the middle of the streched view</li>
+<li>Bottom: <code>contentView</code> sticked to the bottom</li>
+</ul>
+<h4>Customization</h4>
+<p><code>MenuItem</code> declares set of attributes, that allow you to customize appearance of items:
+```swift
+struct MenuItem {
+    var image: UIImage // default image
+    var highlightedImage: UIImage? // image used during selection</p>
+<pre><code>var backgroundColor: UIColor // default background color
+var highlightedBackgroundColor: UIColor // background color used during selection
+
+var shadowColor: UIColor // color of bottom 2px shadow line
+</code></pre>
+<p>}
+```</p>
+<p>Also you're free to configure background of <code>MenuView</code> by utilizing <code>backgroundColor</code> or <code>backgroundImage</code>. Note, that image should be resizeable:
+<code>swift
+let menu = MenuView()
+menu.backgroundImage = UIImage(named: "top_menu_background")</code></p>
+<h4>Advanced customization</h4>
+<ul>
+<li>Can I place the UIImageView instead?</li>
+<li>Sure! Just subclass / use <code>StickyHeaderView</code> directly. It offers layout, positioning and reveal control. All you have to do is to assign your custom view (animated nian-cat UIImageView) to <code>contentView</code>:</li>
+</ul>
+<p>```swift
+let headerView = StickyHeaderView()
+let imageView = UIImageView(...)</p>
+<p>headerView.contentView = imageView
+```</p>
+<p>Obviously, your custom view can have heigh different from default:
+<code>swift
+headerView.contentHeight = image.size.height</code></p>
+<p>As well as control distance to trigger open/close of the header:
+<code>swift
+headerView.threshold = 0.5</code>
+Threshold is a float value from 0 to 1, specifies how much user needs to drag header for reveal.</p>
+<h4>Let us know!</h4>
+<p>We’d be really happy if you sent us links to your projects where you use our component. Just send an email to github@yalantis.com And do let us know if you have any questions or suggestion regarding the animation.</p>
+<p>P.S. We’re going to publish more awesomeness wrapped in code and a tutorial on how to make UI for iOS (Android) better than better. Stay tuned!</p>
+<h2>License</h2>
+<pre><code>The MIT License (MIT)
+
+Copyright © 2017 Yalantis
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</code></pre>

@@ -1,0 +1,85 @@
+<h1>Display Switcher</h1>
+<p><a href="https://img.shields.io/cocoapods/v/DisplaySwitcher.svg"><img alt="CocoaPods Compatible" src="https://img.shields.io/cocoapods/v/DisplaySwitcher.svg" /></a>
+<a href="http://cocoapods.org/?q=YALSideMenu"><img alt="Platform" src="http://img.shields.io/badge/platform-iOS-blue.svg?style=flat" /></a> 
+<a href=""><img alt="License" src="http://img.shields.io/badge/license-MIT-green.svg?style=flat" /></a> 
+<a href="https://yalantis.com/?utm_source=github"><img alt="Yalantis" src="https://raw.githubusercontent.com/Yalantis/PullToRefresh/develop/PullToRefreshDemo/Resources/badge_dark.png" /></a></p>
+<p>This component implements custom transition between two collection view layouts with custom animation duration.</p>
+<p><img alt="Preview" src="https://github.com/Yalantis/DisplaySwitcher/blob/master/Assets/animation.gif" /></p>
+<p>Check this <a href="https://dribbble.com/shots/2276068-Contact-Display-Switch">project on dribbble</a>.</p>
+<p>Also, read how it was done in <a href="https://yalantis.com/blog/contact-display-switch-animation/">our blog</a></p>
+<h2>Requirements</h2>
+<ul>
+<li>iOS 8.0+</li>
+<li>Xcode 9</li>
+<li>Swift 4.2</li>
+</ul>
+<h2>Installing</h2>
+<h3><a href="https://cocoapods.org">CocoaPods</a></h3>
+<p><code>ruby
+use_frameworks!
+pod ‘DisplaySwitcher’, '~&gt; 1.2’</code></p>
+<h3><a href="https://github.com/Carthage/Carthage">Carthage</a></h3>
+<p><code>github "Yalantis/DisplaySwitcher" "master"</code></p>
+<h2>Usage</h2>
+<p>At first, import DisplaySwitcher:</p>
+<p><code>swift
+import DisplaySwitcher</code></p>
+<p>Then create two layouts (list mode and grid mode):</p>
+<p>```swift
+private lazy var listLayout = DisplaySwitchLayout(staticCellHeight: listLayoutStaticCellHeight, nextLayoutStaticCellHeight: gridLayoutStaticCellHeight, layoutState: .list)</p>
+<p>private lazy var gridLayout = DisplaySwitchLayout(staticCellHeight: gridLayoutStaticCellHeight, nextLayoutStaticCellHeight: listLayoutStaticCellHeight, layoutState: .grid)
+```</p>
+<p>Set current layout:</p>
+<p><code>swift
+private var layoutState: LayoutState = .list
+collectionView.collectionViewLayout = listLayout</code></p>
+<p>Then override two UICollectionViewDataSource methods:</p>
+<p>```swift
+func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -&gt; Int {
+    // count of items
+}</p>
+<p>func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -&gt; UICollectionViewCell {
+    // configure your custom cell
+}
+```</p>
+<p>Also override one UICollectionViewDelegate method (for custom layout transition):</p>
+<p><code>swift
+func collectionView(collectionView: UICollectionView, transitionLayoutForOldLayout fromLayout: UICollectionViewLayout, newLayout toLayout: UICollectionViewLayout) -&gt; UICollectionViewTransitionLayout {
+    let customTransitionLayout = TransitionLayout(currentLayout: fromLayout, nextLayout: toLayout)
+    return customTransitionLayout
+}</code></p>
+<p>And in the end necessary create transition and start it (you can simply change animation duration for transition layout and for rotation button):</p>
+<p><code>swift
+let transitionManager: TransitionManager
+if layoutState == .list {
+    layoutState = .grid
+    transitionManager = TransitionManager(duration: animationDuration, collectionView: collectionView!, destinationLayout: gridLayout, layoutState: layoutState)
+} else {
+    layoutState = .list
+    transitionManager = TransitionManager(duration: animationDuration, collectionView: collectionView!, destinationLayout: listLayout, layoutState: layoutState)
+}
+transitionManager.startInteractiveTransition()
+rotationButton.selected = layoutState == .list
+rotationButton.animationDuration = animationDuration</code></p>
+<p>Have fun! :)</p>
+<h4>Let us know!</h4>
+<p>We’d be really happy if you sent us links to your projects where you use our component. Just send an email to github@yalantis.com And do let us know if you have any questions or suggestion regarding the animation. </p>
+<p>P.S. We’re going to publish more awesomeness wrapped in code and a tutorial on how to make UI for iOS (Android) better than better. Stay tuned!</p>
+<h2>License</h2>
+<p>The MIT License (MIT)</p>
+<p>Copyright © 2018 Yalantis</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</p>

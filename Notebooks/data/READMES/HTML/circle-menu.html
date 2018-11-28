@@ -1,0 +1,89 @@
+<p><img alt="header" src="./header.png" />
+<img src="https://github.com/Ramotion/circle-menu/blob/master/circle-menu.gif" width="600" height="450" />
+<br><br/></p>
+<h1>CircleMenu</h1>
+<p><a href="http://twitter.com/Ramotion"><img alt="Twitter" src="https://img.shields.io/badge/Twitter-@Ramotion-blue.svg?style=flat" /></a>
+<a href="https://cocoapods.org/pods/CircleMenu"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/p/CircleMenu.svg" /></a>
+<a href="http://cocoapods.org/pods/CircleMenu"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/CircleMenu.svg" /></a>
+<a href="https://cdn.rawgit.com/Ramotion/circle-menu/master/docs/index.html"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/metrics/doc-percent/CircleMenu.svg" /></a>
+<a href="https://github.com/Ramotion/circle-menu"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a>
+<a href="https://codebeat.co/projects/github-com-ramotion-circle-menu"><img alt="codebeat badge" src="https://codebeat.co/badges/6f67da5d-c416-4bac-9fb7-c2dc938feedc" /></a>
+<a href="https://travis-ci.org/Ramotion/circle-menu"><img alt="Travis" src="https://img.shields.io/travis/Ramotion/circle-menu.svg" /></a>
+<a href="https://paypal.me/Ramotion"><img alt="Donate" src="https://img.shields.io/badge/Donate-PayPal-blue.svg" /></a></p>
+<h1>Check this library on other platforms:</h1>
+<p><a href="https://github.com/Ramotion/circle-menu-android"> 
+<img src="https://github.com/ramotion/navigation-stack/raw/master/Android_Java@2x.png" width="178" height="81"></a>
+<a href="https://github.com/Ramotion/react-native-circle-menu"> 
+<img src="https://github.com/ramotion/navigation-stack/raw/master/React Native@2x.png" width="178" height="81"></a></p>
+<p><strong>Looking for developers for your project?</strong><br>
+This project is maintained by Ramotion, Inc. We specialize in the designing and coding of custom UI for Mobile Apps and Websites.</p>
+<p><a href="mailto:alex.a@ramotion.com?subject=Project%20inquiry%20from%20Github">
+<img src="https://github.com/ramotion/gliding-collection/raw/master/contact_our_team@2x.png" width="187" height="34"></a> <br></p>
+<p>The <a href="https://store.ramotion.com/product/iphone-x-clay-mockups?utm_source=gthb&amp;utm_medium=special&amp;utm_campaign=circle-menu">iPhone mockup</a> available <a href="https://store.ramotion.com?utm_source=gthb&amp;utm_medium=special&amp;utm_campaign=circle-menu">here</a>.</p>
+<h2>Try this UI control in action</h2>
+<p><a href="https://itunes.apple.com/app/apple-store/id1182360240?pt=550053&ct=gthb-circle-menu&mt=8" > <img src="https://github.com/Ramotion/navigation-stack/raw/master/Download_on_the_App_Store_Badge_US-UK_135x40.png" width="170" height="58"></a></p>
+<h2>Requirements</h2>
+<ul>
+<li>iOS 9.0+</li>
+<li>Xcode 9.0.1</li>
+</ul>
+<h2>Installation</h2>
+<p>Just add CircleMenuLib folder to your project.</p>
+<p>or use <a href="https://cocoapods.org">CocoaPods</a> with Podfile:</p>
+<p><code>ruby
+pod 'CircleMenu'</code>
+or <a href="https://github.com/Carthage/Carthage">Carthage</a> users can simply add to their <code>Cartfile</code>:
+<code>github "Ramotion/circle-menu"</code></p>
+<h2>Usage</h2>
+<h5>with storyboard</h5>
+<p>1) Create a new UIButton inheriting from <code>CircleMenu</code></p>
+<p>2) Add images for Normal and Selected state</p>
+<p>3) Use delegate method to configure buttons</p>
+<p><code>swift
+func circleMenu(circleMenu: CircleMenu, willDisplay button: UIButton, atIndex: Int)</code></p>
+<p>4) Use properties to confiure CircleMenu</p>
+<p><code>swift
+@IBInspectable var buttonsCount: Int = 3
+@IBInspectable var duration: Double = 2 // circle animation duration
+@IBInspectable var distance: Float = 100 // distance between center button and buttons</code></p>
+<h5>programmatically</h5>
+<p><code>swift
+let button = CircleMenu(
+  frame: CGRect(x: 200, y: 200, width: 50, height: 50),
+  normalIcon:"icon_menu",
+  selectedIcon:"icon_close",
+  buttonsCount: 4,
+  duration: 4,
+  distance: 120)
+button.delegate = self
+button.layer.cornerRadius = button.frame.size.width / 2.0
+view.addSubview(button)</code></p>
+<h5>delegate methods</h5>
+<p>```swift
+// configure buttons
+optional func circleMenu(circleMenu: CircleMenu, willDisplay button: UIButton, atIndex: Int)</p>
+<p>// call before animation
+optional func circleMenu(circleMenu: CircleMenu, buttonWillSelected button: UIButton, atIndex: Int)</p>
+<p>// call after animation
+optional func circleMenu(circleMenu: CircleMenu, buttonDidSelected button: UIButton, atIndex: Int)</p>
+<p>// call upon cancel of the menu - fires immediately on button press
+optional func menuCollapsed(circleMenu: CircleMenu)</p>
+<p>// call upon opening of the menu - fires immediately on button press
+optional func menuOpened(circleMenu: CircleMenu)
+```</p>
+<p>This library is a part of a <a href="https://github.com/Ramotion/swift-ui-animation-components-and-libraries"><b>selection of our best UI open-source projects.</b></a></p>
+<h2>Licence</h2>
+<p>Circle menu is released under the MIT license.
+See <a href="./LICENSE">LICENSE</a> for details.
+<br></p>
+<h1>Get the Showroom App for iOS and Android to give it a try</h1>
+<p>Try this UI component and more like this in our mobile app. Contact us if interested.</p>
+<p><a href="https://itunes.apple.com/app/apple-store/id1182360240?pt=550053&ct=circle-menu&mt=8" >
+<img src="https://github.com/ramotion/gliding-collection/raw/master/app_store@2x.png" width="117" height="34"></a>
+<a href="mailto:alex.a@ramotion.com?subject=Project%20inquiry%20from%20Github">
+<img src="https://github.com/ramotion/gliding-collection/raw/master/contact_our_team@2x.png" width="187" height="34"></a>
+<br>
+<br></p>
+<p>Follow us for the latest updates<br>
+<a href="https://goo.gl/rPFpid" >
+<img src="https://i.imgur.com/ziSqeSo.png/" width="156" height="28"></a></p>

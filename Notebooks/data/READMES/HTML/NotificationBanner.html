@@ -1,0 +1,196 @@
+<p><img alt="Notification Banner" src="NotificationBanner/Assets/header.png" /></p>
+<p><a href="http://cocoapods.org/pods/NotificationBannerSwift"><img alt="Version" src="https://img.shields.io/cocoapods/v/NotificationBannerSwift.svg?style=flat" /></a>
+<a href="https://github.com/Carthage/Carthage/"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
+<a href="http://cocoapods.org/pods/NotificationBannerSwift"><img alt="Platform" src="https://img.shields.io/cocoapods/p/NotificationBannerSwift.svg?style=flat" /></a>
+<a href="https://developer.apple.com/swift"><img src="https://img.shields.io/badge/swift-4.2-4BC51D.svg?style=flat" alt="Language: Swift" /></a>
+<a href="http://cocoapods.org/pods/NotificationBannerSwift"><img alt="Downloads" src="https://img.shields.io/cocoapods/dt/NotificationBannerSwift.svg" /></a>
+<a href="http://cocoapods.org/pods/NotificationBannerSwift"><img alt="Apps" src="https://img.shields.io/cocoapods/at/NotificationBannerSwift.svg" /></a>
+<a href="http://cocoapods.org/pods/NotificationBannerSwift"><img alt="License" src="https://img.shields.io/cocoapods/l/NotificationBannerSwift.svg?style=flat" /></a></p>
+<h2>Written in Swift 4.2</h2>
+<p>NotificationBanner is an extremely customizable and lightweight library that makes the task of displaying in app notification banners and drop down alerts an absolute breeze in iOS.</p>
+<p>| Basic Banners | Banners with Side Views  | Status Bar Banners |
+| ------------- | ------------- | ------------- |
+| <img alt="Basic Banners" src="NotificationBanner/Assets/basic.gif" />  | <img alt="Banners with Side Views" src="NotificationBanner/Assets/side_views.gif" />  | <img alt="Status Bar Banners" src="NotificationBanner/Assets/status_bar.gif" /> |</p>
+<h2>Features</h2>
+<ul>
+<li>Highly customizable ✅</li>
+<li><code>NSAttributedString</code> support ✅</li>
+<li>iPhone, iPhoneX, &amp; iPad Support ✅</li>
+<li>Orientation change support ✅</li>
+<li>Custom <code>UIView</code> support ✅</li>
+<li>Custom colors support ✅</li>
+<li>Support for long titles/ subtitles ✅</li>
+<li><code>NotificationBanner</code> uses horizontal scrolling labels</li>
+<li><code>GrowingNotificationBanner</code> grows in height as needed</li>
+<li>Presenting from top or bottom support ✅</li>
+<li>Haptic feeback support ✅</li>
+<li>Built in banner queue ✅</li>
+</ul>
+<h2>Requirements</h2>
+<ul>
+<li>iOS 9.0+</li>
+<li>Xcode 9.0+</li>
+</ul>
+<h2>Installation</h2>
+<h3>CocoaPods</h3>
+<p>NotificationBanner is available through <a href="http://cocoapods.org">CocoaPods</a>. To install
+it, simply add the following line to your Podfile:</p>
+<h4>Swift 4.2</h4>
+<p><code>ruby
+pod 'NotificationBannerSwift'</code></p>
+<p>Then add <code>import NotificationBannerSwift</code> at the top of each file you use NotificationBanner in your project.</p>
+<h4>Swift 4.0</h4>
+<p><code>ruby
+pod 'NotificationBannerSwift', '1.6.3'
+pod 'MarqueeLabel/Swift', '3.1.6'</code></p>
+<p>Then add <code>import NotificationBannerSwift</code> at the top of each file you use NotificationBanner in your project.</p>
+<h3>Carthage</h3>
+<p>To use NotificationBanner via Carthage simply add this line to your <code>Cartfile</code>:</p>
+<h4>Swift 4.2</h4>
+<p><code>swift
+github "Daltron/NotificationBanner" "master"</code></p>
+<p>Then add <code>NotificationBanner.framework</code> and the dependencies <code>SnapKit.framework</code> and <code>MarqueeLabelSwift.framework</code> in your project.</p>
+<h2>Usage</h2>
+<p>Creating drop down alerts with NotificationBanner is easy. To create a regular banner (with scrolling labels) and show it, simply:</p>
+<p><code>swift
+let banner = NotificationBanner(title: title, subtitle: subtitle, style: .success)
+banner.show()</code></p>
+<p>If you want to create a banner which grows in height as needed and show it accordingly just use <code>GrowingNotificationBanner</code> instead of <code>NotificationBanner</code>:</p>
+<p><code>swift
+let banner = GrowingNotificationBanner(title: title, subtitle: subtitle, style: .success)
+banner.show()</code></p>
+<p>To create a status bar alert, simply:</p>
+<p><code>swift
+let banner = StatusBarNotificationBanner(title: title, style: .success)
+banner.show()</code></p>
+<p>By default, each banner will be displayed on the main application window. If you are wanting to show a banner below a navigation bar, simply show on the view controller that is within the navigation system:</p>
+<p><code>swift
+banner.show(on: viewController)</code></p>
+<p>By default, each banner will present from the top. If you are wanting to display from the bottom, simply:</p>
+<p><code>swift
+banner.show(bannerPosition: .bottom)</code></p>
+<p>Each of the show properties defined above can be mixed and matched to work flawlessly with eachother.</p>
+<p>By default, each banner will automatically dismiss after 5 seconds. To dismiss programatically, simply:</p>
+<p><code>swift
+banner.dismiss()</code></p>
+<p>To show a banner infinitely until it is manually dismissed, simply:</p>
+<p><code>swift
+banner.autoDismiss = false</code></p>
+<p>NotificationBanner has five prebuilt styles that you can choose from:</p>
+<p><code>swift
+public enum BannerStyle {
+    case danger
+    case info
+    case none
+    case success
+    case warning
+}</code></p>
+<p>You can override the predefined colors that NotificationBanner uses for any style by conforming to the <code>BannerColorsProtocol</code>:</p>
+<p><code>swift
+public protocol BannerColorsProtocol {
+    func color(for style: BannerStyle) -&gt; UIColor
+}</code></p>
+<p>Its as easy as creating a custom banner colors class:</p>
+<p>```swift
+class CustomBannerColors: BannerColorsProtocol {</p>
+<pre><code>internal func color(for style: BannerStyle) -&gt; UIColor {
+    switch style {
+        case .danger:   // Your custom .danger color
+        case .info:     // Your custom .info color
+        case .none:     // Your custom .none color
+        case .success:  // Your custom .success color
+        case .warning:  // Your custom .warning color
+    }
+}
+</code></pre>
+<p>}
+```</p>
+<p>And then passing in that class to any notification banner you create:</p>
+<p><code>swift
+let banner = NotificationBanner(title: title, style: .success, colors: CustomBannerColors())
+banner.show()</code></p>
+<p>By default, the <code>.info</code> style will be applied to the banner if no style is provided in the init method. You can set the background color of a banner at any time by simply setting the <code>backgroundColor</code>.</p>
+<h3>Banners with Side Views</h3>
+<p>A notification banner can have a left accessory view, a right accessory view, or both:</p>
+<p>```swift
+// Success Style Notification with Left View
+let leftView = UIImageView(image: #imageLiteral(resourceName: "success"))
+let banner = NotificationBanner(title: title, subtitle: subtitle, leftView: leftView, style: .success)
+banner.show()</p>
+<p>// Danger Style Notification with Right View
+let rightView = UIImageView(image: #imageLiteral(resourceName: "danger"))
+let banner = NotificationBanner(title: title, subtitle: subtitle, rightView: rightView, style: .danger)
+banner.show()    </p>
+<p>// Info Style Notification with Left and Right Views
+let leftView = UIImageView(image: #imageLiteral(resourceName: "info"))
+let rightView = UIImageView(image: #imageLiteral(resourceName: "right_chevron"))
+let banner = NotificationBanner(title: title, subtitle: subtitle, leftView: leftView, rightView: rightView, style: .info)
+banner.show()
+```
+<img alt="Banners with Side Views" src="NotificationBanner/Assets/side_views.gif" /></p>
+<p>Each side view will be automically reisized to fit perfectly</p>
+<h3>Banners with a Custom View</h3>
+<p>A notification banner can also be initalized with a custom view:</p>
+<p><code>swift
+let banner = NotificationBanner(customView: NorthCarolinaBannerView())
+banner.show()</code>
+<img alt="Custom Banner" src="NotificationBanner/Assets/custom.gif" /></p>
+<h3>Handling User Interaction</h3>
+<p>By default, when a banner is tapped or swiped up by a user, it will be dismissed. If you want to detect when the user taps or swipes up on a banner, simply:</p>
+<p><code>swift
+banner.onTap = {
+    // Do something regarding the banner
+}</code></p>
+<p><code>swift
+banner.onSwipeUp = {
+    // Do something regarding the banner
+}</code></p>
+<h3>Banner Events</h3>
+<p>You can choose to opt into a notification banner's events by registering as its delegate:</p>
+<p><code>swift
+banner.delegate = self</code>
+Then just make sure to implement the following methods:</p>
+<p><code>swift
+internal func notificationBannerWillAppear(_ banner: BaseNotificationBanner)
+internal func notificationBannerDidAppear(_ banner: BaseNotificationBanner)
+internal func notificationBannerWillDisappear(_ banner: BaseNotificationBanner)
+internal func notificationBannerDidDisappear(_ banner: BaseNotificationBanner)</code></p>
+<h2>Haptic Feedback Support</h2>
+<p>By default, when a banner is displayed, a haptic feedback will be generated on devices that support it. The types of haptic feedback are as follows:</p>
+<p><code>swift
+public enum BannerHaptic {
+    case light
+    case medium
+    case heavy
+    case none
+}</code></p>
+<p>To change the type of haptic feedback to generate when a banner is shown, simply:</p>
+<p><code>swift
+banner.haptic = .heavy</code></p>
+<h2>Banner Queue</h2>
+<p>By default, each notification banner is placed onto a singleton of an auto-managed <code>NotificationBannerQueue</code>. This allows an infinite amount of banners to be displayed without one hiding the other. If you have multiple controllers within your navigation stack that need to be managed by a seperate queue (like a tab bar controller), simply create an instance of a <code>NotificationBannerQueue</code> and pass it in to the show function:</p>
+<p><code>swift
+banner.show(queue: customQueue)</code></p>
+<p>By default, each notification banner is placed on the back of the queue. If you would rather place the banner in the front and show it immediately no matter how many banners are in the queue, simply state it in the <code>show()</code> method:</p>
+<p><code>swift
+banner.show(queuePosition: .front)</code></p>
+<p>Adding a banner to the front of the queue will temporarily suspend the currently displayed banner (if there is one) and will resume it after the banner in front of it dismisses.</p>
+<p>To get the number of banners currently on the queue, simply:</p>
+<p><code>swift
+let numberOfBanners = NotificationBannerQueue.default.numberOfBanners</code></p>
+<p><b>This is all automatically managed!</b></p>
+<h2>Feature Requests</h2>
+<p>I'd love to know anything that you think NotificationBanner is missing. Open an issue and I'll add the <code>feature request</code> label to it and I'll do everything I can to accomodate that request if it is in the library's best interest. 😄 </p>
+<h2>Apps that Use NotificationBanner</h2>
+<p><a href="https://itunes.apple.com/us/app/q-talk-about-music/id1071551321?mt=8"><img alt="Q - Talk About Music" src="AppIcons/q_talk_about_music.jpg" /></a> 
+<a href="https://itunes.apple.com/us/app/vh-dispatch/id1249569084?mt=8"><img alt="VH Dispatch" src="AppIcons/vh_dispatch.png" /></a>
+<a href="https://itunes.apple.com/us/app/stikkr/id851375015?ls=1&amp;mt=8"><img alt="Stikkr" src="AppIcons/stikkr.png" /></a>
+<a href="https://itunes.apple.com/us/app/cardcast-business-cards/id1269278947?mt=8"><img alt="CardCast" src="AppIcons/cardcast.png" /></a>
+<a href="https://itunes.apple.com/us/app/happy-scale/id532430574?mt=8"><img alt="Happy Scale" src="AppIcons/happy_scale.png" /></a>
+<a href="https://itunes.apple.com/us/app/wanderings-travel-tracking/id1292503352?mt=8"><img alt="Wanderings" src="AppIcons/wanderings.png" /></a>
+<a href="https://itunes.apple.com/us/app/modern-magic-8-ball/id1381145384?mt=8"><img alt="Modern Magic 8 Ball" src="AppIcons/modernmagic8ball.png" /></a></p>
+<h4>Feel free to add yours!</h4>
+<h2>Author</h2>
+<p>Dalton Hinterscher, daltonhint4@gmail.com</p>
+<h2>License</h2>
+<p>NotificationBanner is available under the MIT license. See the LICENSE file for more info.</p>

@@ -1,0 +1,59 @@
+<h1><a href="http://layoutkit.org/"><img alt="LayoutKit" src="https://cdn.rawgit.com/linkedin/LayoutKit/master/docs/img/layoutkit.svg" /></a></h1>
+<p><a href="#"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/p/LayoutKit.svg?maxAge=3601" /></a>
+<a href="https://github.com/linkedin/LayoutKit/releases"><img alt="GitHub release" src="https://img.shields.io/github/release/linkedin/layoutkit.svg?maxAge=3600" /></a>
+<a href="https://travis-ci.org/linkedin/LayoutKit"><img alt="Build Status" src="https://travis-ci.org/linkedin/LayoutKit.svg?branch=master" /></a>
+<a href="https://codecov.io/gh/linkedin/LayoutKit"><img alt="codecov" src="https://codecov.io/gh/linkedin/LayoutKit/branch/master/graph/badge.svg" /></a></p>
+<p>LayoutKit is a fast view layout library for iOS, macOS, and tvOS.</p>
+<h2>Motivation</h2>
+<p>LinkedIn created LayoutKit because we have found that Auto Layout is not performant enough for complicated view hierarchies in scrollable views.
+For more background, read the <a href="https://engineering.linkedin.com/blog/2016/06/open-sourcing-layoutkit--a-fast-view-layout-library-for-ios-appl">blog post</a>.</p>
+<h2>Benefits</h2>
+<p>LayoutKit has many benefits over using Auto Layout:</p>
+<ul>
+<li><strong>Fast</strong>: LayoutKit is as fast as manual layout code and is <a href="http://layoutkit.org/benchmarks">significantly faster than Auto Layout</a>.</li>
+<li><strong>Asynchronous</strong>: Layouts can be computed in a background thread so user interactions are not interrupted.</li>
+<li><strong>Declarative</strong>: Layouts are declared with immutable data structures. This makes layout code easier to develop, document, code review, test, debug, profile, and maintain.</li>
+<li><strong>Cacheable</strong>: Layout results are immutable data structures so they can be precomputed in the background and cached to increase user perceived performance.</li>
+</ul>
+<p>LayoutKit also provides benefits that make it as easy to use as Auto Layout:</p>
+<ul>
+<li><strong>UIKit friendly</strong>: LayoutKit produces UIViews and also provides an adapter that makes it easy to use with UITableView and UICollectionView.</li>
+<li><strong>Internationalization</strong>: LayoutKit automatically adjusts view frames for right-to-left languages.</li>
+<li><strong>Swift</strong>: LayoutKit can be used in Swift applications and playgrounds.</li>
+<li><strong>Tested and production ready</strong>: LayoutKit is covered by unit tests and is being used inside of recent versions of the <a href="https://itunes.apple.com/us/app/linkedin/id288429040?mt=8">LinkedIn</a> and <a href="https://itunes.apple.com/us/app/linkedin-job-search/id886051313?mt=8">LinkedIn Job Search</a> iOS apps.</li>
+<li><strong>Open-source</strong>: Not a black box like Auto Layout.</li>
+<li><strong>Apache License (v2)</strong>: Your lawyers will be happy that there are no patent shenanigans.</li>
+</ul>
+<h2>Hello world</h2>
+<p>```swift
+let image = SizeLayout<UIImageView>(width: 50, height: 50, config: { imageView in
+    imageView.image = UIImage(named: "earth.jpg")
+})</p>
+<p>let label = LabelLayout(text: "Hello World!", alignment: .center)</p>
+<p>let stack = StackLayout(
+    axis: .horizontal,
+    spacing: 4,
+    sublayouts: [image, label])</p>
+<p>let insets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 8)
+let helloWorld = InsetLayout(insets: insets, sublayout: stack)
+helloWorld.arrangement().makeViews(in: rootView)
+```</p>
+<p><img alt="Hello world example layout" src="docs/img/helloworld.png" /></p>
+<h2>Limitations</h2>
+<p>We have found LayoutKit to be a useful tool, but you should be aware of what it is not.</p>
+<ul>
+<li>LayoutKit is not a constraint based layout system. If you wish to express a constraint between views, then those views need to be children of a single layout that implements code to enforce that constraint.</li>
+<li>LayoutKit is not <a href="https://www.w3.org/TR/css-flexbox-1/">flexbox</a>, but you may find similarities.</li>
+</ul>
+<h2>Installation</h2>
+<p>LayoutKit can be installed with <a href="https://cocoapods.org/">CocoaPods</a> or <a href="https://github.com/Carthage/Carthage">Carthage</a>.</p>
+<h3>CocoaPods</h3>
+<p>Add this to your Podspec:
+<code>pod 'LayoutKit'</code></p>
+<p>Then run <code>pod install</code>.</p>
+<h3>Carthage</h3>
+<p>Add this to your Cartfile:
+<code>github "linkedin/LayoutKit"</code></p>
+<p>Then run <code>carthage update</code>.</p>
+<h2>Documentation</h2>
+<p>Now you are ready to start <a href="http://layoutkit.org/building-ui">building UI</a>.</p>

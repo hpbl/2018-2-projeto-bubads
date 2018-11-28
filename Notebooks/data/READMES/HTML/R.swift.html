@@ -1,0 +1,117 @@
+<h1>R.swift <a href="https://cocoapods.org/pods/R.swift"><img alt="Version" src="https://img.shields.io/cocoapods/v/R.swift.svg?style=flat" /></a> <a href="blob/master/License"><img alt="License" src="https://img.shields.io/cocoapods/l/R.swift.svg?style=flat" /></a> <img alt="Platform" src="https://img.shields.io/cocoapods/p/R.swift.svg?style=flat" /></h1>
+<p><em>Get strong typed, autocompleted resources like images, fonts and segues in Swift projects</em></p>
+<hr />
+<h3>⚠️ R.swift and Xcode 10 / Swift 4.2</h3>
+<p>The currently latest release of R.swift (5.0.0.alpha.2) supports Swift 4.2, but with a couple of known issues:</p>
+<p>When using the new build system and using R.swift as a build step:
+ - The initial compile will fail if no output file is configured
+ - However, when setting an output file, subsequent incremental build won't run the R.swift build step</p>
+<p>Current known work-arounds for these issues:
+ 1. Use the Legacy Build System
+ 2. Don't configure an output file, but compile twice (difficult on a CI)
+ 3. Configure an output file, but always do a clean build when an asset has been added (difficult to remember when developing)
+ 4. Commit the R.generated.swift file to source control, so the CI has the lastest version from development </p>
+<p>We're working on finding a better solution to these issues, see also: https://github.com/mac-cain13/R.swift/issues/456</p>
+<hr />
+<h2>Why use this?</h2>
+<p>It makes your code that uses resources:
+- <strong>Fully typed</strong>, less casting and guessing what a method will return
+- <strong>Compile time checked</strong>, no more incorrect strings that make your app crash at runtime
+- <strong>Autocompleted</strong>, never have to guess that image name again</p>
+<p>Currently you type:
+<code>swift
+let icon = UIImage(named: "settings-icon")
+let font = UIFont(name: "San Francisco", size: 42)
+let color = UIColor(named: "indictator highlight")
+let viewController = CustomViewController(nibName: "CustomView", bundle: nil)
+let string = String(format: NSLocalizedString("welcome.withName", comment: ""), locale: NSLocale.current, "Arthur Dent")</code></p>
+<p>With R.swift it becomes:
+<code>swift
+let icon = R.image.settingsIcon()
+let font = R.font.sanFrancisco(size: 42)
+let color = R.color.indicatorHighlight()
+let viewController = CustomViewController(nib: R.nib.customView)
+let string = R.string.localizable.welcomeWithName("Arthur Dent")</code></p>
+<p>Check out <a href="Documentation/Examples.md">more examples</a> or hear about <a href="https://news.realm.io/news/slug-javi-soto-building-fabric-in-swift/#rswift-2956">how Fabric.app uses R.swift</a>!</p>
+<h2>Demo</h2>
+<p><strong>Autocompleted images:</strong></p>
+<p><img alt="Autocompleted images" src="Documentation/Images/DemoUseImage.gif" /></p>
+<p><strong>Compiletime checked images:</strong></p>
+<p><img alt="Compiletime checked images" src="Documentation/Images/DemoRenameImage.gif" /></p>
+<p>This is only the beginning, check out <a href="Documentation/Examples.md">more examples</a>!</p>
+<h2>CocoaHeadsNL presentation</h2>
+<p>Mathijs Kadijk presented R.swift at the September 2016 CocoaHeadsNL meetup.
+Talking about the ideas behind R.swift and demonstrating how to move from plain stringly-typed iOS code to statically typed code.</p>
+<p><a href="https://vimeo.com/185173151"><img src="https://i.vimeocdn.com/video/594835658.jpg?mw=1920&mh=1080&q=70" width="560" alt="R.swift presentation at CocoaHeadsNL"></a></p>
+<h2>Features</h2>
+<p>After installing R.swift into your project you can use the <code>R</code>-struct to access resources. If the struct is outdated just build and R.swift will correct any missing/changed/added resources.</p>
+<p>R.swift currently supports these types of resources:
+- <a href="Documentation/Examples.md#images">Images</a>
+- <a href="Documentation/Examples.md#custom-fonts">Fonts</a>
+- <a href="Documentation/Examples.md#resource-files">Resource files</a>
+- <a href="Documentation/Examples.md#colors">Colors</a>
+- <a href="Documentation/Examples.md#localized-strings">Localized strings</a>
+- <a href="Documentation/Examples.md#storyboards">Storyboards</a>
+- <a href="Documentation/Examples.md#segues">Segues</a>
+- <a href="Documentation/Examples.md#nibs">Nibs</a>
+- <a href="Documentation/Examples.md#reusable-table-view-cells">Reusable cells</a></p>
+<p>Runtime validation with <a href="Documentation/Examples.md#runtime-validation"><code>R.validate()</code></a>:
+- If all images used in storyboards and nibs are available
+- If all named colors used in storyboards and nibs are available
+- If all view controllers with storyboard identifiers can be loaded
+- If all custom fonts can be loaded</p>
+<h2>Q&amp;A</h2>
+<ul>
+<li><a href="Documentation/QandA.md#why-was-rswift-created">Why was R.swift created?</a></li>
+<li><a href="Documentation/QandA.md#why-should-i-choose-rswift-over-alternative-x-or-y">Why should I choose R.swift over alternative X or Y?</a></li>
+<li><a href="Documentation/QandA.md#what-are-the-requirements-to-run-rswift">What are the requirements to run R.swift?</a></li>
+<li><a href="Documentation/QandA.md#how-to-use-methods-with-a-void-argument">How to use methods with a <code>Void</code> argument?</a></li>
+<li><a href="Documentation/QandA.md#how-to-fix-missing-imports-in-the-generated-file">How to fix missing imports in the generated file?</a></li>
+<li><a href="Documentation/QandA.md#how-to-use-classes-with-the-same-name-as-their-module">How to use classes with the same name as their module?</a></li>
+<li><a href="Documentation/Ignoring.md">Can I ignore resources?</a></li>
+<li><a href="Documentation/QandA.md#can-i-use-rswift-in-a-library">Can I use R.swift in a library?</a></li>
+<li><a href="Documentation/QandA.md#how-does-rswift-work">How does R.swift work?</a></li>
+<li><a href="Documentation/Migration.md">How to upgrade to a new major version?</a></li>
+</ul>
+<h2>Installation</h2>
+<p><a href="http://cocoapods.org">CocoaPods</a> is the recommended way of installation, as this avoids including any binary files into your project.</p>
+<p><em>Note on Carthage: R.swift is a tool used in a build step, it is not a dynamic library. Therefore <a href="https://github.com/mac-cain13/R.swift/issues/42">it is not possible</a> to install it with Carthage.</em></p>
+<blockquote>
+<h3>⚠️ Change between R.swift 3 and R.swift 4</h3>
+<p>Be aware:<br />
+For R.swift 3.x and below, the <code>rswift</code> executable should be called with only one argument: <code>rswift $SRCROOT</code><br />
+For R.swift 4, the <code>rswift</code> executable should be called with two arguments: <code>rswift generate $SRCROOT</code></p>
+</blockquote>
+<h3>CocoaPods (recommended)</h3>
+<p><em>There is also a <a href="https://vimeo.com/122888912">short video</a> of this instruction.</em></p>
+<ol>
+<li>Add <code>pod 'R.swift'</code> to your <a href="http://cocoapods.org/#get_started">Podfile</a> and run <code>pod install</code></li>
+<li>In Xcode: Click on your project in the file list, choose your target under <code>TARGETS</code>, click the <code>Build Phases</code> tab and add a <code>New Run Script Phase</code> by clicking the little plus icon in the top left</li>
+<li>Drag the new <code>Run Script</code> phase <strong>above</strong> the <code>Compile Sources</code> phase and <strong>below</strong> <code>Check Pods Manifest.lock</code>, expand it and paste the following script:<br />
+<code>"$PODS_ROOT/R.swift/rswift" generate "$SRCROOT"</code></li>
+<li>Build your project, in Finder you will now see a <code>R.generated.swift</code> in the <code>$SRCROOT</code>-folder, drag the <code>R.generated.swift</code> files into your project and <strong>uncheck</strong> <code>Copy items if needed</code></li>
+</ol>
+<p><em>Tip:</em> Add the <code>*.generated.swift</code> pattern to your <code>.gitignore</code> file to prevent unnecessary conflicts.</p>
+<h3>Manually</h3>
+<ol>
+<li>Add the <a href="https://github.com/mac-cain13/R.swift.Library#Installation">R.swift.Library</a> to your project</li>
+<li><a href="https://github.com/mac-cain13/R.swift/releases">Download</a> a R.swift release, unzip it and put it into your source root directory</li>
+<li>In Xcode: Click on your project in the file list, choose your target under <code>TARGETS</code>, click the <code>Build Phases</code> tab and add a <code>New Run Script Phase</code> by clicking the little plus icon in the top left</li>
+<li>Drag the new <code>Run Script</code> phase <strong>above</strong> the <code>Compile Sources</code> phase, expand it and paste the following script:<br />
+<code>"$SRCROOT/rswift" generate "$SRCROOT"</code></li>
+<li>Build your project, in Finder you will now see a <code>R.generated.swift</code> in the <code>$SRCROOT</code>-folder, drag the <code>R.generated.swift</code> files into your project and <strong>uncheck</strong> <code>Copy items if needed</code></li>
+</ol>
+<p><em>Tip:</em> Add the <code>*.generated.swift</code> pattern to your <code>.gitignore</code> file to prevent unnecessary conflicts.</p>
+<h3>Building from source</h3>
+<p>R.swift is built using <a href="https://github.com/apple/swift-package-manager">Swift Package Manager (SPM)</a>.</p>
+<ol>
+<li>Check out the code</li>
+<li>Run <code>swift build -c release -Xswiftc -static-stdlib</code> from the root directory</li>
+<li>Follow the manual installation steps with the binary you now have</li>
+</ol>
+<p>For developing on R.swift in Xcode, run <code>swift package generate-xcodeproj --xcconfig-overrides RswiftConfig.xcconfig</code>.</p>
+<h2>Contribute</h2>
+<p>We'll love contributions, read the <a href="Documentation/Contribute.md">contribute docs</a> for info on how to report issues, submit ideas and submit pull requests!</p>
+<h2>License</h2>
+<p><a href="https://github.com/mac-cain13/R.swift">R.swift</a> and <a href="https://github.com/mac-cain13/R.swift.Library">R.swift.Library</a> are created by <a href="https://github.com/mac-cain13">Mathijs Kadijk</a> and released under a <a href="License">MIT License</a>.</p>
+<p>Special thanks to <a href="https://github.com/tomlokhorst">Tom Lokhorst</a> for his major contributions and help maintaining this project.</p>

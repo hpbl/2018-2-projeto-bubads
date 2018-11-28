@@ -1,0 +1,69 @@
+<h1>FaceAware</h1>
+<p><img src="https://raw.githubusercontent.com/BeauNouvelle/FaceAware/master/Images/avatarExample.png" width=50%></p>
+<p>Sometimes the aspect ratios of images we need to work with don't quite fit within the confines of our UIImageViews.</p>
+<p>In most cases we can use AspectFill to fit the image to the bounds of a UIImageView without stretching or leaving whitespace, however when it comes to photos of people, it's quite often to have the faces cropped out if they're not perfectly centered.</p>
+<p>This is where FaceAware comes in.
+It will analyse an image either through <code>UIImageView</code>'s <code>image</code> property, or one you set using one of the built in functions and focus in on any faces it can find within.</p>
+<p>The most common use for FaceAware is with avatars. </p>
+<p>With FaceAware your users will no longer have to crop and adjust their profile pictures.</p>
+<p><img src="https://raw.githubusercontent.com/BeauNouvelle/FaceAware/master/Images/largeExample.jpg" width=50%></p>
+<p>Based on these two older projects:</p>
+<ul>
+<li><a href="https://github.com/croath/UIImageView-BetterFace-Swift">BetterFace-Swift</a></li>
+<li><a href="https://github.com/Julioacarrettoni/UIImageView_FaceAwareFill">FaceAwareFill</a></li>
+</ul>
+<p>Both of which don't seem to be maintained anymore.</p>
+<h2>Requirements</h2>
+<ul>
+<li>Swift 4.2</li>
+<li>iOS 8.0+</li>
+<li>Xcode 10</li>
+</ul>
+<h2>Installation</h2>
+<h4>Manual</h4>
+<p>Simply drag <code>UIImageView+FaceAware.swift</code> into your project. </p>
+<h4>Carthage</h4>
+<ul>
+<li>Add <code>github "BeauNouvelle/FaceAware"</code> to your <code>Cartfile</code></li>
+</ul>
+<p>More information on installing and setting up Carthage can be found here:
+https://github.com/Carthage/Carthage</p>
+<h4>Cocoapods</h4>
+<ul>
+<li>Add <code>pod 'FaceAware'</code> to your pod file.</li>
+<li>Add <code>import FaceAware</code> to the top of your files where you wish to use it.</li>
+</ul>
+<h2>Useage</h2>
+<p>There are a few ways to get your image views focussing in on faces within images.</p>
+<h4>Interface Builder</h4>
+<p>This is the easiest method and doesn't require writing any code.
+The extension makes use of <code>@IBDesignable</code> and <code>@IBInspectable</code> so you can turn on focusOnFaces from within IB. However you won't actually see the extension working until you run your project.</p>
+<p><img src="https://raw.githubusercontent.com/BeauNouvelle/FaceAware/master/Images/inspectable.png" width=40%></p>
+<h4>Code</h4>
+<p>You can set <code>focusOnFaces</code> to <code>true</code>.</p>
+<p><code>swift
+someImageView.focusOnFaces = true</code>
+Be sure to set this <em>after</em> setting your image. If no image is present when this is called, there will be no faces to focus on.</p>
+<hr />
+<p>Alternatively you can use:</p>
+<p><code>swift
+someImageView.set(image: myImage, focusOnFaces: true)</code>
+Which elimates the worry of not having an image previously set.</p>
+<hr />
+<p>You can also recieve a callback for when face detection and any image adjustments have been completed by passing in a closure to the <code>didFocusOnFaces</code> property.</p>
+<p><code>swift
+someImageView.didFocusOnFaces = {
+     print("Did finish focussing")
+}</code></p>
+<h4>Debugging</h4>
+<p>FaceAware now features a debug mode which draws red squares around any detected faces within an image. To enable you can set the <code>debug</code> property to true.</p>
+<p><code>swift
+someImageView.debug = true</code></p>
+<p>You can also set this flag within interface builder.</p>
+<h2>More help? Questions?</h2>
+<p>Reach out to me on Twitter <a href="https://twitter.com/BeauNouvelle">@beaunouvelle</a>
+Also, if you're using this in your project and you like it, please let me know so I can continue working on it!</p>
+<h2>Future Plans</h2>
+<ul>
+<li>[ ] Add an option to only focus on largest/closest face in photo.</li>
+</ul>

@@ -1,0 +1,95 @@
+<p><img src="https://raw.githubusercontent.com/Cosmo/TinyConsole/master/TinyConsole-Banner.png" alt=" text" width="100%" /></p>
+<h1>TinyConsole</h1>
+<p><img src="https://img.shields.io/badge/platform-iOS-blue.svg?style=flat" alt="Platform iOS" />
+<img src="https://img.shields.io/badge/swift3-compatible-green.svg?style=flat" alt="Swift 3 compatible" />
+<img src="https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat" alt="Carthage compatible" />
+<img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="License MIT" /></p>
+<p>A tiny log console to display information while using your iOS app.
+Written in Swift 3.</p>
+<h2>Usage</h2>
+<p>Pass your App-ViewController as a <code>rootViewController</code> parameter to <code>TinyConsole</code> to create the <code>TinyConsoleController</code>.</p>
+<p><code>swift
+TinyConsole.createViewController(rootViewController: MyMainViewController())</code></p>
+<h3>Actions</h3>
+<p>```swift
+// Print message
+TinyConsole.print("hello")</p>
+<p>// Print messages any color you want 
+TinyConsole.print("green text", color: UIColor.green)</p>
+<p>// Print a red error message 
+TinyConsole.error("something went wrong")</p>
+<p>// Print a marker for orientation
+TinyConsole.addMarker()</p>
+<p>// Clear console
+TinyConsole.clear()</p>
+<p>// Set root view controller
+TinyConsole.set(rootViewController: MyViewController())
+```</p>
+<blockquote>
+<p>Calling <code>TinyConsole.set(rootViewController:)</code> will change the <code>rootViewController</code> of <code>TinyConsoleController</code> but hold the console content and gesture configurations, which means the text and gesture recognizers of the console view will remain the same.</p>
+</blockquote>
+<h3>Gestures</h3>
+<p>By default, the gestures is configured as follows:</p>
+<ul>
+<li>Swipe from Left to Right: <code>Add marker</code></li>
+<li>2 Finger Tap: <code>Add custom log entry</code></li>
+<li>3 Finger Tap: Show Action Sheet to <code>Clear Console</code> and <code>Send Mail</code></li>
+<li>Shake to toggle the console view. If you’re using the Simulator, press <kbd>⌃ ctrl</kbd>-<kbd>⌘ cmd</kbd>-<kbd>z</kbd>.</li>
+</ul>
+<p>To customize the gestures, specify <code>withDefaultGestureConfiguration</code> as <code>false</code></p>
+<p>```swift
+TinyConsole.createViewController(rootViewController: MyMainViewController(), withDefaultGestureConfiguration: false)</p>
+<p>```</p>
+<p>and add your own gesture recognizers</p>
+<p><code>swift
+let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(consoleTapped))
+TinyConsole.addGestureRecognizer(tapGestureRecognizer)</code></p>
+<blockquote>
+<p>Calling <code>TinyConsole.useDefaultGestureConfiguration()</code> will remove all gesture recognizers from console view and add the default gesture recognizers.</p>
+</blockquote>
+<h2>Implementation Example</h2>
+<p>Instead of</p>
+<p><code>swift
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -&gt; Bool {
+    window = UIWindow(frame: UIScreen.main.bounds)
+    window?.rootViewController = MainViewController()
+    window?.makeKeyAndVisible()
+    return true
+}</code></p>
+<p>write</p>
+<p><code>swift
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -&gt; Bool {
+    window = UIWindow(frame: UIScreen.main.bounds)
+    window?.rootViewController = TinyConsole.createViewController(rootViewController: MyMainViewController())
+    window?.makeKeyAndVisible()
+    return true
+}</code></p>
+<p>or checkout the example project included in this repository.</p>
+<h2>Demo</h2>
+<p><img src="https://raw.githubusercontent.com/Cosmo/TinyConsole/master/TinyConsole-Demo.gif" alt=" text" width="25%" /></p>
+<h2>Requirements</h2>
+<ul>
+<li>Xcode 8</li>
+<li>Swift 3</li>
+<li>iOS 8 or greater</li>
+</ul>
+<h2>Installation</h2>
+<h3><a href="https://github.com/Carthage/Carthage">Carthage</a></h3>
+<p>Add this to your Cartfile:</p>
+<p><code>ruby
+github "Cosmo/TinyConsole"</code></p>
+<h3><a href="https://cocoapods.org">CocoaPods</a></h3>
+<p>Add this to your Podfile:</p>
+<p><code>ruby
+pod 'TinyConsole'</code></p>
+<h3>Manually</h3>
+<p>Just drag the source files into your project.</p>
+<h2>Hierarchy</h2>
+<p><img src="https://raw.githubusercontent.com/Cosmo/TinyConsole/master/TinyConsole-Hierarchy.png" alt=" text" width="100%" /></p>
+<h2>Contact</h2>
+<ul>
+<li>Devran "Cosmo" Uenal</li>
+<li>Twitter: <a href="http://twitter.com/maccosmo">@maccosmo</a></li>
+</ul>
+<h2>License</h2>
+<p>TinyConsole is released under the <a href="http://www.opensource.org/licenses/MIT">MIT License</a>.</p>

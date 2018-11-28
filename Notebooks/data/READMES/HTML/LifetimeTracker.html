@@ -1,0 +1,147 @@
+<h1>LifetimeTracker</h1>
+<p>| <img alt="Demo (bar)" src="Resources/demo-bar.gif" /> | | <img alt="Demo (circular)" src="Resources/demo-circular.gif" /> |
+|:--:| :--: | :--: |
+| Bar style | | Circular style |</p>
+<p>LifetimeTracker can surface retain cycle / memory issues right as you develop your application, and it will surface them to you immediately, so you can find them with more ease.</p>
+<p>Instruments and Memory Graph Debugger are great, but too many times developers forget to check for issues as they close the feature implementation.</p>
+<p>If you use those tools sporadicaly many of the issues they surface will require you to investigate the cause, and cost you a lot of time in the process.</p>
+<p>Other tools like <a href="https://github.com/facebook/FBRetainCycleDetector">FBRetainCycleDetector</a> rely on objc runtime magic to find the problems, but that means they can't really be used for pure Swift classes. This small tool simply focuses on tracking lifetime of objects which means that it can be used in both Objective-C and Swift codebases and it doesn't rely on any complex or automatic magic behaviour.</p>
+<h2>Installation</h2>
+<h3>CocoaPods</h3>
+<p>Add <code>pod 'LifetimeTracker'</code> to your Podfile.</p>
+<h3>Carthage</h3>
+<p>Add <code>github "krzysztofzablocki/LifetimeTracker"</code> to your Cartfile.</p>
+<h2>Integration</h2>
+<p>To Integrate visual notifications simply add following line at the start of <code>AppDelegate(didFinishLaunchingWithOptions:)</code>.</p>
+<p>Swift:</p>
+<p>```swift</p>
+<h1>if DEBUG</h1>
+<pre><code>LifetimeTracker.setup(onUpdate: LifetimeTrackerDashboardIntegration(visibility: .alwaysVisible, style: .bar).refreshUI)
+</code></pre>
+<h1>endif</h1>
+<p>```</p>
+<p>Objective-C:</p>
+<p><code>objc
+LifetimeTrackerDashboardIntegration *dashboardIntegration = [LifetimeTrackerDashboardIntegration new];
+[dashboardIntegration setVisibleWhenIssueDetected];
+[dashboardIntegration useBarStyle];
+[LifetimeTracker setupOnUpdate:^(NSDictionary&lt;NSString *,EntriesGroup *&gt; * groups) {
+    [dashboardIntegration refreshUIWithTrackedGroups: groups];
+}];</code></p>
+<p>You can control when the dashboard is visible: <code>alwaysVisible</code>, <code>alwaysHidden</code>, or <code>visibleWithIssuesDetected</code>.</p>
+<p>There are two styles available. A overlay bar view which shows the detailed list of issues directly on the screen or a circular view which displays only the amount of issues and opens the detailed list as modal view controller.</p>
+<h2>Tracking key actors</h2>
+<p>Usually you want to use LifetimeTracker to track only key actors in your app, like ViewModels / Controllers etc. When you have more than <code>maxCount</code> items alive, the tracker will let you know.</p>
+<h3>Swift</h3>
+<p>You conform to <code>LifetimeTrackable</code> and call <code>trackLifetime()</code> at the end of your init functions:</p>
+<p>```swift
+class SectionFrontViewController: UIViewController, LifetimeTrackable {
+    static var lifetimeConfiguration = LifetimeConfiguration(maxCount: 1, groupName: "VC")</p>
+<pre><code>override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    /// ...
+    trackLifetime()
+}
+</code></pre>
+<p>}
+```</p>
+<h3>Objective-C</h3>
+<p>You conform to <code>LifetimeTrackable</code> and call <code>[self trackLifetime]</code> at the end of your init functions:</p>
+<p>```objc
+@import LifetimeTracker;</p>
+<p>@interface SectionFrontViewController() <LifetimeTrackable></p>
+<p>@implementation SectionFrontViewController</p>
+<p>+(LifetimeConfiguration *)lifetimeConfiguration
+{
+    return [[LifetimeConfiguration alloc] initWithMaxCount:1 groupName:@"VC"];
+}</p>
+<ul>
+<li>(instancetype)initWithNibName:(NSString <em>)nibNameOrNil bundle:(NSBundle </em>)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        /// …
+        [self trackLifetime];
+    }
+    return self;
+}
+@end
+```</li>
+</ul>
+<h2>Integrating with <a href="https://danger.systems">Danger</a></h2>
+<p>If you are using Danger, you can use it to add both checkbox to each PR to ensure people have verified no retain cycles were created but also to inform you when someone forgets to call <code>trackLifetime()</code> function.</p>
+<p>```ruby</p>
+<h1></h1>
+<h1><strong> FILE CHECKS </strong></h1>
+<h1>Checks for certain rules and warns if needed.</h1>
+<h1>Some rules can be disabled by using // danger:disable rule_name</h1>
+<h1></h1>
+<h1>Rules:</h1>
+<h1>- Check if the modified file is a View and doesn't implement LifetimeTrackable (lifetime_tracking)</h1>
+<h1>Sometimes an added file is also counted as modified. We want the files to be checked only once.</h1>
+<p>files_to_check = (git.modified_files + git.added_files).uniq
+(files_to_check - %w(Dangerfile)).each do |file|
+    next unless File.file?(file)
+    # Only check inside swift files
+  next unless File.extname(file).include?(".swift")</p>
+<p># Will be used to check if we're inside a comment block.
+    is_comment_block = false</p>
+<pre><code># Collects all disabled rules for this file.
+disabled_rules = []
+
+filelines = File.readlines(file)
+filelines.each_with_index do |line, index|
+    if is_comment_block
+        if line.include?("*/")
+            is_comment_block = false
+        end
+    elsif line.include?("/*")
+        is_comment_block = true
+    elsif line.include?("danger:disable")
+        rule_to_disable = line.split.last
+        disabled_rules.push(rule_to_disable)
+    else
+        # Start our custom line checks
+        # e.g. you could do something like check for methods that only call the super class' method
+        #if line.include?("override") and line.include?("func") and filelines[index+1].include?("super") and filelines[index+2].include?("}")
+        #   warn("Override methods which only call super can be removed", file: file, line: index+3) 
+        #end
+end
+end
+
+# Only continue checks for Lifetime Trackable types
+next unless (File.basename(file).include?("ViewModel") or File.basename(file).include?("ViewController") or File.basename(file).include?("View.swift")) and !File.basename(file).include?("Node") and !File.basename(file).include?("Tests") and !File.basename(file).include?("FlowCoordinator")
+
+if disabled_rules.include?("lifetime_tracking") == false 
+    if File.readlines(file).grep(/LifetimeTrackable/).any? 
+        fail("You forgot to call trackLifetime() from your initializers in " + File.basename(file, ".*") + " (lifetime_tracking)") unless File.readlines(file).grep(/trackLifetime()/).any? 
+    else
+        warn("Please add support for LifetimeTrackable to " + File.basename(file, ".*") + " . (lifetime_tracking)")
+    end
+    markdown("- [ ] I've verified that showing and hiding " + File.basename(file, ".*") + " doesn't surface any [LifetimeTracker](https://github.com/krzysztofzablocki/LifetimeTracker) issues")
+end
+</code></pre>
+<p>end
+```</p>
+<h2>Group tracked objects</h2>
+<p>You can group tracked objects together. <code>maxCount</code> of a group will be calculated by <code>maxCount</code> of all members per default. However, you can override it and provide a separate value to the group with <code>groupMaxCount</code>.</p>
+<p>You may want to do this when you have a set of sublasses which can appear x times each, but in total only less than the sum of all sublcasses:</p>
+<p>```swift
+// DetailPage: UIViewController</p>
+<p>// VideoDetailPage: DetailItem
+LifetimeConfiguration(maxCount: 3, groupName: "Detail Page")</p>
+<p>// ImageDetailPage: DetailItem
+LifetimeConfiguration(maxCount: 3, groupName: "Detail Page")</p>
+<p>=&gt; Group warning if 7 DetailPage objects are alive</p>
+<p>// VideoDetailPage: DetailItem
+LifetimeConfiguration(maxCount: 3, groupName: "Detail Page", groupMaxCount: 3)</p>
+<p>// ImageDetailPage: DetailItem
+LifetimeConfiguration(maxCount: 3, groupName: "Detail Page", groupMaxCount: 3)</p>
+<p>=&gt; Group warning if 4 DetailPage object are alive</p>
+<p>```</p>
+<h2>Writing integration tests for memory leaks</h2>
+<p>You can access the summary label using accessibility identifier <code>LifetimeTracker.summaryLabel</code>, which allows you to write integration tests that end up with looking up whether any issues were found.</p>
+<h2>License</h2>
+<p>LifetimeTracker is available under the MIT license. See <a href="LICENSE">LICENSE</a> for more information.</p>
+<h2>Attributions</h2>
+<p>I've used <a href="https://github.com/JohnSundell/SwiftPlate">SwiftPlate</a> to generate xcodeproj compatible with CocoaPods and Carthage.</p>

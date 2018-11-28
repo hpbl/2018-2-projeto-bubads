@@ -1,0 +1,151 @@
+<h2>Segmentio</h2>
+<p><a href="https://cocoapods.org/?q=segmentio"><img alt="Platform" src="http://img.shields.io/badge/platform-iOS-blue.svg?style=flat" /></a> <a href="https://github.com/Yalantis/Segmentio/blob/master/LICENSE"><img alt="License" src="http://img.shields.io/badge/license-MIT-green.svg?style=flat" /></a> <img alt="Swift 4.2" src="https://img.shields.io/badge/Swift-4.1-orange.svg" /> <a href="https://github.com/Carthage/Carthage"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a> <img alt="Swift Package Manager" src="https://img.shields.io/badge/swiftpm-compatible-green.svg" /></p>
+<p>Animated top/bottom segmented control written in Swift.</p>
+<p><img alt="Preview" src="https://github.com/Yalantis/Segmentio/blob/master/Assets/animation.gif" /></p>
+<p>Check this <a href="https://dribbble.com/shots/2820372-Segmentio-Component">project on dribbble</a>.</p>
+<h2>Requirements</h2>
+<ul>
+<li>Xcode 9</li>
+<li>iOS 8.x+</li>
+<li>Swift 4.2</li>
+</ul>
+<h2>Installation</h2>
+<h4><a href="http://cocoapods.org">CocoaPods</a></h4>
+<p>```ruby
+use_frameworks! </p>
+<p>pod 'Segmentio', '~&gt; 3.2'
+```</p>
+<p><em>CocoaPods v1.1.0 or later required</em></p>
+<h4><a href="http://github.com/Carthage/Carthage">Carthage</a></h4>
+<p><code>ruby
+github "Yalantis/Segmentio" ~&gt; 3.2</code></p>
+<h2>Usage</h2>
+<h4>Import <code>Segmentio</code> module</h4>
+<p><code>swift
+import Segmentio</code></p>
+<h4>Init</h4>
+<p>You can initialize a <code>Segmentio</code> instance from code:</p>
+<p>```swift
+var segmentioView: Segmentio!</p>
+<p>let segmentioViewRect = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 125)
+segmentioView = Segmentio(frame: segmentioViewRect)
+view.addSubview(segmentioView)
+```</p>
+<p>or</p>
+<p>add a <code>UIView</code> instance in your .storyboard or .xib, set <code>Segmentio</code> class and connect <code>IBOutlet</code>:</p>
+<p><code>swift
+@IBOutlet weak var segmentioView: Segmentio!</code></p>
+<h4>Setup <code>Segmentio</code></h4>
+<p><code>swift
+segmentioView.setup(
+    content: [SegmentioItem],
+    style: SegmentioStyle,
+    options: SegmentioOptions?
+)</code></p>
+<p>To start with default options you can just pass <code>nil</code> to the <code>options</code> parameter.</p>
+<p><code>swift
+segmentioView.setup(
+    content: [SegmentioItem],
+    style: SegmentioStyle,
+    options: nil
+)</code></p>
+<h4>Configuring items</h4>
+<p>In order to set items you need to create an array of <code>SegmentioItem</code> instances:</p>
+<p>```swift
+var content = <a href="">SegmentioItem</a></p>
+<p>let tornadoItem = SegmentioItem(
+    title: "Tornado",
+    image: UIImage(named: "tornado")
+)
+content.append(tornadoItem)
+```</p>
+<h4>Handling selection</h4>
+<p>You can specify selected item manually:</p>
+<p><code>swift
+segmentioView.selectedSegmentioIndex = 0</code></p>
+<h4>Handling callback</h4>
+<p><code>swift
+segmentioView.valueDidChange = { segmentio, segmentIndex in
+    print("Selected item: ", segmentIndex)
+}</code></p>
+<h4>Customization</h4>
+<p><code>Segmentio</code> can be customized by passing an instance of <code>SegmentioOptions</code> struct:</p>
+<p><code>swift
+SegmentioOptions(
+            backgroundColor: .white,
+            segmentPosition: SegmentioPosition,
+            scrollEnabled: true,
+            indicatorOptions: SegmentioIndicatorOptions,
+            horizontalSeparatorOptions: SegmentioHorizontalSeparatorOptions,
+            verticalSeparatorOptions: SegmentioVerticalSeparatorOptions,
+            imageContentMode: .center,
+            labelTextAlignment: .center,
+            segmentStates: SegmentioStates
+)</code></p>
+<p>Segment width rely on <code>SegmentioPosition</code> enum. Width can be fixed according to maximum visible items or dynamic according to segment's content size:</p>
+<p><code>swift
+enum SegmentioPosition {
+    case dynamic
+    case fixed(maxVisibleItems: Int)
+}</code></p>
+<p>Selection indicator can be customized by passing an instance of <code>SegmentioIndicatorOptions</code>:</p>
+<p><code>swift
+SegmentioIndicatorOptions(
+            type: .bottom,
+            ratio: 1,
+            height: 5,
+            color: .orange
+)</code></p>
+<p>Horizontal borders can be customized by passing an instance of <code>SegmentioHorizontalSeparatorOptions</code>:</p>
+<p><code>swift
+SegmentioHorizontalSeparatorOptions(
+            type: SegmentioHorizontalSeparatorType.topAndBottom, // Top, Bottom, TopAndBottom
+            height: 1,
+            color: .gray
+)</code></p>
+<p>Separators between segments can be customized by passing an instance of  <code>SegmentioVerticalSeparatorOptions</code>:</p>
+<p><code>swift
+SegmentioVerticalSeparatorOptions(
+            ratio: 0.6, // from 0.1 to 1
+            color: .gray
+)</code></p>
+<p>In order to set <code>SegmentioStates</code> you need to create a tuple of <code>SegmentioState</code> instances:</p>
+<p><code>swift
+SegmentioStates(
+            defaultState: SegmentioState(
+                backgroundColor: .clear,
+                titleFont: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize),
+                titleTextColor: .black
+            ),
+            selectedState: SegmentioState(
+                backgroundColor: .orange,
+                titleFont: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize),
+                titleTextColor: .white
+            ),
+            highlightedState: SegmentioState(
+                backgroundColor: UIColor.lightGray.withAlphaComponent(0.6),
+                titleFont: UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize),
+                titleTextColor: .black
+            )
+)</code></p>
+<h4>Let us know!</h4>
+<p>We’d be really happy if you sent us links to your projects where you use our component. Just send an email to github@yalantis.com And do let us know if you have any questions or suggestion regarding the animation.</p>
+<p>P.S. We’re going to publish more awesomeness wrapped in code and a tutorial on how to make UI for iOS (Android) better than better. Stay tuned!</p>
+<h2>License</h2>
+<p>The MIT License (MIT)</p>
+<p>Copyright © 2018 Yalantis</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</p>

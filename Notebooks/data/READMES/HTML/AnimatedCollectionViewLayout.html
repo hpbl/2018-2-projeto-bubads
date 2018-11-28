@@ -1,0 +1,62 @@
+<h1>AnimatedCollectionViewLayout</h1>
+<p>Normally a <code>UICollectionView</code> has no transition effects when you scroll from one item to another. There are lots of ways to write animations for UICollectionView, but using a UICollectionViewLayout subclass is by far the simplest one. And it doesn't break any of your existing code. You can still use your UICollectionView subclass and you don't need to change your UICollectionViewCell. Just plug and enjoy.</p>
+<p><img alt="CI Status" src="https://travis-ci.org/KelvinJin/AnimatedCollectionViewLayout.svg?branch=master" /></p>
+<table>
+<tr>
+<th>Parallax</th>
+<th>ZoomInOut</th>
+<th>RotateInOut</th>
+<th>Cards</th>
+</tr>
+<tr>
+<td><img src="http://i.imgur.com/v8JuRYj.gif"/></td>
+<td><img src="http://i.imgur.com/lLooXQ7.gif"/></td>
+<td><img src="http://i.imgur.com/lCNh5mg.gif"/></td>
+<td><img src="http://i.imgur.com/joA1emB.gif"/></td>
+</tr>
+<tr>
+<th>CrossFade</th>
+<th>Cube</th>
+<th>Page</th>
+<th></th>
+</tr>
+<tr>
+<td><img src="http://i.imgur.com/U1hOKYo.gif"/></td>
+<td><img src="http://i.imgur.com/897mcdm.gif"/></td>
+<td><img src="http://i.imgur.com/HRcvRIV.gif"/></td>
+<td></td>
+</tr>
+</table>
+
+<h2>Example</h2>
+<p>To run the example project, clone the repo, and start <code>iOS Example</code> in Xcode.</p>
+<h2>Requirements</h2>
+<ul>
+<li>iOS 8.0+</li>
+</ul>
+<h2>Installation</h2>
+<h3>CocoaPods</h3>
+<p>To integrate AnimatedCollectionViewLayout into your Xcode project using CocoaPods, specify it in your <code>Podfile</code>:</p>
+<p>For Swift 4.2:</p>
+<p><code>ruby
+pod 'AnimatedCollectionViewLayout'</code></p>
+<p>For Swift 4.1 or below:</p>
+<p><code>ruby
+pod 'AnimatedCollectionViewLayout', '~&gt; 0.3.0'</code></p>
+<h2>Usage</h2>
+<h3>Get Started</h3>
+<p>Import the library where you want to use it. Create a <code>AnimatedCollectionViewLayout</code> object, set its <code>animator</code> and assign it to your <code>UICollectionView</code>.</p>
+<p>```swift
+import AnimatedCollectionViewLayout</p>
+<p>// ...</p>
+<p>let layout = AnimatedCollectionViewLayout()
+layout.animator = ParallaxAttributesAnimator()
+collectionView.collectionViewLayout = layout
+```</p>
+<h3>Customization</h3>
+<p>Most of the built-in animators work best in <strong>Paging</strong> mode and they have additional parameters that you can tweak for better transitions.
+You can also write your own animators by implementing the protocol <code>LayoutAttributesAnimator</code>.</p>
+<h2>Author</h2>
+<p><a href="https://twitter.com/jinw1990">Jin Wang</a></p>
+<h2>License</h2>
+<p>AnimatedCollectionViewLayout is available under the MIT license. See the LICENSE file for more info.</p>

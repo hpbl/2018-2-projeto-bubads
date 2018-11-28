@@ -1,0 +1,169 @@
+<p><img alt="Stevia" src="https://raw.githubusercontent.com/s4cha/Stevia/master/banner.png" /></p>
+<p><a href="http://freshos.org/SteviaDocs/"><img alt="Documentation" src="https://img.shields.io/badge/Read_the-Docs-67ad5c.svg" /></a>
+<a href="https://developer.apple.com/swift"><img alt="Language: Swift 2, 3 and 4" src="https://img.shields.io/badge/language-swift%204-f48041.svg?style=flat" /></a>
+<img alt="Platform: iOS 8+" src="https://img.shields.io/badge/platform-iOS%20|%20tvOS-blue.svg?style=flat" />
+<a href="https://github.com/Carthage/Carthage"><img alt="Carthage compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a>
+<a href="https://cocoapods.org/pods/SteviaLayout"><img alt="CocoaPods compatible" src="https://img.shields.io/badge/Cocoapods-compatible-4BC51D.svg?style=flat" /></a>
+<a href="https://app.bitrise.io/app/4478e29045c5f12e"><img alt="Build Status" src="https://app.bitrise.io/app/4478e29045c5f12e/status.svg?token=pti6g-HVKBUPv9mIR3baIw&amp;branch=master" /></a>
+<a href="https://codebeat.co/projects/github-com-freshos-stevia-master"><img alt="codebeat badge" src="https://codebeat.co/badges/5b81e292-552c-4cf1-9ccc-89d333ec8b79" /></a>
+<a href="https://github.com/s4cha/Stevia/blob/master/LICENSE"><img alt="License: MIT" src="http://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat" /></a>
+<a href=""><img alt="CocoaPods" src="https://img.shields.io/cocoapods/dt/SteviaLayout.svg" /></a>
+<a href=""><img alt="CocoaPods" src="https://img.shields.io/cocoapods/at/SteviaLayout.svg" /></a>
+<a href="https://github.com/freshos/Stevia/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/freshos/Stevia.svg" /></a>
+<a href=""><img alt="GitHub tag" src="https://img.shields.io/github/release/freshos/Stevia.svg" /></a></p>
+<p align="center">
+    <a href="https://www.hackingwithswift.com/articles/9/best-alternatives-to-auto-layout">
+        <img src="https://www.hackingwithswift.com/uploads/recommended@2x.png" alt="Drawing" width="300px;" />
+    </a>
+</p>
+
+<p align="center">
+    <a href="https://www.hackingwithswift.com/articles/9/best-alternatives-to-auto-layout">
+        Winner of Hacking with Swift Recommended award
+    </a>
+</p>
+
+<h2>You + Stevia = 🦄</h2>
+<ul>
+<li>[x] 💡 Write <strong>concise</strong>, <strong>readable</strong> layouts</li>
+<li>[x] 🏖 <strong>Reduce</strong> your <strong>maintenance</strong> time</li>
+<li>[x] 🎨 <strong>Compose</strong> your styles, <strong>CSS-like</strong></li>
+<li>[x] 🔴 Plug <strong>Live reload</strong> and <strong>boost</strong> your iteration cycles</li>
+</ul>
+<p><a href="#-reason">Reason</a> - <a href="#login-view-example">Example</a> - <a href="#-live-reload">Live Reload</a> - <a href="#️-installation">Installation</a> - <a href="#-documentation">Documentation</a></p>
+<h3>🖼 Visual Layout Api</h3>
+<p><code>swift
+layout(
+    100,
+    |-email-| ~ 80,
+    8,
+    |-password-forgot-| ~ 80,
+    &gt;=20,
+    |login| ~ 80,
+    0
+)</code></p>
+<h3>⛓ Chainable Api</h3>
+<p><code>swift
+email.top(100).left(8).right(8).width(200).height(44)
+alignHorizontally(password, forgot)
+image.fillContainer()
+button.centerInContainer().size(50%)
+equalWidths(email, password)
+image.width(&gt;=80)</code></p>
+<h3>📐 Equation-Based Api</h3>
+<p><code>swift
+email.Top == 100
+password.CenterY == forgot.CenterY
+login.Top &gt;= password.Bottom + 20
+login.Width == 75 % Width
+(image.Height == 100).priority = UILayoutPriority(rawValue: 999)</code></p>
+<p>All Generate <strong>native</strong> NSLayoutConstraints 🎉</p>
+<h3>👨‍🔬Try it!</h3>
+<p>Stevia is part of <a href="http://freshos.org">freshOS</a> iOS toolset. Try it in an example App ! <a class="github-button" href="https://github.com/freshOS/StarterProject/archive/master.zip" data-icon="octicon-cloud-download" data-style="mega" aria-label="Download freshOS/StarterProject on GitHub">Download Starter Project</a></p>
+<h3>💡 Reason</h3>
+<p>Because <strong>nothing holds more truth than pure code</strong> 🤓<br />
+Xibs and storyboards are <strong>heavy, hard to maintain, hard to merge.</strong><br />
+They split the view concept into 2 separate files making debugging a <strong>nightmare</strong>  <br />
+<em>There must be a better way</em></p>
+<h4>How</h4>
+<p>By creating a tool that makes Auto layout code finally <strong>readable by a human being</strong>.<br />
+By coupling it with live code injection such as <em><a href="http://johnholdsworth.com/injection.html">injectionForXcode</a></em> we can <strong>design views in real time</strong><br />
+View layout becomes <strong>fun</strong>, <strong>concise</strong>, <strong>maintainable</strong> and dare I say, <em>beautiful</em> ❤️</p>
+<h3>Login View Example</h3>
+<p>In the project folder, you can find an example of a typical login view laid out in both native and Stevia for you to understand and compare the two approaches.</p>
+<p>As a spoiler alert, the <strong>number of characters</strong> goes from 2380 to 1239 <strong>( ~ divided by 2)</strong></p>
+<p>Write <strong>Half the code</strong> that is actually <strong>10X more expressive and maintainable</strong> !</p>
+<h3>🔴 Live Reload</h3>
+<p>Live reload enables you to develop your views live without relaunching the app everytime.</p>
+<p>Stevia + <a href="http://johnholdsworth.com/injection.html">InjectionForXcode</a> = #WhoNeedsReactNative?? 🚀</p>
+<p><img src="http://g.recordit.co/i6kQfTMEpg.gif" height="300" width="360" /></p>
+<p><em>Just <code>Cmd+S</code> and you can dev live in the simulator !</em></p>
+<p>Learn more about how to set up live reload <a href="http://freshos.org/SteviaDocs/liveReload/">here</a>.</p>
+<h3>⚙️ Installation</h3>
+<p>Get started <a href="http://freshos.org/SteviaDocs/installation/">here</a>.</p>
+<h3>📖 Documentation</h3>
+<p>You can find the full documentation <a href="http://freshos.org/SteviaDocs/">here</a>.</p>
+<h3>👨‍💻 Contributors</h3>
+<p><a href="https://github.com/YannickDot">YannickDot</a>,  <a href="https://github.com/S4cha">S4cha</a>,  <a href="https://github.com/damien-nd">Damien</a>,
+<a href="https://github.com/Snowcraft">Snowcraft</a>, <a href="https://github.com/Mathieu-o">Mathieu-o</a>,
+<a href="https://github.com/b1az">Blaz Merela</a>,
+<a href="https://github.com/trupin">Theophane Rupin</a>,
+<a href="https://github.com/jyliang">Jason Liang</a>,
+<a href="https://github.com/liberty4me">liberty4me</a>,
+<a href="https://github.com/cowgp">Scott Bates</a>,
+<a href="https://github.com/sai-prasanna">Sai</a>,
+<a href="https://github.com/mgallagher">Mike Gallagher</a>,
+<a href="https://github.com/waternotwords">WaterNotWords</a>,
+<a href="https://github.com/0x7fffffff">Mick MacCallum</a></p>
+<h3>👥 Backers</h3>
+<p>Like the project? Offer coffee or support us with a monthly donation and help us continue our activities :)</p>
+<p><a href="https://opencollective.com/freshos/backer/0/website" target="_blank"><img src="https://opencollective.com/freshos/backer/0/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/1/website" target="_blank"><img src="https://opencollective.com/freshos/backer/1/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/2/website" target="_blank"><img src="https://opencollective.com/freshos/backer/2/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/3/website" target="_blank"><img src="https://opencollective.com/freshos/backer/3/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/4/website" target="_blank"><img src="https://opencollective.com/freshos/backer/4/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/5/website" target="_blank"><img src="https://opencollective.com/freshos/backer/5/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/6/website" target="_blank"><img src="https://opencollective.com/freshos/backer/6/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/7/website" target="_blank"><img src="https://opencollective.com/freshos/backer/7/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/8/website" target="_blank"><img src="https://opencollective.com/freshos/backer/8/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/9/website" target="_blank"><img src="https://opencollective.com/freshos/backer/9/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/10/website" target="_blank"><img src="https://opencollective.com/freshos/backer/10/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/11/website" target="_blank"><img src="https://opencollective.com/freshos/backer/11/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/12/website" target="_blank"><img src="https://opencollective.com/freshos/backer/12/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/13/website" target="_blank"><img src="https://opencollective.com/freshos/backer/13/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/14/website" target="_blank"><img src="https://opencollective.com/freshos/backer/14/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/15/website" target="_blank"><img src="https://opencollective.com/freshos/backer/15/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/16/website" target="_blank"><img src="https://opencollective.com/freshos/backer/16/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/17/website" target="_blank"><img src="https://opencollective.com/freshos/backer/17/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/18/website" target="_blank"><img src="https://opencollective.com/freshos/backer/18/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/19/website" target="_blank"><img src="https://opencollective.com/freshos/backer/19/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/20/website" target="_blank"><img src="https://opencollective.com/freshos/backer/20/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/21/website" target="_blank"><img src="https://opencollective.com/freshos/backer/21/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/22/website" target="_blank"><img src="https://opencollective.com/freshos/backer/22/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/23/website" target="_blank"><img src="https://opencollective.com/freshos/backer/23/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/24/website" target="_blank"><img src="https://opencollective.com/freshos/backer/24/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/25/website" target="_blank"><img src="https://opencollective.com/freshos/backer/25/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/26/website" target="_blank"><img src="https://opencollective.com/freshos/backer/26/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/27/website" target="_blank"><img src="https://opencollective.com/freshos/backer/27/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/28/website" target="_blank"><img src="https://opencollective.com/freshos/backer/28/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/backer/29/website" target="_blank"><img src="https://opencollective.com/freshos/backer/29/avatar.svg"></a></p>
+<h3>🏅 Sponsors</h3>
+<p>Become a sponsor and get your logo on our README on Github with a link to your site :)</p>
+<p><a href="https://opencollective.com/freshos/sponsor/0/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/1/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/2/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/3/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/4/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/5/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/6/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/7/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/8/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/9/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/9/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/10/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/10/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/11/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/11/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/12/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/12/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/13/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/13/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/14/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/14/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/15/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/15/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/16/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/16/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/17/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/17/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/18/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/18/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/19/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/19/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/20/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/20/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/21/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/21/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/22/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/22/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/23/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/23/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/24/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/24/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/25/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/25/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/26/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/26/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/27/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/27/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/28/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/28/avatar.svg"></a>
+<a href="https://opencollective.com/freshos/sponsor/29/website" target="_blank"><img src="https://opencollective.com/freshos/sponsor/29/avatar.svg"></a></p>
+<h3>Swift Version</h3>
+<ul>
+<li>Swift 2 -&gt; <a href="https://github.com/freshOS/Stevia/releases/tag/2.3.0">v<strong>2.3.0</strong></a></li>
+<li>Swift 3 -&gt; <a href="https://github.com/freshOS/Stevia/releases/tag/3.2.0">v<strong>3.2.0</strong></a></li>
+<li>Swift 4 -&gt; <a href="https://github.com/freshOS/Stevia/releases/tag/4.2.0">v<strong>4.2.0</strong></a></li>
+<li>Swift 4.1 -&gt; <a href="https://github.com/freshOS/Stevia/releases/tag/4.3.2">v<strong>4.3.2</strong></a></li>
+<li>Swift 4.2 -&gt; <a href="https://github.com/freshOS/Stevia/releases/tag/4.4.0">v<strong>4.4.0</strong></a></li>
+</ul>

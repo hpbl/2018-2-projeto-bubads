@@ -1,0 +1,53 @@
+<p><img alt="Header" src="Header.png" /></p>
+<div align="center">
+<a href="https://travis-ci.org/madebybowtie/FlagKit" target="_blank">
+<img src="http://img.shields.io/travis/madebybowtie/FlagKit.svg?style=flat" />
+</a>
+
+<a href="https://github.com/Carthage/Carthage" target="_blank">
+<img src="https://img.shields.io/badge/Carthage-Compatible-brightgreen.svg?style=flat" />
+</a>
+
+<a href="https://cocoapods.org/pods/FlagKit" target="_blank">
+<img src="https://img.shields.io/cocoapods/v/FlagKit.svg?style=flat" />
+</a>
+</div>
+
+<h1>FlagKit</h1>
+<p>Beautiful flag icons for usage in apps and on the web. All flags are provided as stand-alone PNG and SVG files. FlagKit also provides an Asset Catalog and framework for easy use on Apple platforms.</p>
+<h2>Installation (iOS, macOS, tvOS)</h2>
+<p>FlagKit provides a framework for easy installation as a dependency. You can also manually copy the Asset Catalog into your project.</p>
+<h3>Carthage</h3>
+<p>Add the following line to your <code>Cartfile</code>:</p>
+<p><code>github "madebybowtie/FlagKit"</code></p>
+<h3>CocoaPods</h3>
+<p>Add the following line to your <code>Podfile</code>:</p>
+<p><code>pod 'FlagKit'</code></p>
+<h3>Manual</h3>
+<p>Add <code>Assets/FlagKit.xcassets</code> to your target.</p>
+<h2>Usage (iOS, macOS, tvOS)</h2>
+<p>FlagKit provides both rectangular unstyled flags and styled flags in a variety of shapes. Our <a href="Sources/Swift/FlagKitDemo-iOS">sample project</a> demonstrates how to display flags and customize them into different shapes (rounded corners, square, circle).</p>
+<blockquote>
+<p><strong>Note:</strong> Styling is currently not supported by FlagKit on macOS</p>
+</blockquote>
+<p>This brief example loads the flag for the users current locale, and retrieves the unstyled flag and a styled flag:</p>
+<p>```swift
+let countryCode = Locale.current.regionCode!
+let flag = Flag(countryCode: countryCode)!</p>
+<p>// Retrieve the unstyled image for customized use
+let originalImage = flag.originalImage</p>
+<p>// Or retrieve a styled flag
+let styledImage = flag.image(style: .circle)
+```</p>
+<p>You can always access the underlying assets directly, through the bundled Asset Catalog:</p>
+<p><code>swift
+let countryCode = Locale.current.regionCode!
+let bundle = FlagKit.assetBundle
+let originalImage = UIImage(named: countryCode, in: bundle, compatibleWith: nil)</code></p>
+<h2>Reference</h2>
+<p>FlagKit provides over 250 flags. A list of all flags can be <a href="Assets/Flags.md">found here</a>.</p>
+<h2>More Info</h2>
+<p>Have a question? Please <a href="https://github.com/madebybowtie/FlagKit/issues/new">open an issue</a>!</p>
+<h2>License</h2>
+<p>FlagKit is released under the MIT license. See
+<a href="https://github.com/madebybowtie/FlagKit/blob/master/LICENSE">LICENSE</a>.</p>

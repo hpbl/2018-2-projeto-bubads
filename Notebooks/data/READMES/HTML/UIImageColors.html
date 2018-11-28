@@ -1,0 +1,55 @@
+<h1>UIImageColors</h1>
+<p>iTunes style color fetcher for UIImage. It fetches the most dominant and prominent colors.</p>
+<p><img alt="preview" src="preview.png" /></p>
+<h2>Installation</h2>
+<p>You can either directly copy <a href="Sources/UIImageColors.swift">UIImageColors.swift</a> into your project <em>or</em> you can use CocoaPods: <a href="https://cocoapods.org/pods/UIImageColors">UIImageColors</a>.</p>
+<h2>Example</h2>
+<p>Asynchronous example:</p>
+<p>```swift
+let image = UIImage(named: "yeezus.png")</p>
+<p>image.getColors { colors in
+  backgroundView.backgroundColor = colors.background
+  mainLabel.textColor = colors.primary
+  secondaryLabel.textColor = colors.secondary
+  detailLabel.textColor = colors.detail
+}
+```</p>
+<p>Synchronous example:</p>
+<p>```swift
+let colors = UIImage(named: "yeezus.png").getColors()</p>
+<p>backgroundView.backgroundColor = colors.background
+mainLabel.textColor = colors.primary
+secondaryLabel.textColor = colors.secondary
+detailLabel.textColor = colors.detail
+```</p>
+<h2>UIImage Methods</h2>
+<p><code>swift
+getColors() -&gt; UIImageColors</code></p>
+<p><code>swift
+getColors(quality: UIImageColorsQuality) -&gt; UIImageColors</code></p>
+<p><code>swift
+getColors(_ completion: (UIImageColors) -&gt; Void) -&gt; Void</code></p>
+<p><code>swift
+getColors(quality: UIImageColorsQuality, _ completion: (UIImageColors) -&gt; Void) -&gt; Void</code></p>
+<h2>UIImageColors Objects</h2>
+<p><code>UIImageColors</code> is struct that contains four different <code>UIColor</code> variables.</p>
+<p><code>swift
+public struct UIImageColors {
+    public var background: UIColor!
+    public var primary: UIColor!
+    public var secondary: UIColor!
+    public var detail: UIColor!
+}</code></p>
+<p><code>UIImageColorsQuality</code> is a enum with four different qualities. The qualities refer to how much the original image is scaled down. <code>Lowest</code> implies smaller size and faster performance at the cost of quality colors. <code>High</code> implies larger size with slower performance with good colors. <code>Highest</code> implies no downscaling and very good colors, but it is very slow.</p>
+<p>The default is set to <code>high</code>.</p>
+<p><code>swift
+public enum UIImageColorsQuality: CGFloat {
+    case lowest = 50 // 50px
+    case low = 100 // 100px
+    case high = 250 // 250px
+    case highest = 0 // No scale
+}</code></p>
+<h2>License</h2>
+<p>The <a href="https://github.com/jathu/UIImageColors/blob/master/LICENSE">license</a> is provided in the project folder. This is based on Panic's <a href="https://github.com/panicinc/ColorArt/#license">OS X ColorArt</a>.</p>
+<hr />
+<p>June 2015 - Toronto</p>

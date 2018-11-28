@@ -1,0 +1,49 @@
+<h1>Render Neutrino <a href="#"><img alt="Swift" src="https://img.shields.io/badge/swift-4.*-orange.svg?style=flat" /></a> <a href="#"><img alt="Platform" src="https://img.shields.io/badge/platform-iOS-lightgrey.svg?style=flat" /></a> <a href="https://opensource.org/licenses/MIT"><img alt="License" src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat" /></a></h1>
+<p><img src="docs/assets/logo_new.png" width=150 alt="Render" align=right /></p>
+<p>Render is a declarative library for building efficient UIs on iOS inspired by <a href="https://github.com/facebook/react">React</a>.</p>
+<p><em>Render Neutrino</em> is the new version of Render, re-built from the ground up (<a href="https://github.com/alexdrone/Render/tree/classic">4.*  release here</a>)</p>
+<ul>
+<li><strong>Declarative:</strong> Render uses a declarative API to define UI components. You simply describe the layout for your UI based on a set of inputs and the framework takes care of the rest (<em>diff</em> and <em>reconciliation</em> from virtual view hierarchy to the actual one under the hood).</li>
+<li><strong>Flexbox layout:</strong> Render includes the robust and battle-tested Facebook's <a href="https://facebook.github.io/yoga/">Yoga</a> as default layout engine.</li>
+<li><strong>Fine-grained recycling:</strong> Any component such as a text or image can be recycled and reused anywhere in the UI.</li>
+</ul>
+<p>From <a href="http://joshaber.github.io/2015/01/30/why-react-native-matters/">Why React matters</a>:</p>
+<blockquote>
+<p>[The framework] lets us write our UIs as pure function of their states.</p>
+<p>Right now we write UIs by poking at them, manually mutating their properties when something changes, adding and removing views, etc. This is fragile and error-prone. [...]</p>
+<p>[The framework] lets us describe our entire UI for a given state, and then it does the hard work of figuring out what needs to change. It abstracts all the fragile, error-prone code out away from us.</p>
+</blockquote>
+<h3>Installing the framework</h3>
+<p>If you are using <strong>CocoaPods</strong>:</p>
+<p>Add the following to your <a href="https://guides.cocoapods.org/using/the-podfile.html">Podfile</a>:</p>
+<p><code>ruby
+pod 'RenderNeutrino'</code></p>
+<ul>
+<li>Remember to set <code>use_frameworks!</code> in your <strong>Podfile</strong> to tell Cocoapods to use Frameworks instead of Static Libraries. </li>
+</ul>
+<p>If you are using <strong>Carthage</strong>:</p>
+<p>Add the following line to your <code>Cartfile</code>:</p>
+<p><code>github "alexdrone/Render" "master"</code></p>
+<p><strong>Manually</strong>:</p>
+<p><code>cd {PROJECT_ROOT_DIRECTORY}
+curl "https://raw.githubusercontent.com/alexdrone/Render/master/bin/dist.zip" &gt; render_neutrino_dist.zip &amp;&amp; unzip render_neutrino_dist.zip</code></p>
+<p>Drag <code>RenderNeutrino.framework</code> in your project and add it as an embedded binary.</p>
+<h1>Documentation:</h1>
+<h4><a href="docs/getting_started.md">Getting started</a></h4>
+<h4><a href="docs/components_lifecycle.md">Components life-cycle</a></h4>
+<h4><a href="docs/tableviews.md">TableViews and CollectionViews <em>(doc in progress)</em></a></h4>
+<h4><a href="https://yogalayout.com/playground">Layouts</a></h4>
+<h4><a href="docs/animations.md">Animations <em>(doc in progress)</em></a></h4>
+<h4><a href="docs/navigation_bar.md">Component-based Navigation bar <em>(doc in progress)</em></a></h4>
+<h4><a href="docs/mod_stylesheet.md">Mod: Stylesheet and Hot-Reload <em>(doc in progress)</em></a></h4>
+<h4><a href="docs/mod_inspector.md">Mod: Inspector <em>(doc in progress)</em></a></h4>
+<h1>Credits:</h1>
+<p>Layout engine:</p>
+<ul>
+<li><a href="https://github.com/facebook/yoga">facebook/yoga</a></li>
+</ul>
+<p>In the Stylesheet Mod:</p>
+<ul>
+<li><a href="https://github.com/yaml/libyaml">yaml/libyaml</a></li>
+<li><a href="https://github.com/nicklockwood/Expression">nicklockwood/Expression</a></li>
+</ul>

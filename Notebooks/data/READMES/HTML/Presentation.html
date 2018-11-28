@@ -1,0 +1,132 @@
+<p><img alt="Presentation logo" src="https://raw.githubusercontent.com/hyperoslo/Presentation/master/Images/logo.png" /></p>
+<p><a href="http://cocoadocs.org/docsets/Presentation"><img alt="Version" src="https://img.shields.io/cocoapods/v/Presentation.svg?style=flat" /></a>
+<a href="https://travis-ci.org/hyperoslo/Presentation"><img alt="CI Status" src="http://img.shields.io/travis/hyperoslo/Presentation.svg?style=flat" /></a>
+<a href="https://github.com/Carthage/Carthage"><img alt="Carthage Compatible" src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" /></a>
+<img alt="Swift" src="https://img.shields.io/badge/%20in-swift%204.0-orange.svg" />
+<a href="http://cocoadocs.org/docsets/Presentation"><img alt="License" src="https://img.shields.io/cocoapods/l/Presentation.svg?style=flat" /></a>
+<a href="http://cocoadocs.org/docsets/Presentation"><img alt="Platform" src="https://img.shields.io/cocoapods/p/Presentation.svg?style=flat" /></a></p>
+<p>Looking for the easiest way of presenting something in your iOS app? Then you are in the right place. <strong>Presentation</strong> will help you make your tutorials, release notes and any kind of animated pages with the minimum amount of effort.</p>
+<p><em>Presentation</em> includes the following features:</p>
+<ul>
+<li>Custom positioning: You can use <a href="https://github.com/hyperoslo/Presentation/blob/master/Source/Position.swift">Position</a> for percentage-based position declaration.</li>
+<li><a href="https://github.com/hyperoslo/Presentation/blob/master/Source/Content.swift">Content</a>: View model used for custom positioning and animations. It translates your percents to AutoLayout constraints behind the scenes.</li>
+<li>Slides: You can use any kind of <code>UIViewController</code> as a slide. <a href="https://github.com/hyperoslo/Presentation/blob/master/Source/SlideController.swift">SlideController</a> is your good friend if you want to use custom positioning and animation features on your pages.</li>
+<li>Background: You can add views that are visible across all the pages. Also it's possible to animate those views during the transition to the specific page.  </li>
+<li><a href="https://github.com/hyperoslo/Presentation/tree/master/Source/Animations">Animations</a>: You can easily animate the appearance of a view on the specific page.</li>
+</ul>
+<p>Presentation works both on the iPhone and the iPad. You can use it with both <code>Swift</code> and <code>Objective-C</code>.</p>
+<p>Try one of our <a href="https://github.com/hyperoslo/Presentation/tree/master/Example">demos</a> to see how it works:</p>
+<p><code>shell
+pod try Presentation</code></p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/hyperoslo/Presentation/master/Example/Parallax/Images/Parallax-v2.gif"/>
+</p>
+
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#presentation-controller">Presentation controller</a></li>
+<li><a href="#position">Position</a></li>
+<li><a href="#content-view-model">Content view model</a></li>
+<li><a href="#slides">Slides</a></li>
+<li><a href="#page-animations">Page animations</a></li>
+<li><a href="#background-views">Background views</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#components">Components</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#credits">Credits</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<h2>Usage</h2>
+<h3>Presentation controller</h3>
+<p>```swift
+import Presentation</p>
+<p>let viewController1 = UIViewController()
+viewController1.title = "Controller A"</p>
+<p>let viewController2 = UIViewController()
+viewController2.title = "Controller B"</p>
+<p>let presentationController = PresentationController(pages: [viewController1, viewController2])
+```</p>
+<p>If that's the only thing you need, look into <a href="https://github.com/hyperoslo/Pages">Pages</a>.</p>
+<h3>Position</h3>
+<p><code>Position</code> is percentage-based; you can use <code>left</code>, <code>right</code>, <code>top</code>, <code>bottom</code> to set a position.</p>
+<p><code>swift
+let position = Position(left: 0.3, top: 0.4)</code></p>
+<h3>Content view model</h3>
+<p><code>Content</code> view model is a layer between <code>UIView</code> and <code>Position</code>. The current position is the center of a view by default, but can also be changed to the origin of a view.</p>
+<p>```swift
+let view = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+let position = Position(left: 0.3, top: 0.4)</p>
+<p>let centeredContent = Content(view: label, position: position)
+let originContent = Content(view: label, position: position, centered: false)
+```</p>
+<h3>Slides</h3>
+<p>```swift
+let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+label.text = "Slide 1"</p>
+<p>let position = Position(left: 0.3, top: 0.4)
+let content = Content(view: label, position: position)</p>
+<p>let controller = SlideController(contents: [content])</p>
+<p>presentationController.add([controller])
+```</p>
+<h3>Page animations</h3>
+<p>```swift
+let contents = ["Slide 1", "Slide 2", "Slide 3"].map { title -&gt; Content in
+  let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+  label.text = title</p>
+<p>let position = Position(left: 0.3, top: 0.4)</p>
+<p>return Content(view: label, position: position)
+}</p>
+<p>var slides = <a href="">SlideController</a></p>
+<p>for index in 0...2 {
+  let content = contents[index]
+  let controller = SlideController(contents: [content])
+  let animation = TransitionAnimation(
+    content: content,
+    destination: Position(left: 0.5, top: content.initialPosition.top),
+    duration: 2.0,
+    dumping: 0.8,
+    reflective: true)
+  controller.add(animations: [animation])</p>
+<p>slides.append(controller)
+}</p>
+<p>presentationController.add(slides)
+```</p>
+<h3>Background views</h3>
+<p>```swift
+let imageView = UIImageView(image: UIImage(named: "image"))
+let content = Content(view: imageView, position: Position(left: -0.3, top: 0.2))</p>
+<p>presentationController.addToBackground([content])</p>
+<p>// Add pages animations
+presentationController.add(animations: [
+  TransitionAnimation(content: content, destination: Position(left: 0.2, top: 0.2))],
+  forPage: 0)</p>
+<p>presentationController.add(animations: [
+  TransitionAnimation(content: content, destination: Position(left: 0.3, top: 0.2))],
+  forPage: 1)
+```</p>
+<h2>Installation</h2>
+<p><strong>Presentation</strong> is available through <a href="http://cocoapods.org">CocoaPods</a>. To install
+it, simply add the following line to your Podfile:</p>
+<p><code>ruby
+pod 'Presentation'</code></p>
+<p><strong>Presentation</strong> is also available through <a href="https://github.com/Carthage/Carthage">Carthage</a>.
+To install just write into your Cartfile:</p>
+<p><code>ruby
+github "hyperoslo/Presentation"</code></p>
+<h2>Components</h2>
+<p><strong>Presentation</strong> wouldn’t be possible without the help of these components:</p>
+<ul>
+<li>
+<p><a href="https://github.com/hyperoslo/Pages"><strong>Pages</strong></a>: The easiest way of setting up a <code>UIPageViewController</code></p>
+</li>
+<li>
+<p><a href="https://github.com/robb/Cartography"><strong>Cartography</strong></a>: Helps you set up your Auto Layout constraints declaratively and without any stringly typing!</p>
+</li>
+</ul>
+<h2>Contributing</h2>
+<p>Please see our <a href="https://github.com/hyperoslo/playbook/blob/master/GIT_AND_GITHUB.md">playbook</a> for guidelines on contributing.</p>
+<h2>Credits</h2>
+<p><a href="http://hyper.no">Hyper</a> made this. We’re a digital communications agency with a passion for good code and delightful user experiences. If you’re using this library we probably want to <a href="https://github.com/hyperoslo/iOS-playbook/blob/master/HYPER_RECIPES.md">hire you</a> (we consider remote employees, too; the only requirement is that you’re awesome).</p>
+<h2>License</h2>
+<p>Presentation is available under the MIT license. See the <a href="https://github.com/hyperoslo/Presentation/blob/master/LICENSE.md">LICENSE</a>.</p>

@@ -1,0 +1,34 @@
+<h1><img alt="ClassicKit" src="Images/logo.png" /></h1>
+<p>A collection of classic-style UI components for UIKit, influenced by Windows 95</p>
+<p><img alt="about" src="Images/about.png" />   <img alt="portrait" src="Images/portrait.png" />   <img alt="landscape" src="Images/landscape.png" /></p>
+<h2>Introduction</h2>
+<p>This is a little exploration into applying '90s-era design &amp; principles into a modern platform with some primitive components. The assets and design metrics were (for the most part) taken from an actual installation of Windows 95. These are pixel-accurate renditions of the original design:</p>
+<p><img alt="" src="Images/pixel.png" /></p>
+<p><strong>Update:</strong>
+- (3/17) Added a simple Blue Screen of Death! Simply shake the device vigorously.</p>
+<h2>Usage</h2>
+<ul>
+<li>The <code>Browser</code> example can be run out-of-the-box.</li>
+<li>You <em>should</em> be able to include some or all of the files under <code>/Components</code> in your project.</li>
+<li>Each component is intended to be used like their UIKit counterparts. For example, <code>CKButton</code> should respond to gesture events just as <code>UIButton</code> would.</li>
+<li>These are <code>@IBDesignable</code> components! That means you can lay out your entire app with these components in Interface Builder and Xcode will render them for you:
+<img alt="xcode" src="Images/xcode.png" /></li>
+</ul>
+<h2>Notes &amp; FAQ</h2>
+<ul>
+<li>This project is very much a work-in-progress. Although it was designed with modularity and robustness in mind, there are no guarantees on reliability.</li>
+<li><strong>Q: Why did you do this?</strong></li>
+<li>This project was born out of some wholesome sarcasm and Millennial jokes with <a href="http://bengalassi.com">Ben Galassi.</a> Check out his work!</li>
+<li><strong>Q: If this project is made for Apple devices, why based it on Microsoft's design?</strong></li>
+<li>Most people were using Windows during this age and far more people recognize the Windows Standard design pattern than Platinum. If you need any proof, <a href="https://arstechnica.com/features/2005/12/total-share/8/">PCs sold close to 100 million units in 1998, compared to just 2.7 million for Macintosh.</a></li>
+<li>I may revisit this point in the future.</li>
+<li><strong>Q: Why isn't the UI rendering in my Storyboard?</strong></li>
+<li>Interface Builder is very finicky. Rendering typically fails because the underlying code has an error or a constraint cannot be satisfied. Even if you fix these issues, you may have to clear the cache and restart Xcode.</li>
+<li><strong>Q: Why do I need YYImage?</strong></li>
+<li>You don't. <code>YYImage</code> is used in <code>CKImageView</code> to animate the throbber animation in the <code>Browser</code> example, but you can remove the reference in <code>CKImageView.swift</code>. Eventually this dependency will be removed.</li>
+<li>Please let me know if you have any questions or comments! I'd also love to chat about design or tech nostalgia 🙂</li>
+</ul>
+<h2>Disclaimer</h2>
+<p>I do not claim ownership of the assets or logos used in this project. Windows and Internet Explorer are registered trademarks of Microsoft Inc.</p>
+<h2>License</h2>
+<p>MIT</p>
